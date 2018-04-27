@@ -32,6 +32,9 @@
 #include <gua/utils/FpsCounter.hpp>
 #include <gua/concurrent/Doublebuffer.hpp>
 
+#include <scm/gl_core/texture_objects/texture_objects_fwd.h>
+
+
 namespace gua {
 
 class SceneGraph;
@@ -74,7 +77,7 @@ class GUA_DLL Renderer {
    *
    * \param scene_graphs      The SceneGraphs to be processed.
    */
-  void queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool alternate_frame_rendering = false);
+  void queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping = false);
 
   void draw_single_threaded(std::vector<SceneGraph const*> const& scene_graphs);
 
@@ -89,27 +92,46 @@ class GUA_DLL Renderer {
   void send_renderclient(std::string const& window,
                          std::shared_ptr<const Renderer::SceneGraphs> sgs,
                          node::CameraNode* cam,
-                         bool alternate_frame_rendering);
+                         bool enable_warping);
 
   struct Item {
     Item() = default;
     Item( std::shared_ptr<node::SerializedCameraNode> const& sc,
           std::shared_ptr<const SceneGraphs> const& sgs,
-          bool afr = false )
-          : serialized_cam(sc), scene_graphs(sgs), alternate_frame_rendering(afr)
+          bool warp = false )
+          : serialized_cam(sc), scene_graphs(sgs), enable_warping(warp)
     {}
 
     std::shared_ptr<node::SerializedCameraNode> serialized_cam;
     std::shared_ptr<const SceneGraphs>          scene_graphs;
-    bool                                        alternate_frame_rendering;
+    bool                                        enable_warping;
+  };
+
+  using DBTexture = std::shared_ptr<gua::concurrent::Doublebuffer<scm::gl::texture_2d_ptr>>;
+  struct CustomBuffer {
+    CustomBuffer() = default;
+    CustomBuffer( DBTexture const& color, DBTexture const& depth)
+                  : color_buffer(color), depth_buffer(depth) 
+    {}
+
+
+    DBTexture color_buffer;
+    DBTexture depth_buffer;
   };
 
   using Mailbox = std::shared_ptr<gua::concurrent::Doublebuffer<Item> >;
   using Renderclient = std::pair<Mailbox, std::thread>;
+  using Warpclient = std::pair<std::string, std::thread>;
+
+  std::map<std::string, CustomBuffer> warp_resources;
 
   static void renderclient(Mailbox in, std::string name);
+  static void renderclient_warp(Mailbox in, std::string name, std::map<std::string, CustomBuffer>&);
+  static void warpclient(std::string name, std::map<std::string, CustomBuffer>&);
+
 
   std::map<std::string, Renderclient> render_clients_;
+  std::map<std::string, std::pair<Renderclient, Warpclient>> warp_clients_;
 
   FpsCounter application_fps_;
 };
