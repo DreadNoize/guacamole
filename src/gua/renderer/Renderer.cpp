@@ -25,6 +25,7 @@
 // guacamole headers
 #include <memory>
 #include <tuple>
+#include <typeinfo>
 
 #include <gua/platform.hpp>
 #include <gua/scenegraph.hpp>
@@ -36,6 +37,7 @@
 #include <gua/concurrent/pull_items_iterator.hpp>
 #include <gua/memory.hpp>
 #include <gua/config.hpp>
+#include <gua/renderer/GlfwWindow.hpp>
 
 namespace {
 
@@ -201,7 +203,23 @@ void Renderer::renderclient_warp(Mailbox in, std::string window_name, std::map<s
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
 
     if (window_name != "") {
-      auto window = WindowDatabase::instance()->lookup(window_name);
+      auto main_window = WindowDatabase::instance()->lookup(window_name);
+
+      std::cout << "RENDER: type of main window is " << typeid(main_window).name() << std::endl;
+
+      std::cout << "RENDER: creating new window for render thread" << std::endl;
+      auto window = std::make_shared<gua::GlfwWindow>(main_window->config);
+      // WindowDatabase::instance()->add("render_window", r_window);
+
+      // auto window = WindowDatabase::instance()->lookup("render_window");
+      // window->config = main_window->config;
+      // window->init_context();
+	    
+      std::cout << "RENDER: setting window active" << std::endl;
+      window->set_active(true);
+      std::cout << "RENDER: starting frame..." << std::endl;
+      window->start_frame();
+      warp_res[window_name].renderer_ready = true;
 
       // if (window && !window->get_is_open()) {
       //   window->open();
@@ -218,18 +236,18 @@ void Renderer::renderclient_warp(Mailbox in, std::string window_name, std::map<s
         } */
 
         // make sure pipeline was created
-        std::shared_ptr<Pipeline> pipe = nullptr;
-        auto pipe_iter = window->get_context()->render_pipelines.find(
-            cmd.serialized_cam->uuid);
+      std::cout << "RENDER: pipeline creation..." << std::endl;
+      std::shared_ptr<Pipeline> pipe = nullptr;
+      auto pipe_iter = window->get_context()->render_pipelines.find(
+          cmd.serialized_cam->uuid);
 
-        if (pipe_iter == window->get_context()->render_pipelines.end()) {
+      if (pipe_iter == window->get_context()->render_pipelines.end()) {
+        pipe = std::make_shared<Pipeline>(
+            *window->get_context(),
+            cmd.serialized_cam->config.get_resolution());
 
-          pipe = std::make_shared<Pipeline>(
-              *window->get_context(),
-              cmd.serialized_cam->config.get_resolution());
-
-          window->get_context()->render_pipelines.insert(
-              std::make_pair(cmd.serialized_cam->uuid, pipe));
+        window->get_context()->render_pipelines.insert(
+            std::make_pair(cmd.serialized_cam->uuid, pipe));
 
         } else {
           pipe = pipe_iter->second;
@@ -237,6 +255,7 @@ void Renderer::renderclient_warp(Mailbox in, std::string window_name, std::map<s
 
         window->rendering_fps = fpsc.fps;
 
+        std::cout << "RENDER: starting rendering process..." << std::endl;
         if (cmd.serialized_cam->config.get_enable_stereo()) {
           if (window->config.get_stereo_mode() == StereoMode::NVIDIA_3D_VISION) {
             #ifdef GUACAMOLE_ENABLE_NVIDIA_3D_VISION
@@ -251,6 +270,7 @@ void Renderer::renderclient_warp(Mailbox in, std::string window_name, std::map<s
             Logger::LOG_WARNING << "guacamole has not been compiled with NVIDIA 3D Vision support!" << std::endl;
             #endif
           } else if (window->config.get_stereo_mode() == StereoMode::SEPARATE_WINDOWS) {
+            std::cout << "RENDER: Rendering stereo mode: seperate windows..." << std::endl;
             bool is_left = cmd.serialized_cam->config.get_left_output_window() == window_name;
             //auto mode = window->config.get_is_left() ? CameraMode::LEFT : CameraMode::RIGHT;
             auto mode = is_left ? CameraMode::LEFT : CameraMode::RIGHT;
@@ -258,27 +278,36 @@ void Renderer::renderclient_warp(Mailbox in, std::string window_name, std::map<s
 
             warp_res[window_name].color_buffer->push_back(img);
             warp_res[window_name].depth_buffer->push_back(pipe->get_gbuffer()->get_depth_buffer());
+            warp_res[window_name].is_left = is_left;
             /* if (img) {
               window->display(img, false);
             } */
           } else {
-            // TODO: add alternate frame rendering here? -> take clear and render methods
+            std::cout << "RENDER: Rendering stereo mode: other..." << std::endl;
+            // TODO: add alternate frame rendering here? -> take clear and
+            // render methods
             auto img(pipe->render_scene(CameraMode::LEFT, *cmd.serialized_cam, *cmd.scene_graphs));
             /* if (img) window->display(img, true); */
             warp_res[window_name].color_buffer->push_back(img);
             warp_res[window_name].depth_buffer->push_back(pipe->get_gbuffer()->get_depth_buffer());
+            warp_res[window_name].is_left = true;
 
             img = pipe->render_scene(CameraMode::RIGHT, *cmd.serialized_cam, *cmd.scene_graphs);
             /*  if (img) window->display(img, false); */
             warp_res[window_name].color_buffer->push_back(img);
             warp_res[window_name].depth_buffer->push_back(pipe->get_gbuffer()->get_depth_buffer());
+            warp_res[window_name].is_left = false;
           }
         } else {
+          std::cout << "RENDER: Rendering: MONO..." << std::endl;
           auto img(pipe->render_scene(cmd.serialized_cam->config.get_mono_mode(),
                   *cmd.serialized_cam, *cmd.scene_graphs));
           /* if (img) window->display(img, cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT); */
           warp_res[window_name].color_buffer->push_back(img);
           warp_res[window_name].depth_buffer->push_back(pipe->get_gbuffer()->get_depth_buffer());
+
+          warp_res[window_name].is_left = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
+          
         }
 
         pipe->clear_frame_cache();
@@ -296,19 +325,22 @@ void Renderer::renderclient_warp(Mailbox in, std::string window_name, std::map<s
   }
 }
 
-void Renderer::warpclient(std::string window_name, std::map<std::string, Renderer::CustomBuffer>& warp_res) {
+void Renderer::warpclient(Mailbox in, std::string window_name, std::map<std::string, Renderer::CustomBuffer>& warp_res) {
   std::cout << "started warpclient for "  << window_name << std::endl;
 
-  if(window_name != "") {
-    auto window = WindowDatabase::instance()->lookup(window_name);
-    
-    if (window && !window->get_is_open()) {
+  for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
+    if(window_name != "") {
+      auto window = WindowDatabase::instance()->lookup(window_name);
+      
+      if (window && !window->get_is_open()) {
+        std::cout << "WARP: opening window: " << window_name << std::endl;
         window->open();
       }
 
-      // update window if one is assigned
+        // update window if one is assigned
       if (window && window->get_is_open()) {
 
+        std::cout << "WARP: setting window active: " << window_name << std::endl;
         window->set_active(true);
         window->start_frame();
 
@@ -316,9 +348,25 @@ void Renderer::warpclient(std::string window_name, std::map<std::string, Rendere
           display_loading_screen(*window);
         }
 
+        std::cout << "WARP: accessing rendered image..." << std::endl;
         auto img(warp_res[window_name].color_buffer->read());
-        window->display(img, false);
+
+        auto isLeft(warp_res[window_name].is_left);
+        
+        if (warp_res[window_name].renderer_ready) {
+          if(img) {
+            std::cout << "WARP: displaying image..." << std::endl;
+            window->display(img.get(), isLeft);
+          }
+        } else {
+          std::cout << "WARP: displaying alternative image..." << std::endl;
+          display_loading_screen(*window);
+        }
+        
       }
+      // swap buffers
+      window->finish_frame();
+    }
   }
 }
 
@@ -376,8 +424,8 @@ void Renderer::send_renderclient(std::string const& window_name,
                                                        std::thread(Renderer::renderclient_warp, 
                                                                    p.second, window_name, warp_resources)),
                                         std::make_pair(window_name, 
-                                                       std::thread(Renderer::warpclient,
-                                                                   window_name, warp_resources))
+                                                       std::thread(Renderer::warpclient, 
+                                                                   p.second, window_name, warp_resources))
         );        
       }
     }

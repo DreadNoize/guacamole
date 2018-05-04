@@ -87,6 +87,7 @@ class GUA_DLL Renderer {
     return application_fps_.fps;
   }
 
+
  private:
 
   void send_renderclient(std::string const& window,
@@ -98,7 +99,7 @@ class GUA_DLL Renderer {
     Item() = default;
     Item( std::shared_ptr<node::SerializedCameraNode> const& sc,
           std::shared_ptr<const SceneGraphs> const& sgs,
-          bool warp = false )
+          bool warp = false)
           : serialized_cam(sc), scene_graphs(sgs), enable_warping(warp)
     {}
 
@@ -111,12 +112,15 @@ class GUA_DLL Renderer {
   struct CustomBuffer {
     CustomBuffer() = default;
     CustomBuffer( DBTexture const& color, DBTexture const& depth)
-                  : color_buffer(color), depth_buffer(depth) 
+                  : color_buffer(color), depth_buffer(depth), is_left(false), renderer_ready(false)
     {}
 
 
     DBTexture color_buffer;
     DBTexture depth_buffer;
+
+    bool is_left;
+    bool renderer_ready;
   };
 
   using Mailbox = std::shared_ptr<gua::concurrent::Doublebuffer<Item> >;
@@ -127,7 +131,7 @@ class GUA_DLL Renderer {
 
   static void renderclient(Mailbox in, std::string name);
   static void renderclient_warp(Mailbox in, std::string name, std::map<std::string, CustomBuffer>&);
-  static void warpclient(std::string name, std::map<std::string, CustomBuffer>&);
+  static void warpclient(Mailbox in, std::string name, std::map<std::string, CustomBuffer>&);
 
 
   std::map<std::string, Renderclient> render_clients_;

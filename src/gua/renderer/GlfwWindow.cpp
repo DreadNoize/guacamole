@@ -235,6 +235,15 @@ GlfwWindow::CursorMode GlfwWindow::cursor_mode() const {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void GlfwWindow::make_shared_window(std::shared_ptr<GlfwWindow> & win) {
+  auto source_window = win->get_glfw_window();
+  int width, height;
+  glfwGetWindowSize(source_window, &width, &height);
+  glfw_window_ = glfwCreateWindow(width, height, "render_window", 0, source_window);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void GlfwWindow::set_active(bool active) {
 
   glfwMakeContextCurrent(glfw_window_);
@@ -250,6 +259,5 @@ void GlfwWindow::swap_buffers_impl() {
   glfwSwapBuffers(glfw_window_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 
 }
