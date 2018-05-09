@@ -115,7 +115,6 @@ class GUA_DLL Renderer {
                   : color_buffer(color), depth_buffer(depth), is_left(false), renderer_ready(false)
     {}
 
-
     DBTexture color_buffer;
     DBTexture depth_buffer;
 

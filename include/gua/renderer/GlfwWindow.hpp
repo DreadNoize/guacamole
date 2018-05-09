@@ -55,7 +55,7 @@ class GUA_DLL GlfwWindow : public WindowBase {
    */
   virtual ~GlfwWindow();
 
-  void open() override;
+  void open(bool hidden_window = false) override;
   bool should_close() const override;
   bool get_is_open() const override;
   void close() override;
@@ -76,9 +76,6 @@ class GUA_DLL GlfwWindow : public WindowBase {
 
   void cursor_mode(CursorMode mode);
   CursorMode cursor_mode() const;
-
-  void make_shared_window(std::shared_ptr<GlfwWindow>& win);
-  GLFWwindow* get_glfw_window() { return glfw_window_; };
 
   /**
    * Activate the context of this window.

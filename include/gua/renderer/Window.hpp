@@ -61,7 +61,7 @@ class GUA_DLL Window : public WindowBase {
    */
   virtual ~Window();
 
-  void open() override;
+  void open(bool hidden_window = false) override;
   bool get_is_open() const override;
   bool should_close() const override;
   void close() override;

@@ -135,7 +135,7 @@ class GUA_DLL WindowBase {
    */
   virtual ~WindowBase();
 
-  virtual void open() = 0;
+  virtual void open(bool hidden_window = false) = 0;
   virtual bool get_is_open() const = 0;
   virtual bool should_close() const = 0;
   virtual void close() = 0;

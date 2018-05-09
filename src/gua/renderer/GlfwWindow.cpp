@@ -111,7 +111,7 @@ GlfwWindow::~GlfwWindow() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GlfwWindow::open() {
+void GlfwWindow::open(bool hidden_window) {
   glfwSetErrorCallback(error_callback);
 
   int monitor_count(0);
@@ -133,6 +133,10 @@ void GlfwWindow::open() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, config.get_debug());
+
+  if (hidden_window) {
+    glfwWindowHint(GLFW_VISIBLE, 0);
+  }
 
   if (config.get_stereo_mode() == StereoMode::QUAD_BUFFERED) {
     glfwWindowHint(GLFW_STEREO, GL_TRUE);
@@ -231,15 +235,6 @@ void GlfwWindow::cursor_mode(CursorMode mode) {
 
 GlfwWindow::CursorMode GlfwWindow::cursor_mode() const {
   return cursor_mode_;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void GlfwWindow::make_shared_window(std::shared_ptr<GlfwWindow> & win) {
-  auto source_window = win->get_glfw_window();
-  int width, height;
-  glfwGetWindowSize(source_window, &width, &height);
-  glfw_window_ = glfwCreateWindow(width, height, "render_window", 0, source_window);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

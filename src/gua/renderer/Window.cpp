@@ -54,7 +54,7 @@ Window::~Window() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Window::open() {
+void Window::open(bool hidden_window) {
 
   if (scm_window_) {
    scm_window_->hide();

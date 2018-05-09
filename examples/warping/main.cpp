@@ -39,6 +39,19 @@ int main(int argc, char** argv) {
   // initialize scenegraph
   gua::SceneGraph graph("main_scenegraph");
 
+  // initialize trimeshloader for model loading
+  gua::TriMeshLoader loader;
+
+  // create a transform node
+  // which will be attached to the scenegraph
+  auto transform = graph.add_node<gua::node::TransformNode>("/", "transform");
+  // the model will be attached to the transform node
+  auto sphere_geometry(loader.create_geometry_from_file(
+      "sphere_geometry", "../data/objects/sphere.obj"));
+  sphere_geometry->scale(0.5);
+
+  graph.add_node("/transform", sphere_geometry);
+
   auto screen = graph.add_node<gua::node::ScreenNode>("/", "screen");
   screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
   screen->translate(0, 0, 1.0);
@@ -67,7 +80,7 @@ int main(int argc, char** argv) {
     screen->data.set_size(
         gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
   });
-  window->open();
+  // window->open();
 
   gua::Renderer renderer;
 
