@@ -111,26 +111,48 @@ class GUA_DLL Renderer {
   using DBTexture = std::shared_ptr<gua::concurrent::Doublebuffer<scm::gl::texture_2d_ptr>>;
   struct CustomBuffer {
     CustomBuffer() = default;
-    CustomBuffer( DBTexture const& color, DBTexture const& depth)
-                  : color_buffer(color), depth_buffer(depth), is_left(false), renderer_ready(false)
-    {}
+    CustomBuffer(std::pair<DBTexture, DBTexture> const& color,
+                 std::pair<DBTexture, DBTexture> const& depth)
+        : color_buffer(color),
+          depth_buffer(depth),
+          is_left(false),
+          renderer_ready(false),
+          synch("unsynched") {}
 
-    DBTexture color_buffer;
-    DBTexture depth_buffer;
+    CustomBuffer& operator=(CustomBuffer const& rhs) {
+      if (this != &rhs) { 
+        std::lock(tex_mutex, rhs.tex_mutex);
+        std::lock_guard<std::mutex> m_lhs(tex_mutex, std::adopt_lock);
+        std::lock_guard<std::mutex> m_rhs(rhs.tex_mutex, std::adopt_lock);
+        color_buffer = rhs.color_buffer;
+        depth_buffer = rhs.depth_buffer;
+        is_left = rhs.is_left;
+        renderer_ready = rhs.renderer_ready;
+        synch = rhs.synch;
+      }
+      return *this;
+    }
+
+    std::pair<DBTexture, DBTexture> color_buffer;
+    std::pair<DBTexture, DBTexture> depth_buffer;
 
     bool is_left;
     bool renderer_ready;
+
+    std::string synch;
+
+    mutable std::mutex tex_mutex;
   };
 
   using Mailbox = std::shared_ptr<gua::concurrent::Doublebuffer<Item> >;
   using Renderclient = std::pair<Mailbox, std::thread>;
   using Warpclient = std::pair<std::string, std::thread>;
 
-  std::map<std::string, CustomBuffer> warp_resources;
+  std::map<std::string, std::shared_ptr<CustomBuffer>> warp_resources;
 
   static void renderclient(Mailbox in, std::string name);
-  static void renderclient_warp(Mailbox in, std::string name, std::map<std::string, CustomBuffer>&);
-  static void warpclient(Mailbox in, std::string name, std::map<std::string, CustomBuffer>&);
+  static void renderclient_warp(Mailbox in, std::string name, std::map<std::string, std::shared_ptr<CustomBuffer>>&);
+  static void warpclient(Mailbox in, std::string name, std::map<std::string, std::shared_ptr<CustomBuffer>>&);
 
 
   std::map<std::string, Renderclient> render_clients_;

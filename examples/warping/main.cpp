@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
   screen->translate(0, 0, 1.0);
 
   // resolution to be used for camera resolution and windows size
-  auto resolution = gua::math::vec2ui(1280, 720);
+  auto resolution = gua::math::vec2ui(1280, 800);
 
   // set up camera and connect to screen in scenegraph
   auto camera = graph.add_node<gua::node::CameraNode>("/screen", "cam");
