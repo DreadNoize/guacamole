@@ -322,9 +322,9 @@ void WindowBase::display(scm::gl::texture_2d_ptr const& texture,
 
   fullscreen_shader_.use(ctx_);
   uint64_t h = texture->native_handle();
-  std::cout << "WINDOW: native handle: " << h << std::endl;
+  // std::cout << "WINDOW: native handle: " << h << std::endl;
   math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
-  std::cout << "WINDOW: new handle: " << handle.x << "," << handle.y << std::endl;
+  // std::cout << "WINDOW: new handle: " << handle.x << "," << handle.y << std::endl;
   fullscreen_shader_.set_uniform(ctx_, handle, "sampler");
 
   if (is_left) {
@@ -338,7 +338,7 @@ void WindowBase::display(scm::gl::texture_2d_ptr const& texture,
   }
 
   std::string subroutine = subroutine_from_mode(mode);
-  std::cout << "WINDOW: subroutine: " << subroutine << std::endl;
+  // std::cout << "WINDOW: subroutine: " << subroutine << std::endl;
 
   fullscreen_shader_.set_subroutine(
       ctx_, scm::gl::STAGE_FRAGMENT_SHADER, "get_color", subroutine);
@@ -349,7 +349,6 @@ void WindowBase::display(scm::gl::texture_2d_ptr const& texture,
   if (!clear) {
     ctx_.render_context->set_blend_state(blend_state_);
   }
-
   fullscreen_quad_->draw(ctx_.render_context);
 
   ctx_.render_context->reset_state_objects();

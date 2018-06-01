@@ -108,6 +108,7 @@ int main(int argc, char** argv) {
       loop.stop();
     } else {
       // draw our scenegrapgh
+      // std::cout << "MAIN: starting rendering..." << std::endl;
       renderer.queue_draw({&graph}, true);
     }
   });
