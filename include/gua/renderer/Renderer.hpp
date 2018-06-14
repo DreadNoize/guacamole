@@ -188,22 +188,36 @@ class GUA_DLL Renderer {
       initialized = true;
     }
 
-    void update(const void *in_data, math::vec2ui const& resolution) {
+    void update(gua::RenderContext* ctx, const void* in_data, math::vec2ui const& resolution) {
       // std::cout << "creating region ..." << std::endl;
+      // rctx.render_context->apply();
       scm::gl::texture_region region(scm::math::vec3ui(0.0, 0.0, 0.0),
                                      scm::math::vec3ui(resolution.x, resolution.y, 1.0));
 
-      // std::cout << "updating texture ..." << std::endl;
-      rctx.render_context->update_sub_texture(color_buffer.second, region, 0,
+      std::cout << "updating texture ..." << std::endl;
+      ctx->render_context->update_sub_texture(color_buffer.second, region, 0,
                                               color_buffer.second->format(),
                                               in_data);
       // std::cout << "updating texture FINISHED" << std::endl;
       updated = true;
     }
+    /* void update2(const void *in_data, math::vec2ui const& resolution) {
+      // std::cout << "creating region ..." << std::endl;
+      rctx.render_context->apply();
+      scm::gl::texture_region region(scm::math::vec3ui(0.0, 0.0, 0.0),
+                                     scm::math::vec3ui(resolution.x, resolution.y, 1.0));
+
+      std::cout << "updating texture2 ..." << std::endl;
+      rctx.render_context->update_sub_texture(color_buffer.first, region, 0,
+                                              color_buffer.first->format(),
+                                              in_data);
+      // std::cout << "updating texture FINISHED" << std::endl;
+      updated = true;
+    } */
 
     void swap_buffers() {
       if(updated){
-        // std::cout << "swapping buffers ..." << std::endl; 
+        std::cout << "swapping buffers ..." << std::endl; 
         std::lock_guard<std::mutex> lock(copy_mutex);
         std::swap(color_buffer.first, color_buffer.second);
         std::swap(depth_buffer.first, depth_buffer.second);
