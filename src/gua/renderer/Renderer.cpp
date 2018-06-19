@@ -40,10 +40,10 @@
 #include <gua/config.hpp>
 #include <gua/renderer/GlfwWindow.hpp>
 #include <scm/gl_core/render_device/opengl/util/binding_guards.h>
-#include <scm/gl_core/render_device/opengl/util/error_helper.h>
+
 #include <scm/gl_core/render_device/opengl/util/data_format_helper.h>
 
-#define MULTITHREADED 1
+#define MULTITHREADED 0
 
 namespace {
 
@@ -226,7 +226,8 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         offscreen_window->start_frame();
 
         if (!warp_res[window_name]->initialized) {
-          warp_res[window_name]->init(offscreen_window->get_context(),offscreen_window->config.get_resolution());
+          warp_res[window_name]->init_slow(offscreen_window->get_context(),offscreen_window->config.get_resolution());
+          warp_res[window_name]->init_pbo(offscreen_window->get_context(), offscreen_window->config.get_resolution());
         }
 #if MULTITHREADED
 #else
@@ -276,10 +277,10 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               void* const tex_ptr = &img;
               scm::gl::texture_region region(scm::math::vec3ui(0.0,0.0,0.0),scm::math::vec3ui(img->dimensions(),0.0));
               
-              offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->color_buffer.second, region, 0, img->format(), &tex_ptr);
+              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->color_buffer.second, region, 0, img->format(), &tex_ptr);
               
               void* const depth_ptr = &depth;
-              offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->depth_buffer.second, region, 0, depth->format(), &depth_ptr);
+              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->depth_buffer.second, region, 0, depth->format(), &depth_ptr);
 
               warp_res[window_name]->is_left.second = is_left;
               /* if (img) {
@@ -291,14 +292,14 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               // render methods
               auto img(pipe->render_scene(CameraMode::LEFT, *cmd.serialized_cam, *cmd.scene_graphs));
               /* if (img) offscreen_window->display(img, true); */
-              warp_res[window_name]->color_buffer.second = img;
-              warp_res[window_name]->depth_buffer.second = pipe->get_gbuffer()->get_depth_buffer();
+              // warp_res[window_name]->color_buffer.second = img;
+              // warp_res[window_name]->depth_buffer.second = pipe->get_gbuffer()->get_depth_buffer();
               warp_res[window_name]->is_left.second = true;
 
               img = pipe->render_scene(CameraMode::RIGHT, *cmd.serialized_cam, *cmd.scene_graphs);
               /*  if (img) offscreen_window->display(img, false); */
-              warp_res[window_name]->color_buffer.second = img;
-              warp_res[window_name]->depth_buffer.second = pipe->get_gbuffer()->get_depth_buffer();
+              // warp_res[window_name]->color_buffer.second = img;
+              // warp_res[window_name]->depth_buffer.second = pipe->get_gbuffer()->get_depth_buffer();
               warp_res[window_name]->is_left.second = false;
             }
           } else {
@@ -333,25 +334,27 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               warp_res[window_name]->pixel_data = random_tex;
               warp_res[window_name]->is_left.second = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
               warp_res[window_name]->synch = "synchronized";
-              std::cout << "[SLOW] color buffer adress of second is " << warp_res[window_name]->color_buffer.second <<std::endl;
-              std::cout << "[SLOW] color buffer ID of second is " << warp_res[window_name]->color_buffer.second->object_id() << std::endl;
+              std::cout << "[SLOW] color buffer adress of second is " << warp_res[window_name]->color_buffer_slow.second <<std::endl;
+              std::cout << "[SLOW] color buffer ID of second is " << warp_res[window_name]->color_buffer_slow.second->object_id() << std::endl;
               // warp_res[window_name]->update(&random_tex.front(), offscreen_window->config.get_resolution());
               if(!warp_res[window_name]->renderer_ready) warp_res[window_name]->renderer_ready = true;
               // warp_res[window_name]->update(offscreen_window->get_context(), &(warp_res[window_name]->pixel_data.front()), offscreen_window->config.get_resolution());
 
-              auto ppfbo = offscreen_window->get_context()->render_device->create_frame_buffer();
+              /* auto ppfbo = offscreen_window->get_context()->render_device->create_frame_buffer();
               ppfbo->attach_color_buffer(0, warp_res[window_name]->color_buffer.second, 0, 0);
-              offscreen_window->get_context()->render_context->clear_color_buffer(ppfbo, 0, scm::math::vec4f(0.0, 0.0, 1.0, 1.0));
+              offscreen_window->get_context()->render_context->clear_color_buffer(ppfbo, 0, scm::math::vec4f(0.0, 0.0, 1.0, 1.0)); */
               //offscreen_window->get_context()->render_context->set_frame_buffer(ppfbo);
 
-              warp_res[window_name]->updated = true;
+              //warp_res[window_name]->updated = true;
+
+              warp_res[window_name]->update_pbo(offscreen_window->get_context(), img);
               
             }
 
 #if MULTITHREADED
 
 #else       //// single threaded alternative for testing purposes
-            if(warp_res[window_name]->renderer_ready) {
+            if(warp_res[window_name]->renderer_ready && warp_res[window_name]->initialized) {
               // std::cout << "[RENDER] update color buffer " << std::endl;
               // warp_res[window_name]->update(offscreen_window->get_context(), &(random_tex.front()), offscreen_window->config.get_resolution());
               
@@ -359,10 +362,15 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               if(!warp_res[window_name]->renderer_ready) warp_res[window_name]->renderer_ready = true;
               warp_res[window_name]->synch = "synchronized";
               warp_res[window_name]->updated = true; */
-              
-              warp_res[window_name]->swap_buffers();
 
-              offscreen_window->display(warp_res[window_name]->color_buffer.first, warp_res[window_name]->is_left.first);
+              /* if (warp_res[window_name]->fence_status(offscreen_window->get_context())) {
+                warp_res[window_name]->update_texture(offscreen_window->get_context(), offscreen_window->config.get_resolution());
+                warp_res[window_name]->swap_buffers_slow();
+              } */
+              warp_res[window_name]->update_texture(offscreen_window->get_context(), offscreen_window->config.get_resolution());
+              warp_res[window_name]->swap_buffers_slow();
+              
+              offscreen_window->display(warp_res[window_name]->color_buffer_slow.first, warp_res[window_name]->is_left.first);
             }
 #endif
           pipe->clear_frame_cache();
@@ -422,24 +430,24 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         if(warp_res[window_name]->initialized && warp_res[window_name]->renderer_ready) {
           //// update the existing color buffer with the pixel data from the slow client
           // warp_res[window_name]->update(window->get_context(), &(warp_res[window_name]->pixel_data.front()), window->config.get_resolution());
-          auto dim = warp_res[window_name]->color_buffer.second->dimensions();
-          //std::cout << "[FAST] texture format is " << scm::gl::format_string(warp_res[window_name]->color_buffer.second->format()) << std::endl;
-          std::cout << "[FAST] color buffer adress of second is " << warp_res[window_name]->color_buffer.second <<std::endl;
-          std::cout << "[FAST] color buffer ID of second is " << warp_res[window_name]->color_buffer.second->object_id() <<std::endl;
-          std::cout << "[FAST] texture samples are " << warp_res[window_name]->color_buffer.second->samples() << std::endl;
-          std::cout << "[FAST] texture layer are " << warp_res[window_name]->color_buffer.second->mip_map_layers() << std::endl;
+          auto dim = warp_res[window_name]->color_buffer_fast.second->dimensions();
+          //std::cout << "[FAST] texture format is " << scm::gl::format_string(warp_res[window_name]->color_buffer_fast.second->format()) << std::endl;
+          std::cout << "[FAST] color buffer adress of second is " << warp_res[window_name]->color_buffer_fast.second <<std::endl;
+          std::cout << "[FAST] color buffer ID of second is " << warp_res[window_name]->color_buffer_fast.second->object_id() <<std::endl;
+          std::cout << "[FAST] texture samples are " << warp_res[window_name]->color_buffer_fast.second->samples() << std::endl;
+          std::cout << "[FAST] texture layer are " << warp_res[window_name]->color_buffer_fast.second->mip_map_layers() << std::endl;
           std::vector<float> data(dim.x * dim.y * 3);
 
-          warp_res[window_name]->swap_buffers();
+          warp_res[window_name]->swap_buffers_fast();
           /*const scm::gl::opengl::gl_core& glapi = window->get_context()->render_context->opengl_api();
 
           scm::gl::util::gl_error         glerror(glapi);*/
 
-          //auto target = warp_res[window_name]->color_buffer.first->object_target();
-          // auto binding = warp_res[window_name]->color_buffer.first->object_binding();
-          //auto id = warp_res[window_name]->color_buffer.first->object_id();
-          // auto format = warp_res[window_name]->color_buffer.first->format();
-          // auto level = warp_res[window_name]->color_buffer.first->mip_map_layers();
+          //auto target = warp_res[window_name]->color_buffer_fast.first->object_target();
+          // auto binding = warp_res[window_name]->color_buffer_fast.first->object_binding();
+          //auto id = warp_res[window_name]->color_buffer_fast.first->object_id();
+          // auto format = warp_res[window_name]->color_buffer_fast.first->format();
+          // auto level = warp_res[window_name]->color_buffer_fast.first->mip_map_layers();
 
           // //scm::gl::util::texture_binding_guard save_guard(glapi, target, binding);
 
@@ -451,14 +459,14 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 
 
           // warp_res[window_name]->update2(&(data.front()), dim);
-          // auto result = window->get_context()->render_context->retrieve_texture_data(warp_res[window_name]->color_buffer.second, warp_res[window_name]->color_buffer.second->mip_map_layers(), &data.front());
+          // auto result = window->get_context()->render_context->retrieve_texture_data(warp_res[window_name]->color_buffer_fast.second, warp_res[window_name]->color_buffer_fast.second->mip_map_layers(), &data.front());
           // window->get_context()->render_context->apply();
           //// swap buffers
           // glapi.glBindTexture(target, id);
           //std::cout << "[FAST] gl_error: " << glerror.error_string() << std::endl;
 
           //// display
-          window->display(warp_res[window_name]->color_buffer.first, warp_res[window_name]->is_left.first);
+          window->display(warp_res[window_name]->color_buffer_fast.first, warp_res[window_name]->is_left.first);
         }        
       }
       // swap buffers
