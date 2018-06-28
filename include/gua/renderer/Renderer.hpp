@@ -46,6 +46,7 @@
 
 //#define GL_PIXEL_PACK_BUFFER              0x88EB
 
+struct GLFWwindow;
 
 namespace gua {
 
@@ -151,26 +152,58 @@ class GUA_DLL Renderer {
 
     WarpingResources& operator=(WarpingResources const& rhs) {
       if (this != &rhs) { 
-        std::lock(copy_mutex_slow, rhs.copy_mutex_slow);
-        std::lock_guard<std::mutex> m_lhs(copy_mutex_slow, std::adopt_lock);
-        std::lock_guard<std::mutex> m_rhs(rhs.copy_mutex_slow, std::adopt_lock);
+        std::lock(copy_mutex, rhs.copy_mutex);
+        std::lock_guard<std::mutex> m_lhs(copy_mutex, std::adopt_lock);
+        std::lock_guard<std::mutex> m_rhs(rhs.copy_mutex, std::adopt_lock);
+        color_buffer = rhs.color_buffer;
         color_buffer_fast = rhs.color_buffer_fast;
         color_buffer_slow = rhs.color_buffer_slow;
+        depth_buffer = rhs.depth_buffer_slow;
         depth_buffer_fast = rhs.depth_buffer_fast;
         depth_buffer_slow = rhs.depth_buffer_slow;
         pbo_color = rhs.pbo_color;
+        sampler_state_desc = rhs.sampler_state_desc;
         sampler_state_desc_fast = rhs.sampler_state_desc_fast;
         sampler_state_desc_slow = rhs.sampler_state_desc_slow;
+        sampler_state = rhs.sampler_state;
         sampler_state_fast = rhs.sampler_state_fast;
         sampler_state_slow = rhs.sampler_state_slow;
         is_left = rhs.is_left;
         renderer_ready = rhs.renderer_ready;
         updated = rhs.updated;
+        shared_initialized = rhs.shared_initialized;
         rctx = rhs.rctx;
         pixel_data = rhs.pixel_data;
         synch = rhs.synch;
       }
       return *this;
+    }
+
+    void init(gua::RenderContext* ctx, gua::math::vec2ui const& resolution) {
+      // synch = "unsynched";
+      // is_left = std::make_pair<bool,bool>(false,false);
+      renderer_ready = false;
+      updated = false;
+
+      sampler_state_desc = scm::gl::sampler_state_desc(scm::gl::FILTER_MIN_MAG_LINEAR, scm::gl::WRAP_MIRRORED_REPEAT, scm::gl::WRAP_MIRRORED_REPEAT);
+      std::cout << "Initializing Warping Sampler State ..." << std::endl; 
+      sampler_state = ctx->render_device->create_sampler_state(sampler_state_desc);
+      
+      std::cout << "Initializing Warping Texture Color ..." << std::endl; 
+
+      color_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
+      ctx->render_context->make_resident(color_buffer.first, sampler_state);
+      color_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
+      ctx->render_context->make_resident(color_buffer.second, sampler_state);
+
+      std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
+
+      depth_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
+      ctx->render_context->make_resident(depth_buffer.first, sampler_state);
+      depth_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
+      ctx->render_context->make_resident(depth_buffer.second, sampler_state);
+
+      initialized = true;
     }
 
     void init_fast(gua::RenderContext* ctx, gua::math::vec2ui const& resolution) {
@@ -296,7 +329,7 @@ class GUA_DLL Renderer {
       }
     }
 
-    /* void update(gua::RenderContext* ctx, const void* in_data, math::vec2ui const& resolution) {
+    void update(gua::RenderContext* ctx, const void* in_data, math::vec2ui const& resolution) {
       // std::cout << "creating region ..." << std::endl;
       // rctx.render_context->apply();
       scm::gl::texture_region region(scm::math::vec3ui(0.0, 0.0, 0.0),
@@ -308,7 +341,7 @@ class GUA_DLL Renderer {
                                               in_data);
       // std::cout << "updating texture FINISHED" << std::endl;
       updated = true;
-    } */
+    }
     /* void update2(const void *in_data, math::vec2ui const& resolution) {
       // std::cout << "creating region ..." << std::endl;
       rctx.render_context->apply();
@@ -322,6 +355,17 @@ class GUA_DLL Renderer {
       // std::cout << "updating texture FINISHED" << std::endl;
       updated = true;
     } */
+
+    void swap_buffers() {
+      if(updated){
+        std::cout << "swapping buffers ..." << std::endl; 
+        std::lock_guard<std::mutex> lock(copy_mutex);
+        std::swap(color_buffer.first, color_buffer.second);
+        std::swap(depth_buffer.first, depth_buffer.second);
+        std::swap(is_left.first, is_left.second);
+        updated = false;
+      }
+    }
 
     void swap_buffers_fast() {
       if(updated){
@@ -350,15 +394,21 @@ class GUA_DLL Renderer {
       std::swap(pbo_color.first, pbo_color.second);
     }
 
+    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer;
     std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer_fast;
     std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer_slow;
+
+    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer;
     std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer_fast;
     std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer_slow;
 
     std::pair<scm::gl::buffer_ptr, scm::gl::buffer_ptr> pbo_color;
-    
+
+    scm::gl::sampler_state_desc sampler_state_desc;
     scm::gl::sampler_state_desc sampler_state_desc_fast;
     scm::gl::sampler_state_desc sampler_state_desc_slow;
+
+    scm::gl::sampler_state_ptr sampler_state;
     scm::gl::sampler_state_ptr sampler_state_fast;
     scm::gl::sampler_state_ptr sampler_state_slow;
 
@@ -366,16 +416,20 @@ class GUA_DLL Renderer {
     bool renderer_ready;
     bool updated;
     bool initialized = false;
+    bool shared_initialized = false;
 
     mutable gua::RenderContext rctx;
+
+    GLFWwindow* shared;
 
     std::vector<float> pixel_data;
 
     std::string synch;
     GLsync fence;
 
-    mutable std::mutex copy_mutex_slow;
+    mutable std::mutex copy_mutex;
     mutable std::mutex copy_mutex_fast;
+    mutable std::mutex copy_mutex_slow;
     mutable std::mutex copy_mutex_pbo;
   }; 
 

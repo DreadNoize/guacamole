@@ -56,10 +56,12 @@ class GUA_DLL GlfwWindow : public WindowBase {
   virtual ~GlfwWindow();
 
   void open(bool hidden_window = false) override;
+  void open(GLFWwindow* shared, bool hidden_window = false);
   bool should_close() const override;
   bool get_is_open() const override;
   void close() override;
   void process_events() override;
+  GLFWwindow* get_glfw_window();
 
   /**
    * Control the cursor mode.

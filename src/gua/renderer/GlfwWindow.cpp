@@ -37,6 +37,7 @@ namespace gua {
 
 void error_callback(int error, const char* description)
 {
+  std::cerr << "[GLFW] Error: " << description << std::endl;
   throw std::runtime_error(description);
 }
 
@@ -184,6 +185,81 @@ void GlfwWindow::open(bool hidden_window) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void GlfwWindow::open(GLFWwindow* shared, bool hidden_window) {
+  glfwSetErrorCallback(error_callback);
+
+  int monitor_count(0);
+  auto monitors(glfwGetMonitors(&monitor_count));
+
+  if (monitor_count == 0) {
+    Logger::LOG_WARNING << "Failed to open GlfwWindow: No monitor found!"
+                        << std::endl;
+    glfwTerminate();
+    return;
+  }
+
+  if (config.monitor() >= monitor_count) {
+    Logger::LOG_WARNING
+        << "Failed to open GlfwWindow: There is no monitor with the number "
+        << config.monitor() << "!" << std::endl;
+    glfwTerminate();
+    return;
+  }
+
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, config.get_debug());
+
+  if (hidden_window) {
+    glfwWindowHint(GLFW_VISIBLE, 0);
+  }
+
+  if (config.get_stereo_mode() == StereoMode::QUAD_BUFFERED) {
+    glfwWindowHint(GLFW_STEREO, GL_TRUE);
+  }
+
+  glfw_window_ = glfwCreateWindow(
+      config.get_size().x, config.get_size().y, config.get_title().c_str(),
+      config.get_fullscreen_mode() ? glfwGetPrimaryMonitor() : nullptr,
+      shared);
+  if (!glfw_window_) {
+    throw std::runtime_error("GlfwWindow::open() : unable to create window");
+  }
+
+  glfwSetWindowUserPointer(glfw_window_, this);
+  glfwSetWindowSizeCallback(glfw_window_, &on_window_resize);
+
+  glfwSetKeyCallback(glfw_window_, &on_window_key_press);
+  glfwSetCharCallback(glfw_window_, &on_window_char);
+  glfwSetMouseButtonCallback(glfw_window_, &on_window_button_press);
+  glfwSetCursorPosCallback(glfw_window_, &on_window_move_cursor);
+  glfwSetScrollCallback(glfw_window_, &on_window_scroll);
+  glfwSetCursorEnterCallback(glfw_window_, &on_window_enter);
+
+  switch (cursor_mode_) {
+    case CursorMode::NORMAL:
+      glfwSetInputMode(glfw_window_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+      break;
+    case CursorMode::HIDDEN:
+      glfwSetInputMode(glfw_window_, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+      break;
+    case CursorMode::DISABLED:
+      glfwSetInputMode(glfw_window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+      break;
+  }
+
+  if (!glfw_window_) {
+    Logger::LOG_WARNING
+        << "Failed to open GlfwWindow: Could not create glfw3 window!"
+        << std::endl;
+    glfwTerminate();
+    return;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 bool GlfwWindow::get_is_open() const {
   return glfw_window_ != 0;
 }
@@ -207,6 +283,12 @@ void GlfwWindow::close() {
 
 void GlfwWindow::process_events() {
   glfwPollEvents();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+GLFWwindow* GlfwWindow::get_glfw_window() {
+  return glfw_window_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
