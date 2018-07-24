@@ -62,6 +62,7 @@ vec3 get_checker_odd() {
 subroutine( GetColorType )
 vec3 get_full() {
   return vec3(texture2D( sampler2D(sampler), tex_coord).rgb);
+  // return vec3(0.76, 0.21, 0.086);
 }
 
 subroutine( GetColorType )

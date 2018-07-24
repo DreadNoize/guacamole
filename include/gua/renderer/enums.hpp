@@ -59,6 +59,18 @@ enum class StereoMode {
 };
 
 /**
+ * Stereo type for a pipeline.
+ *
+ * Determines how two stereo images should be created.
+ */
+enum class StereoType {
+  RENDER_TWICE = 0,
+  SPATIAL_WARP,
+  TEMPORAL_WARP,
+  SINGLE_TEMPORAL_WARP
+};
+
+/**
  * Shadow type for a shadow-casting node.
  *
  * Determines the quality of shadows.

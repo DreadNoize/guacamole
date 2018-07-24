@@ -33,6 +33,7 @@
 #include <gua/utils/FpsCounter.hpp>
 #include <gua/concurrent/Doublebuffer.hpp>
 #include <gua/renderer/RenderContext.hpp>
+#include <gua/renderer/Texture2D.hpp>
 
 #include <scm/gl_core/texture_objects/texture_objects_fwd.h>
 #include <scm/gl_core/data_formats.h>
@@ -64,6 +65,192 @@ namespace node {
  */
 class GUA_DLL Renderer {
  public:
+  // Container struct for resources (like textures) needed for the asynchronous warping technique
+  // using DBTexture = std::shared_ptr<gua::concurrent::Doublebuffer<scm::gl::texture_2d_ptr>>;
+  struct WarpingResources {
+    WarpingResources() = default;
+
+    WarpingResources& operator=(WarpingResources const& rhs) {
+      if (this != &rhs) { 
+        std::lock(copy_mutex, rhs.copy_mutex);
+        std::lock_guard<std::mutex> m_lhs(copy_mutex, std::adopt_lock);
+        std::lock_guard<std::mutex> m_rhs(rhs.copy_mutex, std::adopt_lock);
+        color_buffer = rhs.color_buffer;
+        depth_buffer = rhs.depth_buffer;
+        sampler_state_desc = rhs.sampler_state_desc;
+        sampler_state = rhs.sampler_state;
+        is_left = rhs.is_left;
+        renderer_ready = rhs.renderer_ready;
+        updated = rhs.updated;
+        initialized = rhs.initialized;
+        initialized_fbo = rhs.initialized_fbo;
+        shared_initialized = rhs.shared_initialized;
+        rctx = rhs.rctx;
+      }
+      return *this;
+    }
+
+    void init(gua::RenderContext* ctx, gua::math::vec2ui const& resolution) {
+      // synch = "unsynched";
+      // is_left = std::make_pair<bool,bool>(false,false);
+
+      sampler_state_desc = scm::gl::sampler_state_desc(scm::gl::FILTER_MIN_MAG_NEAREST, scm::gl::WRAP_CLAMP_TO_EDGE, scm::gl::WRAP_CLAMP_TO_EDGE);
+      std::cout << "Initializing Warping Sampler State ..." << std::endl; 
+      sampler_state = ctx->render_device->create_sampler_state(sampler_state_desc);
+      
+      std::cout << "Initializing Warping Texture Color ..." << std::endl; 
+
+      color_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
+      ctx->render_context->make_resident(color_buffer.first, sampler_state);
+      color_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
+      ctx->render_context->make_resident(color_buffer.second, sampler_state);
+
+      std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
+
+      depth_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24, 1);
+      ctx->render_context->make_resident(depth_buffer.first, sampler_state);
+      depth_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24, 1);
+      ctx->render_context->make_resident(depth_buffer.second, sampler_state);
+
+      math::vec2 size(resolution / 2);
+
+      int current_level(std::log2(32));
+      int mip_map_levels(current_level);
+
+      scm::gl::sampler_state_desc state_desc(scm::gl::FILTER_MIN_MAG_NEAREST,
+        scm::gl::WRAP_CLAMP_TO_EDGE,
+        scm::gl::WRAP_CLAMP_TO_EDGE);
+      scm::gl::sampler_state_ptr state = ctx->render_device->create_sampler_state(state_desc);
+
+      surface_detection_buffer.first = ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+      ctx->render_context->make_resident(surface_detection_buffer.first, state);
+      surface_detection_buffer.second = ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+      ctx->render_context->make_resident(surface_detection_buffer.second, state);
+
+      initialized = true;
+    }
+
+    void init_grid_resources(RenderContext* ctx, math::vec2ui const& resolution) {
+      auto pixel_count(resolution.x * resolution.y / 4);
+      grid_vbo.first = std::vector<scm::gl::buffer_ptr>(2);
+      grid_vbo.second = std::vector<scm::gl::buffer_ptr>(2);
+      grid_vao.first = std::vector<scm::gl::vertex_array_ptr>(2);
+      grid_vao.second = std::vector<scm::gl::vertex_array_ptr>(2);
+      grid_tfb.first = std::vector<scm::gl::transform_feedback_ptr>(2);
+      grid_tfb.second = std::vector<scm::gl::transform_feedback_ptr>(2);
+      for (int i = 0; i < 2; ++i) {
+        grid_vbo.first[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+                                           scm::gl::USAGE_DYNAMIC_DRAW,
+                                           pixel_count * sizeof(math::vec3ui));
+        grid_vbo.second[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+                                           scm::gl::USAGE_DYNAMIC_DRAW,
+                                           pixel_count * sizeof(math::vec3ui));
+
+        grid_vao.first[i] = ctx->render_device->create_vertex_array(
+          scm::gl::vertex_format(0, 0, scm::gl::TYPE_VEC3UI, sizeof(math::vec3ui)), {grid_vbo.first[i]});
+        grid_vao.second[i] = ctx->render_device->create_vertex_array(
+          scm::gl::vertex_format(0, 0, scm::gl::TYPE_VEC3UI, sizeof(math::vec3ui)), {grid_vbo.second[i]});
+
+
+        grid_tfb.first[i] = ctx->render_device->create_transform_feedback(
+          scm::gl::stream_output_setup(grid_vbo.first[i]));
+        grid_tfb.second[i] = ctx->render_device->create_transform_feedback(
+            scm::gl::stream_output_setup(grid_vbo.second[i]));
+      }
+      cell_count = pixel_count;
+
+      grid_initialized = true;
+      
+      /*surface_detection_buffer.first = std::make_shared<Texture2D>();
+      surface_detection_buffer.second = std::make_shared<Texture2D>();*/
+    }
+
+    void init_fbo(gua::RenderContext* ctx) {
+      framebuffer_resolved = ctx->render_device->create_frame_buffer();
+      framebuffer_resolved->attach_color_buffer(0, color_buffer.second);
+      framebuffer_resolved->attach_depth_stencil_buffer(depth_buffer.second);
+      initialized_fbo = true;
+    }
+
+    void postprocess_frame(RenderContext* ctx) {
+      ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
+      ctx->render_context->generate_mipmaps(color_buffer.second);
+      ctx->render_context->reset();
+      updated = true;
+    }
+
+    void swap_buffers() {
+      if(updated){
+        std::cout << "swapping buffers ..." << std::endl; 
+        std::lock_guard<std::mutex> lock(copy_mutex);
+        std::swap(color_buffer.first, color_buffer.second);
+        std::swap(depth_buffer.first, depth_buffer.second);
+        std::swap(is_left.first, is_left.second);
+        updated = false;
+      }
+    }
+
+    inline int current_tfb() {
+      return ping ? 1 : 0;
+    }
+
+    inline int current_vbo() {
+      return ping ? 0 : 1;
+    }
+
+    void swap_shared_resources() {
+      if (grid_generated) {
+        std::cout << "[FAST] swapping shared resources" << std::endl;
+        std::lock_guard<std::mutex> lock(copy_mutex);
+        std::swap(surface_detection_buffer.first, surface_detection_buffer.second);
+        std::swap(grid_vbo.first, grid_vbo.second);
+        std::swap(grid_tfb.first, grid_tfb.second);
+        std::swap(grid_vao.first, grid_vao.second);
+      }
+    }
+
+    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer;
+
+    std::pair<std::vector<scm::gl::buffer_ptr>, std::vector<scm::gl::buffer_ptr>> grid_vbo;
+    std::pair<std::vector<scm::gl::transform_feedback_ptr>, std::vector<scm::gl::transform_feedback_ptr>> grid_tfb;
+    std::pair<std::vector<scm::gl::vertex_array_ptr>, std::vector<scm::gl::vertex_array_ptr>> grid_vao;
+    scm::gl::vertex_array_ptr warp_vao[2];
+
+    size_t cell_count = 0;
+    bool ping = false;
+
+    bool grid_initialized = false;
+    bool grid_generated = false;
+    CameraMode camera_mode;
+    
+    std::shared_ptr<node::SerializedCameraNode> serialized_warp_cam;
+
+    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer;
+    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer;
+
+    scm::gl::frame_buffer_ptr framebuffer;
+    scm::gl::frame_buffer_ptr framebuffer_resolved;
+
+    scm::gl::sampler_state_desc sampler_state_desc;
+
+    scm::gl::sampler_state_ptr sampler_state;
+
+    std::pair<bool,bool> is_left = std::make_pair<bool,bool>(false, false);
+    bool renderer_ready = false;
+    bool updated = false;
+    bool initialized = false;
+    bool initialized_fbo = false;
+    bool shared_initialized = false;
+
+    mutable gua::RenderContext rctx;
+
+    GLFWwindow* shared;
+
+
+    mutable std::mutex copy_mutex;
+  }; // struct WarpingResources
+
+
   using SceneGraphs = std::vector<std::unique_ptr<const SceneGraph> >;
 
   /**
@@ -121,107 +308,6 @@ class GUA_DLL Renderer {
     bool                                        enable_warping;
   };
 
-  // Container struct for resources (like textures) needed for the asynchronous warping technique
-  // using DBTexture = std::shared_ptr<gua::concurrent::Doublebuffer<scm::gl::texture_2d_ptr>>;
-  struct WarpingResources {
-    WarpingResources() = default;
-
-    WarpingResources& operator=(WarpingResources const& rhs) {
-      if (this != &rhs) { 
-        std::lock(copy_mutex, rhs.copy_mutex);
-        std::lock_guard<std::mutex> m_lhs(copy_mutex, std::adopt_lock);
-        std::lock_guard<std::mutex> m_rhs(rhs.copy_mutex, std::adopt_lock);
-        color_buffer = rhs.color_buffer;
-        depth_buffer = rhs.depth_buffer;
-        sampler_state_desc = rhs.sampler_state_desc;
-        sampler_state = rhs.sampler_state;
-        is_left = rhs.is_left;
-        renderer_ready = rhs.renderer_ready;
-        updated = rhs.updated;
-        initialized = rhs.initialized;
-        initialized_fbo = rhs.initialized_fbo;
-        shared_initialized = rhs.shared_initialized;
-        rctx = rhs.rctx;
-      }
-      return *this;
-    }
-
-    void init(gua::RenderContext* ctx, gua::math::vec2ui const& resolution) {
-      // synch = "unsynched";
-      // is_left = std::make_pair<bool,bool>(false,false);
-      renderer_ready = false;
-      updated = false;
-
-      sampler_state_desc = scm::gl::sampler_state_desc(scm::gl::FILTER_MIN_MAG_LINEAR, scm::gl::WRAP_MIRRORED_REPEAT, scm::gl::WRAP_MIRRORED_REPEAT);
-      std::cout << "Initializing Warping Sampler State ..." << std::endl; 
-      sampler_state = ctx->render_device->create_sampler_state(sampler_state_desc);
-      
-      std::cout << "Initializing Warping Texture Color ..." << std::endl; 
-
-      color_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
-      ctx->render_context->make_resident(color_buffer.first, sampler_state);
-      color_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
-      ctx->render_context->make_resident(color_buffer.second, sampler_state);
-
-      std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
-
-      depth_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
-      ctx->render_context->make_resident(depth_buffer.first, sampler_state);
-      depth_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
-      ctx->render_context->make_resident(depth_buffer.second, sampler_state);
-
-      initialized = true;
-    }
-
-    void init_fbo(gua::RenderContext* ctx) {
-      framebuffer_resolved = ctx->render_device->create_frame_buffer();
-      framebuffer_resolved->attach_color_buffer(0, color_buffer.second);
-      framebuffer_resolved->attach_depth_stencil_buffer(depth_buffer.second);
-      initialized_fbo = true;
-    }
-
-    void postprocess_frame(RenderContext* ctx) {
-      ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
-      ctx->render_context->generate_mipmaps(color_buffer.second);
-      ctx->render_context->reset();
-      updated = true;
-    }
-
-    void swap_buffers() {
-      if(updated){
-        std::cout << "swapping buffers ..." << std::endl; 
-        std::lock_guard<std::mutex> lock(copy_mutex);
-        std::swap(color_buffer.first, color_buffer.second);
-        std::swap(depth_buffer.first, depth_buffer.second);
-        std::swap(is_left.first, is_left.second);
-        updated = false;
-      }
-    }
-
-    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer;
-    std::pair<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer;
-
-    scm::gl::frame_buffer_ptr framebuffer;
-    scm::gl::frame_buffer_ptr framebuffer_resolved;
-
-    scm::gl::sampler_state_desc sampler_state_desc;
-
-    scm::gl::sampler_state_ptr sampler_state;
-
-    std::pair<bool,bool> is_left;
-    bool renderer_ready;
-    bool updated;
-    bool initialized = false;
-    bool initialized_fbo = false;
-    bool shared_initialized = false;
-
-    mutable gua::RenderContext rctx;
-
-    GLFWwindow* shared;
-
-
-    mutable std::mutex copy_mutex;
-  }; 
 
   using Mailbox = std::shared_ptr<gua::concurrent::Doublebuffer<Item> >;
   using Renderclient = std::pair<Mailbox, std::thread>;

@@ -19,34 +19,21 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef GUA_INCLUDE_RENDERER_HPP
-#define GUA_INCLUDE_RENDERER_HPP
+@include "common/header.glsl"
+@include "common/gua_camera_uniforms.glsl"
+@include "abuffer_warp_modes.glsl"
 
-// renderer headers
-#include <gua/config.hpp>
-#include <gua/renderer/enums.hpp>
-#include <gua/renderer/TriMeshLoader.hpp>
-#include <gua/renderer/LineStripLoader.hpp>
-#include <gua/renderer/Pipeline.hpp>
-#include <gua/renderer/TriMeshPass.hpp>
-#include <gua/renderer/WarpPass.hpp>
-#include <gua/renderer/LineStripPass.hpp>
-#include <gua/renderer/LightVisibilityPass.hpp>
-#include <gua/renderer/BackgroundPass.hpp>
-#include <gua/renderer/ResolvePass.hpp>
-#include <gua/renderer/SkyMapPass.hpp>
-#include <gua/renderer/SSAOPass.hpp>
-#include <gua/renderer/FullscreenPass.hpp>
-#include <gua/renderer/ToneMappingPass.hpp>
-#include <gua/renderer/WarpGridGeneratorPass.hpp>
-#include <gua/renderer/Renderer.hpp>
-#include <gua/renderer/Window.hpp>
-#include <gua/renderer/HeadlessSurface.hpp>
-#include <gua/renderer/MaterialShader.hpp>
-#include <gua/renderer/MaterialShaderDescription.hpp>
-#include <gua/renderer/Material.hpp>
-#ifdef GUACAMOLE_GLFW3
-#include <gua/renderer/GlfwWindow.hpp>
-#endif
+// input
+layout(location=0) in vec3 gua_in_position;
+layout(location=2) in vec2 gua_in_texcoord;
 
-#endif  // GUA_INCLUDE_RENDERER_HPP
+// output
+out vec2 gua_quad_coords;
+
+// body
+void main() {
+  // gua_quad_coords = (gua_in_texcoord * (gua_resolution - 1) + 0.5) / gua_resolution;
+  gua_quad_coords = gua_in_texcoord;
+  gl_Position = vec4(gua_in_position, 1.0);
+}
+

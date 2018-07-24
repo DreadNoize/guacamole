@@ -48,7 +48,10 @@ int main(int argc, char** argv) {
   // the model will be attached to the transform node
   auto sphere_geometry(loader.create_geometry_from_file(
       "sphere_geometry", "../data/objects/sphere.obj"));
+  sphere_geometry->translate(-0.6, 0.0, 0.0);
   sphere_geometry->scale(0.5);
+  
+  
 
   graph.add_node("/transform", sphere_geometry);
 
@@ -94,6 +97,8 @@ int main(int argc, char** argv) {
   // log fps and handle close events
   size_t ctr{};
   ticker.on_tick.connect([&]() {
+    auto time = gua::Timer::get_now();
+    sphere_geometry->rotate(time*0.0000000002, gua::math::vec3(0.0,1.0,0.0));
     // log fps every 150th tick
     if (ctr++ % 150 == 0) {
       gua::Logger::LOG_WARNING

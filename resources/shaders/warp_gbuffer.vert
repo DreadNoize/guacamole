@@ -19,34 +19,36 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef GUA_INCLUDE_RENDERER_HPP
-#define GUA_INCLUDE_RENDERER_HPP
+@include "common/header.glsl"
+@include "gbuffer_warp_modes.glsl"
+@include "common/gua_camera_uniforms.glsl"
+@include "common/gua_gbuffer_input.glsl"
 
-// renderer headers
-#include <gua/config.hpp>
-#include <gua/renderer/enums.hpp>
-#include <gua/renderer/TriMeshLoader.hpp>
-#include <gua/renderer/LineStripLoader.hpp>
-#include <gua/renderer/Pipeline.hpp>
-#include <gua/renderer/TriMeshPass.hpp>
-#include <gua/renderer/WarpPass.hpp>
-#include <gua/renderer/LineStripPass.hpp>
-#include <gua/renderer/LightVisibilityPass.hpp>
-#include <gua/renderer/BackgroundPass.hpp>
-#include <gua/renderer/ResolvePass.hpp>
-#include <gua/renderer/SkyMapPass.hpp>
-#include <gua/renderer/SSAOPass.hpp>
-#include <gua/renderer/FullscreenPass.hpp>
-#include <gua/renderer/ToneMappingPass.hpp>
-#include <gua/renderer/WarpGridGeneratorPass.hpp>
-#include <gua/renderer/Renderer.hpp>
-#include <gua/renderer/Window.hpp>
-#include <gua/renderer/HeadlessSurface.hpp>
-#include <gua/renderer/MaterialShader.hpp>
-#include <gua/renderer/MaterialShaderDescription.hpp>
-#include <gua/renderer/Material.hpp>
-#ifdef GUACAMOLE_GLFW3
-#include <gua/renderer/GlfwWindow.hpp>
-#endif
+// -----------------------------------------------------------------------------
+// all grid modes
+// #if WARP_MODE == WARP_MODE_GRID_DEPTH_THRESHOLD || WARP_MODE == WARP_MODE_GRID_SURFACE_ESTIMATION || WARP_MODE == WARP_MODE_GRID_SURFACE_ESTIMATION_STRETCH || WARP_MODE == WARP_MODE_GRID_ADVANCED_SURFACE_ESTIMATION || WARP_MODE == WARP_MODE_GRID_NON_UNIFORM_SURFACE_ESTIMATION
+// -----------------------------------------------------------------------------
 
-#endif  // GUA_INCLUDE_RENDERER_HPP
+layout(location=0) in uvec3 position;
+
+flat out uvec3 varying_position;
+
+void main() {
+  varying_position = position;
+}
+
+// -----------------------------------------------------------------------------
+// #else // WARP_MODE_QUADS_DEPTH_ALIGNED------------------------------------------
+// // -----------------------------------------------------------------------------
+
+// layout(location=0) in float foo;
+
+// flat out uint vertex_id;
+// out float bar;
+
+// void main() {
+//   vertex_id = gl_VertexID;
+//   bar = foo;
+// }
+
+// #endif
