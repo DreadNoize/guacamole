@@ -111,7 +111,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     res_ = description->warp_resources();
     for (int i = 0; i < 2; ++i) {
       res_->warp_vao[i] = ctx.render_device->create_vertex_array(
-            scm::gl::vertex_format(0, 0, scm::gl::TYPE_VEC3UI, sizeof(math::vec3ui)), {res_->grid_vbo.first[i]});
+            scm::gl::vertex_format(0, 0, scm::gl::TYPE_VEC3UI, sizeof(math::vec3ui)), {res_->grid_vbo_warp.first[i]});
     }
   }
   if (!warp_gbuffer_program_) {
@@ -164,7 +164,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     }
   }
 
-  res_->swap_shared_resources();
+  // res_->swap_shared_resources();
 
   if (description->depth_test()) {
     ctx.render_context->set_depth_stencil_state(depth_stencil_state_yes_, 1);
@@ -177,6 +177,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   // ---------------------------------------------------------------------------
   auto gbuffer = dynamic_cast<GBuffer*>(pipe.current_viewstate().target);
   auto stereo_type(pipe.current_viewstate().camera.config.stereo_type());
+  //auto stereo_type(StereoType::SPATIAL_WARP);
 
   bool first_eye(
        (stereo_type == StereoType::SPATIAL_WARP  && ctx.mode != CameraMode::RIGHT)
@@ -285,7 +286,9 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
           warp_gbuffer_program_->set_uniform(ctx, sdb_handle,  "gua_warp_grid_tex");
           ctx.render_context->bind_vertex_array(res_->warp_vao[res_->current_vbo()]);
           ctx.render_context->apply();
-          ctx.render_context->draw_transform_feedback(scm::gl::PRIMITIVE_POINT_LIST, res_->grid_tfb.first[res_->current_vbo()]);
+          std::cout << "\n[WARP_RENDERER] grid_tfb id (current vbo): " << res_->grid_tfb_warp.first[res_->current_vbo()]->object_id() << std::endl;
+          std::cout << "\n[WARP_RENDERER] grid_tfb_warp id (current tfb): " << res_->grid_tfb_warp.first[res_->current_tfb()]->object_id() << std::endl;
+          ctx.render_context->draw_transform_feedback(scm::gl::PRIMITIVE_POINT_LIST, res_->grid_tfb_warp.first[res_->current_tfb()]);
         }
       } else {
         ctx.render_context->set_rasterizer_state(points_);

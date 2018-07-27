@@ -200,22 +200,11 @@ scm::gl::texture_2d_ptr Pipeline::render_scene(
   gbuffer_->clear(context_, 1.f, 1);
   current_viewstate_.target = gbuffer_.get();
 
-  /* Incase warping is enabled, look here for warp pass and only process the warp pass *
-   * as all other passes have been process in the slow client                          */
-  /* bool warp_pass = false;
-  for (unsigned i(0); i < passes_.size(); ++i) {
-    warp_pass = (last_description_.get_passes()[i]->name() == "WarpPass");
-    if (warp_pass) {
-      passes_[i].process(*last_description_.get_passes()[i], *this);
-    }
-  } */
-
   // process all passes
   for (unsigned i(0); i < passes_.size(); ++i) {
     if (passes_[i].needs_color_buffer_as_input()) {
       gbuffer_->toggle_ping_pong();
     }
-
     passes_[i].process(*last_description_.get_passes()[i], *this);
   }
 

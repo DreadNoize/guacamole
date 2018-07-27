@@ -131,12 +131,8 @@ PipelinePass WarpGridGeneratorPassDescription::make_pass(RenderContext const& ct
   pass.process_ = [renderer, mode](
     PipelinePass& pass, PipelinePassDescription const& desc, Pipeline & pipe) {
 
-    if (pipe.current_viewstate().camera.config.get_stereo_type() == StereoType::SPATIAL_WARP ||
-        pipe.current_viewstate().camera.config.get_stereo_type() == StereoType::TEMPORAL_WARP ||
-        pipe.current_viewstate().camera.config.get_stereo_type() == StereoType::SINGLE_TEMPORAL_WARP) {
-      if (mode == WarpPassDescription::GBUFFER_GRID_ADVANCED_SURFACE_ESTIMATION) {
-        renderer->render(pipe, desc);
-      }
+    if (mode == WarpPassDescription::GBUFFER_GRID_ADVANCED_SURFACE_ESTIMATION) {
+      renderer->render(pipe, desc);
     }
   };
 

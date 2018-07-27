@@ -56,8 +56,6 @@ class GUA_DLL GBuffer : public RenderTarget {
   inline scm::gl::sampler_state_desc const& get_sampler_state_desc() const { return sampler_state_desc_; }
   inline scm::gl::sampler_state_ptr const& get_sampler_state() const { return sampler_state_; }
 
-  ABuffer& get_abuffer() {return abuffer_;}
-
  private:
   ABuffer abuffer_;
 
@@ -72,11 +70,11 @@ class GUA_DLL GBuffer : public RenderTarget {
 
   scm::gl::texture_2d_ptr color_buffer_read_;
   scm::gl::texture_2d_ptr color_buffer_write_;
-  scm::gl::texture_2d_ptr depth_buffer_read_;
-  scm::gl::texture_2d_ptr depth_buffer_write_;
   scm::gl::texture_2d_ptr pbr_buffer_;
   scm::gl::texture_2d_ptr normal_buffer_;
   scm::gl::texture_2d_ptr flags_buffer_;
+  scm::gl::texture_2d_ptr depth_buffer_read_;
+  scm::gl::texture_2d_ptr depth_buffer_write_;
 };
 
 }

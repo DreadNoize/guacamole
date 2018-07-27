@@ -21,7 +21,6 @@
 
 @include "common/header.glsl"
 @include "common/gua_camera_uniforms.glsl"
-@include "common/gua_gbuffer_input.glsl"
 @include "gbuffer_warp_modes.glsl"
 @include "hole_filling_modes.glsl"
 

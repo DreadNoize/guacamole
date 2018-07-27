@@ -59,9 +59,9 @@ GBuffer::GBuffer(RenderContext const& ctx, math::vec2ui const& resolution):
   flags_buffer_       = ctx.render_device->create_texture_2d(resolution, scm::gl::FORMAT_R_8UI, 1);
   ctx.render_context->make_resident(flags_buffer_, sampler_state_);
 
-  depth_buffer_read_ = ctx.render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
+  depth_buffer_read_  = ctx.render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8,  1);
   ctx.render_context->make_resident(depth_buffer_read_, sampler_state_);
-  depth_buffer_write_ = ctx.render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
+  depth_buffer_write_  = ctx.render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8,  1);
   ctx.render_context->make_resident(depth_buffer_write_, sampler_state_);
 
   fbo_read_ = ctx.render_device->create_frame_buffer();
@@ -76,7 +76,7 @@ GBuffer::GBuffer(RenderContext const& ctx, math::vec2ui const& resolution):
   fbo_write_->attach_color_buffer(1, pbr_buffer_,0,0);
   fbo_write_->attach_color_buffer(2, normal_buffer_,0,0);
   fbo_write_->attach_color_buffer(3, flags_buffer_,0,0);
-  fbo_write_->attach_depth_stencil_buffer(depth_buffer_write_,0,0);
+  fbo_write_->attach_depth_stencil_buffer(depth_buffer_read_,0,0);
 
   fbo_read_only_color_ = ctx.render_device->create_frame_buffer();
   fbo_read_only_color_->attach_color_buffer(0, color_buffer_read_,0,0);
@@ -84,7 +84,7 @@ GBuffer::GBuffer(RenderContext const& ctx, math::vec2ui const& resolution):
 
   fbo_write_only_color_ = ctx.render_device->create_frame_buffer();
   fbo_write_only_color_->attach_color_buffer(0, color_buffer_write_,0,0);
-  fbo_write_only_color_->attach_depth_stencil_buffer(depth_buffer_write_,0,0);
+  fbo_write_only_color_->attach_depth_stencil_buffer(depth_buffer_read_,0,0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +135,7 @@ void GBuffer::toggle_ping_pong() {
   std::swap(fbo_write_, fbo_read_);
   std::swap(fbo_write_only_color_, fbo_read_only_color_);
   std::swap(color_buffer_write_, color_buffer_read_);
-  std::swap(depth_buffer_write_, depth_buffer_read_);
+  // std::swap(depth_buffer_write_, depth_buffer_read_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -168,11 +168,11 @@ void GBuffer::remove_buffers(RenderContext const& ctx) {
   if (flags_buffer_) {
     ctx.render_context->make_non_resident(flags_buffer_);
   }
-  if (depth_buffer_write_) {
-    ctx.render_context->make_non_resident(depth_buffer_write_);
-  }
   if (depth_buffer_read_) {
     ctx.render_context->make_non_resident(depth_buffer_read_);
+  }
+  if (depth_buffer_write_) {
+    ctx.render_context->make_non_resident(depth_buffer_write_);
   }
 }
 

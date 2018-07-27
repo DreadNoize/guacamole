@@ -70,7 +70,9 @@ WarpGridGenerator::~WarpGridGenerator() {
 ////////////////////////////////////////////////////////////////////////////////
 void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   std::cout << "Generating Grid ..." << std::endl;
-  if(res_->grid_generated) {res_->grid_generated = false;}
+  if(res_) {
+    if(res_->grid_generated) {res_->grid_generated = false;}
+  }
   auto& ctx(pipe.get_context());
 
   pipe_ = &pipe;
@@ -81,13 +83,15 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   size_t pixel_count(resolution.x * resolution.y / 4);
 
   if (!grid_generation_program_) {
+    std::list<std::string> list_temp;
+    list_temp.push_back("xfb_output");
     grid_generation_program_ = std::make_shared<ShaderProgram>();
-    grid_generation_program_->set_shaders(grid_generation_program_stages_, {"xfb_output"}, true, global_substitution_map_);
+    grid_generation_program_->set_shaders(grid_generation_program_stages_, list_temp, true, global_substitution_map_);
   }
 
   if (!surface_detection_program_) {
     surface_detection_program_ = std::make_shared<ShaderProgram>();
-    surface_detection_program_->set_shaders(surface_detection_program_stages_, {}, false, global_substitution_map_);
+    surface_detection_program_->set_shaders(surface_detection_program_stages_, std::list<std::string>(), false, global_substitution_map_);
   }
 
 
@@ -97,36 +101,34 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   if(!res_) {
     res_ = description->warp_resources();
 
-    if (res_->surface_detection_buffer.second) {
-        ctx.render_context->make_non_resident(res_->surface_detection_buffer.second);
-      }
+    /*if (res_->surface_detection_buffer.second) {
+      ctx.render_context->make_non_resident(res_->surface_detection_buffer.first);
+      ctx.render_context->make_non_resident(res_->surface_detection_buffer.second);
+    }*/
 
-      math::vec2 size(resolution/2);
-      int mip_map_levels(current_level);
-      scm::gl::sampler_state_desc state_desc(scm::gl::FILTER_MIN_MAG_NEAREST,
-        scm::gl::WRAP_CLAMP_TO_EDGE,
-        scm::gl::WRAP_CLAMP_TO_EDGE);
-      scm::gl::sampler_state_ptr state = ctx.render_device->create_sampler_state(state_desc);
+    math::vec2 size(resolution/2);
+    int mip_map_levels(current_level);
+    scm::gl::sampler_state_desc state_desc(scm::gl::FILTER_MIN_MAG_NEAREST,
+      scm::gl::WRAP_CLAMP_TO_EDGE,
+      scm::gl::WRAP_CLAMP_TO_EDGE);
+    scm::gl::sampler_state_ptr state = ctx.render_device->create_sampler_state(state_desc);
 
-      {
-        res_->surface_detection_buffer.first = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-        ctx.render_context->make_resident(res_->surface_detection_buffer.first, state);
-        ctx.render_context->make_resident(res_->surface_detection_buffer.first, state);
-        res_->surface_detection_buffer.second = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-        ctx.render_context->make_resident(res_->surface_detection_buffer.second, state);
+    /*res_->surface_detection_buffer.first = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+    ctx.render_context->make_resident(res_->surface_detection_buffer.first, state);
+    res_->surface_detection_buffer.second = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+    ctx.render_context->make_resident(res_->surface_detection_buffer.second, state);*/
 
-        /*res_->surface_detection_buffer.first = std::make_shared<Texture2D>(size.x, size.y,
-            scm::gl::FORMAT_R_16UI, mip_map_levels, state);
-        res_->surface_detection_buffer.second = std::make_shared<Texture2D>(size.x, size.y,
-            scm::gl::FORMAT_R_16UI, mip_map_levels, state);*/
-      }
+    /*res_->surface_detection_buffer.first = std::make_shared<Texture2D>(size.x, size.y,
+        scm::gl::FORMAT_R_16UI, mip_map_levels, state);
+    res_->surface_detection_buffer.second = std::make_shared<Texture2D>(size.x, size.y,
+        scm::gl::FORMAT_R_16UI, mip_map_levels, state);*/
 
-      surface_detection_buffer_fbos_.clear();
+    surface_detection_buffer_fbos_.clear();
 
-      for (int i(0); i<mip_map_levels; ++i) {
-        surface_detection_buffer_fbos_.push_back(ctx.render_device->create_frame_buffer());
-        surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
-      }
+    for (int i(0); i<mip_map_levels; ++i) {
+      surface_detection_buffer_fbos_.push_back(ctx.render_device->create_frame_buffer());
+      surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -202,6 +204,10 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
     ctx.render_context->end_transform_feedback();
     res_->ping = !res_->ping;
   }
+
+  auto buffer = res_->grid_tfb.first[res_->current_vbo()]->stream_out_buffer(0);
+  //auto buffer_2 = ctx.render_device->create_buffer(buffer->descriptor()._bindings, buffer->descriptor()._usage, buffer->descriptor()._size);
+  ctx.render_context->copy_buffer_data(res_->grid_vbo_warp.second[res_->current_vbo()],buffer,0,0,buffer->descriptor()._size);
 
   res_->grid_generated = true;
 
