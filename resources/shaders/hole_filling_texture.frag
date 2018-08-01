@@ -82,7 +82,8 @@ void main() {
       // calculate average color of all none hole pixels with a depth larger or equal to average
       if (samples[i].a != 1.0 && samples[i].a > average_depth-0.000001) {
         max_depth = min(max_depth, samples[i].a);
-        result.rgb += samples[i].rgb * weights[i];
+        // result.rgb += samples[i].rgb * weights[i];
+        result.rgb += vec3(0,1,0);
         weight += weights[i];
       }
     }
@@ -94,6 +95,6 @@ void main() {
 
     result.a = max_depth;
   } else {
-    result = vec4(0, 0, 0, 1);
+    result = vec4(1, 0, 0, 1);
   }
 }

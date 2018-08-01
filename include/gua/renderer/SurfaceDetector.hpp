@@ -1,8 +1,9 @@
 /******************************************************************************
  * guacamole - delicious VR                                                   *
  *                                                                            *
- * Copyright: (c) 2011-2013 Bauhaus-Universität Weimar                        *
+ * Copyright: (c) 2011-2018 Bauhaus-Universität Weimar                        *
  * Contact:   felix.lauer@uni-weimar.de / simon.schneegans@uni-weimar.de      *
+ *            joachim.billert@uni-weimar.de                                   *
  *                                                                            *
  * This program is free software: you can redistribute it and/or modify it    *
  * under the terms of the GNU General Public License as published by the Free *
@@ -18,36 +19,49 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.             *
  *                                                                            *
  ******************************************************************************/
+/* This is a simplified and adjusted version of the WarpGridGenerator         *
+ * which was written by Simon Schneegans                                      */
 
-#ifndef GUA_INCLUDE_RENDERER_HPP
-#define GUA_INCLUDE_RENDERER_HPP
+#ifndef GUA_SURFACE_DETECTOR_HPP
+#define GUA_SURFACE_DETECTOR_HPP
 
-// renderer headers
-#include <gua/config.hpp>
-#include <gua/renderer/enums.hpp>
-#include <gua/renderer/TriMeshLoader.hpp>
-#include <gua/renderer/LineStripLoader.hpp>
-#include <gua/renderer/Pipeline.hpp>
-#include <gua/renderer/TriMeshPass.hpp>
-#include <gua/renderer/WarpPass.hpp>
-#include <gua/renderer/LineStripPass.hpp>
-#include <gua/renderer/LightVisibilityPass.hpp>
-#include <gua/renderer/BackgroundPass.hpp>
-#include <gua/renderer/ResolvePass.hpp>
-#include <gua/renderer/SkyMapPass.hpp>
-#include <gua/renderer/SSAOPass.hpp>
-#include <gua/renderer/FullscreenPass.hpp>
-#include <gua/renderer/ToneMappingPass.hpp>
-#include <gua/renderer/SurfaceDetectionPass.hpp>
-#include <gua/renderer/WarpGridGeneratorPass.hpp>
+#include <map>
+//#include <unordered map>
+
+#include <gua/platform.hpp>
+#include <gua/renderer/ShaderProgram.hpp>
 #include <gua/renderer/Renderer.hpp>
-#include <gua/renderer/Window.hpp>
-#include <gua/renderer/HeadlessSurface.hpp>
-#include <gua/renderer/MaterialShader.hpp>
-#include <gua/renderer/MaterialShaderDescription.hpp>
-#include <gua/renderer/Material.hpp>
-#ifdef GUACAMOLE_GLFW3
-#include <gua/renderer/GlfwWindow.hpp>
-#endif
 
-#endif  // GUA_INCLUDE_RENDERER_HPP
+#include <scm/gl_core/shader_objects.h>
+
+namespace gua {
+
+class Pipeline;
+class PipelinePassDescription;
+
+class SurfaceDetector {
+ public:
+  SurfaceDetector();
+  virtual ~SurfaceDetector();
+
+  void render(Pipeline& pipe, PipelinePassDescription const& desc);
+  void set_global_substitution_map(SubstitutionMap const& smap) {
+    global_substitution_map_ = smap;
+  }
+
+ protected:
+  std::shared_ptr<Renderer::WarpingResources> res_;
+  SubstitutionMap global_substitution_map_;
+
+  std::vector<scm::gl::frame_buffer_ptr> surface_detection_buffer_fbos_;
+
+  std::vector<ShaderProgramStage> surface_detection_program_stages_;
+  std::shared_ptr<ShaderProgram> surface_detection_program_;
+
+  Pipeline* pipe_;
+
+};
+
+}
+
+#endif // GUA_SURFACE_DETECTOR_HPP

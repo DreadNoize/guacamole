@@ -27,11 +27,11 @@
 
 uniform mat4 warp_matrix;
 uniform uvec2 resolution;
-uniform uvec2 gbuffer_depth;
+uniform uvec2 gua_gbuffer_depth;
 
 
 float get_depth_raw(vec2 frag_pos) {
-  return texelFetch(sampler2D(gbuffer_depth), ivec2(frag_pos), 0).x*2-1;
+  return texelFetch(sampler2D(gua_gbuffer_depth), ivec2(frag_pos), 0).x*2-1;
 }
 
 float get_min_depth(vec2 frag_pos) {

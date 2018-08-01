@@ -31,6 +31,7 @@
 #include <gua/platform.hpp>
 #include <gua/scenegraph.hpp>
 #include <gua/renderer/Pipeline.hpp>
+#include <gua/renderer/SurfaceDetectionPass.hpp>
 #include <gua/renderer/WarpGridGeneratorPass.hpp>
 #include <gua/databases/WindowDatabase.hpp>
 #include <gua/node/CameraNode.hpp>
@@ -213,15 +214,20 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
     // std::cout << "[SLOW] PiplinePass count: " << cmd.serialized_cam->pipeline_description->get_passes().size() << std::endl;
     try {
+      cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::SurfaceDetectionPassDescription>();
+    } catch (std::runtime_error& e) {
+      cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::SurfaceDetectionPassDescription>(warp_res[window_name]));
+    }
+    /* try {
       cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpGridGeneratorPassDescription>();
     } catch (std::runtime_error& e) {
       cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
     }
-    /*try {
+    try {
       cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpPassDescription>();
     } catch (std::runtime_error& e) {
       cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
-    }*/
+     }*/
     /*if (!cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpGridGeneratorPassDescription>()) {
       cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
     }*/
@@ -232,7 +238,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         while (!(warp_res[window_name]->shared)) {
           std::cout << "[SLOW] waiting for fast window" << std::endl;
         }
-        offscreen_window->open(warp_res[window_name]->shared, false);
+        offscreen_window->open(warp_res[window_name]->shared, true);
         warp_res[window_name]->shared_initialized = true;
 #else
         offscreen_window->open();
@@ -244,9 +250,9 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         offscreen_window->set_active(true);
         offscreen_window->start_frame();
 
-        /*if(!warp_res[window_name]->initialized) {
-          warp_res[window_name]->init(offscreen_window->get_context(), offscreen_window->config.get_resolution());
-        }*/
+        // if(!warp_res[window_name]->initialized) {
+        //   warp_res[window_name]->init(offscreen_window->get_context(), offscreen_window->config.get_resolution());
+        // }
         while (!warp_res[window_name]->initialized) {
           std::cout << "[SLOW] waiting on initialization" << std::endl;
         }
@@ -254,7 +260,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         //// as fbo cannot be shared, initialize fbo after warp resources where initialized
         if (warp_res[window_name]->initialized && !warp_res[window_name]->grid_initialized) {
           warp_res[window_name]->init_fbo( offscreen_window->get_context());
-          warp_res[window_name]->init_grid_resources(offscreen_window->get_context(), offscreen_window->config.get_resolution());
+          // warp_res[window_name]->init_grid_resources(offscreen_window->get_context(), offscreen_window->config.get_resolution());
         }
 #if MULTITHREADED
 #else
@@ -341,18 +347,19 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
             auto depth = pipe->get_gbuffer()->get_depth_buffer();
             warp_res[window_name]->framebuffer = pipe->get_gbuffer()->get_fbo_read();
             warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
+            warp_res[window_name]->is_left.second = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
             // as fast client is waiting on the first image, set flag = true
 
             //// If warping resources are initialized, set the according parameters
             if(warp_res[window_name]->initialized_fbo) {
               if (img) {
                 // warp_res[window_name]->swap_shared_resources();
-                //warp_res[window_name]->swap_buffers();
+                // warp_res[window_name]->swap_buffers();
 
-                warp_res[window_name]->is_left.second = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
                 warp_res[window_name]->postprocess_frame(offscreen_window->get_context());
                 if(!warp_res[window_name]->renderer_ready) warp_res[window_name]->renderer_ready = true;
-                offscreen_window->display(img, warp_res[window_name]->is_left.first);
+                // offscreen_window->display(warp_res[window_name]->color_buffer.second, warp_res[window_name]->is_left.first);
+                // offscreen_window->display(img, warp_res[window_name]->is_left.first);
               }
               
             }
@@ -385,6 +392,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
     
     if (!warp_res[window_name]->serialized_warp_cam) {
       auto warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
+      warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
       warp_res[window_name]->serialized_warp_cam = std::make_shared<node::SerializedCameraNode>(warp_cam->serialize());
     }
@@ -410,9 +418,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         window->set_active(true);
         window->start_frame();
         // if warp resources arent initialized, do it now
-         if(!warp_res[window_name]->initialized) {
-           warp_res[window_name]->init(window->get_context(), window->config.get_resolution());
-         }
+        if(!warp_res[window_name]->initialized) {
+          warp_res[window_name]->init(window->get_context(), window->config.get_resolution());
+        }
 
         //// create warping pipeline
         std::shared_ptr<Pipeline> pipe = nullptr;
@@ -441,9 +449,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         //// if the slow client rendered for the first time, start display
         if(warp_res[window_name]->initialized && warp_res[window_name]->renderer_ready) {
           warp_res[window_name]->swap_shared_resources();
+          warp_res[window_name]->swap_buffers();
           auto tex = pipe->render_scene(warp_res[window_name]->camera_mode, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
           // display
-          warp_res[window_name]->swap_buffers();
           window->display(tex, warp_res[window_name]->is_left.first);
           // window->display(warp_res[window_name]->color_buffer.first, warp_res[window_name]->is_left.first);
           // window->display(temp_tex, warp_res[window_name]->is_left.first);

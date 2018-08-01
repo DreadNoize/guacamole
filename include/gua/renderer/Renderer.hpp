@@ -107,39 +107,39 @@ class GUA_DLL Renderer {
 
       std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
 
-      depth_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24, 1);
+      depth_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
       ctx->render_context->make_resident(depth_buffer.first, sampler_state);
-      depth_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24, 1);
+      depth_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
       ctx->render_context->make_resident(depth_buffer.second, sampler_state);
 
-      auto pixel_count(resolution.x * resolution.y / 4);
+      // auto pixel_count(resolution.x * resolution.y / 4);
 
-      grid_vbo_warp.first = std::vector<scm::gl::buffer_ptr>(2);
-      grid_vbo_warp.second = std::vector<scm::gl::buffer_ptr>(2);
+      // grid_vbo_warp.first = std::vector<scm::gl::buffer_ptr>(2);
+      // grid_vbo_warp.second = std::vector<scm::gl::buffer_ptr>(2);
 
-      grid_tfb_warp.first = std::vector<scm::gl::transform_feedback_ptr>(2);
-      grid_tfb_warp.second = std::vector<scm::gl::transform_feedback_ptr>(2);
+      // grid_tfb_warp.first = std::vector<scm::gl::transform_feedback_ptr>(2);
+      // grid_tfb_warp.second = std::vector<scm::gl::transform_feedback_ptr>(2);
 
-      copy_buffer.first = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
-                                           scm::gl::USAGE_DYNAMIC_DRAW,
-                                           pixel_count * sizeof(math::vec3ui));
-      copy_buffer.second = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
-                                           scm::gl::USAGE_DYNAMIC_DRAW,
-                                           pixel_count * sizeof(math::vec3ui));
+      // copy_buffer.first = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+      //                                      scm::gl::USAGE_DYNAMIC_DRAW,
+      //                                      pixel_count * sizeof(math::vec3ui));
+      // copy_buffer.second = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+      //                                      scm::gl::USAGE_DYNAMIC_DRAW,
+      //                                      pixel_count * sizeof(math::vec3ui));
 
-      for(int i = 0; i < 2; ++i) {
-        grid_vbo_warp.first[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
-                                           scm::gl::USAGE_DYNAMIC_DRAW,
-                                           pixel_count * sizeof(math::vec3ui));
-        grid_vbo_warp.second[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
-                                           scm::gl::USAGE_DYNAMIC_DRAW,
-                                           pixel_count * sizeof(math::vec3ui));
+      // for(int i = 0; i < 2; ++i) {
+      //   grid_vbo_warp.first[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+      //                                      scm::gl::USAGE_DYNAMIC_DRAW,
+      //                                      pixel_count * sizeof(math::vec3ui));
+      //   grid_vbo_warp.second[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+      //                                      scm::gl::USAGE_DYNAMIC_DRAW,
+      //                                      pixel_count * sizeof(math::vec3ui));
 
-        grid_tfb_warp.first[i] = ctx->render_device->create_transform_feedback(
-            scm::gl::stream_output_setup(grid_vbo_warp.first[i]));
-        grid_tfb_warp.second[i] = ctx->render_device->create_transform_feedback(
-            scm::gl::stream_output_setup(grid_vbo_warp.second[i]));
-      }
+      //   grid_tfb_warp.first[i] = ctx->render_device->create_transform_feedback(
+      //       scm::gl::stream_output_setup(grid_vbo_warp.first[i]));
+      //   grid_tfb_warp.second[i] = ctx->render_device->create_transform_feedback(
+      //       scm::gl::stream_output_setup(grid_vbo_warp.second[i]));
+      // }
 
       math::vec2 size(resolution / 2);
 
@@ -159,8 +159,8 @@ class GUA_DLL Renderer {
       initialized = true;
     }
 
-    void init_grid_resources(RenderContext* ctx, math::vec2ui const& resolution) {
-      auto pixel_count(resolution.x * resolution.y / 4);
+    void init_grid_resources(RenderContext ctx, /* math::vec2ui const& resolution */float pixel_count) {
+      // auto pixel_count(resolution.x * resolution.y / 4);
 
       grid_vbo.first = std::vector<scm::gl::buffer_ptr>(2);
       grid_vbo.second = std::vector<scm::gl::buffer_ptr>(2);
@@ -171,21 +171,21 @@ class GUA_DLL Renderer {
       grid_tfb.first = std::vector<scm::gl::transform_feedback_ptr>(2);
       grid_tfb.second = std::vector<scm::gl::transform_feedback_ptr>(2);
       for (int i = 0; i < 2; ++i) {
-        grid_vbo.first[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+        grid_vbo.first[i] = ctx.render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
                                            scm::gl::USAGE_DYNAMIC_DRAW,
                                            pixel_count * sizeof(math::vec3ui));
-        grid_vbo.second[i] = ctx->render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
+        grid_vbo.second[i] = ctx.render_device->create_buffer(scm::gl::BIND_VERTEX_BUFFER,
                                            scm::gl::USAGE_DYNAMIC_DRAW,
                                            pixel_count * sizeof(math::vec3ui));
 
-        grid_vao.first[i] = ctx->render_device->create_vertex_array(
+        grid_vao.first[i] = ctx.render_device->create_vertex_array(
             scm::gl::vertex_format(0, 0, scm::gl::TYPE_VEC3UI, sizeof(math::vec3ui)), {grid_vbo.first[i]});
-        grid_vao.second[i] = ctx->render_device->create_vertex_array(
+        grid_vao.second[i] = ctx.render_device->create_vertex_array(
             scm::gl::vertex_format(0, 0, scm::gl::TYPE_VEC3UI, sizeof(math::vec3ui)), {grid_vbo.second[i]});
 
-        grid_tfb.first[i] = ctx->render_device->create_transform_feedback(
+        grid_tfb.first[i] = ctx.render_device->create_transform_feedback(
             scm::gl::stream_output_setup(grid_vbo.first[i]));
-        grid_tfb.second[i] = ctx->render_device->create_transform_feedback(
+        grid_tfb.second[i] = ctx.render_device->create_transform_feedback(
             scm::gl::stream_output_setup(grid_vbo.second[i]));
       }
       cell_count = pixel_count;
@@ -204,8 +204,10 @@ class GUA_DLL Renderer {
     }
 
     void postprocess_frame(RenderContext* ctx) {
-      ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
-      ctx->render_context->generate_mipmaps(color_buffer.second);
+      // ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
+      // ctx->render_context->generate_mipmaps(color_buffer.second);
+      ctx->render_context->copy_color_buffer(framebuffer, framebuffer_resolved, 0);
+      ctx->render_context->copy_depth_stencil_buffer(framebuffer, framebuffer_resolved);
       ctx->render_context->reset();
       updated = true;
     }
@@ -234,11 +236,11 @@ class GUA_DLL Renderer {
         std::cout << "[FAST] swapping shared resources" << std::endl;
         std::lock_guard<std::mutex> lock(copy_mutex);
         std::swap(surface_detection_buffer.first, surface_detection_buffer.second);
-        std::swap(grid_vbo.first, grid_vbo.second);
-        std::swap(grid_tfb.first, grid_tfb.second);
-        std::swap(grid_vao.first, grid_vao.second);
-        std::swap(grid_vbo_warp.first, grid_vbo_warp.second);
-        std::swap(grid_tfb_warp.first, grid_tfb_warp.second);
+        // std::swap(grid_vbo.first, grid_vbo.second);
+        // std::swap(grid_tfb.first, grid_tfb.second);
+        // std::swap(grid_vao.first, grid_vao.second);
+        // std::swap(grid_vbo_warp.first, grid_vbo_warp.second);
+        // std::swap(grid_tfb_warp.first, grid_tfb_warp.second);
       }
     }
 
@@ -246,12 +248,12 @@ class GUA_DLL Renderer {
 
     std::pair<std::vector<scm::gl::buffer_ptr>, std::vector<scm::gl::buffer_ptr>> grid_vbo;
     std::pair<std::vector<scm::gl::transform_feedback_ptr>, std::vector<scm::gl::transform_feedback_ptr>> grid_tfb;
-    std::pair<std::vector<scm::gl::buffer_ptr>, std::vector<scm::gl::buffer_ptr>> grid_vbo_warp;
-    std::pair<std::vector<scm::gl::transform_feedback_ptr>, std::vector<scm::gl::transform_feedback_ptr>> grid_tfb_warp;
+    // std::pair<std::vector<scm::gl::buffer_ptr>, std::vector<scm::gl::buffer_ptr>> grid_vbo_warp;
+    // std::pair<std::vector<scm::gl::transform_feedback_ptr>, std::vector<scm::gl::transform_feedback_ptr>> grid_tfb_warp;
     std::pair<std::vector<scm::gl::vertex_array_ptr>, std::vector<scm::gl::vertex_array_ptr>> grid_vao;
     scm::gl::vertex_array_ptr warp_vao[2];
 
-    std::pair<scm::gl::buffer_ptr, scm::gl::buffer_ptr> copy_buffer;
+    // std::pair<scm::gl::buffer_ptr, scm::gl::buffer_ptr> copy_buffer;
 
     size_t cell_count = 0;
     bool ping = false;

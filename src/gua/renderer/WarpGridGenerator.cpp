@@ -47,16 +47,16 @@ WarpGridGenerator::WarpGridGenerator()
   grid_generation_program_stages_.push_back(ShaderProgramStage(scm::gl::STAGE_GEOMETRY_SHADER, g_shader));
 
 
-#ifdef GUACAMOLE_RUNTIME_PROGRAM_COMPILATION
-  v_shader = factory.read_shader_file("shaders/common/fullscreen_quad.vert");
-  g_shader = factory.read_shader_file("shaders/surface_detection_shader.frag");
-#else
-  v_shader = Resources::lookup_shader("shaders/common/fullscreen_quad.vert");
-  g_shader = Resources::lookup_shader("shaders/surface_detection_shader.frag");
-#endif
+// #ifdef GUACAMOLE_RUNTIME_PROGRAM_COMPILATION
+//   v_shader = factory.read_shader_file("shaders/common/fullscreen_quad.vert");
+//   g_shader = factory.read_shader_file("shaders/surface_detection_shader.frag");
+// #else
+//   v_shader = Resources::lookup_shader("shaders/common/fullscreen_quad.vert");
+//   g_shader = Resources::lookup_shader("shaders/surface_detection_shader.frag");
+// #endif
 
-  surface_detection_program_stages_.push_back(ShaderProgramStage(scm::gl::STAGE_VERTEX_SHADER,   v_shader));
-  surface_detection_program_stages_.push_back(ShaderProgramStage(scm::gl::STAGE_FRAGMENT_SHADER, g_shader));
+//   surface_detection_program_stages_.push_back(ShaderProgramStage(scm::gl::STAGE_VERTEX_SHADER,   v_shader));
+//   surface_detection_program_stages_.push_back(ShaderProgramStage(scm::gl::STAGE_FRAGMENT_SHADER, g_shader));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -70,9 +70,9 @@ WarpGridGenerator::~WarpGridGenerator() {
 ////////////////////////////////////////////////////////////////////////////////
 void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   std::cout << "Generating Grid ..." << std::endl;
-  if(res_) {
-    if(res_->grid_generated) {res_->grid_generated = false;}
-  }
+  // if(res_) {
+  //   if(res_->grid_generated) {res_->grid_generated = false;}
+  // }
   auto& ctx(pipe.get_context());
 
   pipe_ = &pipe;
@@ -89,22 +89,25 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
     grid_generation_program_->set_shaders(grid_generation_program_stages_, list_temp, true, global_substitution_map_);
   }
 
-  if (!surface_detection_program_) {
-    surface_detection_program_ = std::make_shared<ShaderProgram>();
-    surface_detection_program_->set_shaders(surface_detection_program_stages_, std::list<std::string>(), false, global_substitution_map_);
-  }
+  // if (!surface_detection_program_) {
+  //   surface_detection_program_ = std::make_shared<ShaderProgram>();
+  //   surface_detection_program_->set_shaders(surface_detection_program_stages_, std::list<std::string>(), false, global_substitution_map_);
+  // }
 
 
   int current_level(std::log2(description->cell_size()));
 
   // get warping resources -----------------------------------------------------
-  if(!res_) {
+  if (!res_) {
     res_ = description->warp_resources();
 
     /*if (res_->surface_detection_buffer.second) {
       ctx.render_context->make_non_resident(res_->surface_detection_buffer.first);
       ctx.render_context->make_non_resident(res_->surface_detection_buffer.second);
     }*/
+    if (!res_->grid_vbo.second.size() == 0 || res_->cell_count < pixel_count) {
+      res_->init_grid_resources(ctx, pixel_count);
+    }
 
     math::vec2 size(resolution/2);
     int mip_map_levels(current_level);
@@ -123,34 +126,35 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
     res_->surface_detection_buffer.second = std::make_shared<Texture2D>(size.x, size.y,
         scm::gl::FORMAT_R_16UI, mip_map_levels, state);*/
 
-    surface_detection_buffer_fbos_.clear();
+    // surface_detection_buffer_fbos_.clear();
 
-    for (int i(0); i<mip_map_levels; ++i) {
-      surface_detection_buffer_fbos_.push_back(ctx.render_device->create_frame_buffer());
-      surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
-    }
+    // for (int i(0); i<mip_map_levels; ++i) {
+    //   surface_detection_buffer_fbos_.push_back(ctx.render_device->create_frame_buffer());
+    //   surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
+    // }
   }
+
+  auto gbuffer = dynamic_cast<GBuffer*>(pipe.current_viewstate().target);
 
   // ---------------------------------------------------------------------------
   // ------------------- Surface Information Map -------------------------------
   // ---------------------------------------------------------------------------
-  auto gbuffer = dynamic_cast<GBuffer*>(pipe.current_viewstate().target);
 
-  surface_detection_program_->use(ctx);
-  uint64_t h = gbuffer->get_depth_buffer()->native_handle();
-  math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
-  surface_detection_program_->set_uniform(ctx, handle, "depth_buffer");
-  h = res_->surface_detection_buffer.second->native_handle();
-  handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
-  surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer");
+  // surface_detection_program_->use(ctx);
+  // uint64_t h = gbuffer->get_depth_buffer()->native_handle();
+  // math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+  // surface_detection_program_->set_uniform(ctx, handle, "depth_buffer");
+  // h = res_->surface_detection_buffer.second->native_handle();
+  // handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+  // surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer");
 
-  for (int i = 0; i < surface_detection_buffer_fbos_.size(); ++i) {
-    math::vec2ui level_size(scm::gl::util::mip_level_dimensions(resolution / 2, i));
-    ctx.render_context->set_frame_buffer(surface_detection_buffer_fbos_[i]);
-    ctx.render_context->set_viewport(scm::gl::viewport(scm::math::vec2f(0, 0), scm::math::vec2f(level_size)));
-    surface_detection_program_->set_uniform(ctx, i, "current_level");
-    pipe.draw_quad();
-  }
+  // for (int i = 0; i < surface_detection_buffer_fbos_.size(); ++i) {
+  //   math::vec2ui level_size(scm::gl::util::mip_level_dimensions(resolution / 2, i));
+  //   ctx.render_context->set_frame_buffer(surface_detection_buffer_fbos_[i]);
+  //   ctx.render_context->set_viewport(scm::gl::viewport(scm::math::vec2f(0, 0), scm::math::vec2f(level_size)));
+  //   surface_detection_program_->set_uniform(ctx, i, "current_level");
+  //   pipe.draw_quad();
+  // }
 
   // ---------------------------------------------------------------------------
   // --------------------- Generate Warp Grid ----------------------------------
@@ -173,6 +177,10 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
 
     ctx.render_context->unmap_buffer(res_->grid_vbo.second[res_->current_vbo()]);
   }
+
+  uint64_t h = res_->surface_detection_buffer.first->native_handle();
+  math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+  // surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer");
 
   grid_generation_program_->use(ctx);
   grid_generation_program_->set_uniform(ctx, handle, "surface_detection_buffer");
@@ -205,11 +213,12 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
     res_->ping = !res_->ping;
   }
 
-  auto buffer = res_->grid_tfb.first[res_->current_vbo()]->stream_out_buffer(0);
-  //auto buffer_2 = ctx.render_device->create_buffer(buffer->descriptor()._bindings, buffer->descriptor()._usage, buffer->descriptor()._size);
-  ctx.render_context->copy_buffer_data(res_->grid_vbo_warp.second[res_->current_vbo()],buffer,0,0,buffer->descriptor()._size);
+  // auto buffer = res_->grid_tfb.first[res_->current_vbo()]->stream_out_buffer(0);
+  // auto buffer_2 = ctx.render_device->create_buffer(buffer->descriptor()._bindings, buffer->descriptor()._usage, buffer->descriptor()._size);
+  // ctx.render_context->copy_buffer_data(res_->grid_vbo_warp.second[res_->current_vbo()],buffer,0,0,buffer->descriptor()._size);
 
-  res_->grid_generated = true;
+  // res_->grid_generated = true;
+  ctx.render_context->reset_state_objects();
 
 }
 

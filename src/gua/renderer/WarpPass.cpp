@@ -45,8 +45,8 @@ WarpPassDescription::WarpPassDescription()
  , pixel_size_(0.2f)
  , hole_filling_color_(0,0,0)
  , gbuffer_warp_mode_(GBUFFER_GRID_ADVANCED_SURFACE_ESTIMATION)
- , hole_filling_mode_(HOLE_FILLING_BLUR)
- , interpolation_mode_(INTERPOLATION_MODE_ADAPTIVE)
+ , hole_filling_mode_(HOLE_FILLING_NONE)
+ , interpolation_mode_(INTERPOLATION_MODE_NEAREST)
  , pass_res_()
 {
   vertex_shader_ = "";
@@ -67,7 +67,7 @@ WarpPassDescription::WarpPassDescription(std::shared_ptr<Renderer::WarpingResour
  , pixel_size_(0.2f)
  , hole_filling_color_(0,0,0)
  , gbuffer_warp_mode_(GBUFFER_GRID_ADVANCED_SURFACE_ESTIMATION)
- , hole_filling_mode_(HOLE_FILLING_BLUR)
+ , hole_filling_mode_(HOLE_FILLING_NONE)
  , interpolation_mode_(INTERPOLATION_MODE_NEAREST)
  , pass_res_(resources)
 {
@@ -223,6 +223,7 @@ PipelinePass WarpPassDescription::make_pass(RenderContext const& ctx, Substituti
   substitution_map["hole_filling_mode"] = std::to_string(hole_filling_mode_);
   substitution_map["hole_filling_color"] = "vec3(" + gua::string_utils::to_string(hole_filling_color_.x) + ", " + gua::string_utils::to_string(hole_filling_color_.y) + ", " + gua::string_utils::to_string(hole_filling_color_.z) + ")";
   substitution_map["interpolation_mode"] = std::to_string(interpolation_mode_);
+  substitution_map["max_raysteps"] = std::to_string(0);
   PipelinePass pass{*this, ctx, substitution_map};
 
   auto renderer = std::make_shared<WarpRenderer>();
