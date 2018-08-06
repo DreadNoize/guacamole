@@ -5,7 +5,10 @@ SET(_EXE_NAME ${_TUTORIAL_NAME})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(${_EXE_NAME} main.cpp)
+include_directories( ${INCLUDE_PATHS} ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/examples/warping)
+
+set(SOURCES Navigator.hpp)
+add_executable(${_EXE_NAME} main.cpp Navigator.cpp)
 
 target_link_libraries(${_EXE_NAME} guacamole)
 

@@ -202,13 +202,14 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
 }
 
 void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
-
-  std::cout << "started renderclient for " << window_name << std::endl;
-  
+  // std::cout << "started renderclient for " << window_name << std::endl;
+  FpsCounter fpsc(20);
+  fpsc.start();
 
   auto application_window = WindowDatabase::instance()->lookup(window_name);
 
   auto offscreen_window = std::make_shared<gua::GlfwWindow>(application_window->config);
+  offscreen_window->config.set_title("SLOW CLIENT WINDOW");
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
@@ -238,7 +239,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         while (!(warp_res[window_name]->shared)) {
           std::cout << "[SLOW] waiting for fast window" << std::endl;
         }
-        offscreen_window->open(warp_res[window_name]->shared, true);
+        offscreen_window->open(warp_res[window_name]->shared, false);
         warp_res[window_name]->shared_initialized = true;
 #else
         offscreen_window->open();
@@ -254,7 +255,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         //   warp_res[window_name]->init(offscreen_window->get_context(), offscreen_window->config.get_resolution());
         // }
         while (!warp_res[window_name]->initialized) {
-          std::cout << "[SLOW] waiting on initialization" << std::endl;
+          // std::cout << "[SLOW] waiting on initialization" << std::endl;
         }
 
         //// as fbo cannot be shared, initialize fbo after warp resources where initialized
@@ -283,6 +284,8 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
           } else {
             pipe = pipe_iter->second;
           }
+
+        offscreen_window->rendering_fps = fpsc.fps;
 
 
           // std::cout << "[RENDER] starting rendering process..." << std::endl;
@@ -341,7 +344,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
             // std::cout << "[RENDER] Rendering: MONO..." << std::endl;
 
             //// Rendering and retireving color and depth buffer
-            // Sleep(50);
+            // Sleep(20);
             auto img(pipe->render_scene(cmd.serialized_cam->config.get_mono_mode(),
                     *cmd.serialized_cam, *cmd.scene_graphs));
             auto depth = pipe->get_gbuffer()->get_depth_buffer();
@@ -355,11 +358,11 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               if (img) {
                 // warp_res[window_name]->swap_shared_resources();
                 // warp_res[window_name]->swap_buffers();
-
+                offscreen_window->display(img, warp_res[window_name]->is_left.first);
                 warp_res[window_name]->postprocess_frame(offscreen_window->get_context());
                 if(!warp_res[window_name]->renderer_ready) warp_res[window_name]->renderer_ready = true;
                 // offscreen_window->display(warp_res[window_name]->color_buffer.second, warp_res[window_name]->is_left.first);
-                // offscreen_window->display(img, warp_res[window_name]->is_left.first);
+                
               }
               
             }
@@ -371,10 +374,16 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 #endif
           pipe->clear_frame_cache();
 
+          
+
           // swap buffers
+          if (0 == offscreen_window->get_context()->framecount % 100) {
+            gua::Logger::LOG_MESSAGE << "[SLOW] fps: " << offscreen_window->get_rendering_fps() << std::endl;
+          }
           offscreen_window->finish_frame();
 
           ++(offscreen_window->get_context()->framecount);
+          fpsc.step();
         }
       }
     }
@@ -383,17 +392,40 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 }
 
 void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
-  std::cout << "started warpclient for "  << window_name << std::endl;
+  // std::cout << "started warpclient for "  << window_name << std::endl;
   FpsCounter fpsc(20);
   fpsc.start();
 #if MULTITHREADED
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
-
     
     if (!warp_res[window_name]->serialized_warp_cam) {
-      auto warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
+      // auto warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
+      auto warp_cam = std::make_shared<gua::node::CameraNode>();
+      // std::cout << "[FAST] scenegraphs camera vector size: " << cmd.scene_graphs->front()->get_camera_nodes().size() << std::endl;
+      for(auto cam : cmd.scene_graphs->front()->get_camera_nodes()) {
+        if (cam == nullptr) {
+          warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
+        } else if ("warp_cam" == cam->get_name()) {
+          warp_cam = std::make_shared<gua::node::CameraNode>(*cam);
+        }
+      }
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
+      auto warp_pass = warp_cam->get_pipeline_description()->get_warp_pass();
+      warp_pass->get_warp_state([&](){
+        gua::WarpPassDescription::WarpState state;
+
+        gua::Frustum frustum = warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+        state.projection_view_center = frustum.get_projection() * frustum.get_view();
+
+        frustum = warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+        state.projection_view_left = frustum.get_projection() * frustum.get_view();
+
+        frustum = warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+        state.projection_view_right = frustum.get_projection() * frustum.get_view();
+
+        return state;
+      });
       warp_res[window_name]->serialized_warp_cam = std::make_shared<node::SerializedCameraNode>(warp_cam->serialize());
     }
     
@@ -413,7 +445,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         // update window if one is assigned
       if (window && window->get_is_open()) {
         while(!warp_res[window_name]->shared_initialized) {
-          std::cout << "[FAST] waiting for offscreen window to get initialized" << std::endl;
+          // std::cout << "[FAST] waiting for offscreen window to get initialized" << std::endl;
         }
         window->set_active(true);
         window->start_frame();
@@ -452,12 +484,20 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           warp_res[window_name]->swap_buffers();
           auto tex = pipe->render_scene(warp_res[window_name]->camera_mode, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
           // display
+          // std::cout << "[FAST] tex adress: " << tex->native_handle() << std::endl;
           window->display(tex, warp_res[window_name]->is_left.first);
+          // window->display(warp_res[window_name]->surface_detection_buffer.first, warp_res[window_name]->is_left.first);
+          // std::cout << "[FAST] color buffer.first adress: " << warp_res[window_name]->color_buffer.first->native_handle() << std::endl;
+          // std::cout << "[FAST] color buffer.second adress: " << warp_res[window_name]->color_buffer.second->native_handle() << std::endl;
+
           // window->display(warp_res[window_name]->color_buffer.first, warp_res[window_name]->is_left.first);
           // window->display(temp_tex, warp_res[window_name]->is_left.first);
         }        
       }
       // swap buffers
+      if (0 == window->get_context()->framecount % 100) {
+        gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
+      }
       window->finish_frame();
       ++(window->get_context()->framecount);
       fpsc.step();

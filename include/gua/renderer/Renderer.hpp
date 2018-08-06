@@ -95,17 +95,17 @@ class GUA_DLL Renderer {
       // is_left = std::make_pair<bool,bool>(false,false);
 
       sampler_state_desc = scm::gl::sampler_state_desc(scm::gl::FILTER_MIN_MAG_NEAREST, scm::gl::WRAP_CLAMP_TO_EDGE, scm::gl::WRAP_CLAMP_TO_EDGE);
-      std::cout << "Initializing Warping Sampler State ..." << std::endl; 
+      // std::cout << "Initializing Warping Sampler State ..." << std::endl; 
       sampler_state = ctx->render_device->create_sampler_state(sampler_state_desc);
       
-      std::cout << "Initializing Warping Texture Color ..." << std::endl; 
+      // std::cout << "Initializing Warping Texture Color ..." << std::endl; 
 
       color_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
       ctx->render_context->make_resident(color_buffer.first, sampler_state);
       color_buffer.second = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGB_32F, 1);
       ctx->render_context->make_resident(color_buffer.second, sampler_state);
 
-      std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
+      // std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
 
       depth_buffer.first = ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1);
       ctx->render_context->make_resident(depth_buffer.first, sampler_state);
@@ -198,27 +198,33 @@ class GUA_DLL Renderer {
 
     void init_fbo(gua::RenderContext* ctx) {
       framebuffer_resolved = ctx->render_device->create_frame_buffer();
-      framebuffer_resolved->attach_color_buffer(0, color_buffer.second);
-      framebuffer_resolved->attach_depth_stencil_buffer(depth_buffer.second);
+      // framebuffer_resolved->attach_color_buffer(0, color_buffer.second);
+      // framebuffer_resolved->attach_depth_stencil_buffer(depth_buffer.second);
       initialized_fbo = true;
     }
 
     void postprocess_frame(RenderContext* ctx) {
       // ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
       // ctx->render_context->generate_mipmaps(color_buffer.second);
+      framebuffer_resolved->attach_color_buffer(0, color_buffer.second);
+      framebuffer_resolved->attach_depth_stencil_buffer(depth_buffer.second);
+      //std::cout << "[POST PROCESS] color buffer second adress: " << color_buffer.second->native_handle() << std::endl;
       ctx->render_context->copy_color_buffer(framebuffer, framebuffer_resolved, 0);
       ctx->render_context->copy_depth_stencil_buffer(framebuffer, framebuffer_resolved);
       ctx->render_context->reset();
+      framebuffer_resolved->clear_attachments();
       updated = true;
     }
 
     void swap_buffers() {
       if(updated){
-        std::cout << "swapping buffers ..." << std::endl; 
+        // std::cout << "swapping buffers ..." << std::endl; 
+        // std::cout << "[BEFORE SWAP] color buffer second adress: " << color_buffer.second->native_handle() << std::endl;
         std::lock_guard<std::mutex> lock(copy_mutex);
         std::swap(color_buffer.first, color_buffer.second);
         std::swap(depth_buffer.first, depth_buffer.second);
         std::swap(is_left.first, is_left.second);
+        // std::cout << "[AFTER SWAP] color buffer second adress: " << color_buffer.second->native_handle() << std::endl;
         updated = false;
       }
     }
@@ -233,7 +239,7 @@ class GUA_DLL Renderer {
 
     void swap_shared_resources() {
       if (grid_generated) {
-        std::cout << "[FAST] swapping shared resources" << std::endl;
+        // std::cout << "[FAST] swapping shared resources" << std::endl;
         std::lock_guard<std::mutex> lock(copy_mutex);
         std::swap(surface_detection_buffer.first, surface_detection_buffer.second);
         // std::swap(grid_vbo.first, grid_vbo.second);

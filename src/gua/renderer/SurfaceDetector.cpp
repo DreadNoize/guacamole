@@ -57,7 +57,7 @@ SurfaceDetector::~SurfaceDetector() {
 
 ////////////////////////////////////////////////////////////////////////////////
 void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc) {
-  std::cout << "Surface Detection ..." << std::endl;
+  // std::cout << "Surface Detection ..." << std::endl;
   if(res_) {
     if(res_->grid_generated) {res_->grid_generated = false;}
   }

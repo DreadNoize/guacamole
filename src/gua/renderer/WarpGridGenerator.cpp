@@ -61,15 +61,15 @@ WarpGridGenerator::WarpGridGenerator()
 
 ////////////////////////////////////////////////////////////////////////////////
 WarpGridGenerator::~WarpGridGenerator() {
-  if (res_ && res_->surface_detection_buffer.first && res_->surface_detection_buffer.second) {
+  if (res_ && res_->surface_detection_buffer.first && res_->surface_detection_buffer.first) {
     pipe_->get_context().render_context->make_non_resident(res_->surface_detection_buffer.first);
-    pipe_->get_context().render_context->make_non_resident(res_->surface_detection_buffer.second);
+    pipe_->get_context().render_context->make_non_resident(res_->surface_detection_buffer.first);
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& desc) {
-  std::cout << "Generating Grid ..." << std::endl;
+  // std::cout << "Generating Grid ..." << std::endl;
   // if(res_) {
   //   if(res_->grid_generated) {res_->grid_generated = false;}
   // }
@@ -101,11 +101,11 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   if (!res_) {
     res_ = description->warp_resources();
 
-    /*if (res_->surface_detection_buffer.second) {
+    /*if (res_->surface_detection_buffer.first) {
       ctx.render_context->make_non_resident(res_->surface_detection_buffer.first);
-      ctx.render_context->make_non_resident(res_->surface_detection_buffer.second);
+      ctx.render_context->make_non_resident(res_->surface_detection_buffer.first);
     }*/
-    if (!res_->grid_vbo.second.size() == 0 || res_->cell_count < pixel_count) {
+    if (!res_->grid_vbo.first.size() == 0 || res_->cell_count < pixel_count) {
       res_->init_grid_resources(ctx, pixel_count);
     }
 
@@ -118,19 +118,19 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
 
     /*res_->surface_detection_buffer.first = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
     ctx.render_context->make_resident(res_->surface_detection_buffer.first, state);
-    res_->surface_detection_buffer.second = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-    ctx.render_context->make_resident(res_->surface_detection_buffer.second, state);*/
+    res_->surface_detection_buffer.first = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+    ctx.render_context->make_resident(res_->surface_detection_buffer.first, state);*/
 
     /*res_->surface_detection_buffer.first = std::make_shared<Texture2D>(size.x, size.y,
         scm::gl::FORMAT_R_16UI, mip_map_levels, state);
-    res_->surface_detection_buffer.second = std::make_shared<Texture2D>(size.x, size.y,
+    res_->surface_detection_buffer.first = std::make_shared<Texture2D>(size.x, size.y,
         scm::gl::FORMAT_R_16UI, mip_map_levels, state);*/
 
     // surface_detection_buffer_fbos_.clear();
 
     // for (int i(0); i<mip_map_levels; ++i) {
     //   surface_detection_buffer_fbos_.push_back(ctx.render_device->create_frame_buffer());
-    //   surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
+    //   surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.first, i,0);
     // }
   }
 
@@ -144,7 +144,7 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   // uint64_t h = gbuffer->get_depth_buffer()->native_handle();
   // math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   // surface_detection_program_->set_uniform(ctx, handle, "depth_buffer");
-  // h = res_->surface_detection_buffer.second->native_handle();
+  // h = res_->surface_detection_buffer.first->native_handle();
   // handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   // surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer");
 
@@ -165,7 +165,7 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   {
     // upload initial data
     auto data = static_cast<math::vec3ui*>(ctx.render_context->map_buffer(
-        res_->grid_vbo.second[res_->current_vbo()], scm::gl::ACCESS_WRITE_INVALIDATE_BUFFER));
+        res_->grid_vbo.first[res_->current_vbo()], scm::gl::ACCESS_WRITE_INVALIDATE_BUFFER));
 
 	  for (unsigned x(0); x < initial_grid_x; ++x) {
 		  for (unsigned y(0); y < initial_grid_y; ++y) {
@@ -175,7 +175,7 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
       }
     }
 
-    ctx.render_context->unmap_buffer(res_->grid_vbo.second[res_->current_vbo()]);
+    ctx.render_context->unmap_buffer(res_->grid_vbo.first[res_->current_vbo()]);
   }
 
   uint64_t h = res_->surface_detection_buffer.first->native_handle();
@@ -187,10 +187,10 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   grid_generation_program_->set_uniform(ctx, current_level, "current_level");
 
   // first subdivision
-  ctx.render_context->begin_transform_feedback(res_->grid_tfb.second[res_->current_tfb()],
+  ctx.render_context->begin_transform_feedback(res_->grid_tfb.first[res_->current_tfb()],
     scm::gl::PRIMITIVE_POINTS);
   {
-    ctx.render_context->bind_vertex_array(res_->grid_vao.second[res_->current_vbo()]);
+    ctx.render_context->bind_vertex_array(res_->grid_vao.first[res_->current_vbo()]);
     ctx.render_context->apply();
     ctx.render_context->draw_arrays(scm::gl::PRIMITIVE_POINT_LIST, 0, initial_grid_x*initial_grid_y);
   }
@@ -201,12 +201,12 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   while (--current_level > 1) {
     // further subdivisions
     grid_generation_program_->set_uniform(ctx, current_level, "current_level");
-    ctx.render_context->begin_transform_feedback(res_->grid_tfb.second[res_->current_tfb()],
+    ctx.render_context->begin_transform_feedback(res_->grid_tfb.first[res_->current_tfb()],
       scm::gl::PRIMITIVE_POINTS);
     {
-      ctx.render_context->bind_vertex_array(res_->grid_vao.second[res_->current_vbo()]);
+      ctx.render_context->bind_vertex_array(res_->grid_vao.first[res_->current_vbo()]);
       ctx.render_context->apply();
-      ctx.render_context->draw_transform_feedback(scm::gl::PRIMITIVE_POINT_LIST, res_->grid_tfb.second[res_->current_vbo()]);
+      ctx.render_context->draw_transform_feedback(scm::gl::PRIMITIVE_POINT_LIST, res_->grid_tfb.first[res_->current_vbo()]);
     }
 
     ctx.render_context->end_transform_feedback();
@@ -215,7 +215,7 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
 
   // auto buffer = res_->grid_tfb.first[res_->current_vbo()]->stream_out_buffer(0);
   // auto buffer_2 = ctx.render_device->create_buffer(buffer->descriptor()._bindings, buffer->descriptor()._usage, buffer->descriptor()._size);
-  // ctx.render_context->copy_buffer_data(res_->grid_vbo_warp.second[res_->current_vbo()],buffer,0,0,buffer->descriptor()._size);
+  // ctx.render_context->copy_buffer_data(res_->grid_vbo_warp.first[res_->current_vbo()],buffer,0,0,buffer->descriptor()._size);
 
   // res_->grid_generated = true;
   ctx.render_context->reset_state_objects();

@@ -65,10 +65,10 @@ WarpPassDescription::WarpPassDescription(std::shared_ptr<Renderer::WarpingResour
  , debug_sample_count_(false)
  , debug_bounding_volumes_(false)
  , pixel_size_(0.2f)
- , hole_filling_color_(0,0,0)
+ , hole_filling_color_(0.0,0.1,0.3)
  , gbuffer_warp_mode_(GBUFFER_GRID_ADVANCED_SURFACE_ESTIMATION)
  , hole_filling_mode_(HOLE_FILLING_NONE)
- , interpolation_mode_(INTERPOLATION_MODE_NEAREST)
+ , interpolation_mode_(INTERPOLATION_MODE_ADAPTIVE)
  , pass_res_(resources)
 {
   vertex_shader_ = "";

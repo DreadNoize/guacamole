@@ -24,11 +24,17 @@
 @include "gbuffer_warp_modes.glsl"
 @include "hole_filling_modes.glsl"
 
-
-uniform mat4 warp_matrix;
-uniform uvec2 resolution;
 uniform uvec2 gua_gbuffer_depth;
+uniform mat4 warp_matrix;
 
+
+float gua_get_depth(vec2 frag_pos) {
+    return texture2D(sampler2D(gua_gbuffer_depth), frag_pos).x * 2.0 - 1.0;
+}
+
+float gua_get_depth(sampler2D depth_texture, vec2 frag_pos) {
+    return texture2D(depth_texture, frag_pos).x * 2.0 - 1.0;
+}
 
 float get_depth_raw(vec2 frag_pos) {
   return texelFetch(sampler2D(gua_gbuffer_depth), ivec2(frag_pos), 0).x*2-1;
@@ -45,14 +51,14 @@ float get_min_depth(vec2 frag_pos) {
 
 float get_depth(vec2 position) {
   #if WARP_MODE == WARP_MODE_GRID_ADVANCED_SURFACE_ESTIMATION || WARP_MODE == WARP_MODE_GRID_NON_UNIFORM_SURFACE_ESTIMATION
-    return gua_get_depth(position/resolution);
+    return gua_get_depth(position/gua_resolution);
   #else
     return get_depth_raw(position);
   #endif
 }
 
 void emit_grid_vertex(vec2 position, float depth) {
-  gl_Position = warp_matrix * vec4(2.0 * (position / resolution) - 1.0, depth, 1.0);
+  gl_Position = vec4(2.0 * (position / gua_resolution) - 1.0, depth, 1.0);
   EmitVertex();
 }
 
@@ -113,19 +119,19 @@ void emit_quad(uvec2 offset, uvec2 size) {
 
     cellsize = min(size.x, size.y);
 
-    texcoords = pos1 / resolution;
+    texcoords = pos1 / gua_resolution;
     cellcoords = vec2(0, 0);
     emit_grid_vertex(pos1 + vec2(-GAP, -GAP), depth1);
 
-    texcoords = pos2 / resolution;
+    texcoords = pos2 / gua_resolution;
     cellcoords = vec2(1, 0);
     emit_grid_vertex(pos2 + vec2( GAP, -GAP), depth2);
 
-    texcoords = pos3 / resolution;
+    texcoords = pos3 / gua_resolution;
     cellcoords = vec2(0, 1);
     emit_grid_vertex(pos3 + vec2(-GAP,  GAP), depth3);
 
-    texcoords = pos4 / resolution;
+    texcoords = pos4 / gua_resolution;
     cellcoords = vec2(1, 1);
     emit_grid_vertex(pos4 + vec2( GAP,  GAP), depth4);
 
@@ -139,9 +145,9 @@ void emit_pixel(uvec2 offset) {
   vec2 position = varying_position[0].xy + offset;
 
   // remove strange one-pixel line
-  if (position.y == resolution.y) return;
+  if (position.y == gua_resolution.y) return;
 
-  texcoords = position / resolution;
+  texcoords = position / gua_resolution;
   const float depth = get_depth_raw(position);
 
   cellcoords = vec2(0, 0);
@@ -218,8 +224,8 @@ void main() {
     emit_pixel(quad3.xy);
   }
 
- */
- //#else
+
+ #else */
 
   if ((varying_position[0].z & 1) > 0) {
     emit_quad(uvec2(0), uvec2(1 << (varying_position[0].z >> BIT_CURRENT_LEVEL)));
