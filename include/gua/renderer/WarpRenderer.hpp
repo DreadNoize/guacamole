@@ -54,7 +54,8 @@ class WarpRenderer {
     global_substitution_map_ = smap;
   };
 
-  void print_matrix(gua::math::mat4f const& matrix, std::string const& name) {
+  template <typename T>
+  static void print_matrix(scm::math::mat<T, 4, 4> const& matrix, std::string const& name) {
     std::cout << "Matrix: " << name << std::endl;
     std::cout << matrix[0] << "," << matrix[1] << "," << matrix[2] << "," << matrix[3] << std::endl;
     std::cout << matrix[4] << "," << matrix[5] << "," << matrix[6] << "," << matrix[7] << std::endl;
@@ -64,7 +65,7 @@ class WarpRenderer {
  protected:
   std::shared_ptr<Renderer::WarpingResources> res_;
 
-  WarpPassDescription::WarpState cached_warp_state_;
+  Renderer::WarpingResources::WarpState cached_warp_state_;
   Frustum last_frustum_;
 
   scm::gl::vertex_array_ptr empty_vao_;

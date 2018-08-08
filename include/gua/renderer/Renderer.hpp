@@ -68,6 +68,19 @@ class GUA_DLL Renderer {
   // Container struct for resources (like textures) needed for the asynchronous warping technique
   // using DBTexture = std::shared_ptr<gua::concurrent::Doublebuffer<scm::gl::texture_2d_ptr>>;
   struct WarpingResources {
+    
+    struct WarpState {
+      math::mat4f projection_view_center;
+      math::mat4f projection_view_right;
+      math::mat4f projection_view_left;
+
+      math::mat4f const& get(CameraMode mode) {
+        if (mode == CameraMode::LEFT)  return projection_view_left;
+        if (mode == CameraMode::RIGHT) return projection_view_right;
+        return projection_view_center;
+      } 
+    } warp_state;
+
     WarpingResources() = default;
 
     WarpingResources& operator=(WarpingResources const& rhs) {

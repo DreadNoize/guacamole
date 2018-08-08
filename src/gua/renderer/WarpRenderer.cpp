@@ -118,6 +118,8 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   auto ctx(pipe.get_context());
   pipe_ = &pipe;
 
+  pipe.begin_gpu_query(ctx, "Warping");
+
   auto description(dynamic_cast<WarpPassDescription const*>(&desc));
   math::vec2ui resolution(pipe.current_viewstate().camera.config.get_resolution());
 
@@ -221,7 +223,8 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   );
 
   if (first_eye) {
-    cached_warp_state_ = description->get_warp_state()();
+    //cached_warp_state_ = description->get_warp_state()();
+    cached_warp_state_ = res_->warp_state;
   }
  
   gua::math::mat4d proj;
@@ -231,7 +234,8 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   if (first_eye && stereo_type == StereoType::TEMPORAL_WARP) {
     proj = last_frustum_.get_projection();
     view = last_frustum_.get_view();
-    warp = cached_warp_state_.get(ctx.mode);
+    //warp = cached_warp_state_.get(ctx.mode);
+    cached_warp_state_ = res_->warp_state;
   } else if (first_eye && stereo_type == StereoType::SINGLE_TEMPORAL_WARP) {
     proj = last_frustum_.get_projection();
     view = last_frustum_.get_view();
@@ -249,6 +253,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     proj = pipe.current_viewstate().frustum.get_projection();
     view = pipe.current_viewstate().frustum.get_view();
     warp = cached_warp_state_.get(ctx.mode);
+    //cached_warp_state_ = res_->warp_state;
   }
 
   if (first_warp) {
@@ -256,9 +261,15 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     gbuffer->toggle_ping_pong();
     last_frustum_ = pipe.current_viewstate().frustum;
   }
+  /* print_matrix(proj, "Projection");
+  print_matrix(view, "View");
+  print_matrix(proj * view, "ProjectionView");
+  print_matrix(warp, "Cached ProjectionView"); */
 
   math::mat4f warp_matrix(warp * scm::math::inverse(proj * view));
   math::mat4f inv_warp_matrix(scm::math::inverse(warp * scm::math::inverse(proj * view)));
+
+  print_matrix(warp_matrix, "Resulting WarpMatrix");
 
   // ---------------------------------------------------------------------------
   // --------------------------------- Warp Gbuffer ----------------------------
@@ -377,13 +388,13 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     }
 
     if (perform_warp) {
-      // uint64_t h = color_buffer_->native_handle();
-      uint64_t h = res_->color_buffer.first->native_handle();
+      uint64_t h = color_buffer_->native_handle();
+      // uint64_t h = res_->color_buffer.first->native_handle();
       math::vec2ui handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
       warp_abuffer_program_->set_uniform(ctx, handle, "warped_color_buffer");
 
-      // h = depth_buffer_->native_handle();
-      h = res_->depth_buffer.first->native_handle();
+      h = depth_buffer_->native_handle();
+      // h = res_->depth_buffer.first->native_handle();
       handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
       warp_abuffer_program_->set_uniform(ctx, handle, "warped_depth_buffer");
     } else {
@@ -417,6 +428,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   ctx.render_context->reset_state_objects();
 
   res_->updated = true;
+  pipe.end_gpu_query(ctx, "Warping");
 
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -425,7 +437,7 @@ void WarpRenderer::render_grid(Pipeline& pipe, PipelinePassDescription const& de
 {
   auto description(dynamic_cast<WarpPassDescription const*>(&desc));
 
-  print_matrix(warp_matrix, "Warp Matrix");
+  // print_matrix(warp_matrix, "Warp Matrix");
 
   if (!render_grid_program_) {
     render_grid_program_ = std::make_shared<ShaderProgram>();

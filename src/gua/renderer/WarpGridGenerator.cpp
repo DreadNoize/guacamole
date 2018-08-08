@@ -75,6 +75,8 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   // }
   auto& ctx(pipe.get_context());
 
+  pipe.begin_gpu_query(ctx, "Grid Generation");
+
   pipe_ = &pipe;
 
   auto description(dynamic_cast<WarpGridGeneratorPassDescription const*>(&desc));
@@ -219,6 +221,7 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
 
   // res_->grid_generated = true;
   ctx.render_context->reset_state_objects();
+  pipe.end_gpu_query(ctx, "Grid Generation");
 
 }
 

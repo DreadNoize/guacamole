@@ -58,10 +58,13 @@ SurfaceDetector::~SurfaceDetector() {
 ////////////////////////////////////////////////////////////////////////////////
 void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   // std::cout << "Surface Detection ..." << std::endl;
+
+  
   if(res_) {
     if(res_->grid_generated) {res_->grid_generated = false;}
   }
   auto& ctx(pipe.get_context());
+  pipe.begin_gpu_query(ctx, "Surface Detection");
 
   pipe_ = &pipe;
 
@@ -134,6 +137,8 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   }
 
   res_->grid_generated = true;
+
+  pipe.end_gpu_query(ctx, "Surface Detection");
 
 }
 

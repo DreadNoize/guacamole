@@ -59,23 +59,23 @@ void emit_quad(uvec2 offset, vec2 size) {
   float depth = get_depth_raw(varying_position[0].xy);
 
   vec2 vertex_position = vec2(varying_position[0].xy + offset) / gua_resolution * 2 - 1;
-  gl_Position = vec4(vertex_position, depth, 1);
+  gl_Position = warp_matrix * vec4(vertex_position, depth, 1);
   EmitVertex();
 
   vertex_position = vec2(varying_position[0].xy + offset + vec2(size.x, 0)) / gua_resolution * 2 - 1;
-  gl_Position = vec4(vertex_position, depth, 1);
+  gl_Position = warp_matrix * vec4(vertex_position, depth, 1);
   EmitVertex();
 
   vertex_position = vec2(varying_position[0].xy + offset + vec2(size.x, size.y)) / gua_resolution * 2 - 1;
-  gl_Position = vec4(vertex_position, depth, 1);
+  gl_Position = warp_matrix * vec4(vertex_position, depth, 1);
   EmitVertex();
 
   vertex_position = vec2(varying_position[0].xy + offset + vec2(0, size.y)) / gua_resolution * 2 - 1;
-  gl_Position = vec4(vertex_position, depth, 1);
+  gl_Position = warp_matrix * vec4(vertex_position, depth, 1);
   EmitVertex();
 
   vertex_position = vec2(varying_position[0].xy + offset) / gua_resolution * 2 - 1;
-  gl_Position = vec4(vertex_position, depth, 1);
+  gl_Position = warp_matrix * vec4(vertex_position, depth, 1);
   EmitVertex();
 
   EndPrimitive();

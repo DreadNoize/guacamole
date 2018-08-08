@@ -42,6 +42,7 @@
 #include <gua/config.hpp>
 #include <gua/renderer/GlfwWindow.hpp>
 #include <scm/gl_core/render_device/opengl/util/binding_guards.h>
+#include <gua/renderer/WarpRenderer.hpp>
 
 #include <scm/gl_core/render_device/opengl/util/data_format_helper.h>
 
@@ -409,24 +410,54 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           warp_cam = std::make_shared<gua::node::CameraNode>(*cam);
         }
       }
+      // auto graph = (cmd.scene_graphs->front());
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
-      auto warp_pass = warp_cam->get_pipeline_description()->get_warp_pass();
-      warp_pass->get_warp_state([&](){
+      /*auto warp_pass = warp_cam->get_pipeline_description()->get_warp_pass();*/
+     /* warp_pass->get_warp_state([&](){
         gua::WarpPassDescription::WarpState state;
 
-        gua::Frustum frustum = warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+        gua::Frustum frustum = warp_cam->get_rendering_frustum(*graph, gua::CameraMode::CENTER);
         state.projection_view_center = frustum.get_projection() * frustum.get_view();
+        
+        gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ CENTER");
+        gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW CENTER");
 
-        frustum = warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+        frustum = warp_cam->get_rendering_frustum(*graph, gua::CameraMode::LEFT);
         state.projection_view_left = frustum.get_projection() * frustum.get_view();
 
-        frustum = warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+        gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ LEFT");
+        gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW LEFT");
+
+        frustum = warp_cam->get_rendering_frustum(*graph, gua::CameraMode::RIGHT);
         state.projection_view_right = frustum.get_projection() * frustum.get_view();
 
+        gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ RIGHT");
+        gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW RIGHT");
+
         return state;
-      });
+      });*/
       warp_res[window_name]->serialized_warp_cam = std::make_shared<node::SerializedCameraNode>(warp_cam->serialize());
+    }
+
+    {
+      gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+      warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
+
+      // gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ CENTER");
+      // gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW CENTER");
+
+      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+      warp_res[window_name]->warp_state.projection_view_left = frustum.get_projection() * frustum.get_view();
+
+      // gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ LEFT");
+      // gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW LEFT");
+
+      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+      warp_res[window_name]->warp_state.projection_view_right = frustum.get_projection() * frustum.get_view();
+
+      // gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ RIGHT");
+      // gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW RIGHT");
     }
     
 
@@ -493,14 +524,16 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           // window->display(warp_res[window_name]->color_buffer.first, warp_res[window_name]->is_left.first);
           // window->display(temp_tex, warp_res[window_name]->is_left.first);
         }        
+        if (0 == window->get_context()->framecount % 100) {
+          gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
+        }
+        
+        pipe->clear_frame_cache();
+        window->finish_frame();
+        ++(window->get_context()->framecount);
+        fpsc.step();
       }
       // swap buffers
-      if (0 == window->get_context()->framecount % 100) {
-        gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
-      }
-      window->finish_frame();
-      ++(window->get_context()->framecount);
-      fpsc.step();
     }
   }
 #endif

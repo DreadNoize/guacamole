@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
   camera->config.set_screen_path("/navigation/screen");
   camera->config.set_scene_graph_name("main_scenegraph");
   camera->config.set_output_window_name("main_window");
-  //camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
+  camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
   camera->config.set_far_clip(350.f);
   camera->config.set_near_clip(0.1f);
 
@@ -145,8 +145,10 @@ int main(int argc, char** argv) {
   warp_cam->config.set_resolution(resolution);
   warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
   warp_cam->config.set_scene_graph_name("main_scenegraph");
+  warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
   warp_cam->config.set_far_clip(camera->config.get_far_clip() * 1.5);
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
+  
 
   // update view mode
   auto update_view_mode([&](){

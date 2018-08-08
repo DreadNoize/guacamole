@@ -58,7 +58,7 @@ float get_depth(vec2 position) {
 }
 
 void emit_grid_vertex(vec2 position, float depth) {
-  gl_Position = vec4(2.0 * (position / gua_resolution) - 1.0, depth, 1.0);
+  gl_Position = warp_matrix * vec4(2.0 * (position / gua_resolution) - 1.0, depth, 1.0);
   EmitVertex();
 }
 
@@ -78,6 +78,7 @@ flat out uint cellsize;
 
 out vec2 texcoords;
 out vec2 cellcoords;
+out float pass_depth;
 
 
 void emit_quad(uvec2 offset, uvec2 size) {
@@ -135,6 +136,7 @@ void emit_quad(uvec2 offset, uvec2 size) {
     cellcoords = vec2(1, 1);
     emit_grid_vertex(pos4 + vec2( GAP,  GAP), depth4);
 
+    pass_depth = depth4;
     EndPrimitive();
   }
 }
@@ -142,13 +144,14 @@ void emit_quad(uvec2 offset, uvec2 size) {
 void emit_pixel(uvec2 offset) {
 
   cellsize = 1;
-  vec2 position = varying_position[0].xy + offset;
+  vec2 position = varying_position[0].xy; // + offset;
 
   // remove strange one-pixel line
-  if (position.y == gua_resolution.y) return;
+  // if (position.y == gua_resolution.y) return;
 
   texcoords = position / gua_resolution;
   const float depth = get_depth_raw(position);
+  pass_depth = depth;
 
   cellcoords = vec2(0, 0);
   emit_grid_vertex(position + vec2(0, 0) + vec2(-GAP, -GAP), depth);
@@ -236,6 +239,9 @@ void main() {
     emit_pixel(uvec2(1, 1));
     emit_pixel(uvec2(0, 1));
   }
+  // gl_Position = warp_matrix * vec4(varying_position[0], 1);
+  // pass_depth = get_depth(varying_position[0].xy);
+  // EmitVertex();
 
 // #endif
 }

@@ -80,16 +80,16 @@ WarpPassDescription::WarpPassDescription(std::shared_ptr<Renderer::WarpingResour
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-WarpPassDescription& WarpPassDescription::get_warp_state(std::function<WarpState()> const& f) {
-  get_warp_state_ = f;
-  touch();
-  return *this;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-std::function<WarpPassDescription::WarpState()> const& WarpPassDescription::get_warp_state() const {
-  return get_warp_state_;
-}
+//WarpPassDescription& WarpPassDescription::get_warp_state(std::function<WarpState()> const& f) {
+//  get_warp_state_ = f;
+//  touch();
+//  return *this;
+//}
+//
+//////////////////////////////////////////////////////////////////////////////////
+//std::function<WarpPassDescription::WarpState()> const& WarpPassDescription::get_warp_state() const {
+//  return get_warp_state_;
+//}
 
 ////////////////////////////////////////////////////////////////////////////////
 WarpPassDescription& WarpPassDescription::depth_test(bool depth_test) {

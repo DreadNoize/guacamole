@@ -35,17 +35,17 @@ namespace gua {
 class GUA_DLL WarpPassDescription : public PipelinePassDescription {
  public:
 
-  struct WarpState {
-    math::mat4f projection_view_center;
-    math::mat4f projection_view_right;
-    math::mat4f projection_view_left;
+  // struct WarpState {
+  //   math::mat4f projection_view_center;
+  //   math::mat4f projection_view_right;
+  //   math::mat4f projection_view_left;
 
-    math::mat4f const& get(CameraMode mode) {
-      if (mode == CameraMode::LEFT)  return projection_view_left;
-      if (mode == CameraMode::RIGHT) return projection_view_right;
-      return projection_view_center;
-    } 
-  };
+  //   math::mat4f const& get(CameraMode mode) {
+  //     if (mode == CameraMode::LEFT)  return projection_view_left;
+  //     if (mode == CameraMode::RIGHT) return projection_view_right;
+  //     return projection_view_center;
+  //   } 
+  // };
 
   enum GBufferWarpMode {
     GBUFFER_GRID_SURFACE_ESTIMATION,
@@ -104,8 +104,8 @@ class GUA_DLL WarpPassDescription : public PipelinePassDescription {
   WarpPassDescription& interpolation_mode(InterpolationMode interpolation_mode);
   InterpolationMode interpolation_mode() const;
 
-  WarpPassDescription& get_warp_state(std::function<WarpState()> const& warp_state);
-  std::function<WarpState()> const& get_warp_state() const;
+  /*WarpPassDescription& get_warp_state(std::function<WarpState()> const& warp_state);
+  std::function<WarpState()> const& get_warp_state() const;*/
 
   std::shared_ptr<Renderer::WarpingResources> warp_resources() const;
 
@@ -130,7 +130,7 @@ class GUA_DLL WarpPassDescription : public PipelinePassDescription {
   HoleFillingMode hole_filling_mode_;
   InterpolationMode interpolation_mode_;
 
-  std::function<WarpState()> get_warp_state_;
+  // std::function<WarpState()> get_warp_state_;
 
   std::shared_ptr<Renderer::WarpingResources> pass_res_;
 };
