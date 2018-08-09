@@ -81,6 +81,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
 
   int current_level(std::log2(description->cell_size()));
 
+  int mip_map_levels(current_level);
   // get warping resources -----------------------------------------------------
   if(!res_) {
     res_ = description->warp_resources();
@@ -91,7 +92,6 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
     }*/
 
     math::vec2 size(resolution/2);
-    int mip_map_levels(current_level);
     scm::gl::sampler_state_desc state_desc(scm::gl::FILTER_MIN_MAG_NEAREST,
       scm::gl::WRAP_CLAMP_TO_EDGE,
       scm::gl::WRAP_CLAMP_TO_EDGE);
@@ -108,13 +108,14 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
         scm::gl::FORMAT_R_16UI, mip_map_levels, state);*/
 
     surface_detection_buffer_fbos_.clear();
-
     for (int i(0); i<mip_map_levels; ++i) {
       surface_detection_buffer_fbos_.push_back(ctx.render_device->create_frame_buffer());
-      surface_detection_buffer_fbos_.back()->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
     }
   }
-
+  for (int i(0); i<mip_map_levels; ++i) {
+    surface_detection_buffer_fbos_[i]->clear_attachments();
+    surface_detection_buffer_fbos_[i]->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
+  }
   // ---------------------------------------------------------------------------
   // ------------------- Surface Information Map -------------------------------
   // ---------------------------------------------------------------------------
@@ -135,10 +136,10 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
     surface_detection_program_->set_uniform(ctx, i, "current_level");
     pipe.draw_quad();
   }
+  pipe.end_gpu_query(ctx, "Surface Detection");
 
   res_->grid_generated = true;
 
-  pipe.end_gpu_query(ctx, "Surface Detection");
 
 }
 

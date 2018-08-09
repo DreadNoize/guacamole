@@ -174,8 +174,10 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     // depth_buffer_ = gbuffer->get_depth_buffer();
 
     fbo_ = ctx.render_device->create_frame_buffer();
-    fbo_->attach_color_buffer(0, color_buffer_,0,0);
-    fbo_->attach_depth_stencil_buffer(depth_buffer_,0,0);
+    // fbo_->attach_color_buffer(0, res_->color_buffer.first, 0, 0);
+    fbo_->attach_color_buffer(0, color_buffer_, 0, 0);
+    // fbo_->attach_depth_stencil_buffer(res_->depth_buffer.first, 0, 0);
+    fbo_->attach_depth_stencil_buffer(depth_buffer_, 0, 0);
 
     if (description->hole_filling_mode() == WarpPassDescription::HOLE_FILLING_BLUR) {
       int holefilling_levels = 6;
@@ -269,7 +271,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   math::mat4f warp_matrix(warp * scm::math::inverse(proj * view));
   math::mat4f inv_warp_matrix(scm::math::inverse(warp * scm::math::inverse(proj * view)));
 
-  print_matrix(warp_matrix, "Resulting WarpMatrix");
+  // print_matrix(warp_matrix, "Resulting WarpMatrix");
 
   // ---------------------------------------------------------------------------
   // --------------------------------- Warp Gbuffer ----------------------------
@@ -279,6 +281,10 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   // }
 
   if (perform_warp) {
+    // fbo_->clear_attachments();
+    // fbo_->attach_color_buffer(0, res_->color_buffer.first, 0, 0);
+    // fbo_->attach_depth_stencil_buffer(res_->depth_buffer.first, 0, 0);
+
     ctx.render_context->set_frame_buffer(fbo_);
     gbuffer->set_viewport(ctx);
     ctx.render_context->clear_color_buffers(
@@ -364,7 +370,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   //     pipe_->draw_quad();
   //   }
   // }
-  bool debug_grid = false;
+  bool debug_grid = true;
   
   if (debug_grid) {
     render_grid(pipe, desc, warp_matrix);
@@ -437,6 +443,8 @@ void WarpRenderer::render_grid(Pipeline& pipe, PipelinePassDescription const& de
 {
   auto description(dynamic_cast<WarpPassDescription const*>(&desc));
 
+  auto gbuffer = dynamic_cast<GBuffer*>(pipe.current_viewstate().target);
+
   // print_matrix(warp_matrix, "Warp Matrix");
 
   if (!render_grid_program_) {
@@ -483,12 +491,34 @@ void WarpRenderer::render_grid(Pipeline& pipe, PipelinePassDescription const& de
     target.set_viewport(ctx);
     // std::cout << "[WARP] doin some warpin ..." << std::endl;
     render_grid_program_->use(ctx);
-    uint64_t h = res_->depth_buffer.first->native_handle();
-    // h = gbuffer->get_depth_buffer()->native_handle();
+    uint64_t h = res_->color_buffer.first->native_handle();
+      // std::cout << "[WARP] color buffer.first adress: " << h << std::endl;
+
+      // uint64_t h = gbuffer->get_color_buffer()->native_handle();
     math::vec2ui handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+
+    render_grid_program_->set_uniform(ctx,
+                        handle,
+                        "gua_gbuffer_color");
+
+    h = gbuffer->get_pbr_buffer()->native_handle();
+    handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+
+    render_grid_program_->set_uniform(ctx,
+                        handle,
+                        "gua_gbuffer_pbr");
+
+    h = res_->depth_buffer.first->native_handle();
+    // uint64_t h = gbuffer->get_depth_buffer()->native_handle();
+    handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
 
     render_grid_program_->set_uniform(ctx, handle, "gua_gbuffer_depth");
     render_grid_program_->apply_uniform(ctx, "warp_matrix", warp_matrix);
+
+    h = res_->surface_detection_buffer.first->native_handle();
+    handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+
+    render_grid_program_->set_uniform(ctx, handle, "gua_warp_grid_tex");
 
     ctx.render_context->set_blend_state(blend_state_);
     ctx.render_context->set_depth_stencil_state(depth_stencil_state_grid_, 1);

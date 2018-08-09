@@ -213,6 +213,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
   offscreen_window->config.set_title("SLOW CLIENT WINDOW");
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
+    
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
     // std::cout << "[SLOW] PiplinePass count: " << cmd.serialized_cam->pipeline_description->get_passes().size() << std::endl;
     try {
@@ -220,6 +221,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
     } catch (std::runtime_error& e) {
       cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::SurfaceDetectionPassDescription>(warp_res[window_name]));
     }
+    // std::cout << "[SLOW] Camera id: " << cmd.serialized_cam->uuid << std::endl;
     /* try {
       cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpGridGeneratorPassDescription>();
     } catch (std::runtime_error& e) {
@@ -398,12 +400,13 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
   fpsc.start();
 #if MULTITHREADED
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
-    
+    // std::cout << "[FAST] Camera id: " << cmd.serialized_cam->uuid << std::endl;
     if (!warp_res[window_name]->serialized_warp_cam) {
       // auto warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
       auto warp_cam = std::make_shared<gua::node::CameraNode>();
       // std::cout << "[FAST] scenegraphs camera vector size: " << cmd.scene_graphs->front()->get_camera_nodes().size() << std::endl;
       for(auto cam : cmd.scene_graphs->front()->get_camera_nodes()) {
+        // std::cout << "[SLOW] Camera Name: " << cam->get_name() << "; Camera id: " << cam->uuid() << std::endl;
         if (cam == nullptr) {
           warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
         } else if ("warp_cam" == cam->get_name()) {
@@ -411,8 +414,10 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         }
       }
       // auto graph = (cmd.scene_graphs->front());
+      warp_cam->get_pipeline_description()->clear();
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
+      // std::cout << "[FAST] number of passes: " << warp_cam->get_pipeline_description()->get_passes().size() << std::endl;
       /*auto warp_pass = warp_cam->get_pipeline_description()->get_warp_pass();*/
      /* warp_pass->get_warp_state([&](){
         gua::WarpPassDescription::WarpState state;
@@ -438,6 +443,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         return state;
       });*/
       warp_res[window_name]->serialized_warp_cam = std::make_shared<node::SerializedCameraNode>(warp_cam->serialize());
+      // std::cout << "[FAST] Warp Camera id: " << warp_res[window_name]->serialized_warp_cam->uuid << std::endl;
     }
 
     {
@@ -488,15 +494,15 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         //// create warping pipeline
         std::shared_ptr<Pipeline> pipe = nullptr;
         auto pipe_iter = window->get_context()->render_pipelines.find(
-            cmd.serialized_cam->uuid);
+          warp_res[window_name]->serialized_warp_cam->uuid);
 
         if (pipe_iter == window->get_context()->render_pipelines.end()) {
           pipe = std::make_shared<Pipeline>(
               *window->get_context(),
-              cmd.serialized_cam->config.get_resolution());
+              warp_res[window_name]->serialized_warp_cam->config.get_resolution());
 
           window->get_context()->render_pipelines.insert(
-              std::make_pair(cmd.serialized_cam->uuid, pipe));
+              std::make_pair(warp_res[window_name]->serialized_warp_cam->uuid, pipe));
 
           } else {
             pipe = pipe_iter->second;

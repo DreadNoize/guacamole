@@ -28,37 +28,19 @@
 @include "warp_grid_bits.glsl"
 
 // -----------------------------------------------------------------------------
-// #if WARP_MODE == WARP_MODE_GRID_DEPTH_THRESHOLD || WARP_MODE == WARP_MODE_GRID_SURFACE_ESTIMATION || WARP_MODE == WARP_MODE_GRID_ADVANCED_SURFACE_ESTIMATION || WARP_MODE == WARP_MODE_GRID_NON_UNIFORM_SURFACE_ESTIMATION
-// -----------------------------------------------------------------------------
 
 flat in uint cellsize;
 in vec2 texcoords;
 in vec2 cellcoords;
-in float pass_depth;
+// in float pass_depth;
+// uniform uvec2 gua_gbuffer_depth;
+
+// flat in uvec3 varying_position;
 
 uniform uvec2 gua_warp_grid_tex;
 
 // output
 layout(location=0) out vec4 gua_out_color_emit;
-
-// color -------------------------------------------------------------------------
-// vec3 gua_get_color(vec2 frag_pos) {
-//     return texture2D(sampler2D(gua_gbuffer_color), frag_pos).rgb;
-// }
-
-// vec3 gua_get_color() {
-//     return gua_get_color(gua_get_quad_coords());
-// }
-
-// // pbr -------------------------------------------------------------------------
-// vec3 gua_get_pbr(vec2 frag_pos) {
-//     return texture2D(sampler2D(gua_gbuffer_pbr), frag_pos).rgb;
-// }
-
-// vec3 gua_get_pbr() {
-//     //return gua_get_pbr(gua_get_quad_coords());
-//     return texelFetch(sampler2D(gua_gbuffer_pbr), ivec2(gl_FragCoord.xy), 0).rgb;
-// }
 
 vec3 heat(float v) {
   float value = 1.0-v;
@@ -70,13 +52,15 @@ vec3 heat(float v) {
 }
 
 void main() {
+  // vec2 texcoords = varying_position.xy / gua_resolution;
+  // gl_FragCoord = vec4(varying_position, 1.0);
+  // gl_FragDepth = texture2D(sampler2D(gua_gbuffer_depth), texcoords).x;
+  // gua_out_color_emit = vec4(1.0,0.4,0.6,1.0);
 
-  // #if WARP_MODE == WARP_MODE_GRID_DEPTH_THRESHOLD || WARP_MODE == WARP_MODE_GRID_SURFACE_ESTIMATION
-  //   const bool is_surface = (texelFetch(usampler2D(gua_warp_grid_tex), ivec2(ivec2(texcoords*gua_resolution+vec2(0.001))/2), 0).x & 1) == 1;
-  // #else
-    uint info = texelFetch(usampler2D(gua_warp_grid_tex), ivec2(ivec2(texcoords*gua_resolution+vec2(0.001))/2), 0).x;
-    const bool is_surface = (info & ALL_CONTINUITY_BITS) == ALL_CONTINUITY_BITS;
-  // // // #endif
+  // gl_FragDepth = pass_depth;
+  uint info = texelFetch(usampler2D(gua_warp_grid_tex), ivec2(ivec2(texcoords*gua_resolution+vec2(0.001))/2), 0).x;
+  const bool is_surface = (info & ALL_CONTINUITY_BITS) == ALL_CONTINUITY_BITS;
+
 
   #if INTERPOLATION_MODE == INTERPOLATION_MODE_NEAREST
     gua_out_color_emit.rgb = texelFetch(sampler2D(gua_gbuffer_color), ivec2(texcoords*gua_resolution+vec2(0.001)), 0).rgb;
@@ -89,26 +73,25 @@ void main() {
   #else
     if (is_surface) {
       // gua_out_color_emit.rgb = gua_get_color(texcoords);
-      gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
-      // gua_out_color_emit = vec4(1.0,0.8,0.3, 1.0);
+      // gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
+      gua_out_color_emit = vec4(1.0,0.8,0.3, 1.0);
       // gua_out_color_emit.a = gua_get_pbr(texcoords).r;
     } else {
       // gua_out_color_emit.rgb = texelFetch(sampler2D(gua_gbuffer_color), ivec2(texcoords*gua_resolution+vec2(0.001)), 0).rgb;
-    	gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
-      // gua_out_color_emit = vec4(0.0,0.8,0.3, 1.0);
+    	// gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
+      gua_out_color_emit = vec4(0.0,0.8,0.3, 1.0);
       // gua_out_color_emit.a = texelFetch(sampler2D(gua_gbuffer_pbr), ivec2(texcoords*gua_resolution+vec2(0.001)), 0).r;
     }
   #endif
-  // // gua_out_color_emit = vec4(1.0,0.3,0.6,1.0);
 
-  // #if @debug_cell_colors@ == 1
-  //   float intensity = log2(cellsize) / 7.0;
-  //   gua_out_color_emit.rgb = heat(1-intensity);
+  #if @debug_cell_colors@ == 1
+    float intensity = log2(cellsize) / 7.0;
+    gua_out_color_emit.rgb = heat(1-intensity);
 
-  //   if (any(lessThan(cellcoords, vec2(0.6/float(cellsize)))) || any(greaterThan(cellcoords, vec2(1.0-0.6/float(cellsize))))) {
-  //     gua_out_color_emit.rgb = mix(gua_out_color_emit.rgb, vec3(0), 0.7);
-  //   }
-  // #endif
+    if (any(lessThan(cellcoords, vec2(0.6/float(cellsize)))) || any(greaterThan(cellcoords, vec2(1.0-0.6/float(cellsize))))) {
+      gua_out_color_emit.rgb = mix(gua_out_color_emit.rgb, vec3(0), 0.7);
+    }
+  #endif
   // gua_out_color_emit = vec4(0.3,0.0,0.1,1);
-  gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
+  // gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
 }

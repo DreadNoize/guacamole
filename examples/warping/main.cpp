@@ -141,6 +141,7 @@ int main(int argc, char** argv) {
 
 
   auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", "warp_cam");
+  // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
   // warp_cam->translate(5,0,2);
   warp_cam->config.set_resolution(resolution);
   warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
