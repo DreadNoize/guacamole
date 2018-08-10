@@ -620,10 +620,10 @@ void Renderer::queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bo
   for (auto graph : scene_graphs) {
     for (auto& cam : graph->get_camera_nodes()) {
       if (cam->config.separate_windows()) {
-        send_renderclient(cam->config.get_left_output_window(), sgs, cam, enable_warping, enable_debug_grid);
-        send_renderclient(cam->config.get_right_output_window(), sgs, cam, enable_warping, enable_debug_grid);
+        send_renderclient(cam->config.get_left_output_window(), sgs, cam, enable_warping);
+        send_renderclient(cam->config.get_right_output_window(), sgs, cam, enable_warping);
       } else {
-        send_renderclient(cam->config.get_output_window_name(), sgs, cam, enable_warping, enable_debug_grid);
+        send_renderclient(cam->config.get_output_window_name(), sgs, cam, enable_warping);
       }
     }
   }
