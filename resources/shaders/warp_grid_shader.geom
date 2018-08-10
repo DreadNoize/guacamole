@@ -34,7 +34,7 @@ flat in uvec3 varying_position[];
 flat out uint cellsize;
 out vec2 cellcoords;
 out vec2 texcoords;
-// out float pass_depth;
+out float pass_depth;
 
 float gua_get_depth(vec2 frag_pos) {
     return texture2D(sampler2D(gua_gbuffer_depth), frag_pos).x * 2.0 - 1.0;
@@ -62,13 +62,13 @@ float get_depth(vec2 position) {
 }
 
 void emit_grid_vertex(vec2 position, float depth) {
-  // pass_depth = depth;
+  pass_depth = depth;
   gl_Position = warp_matrix * vec4(2.0 * (position / gua_resolution) - 1.0, depth, 1.0);
   // gl_Position = vec4(position, depth, 1.0);
   EmitVertex();
 }
 
-#define GAP 0.2
+#define GAP 0.7
 
 @include "shaders/warp_grid_bits.glsl"
 

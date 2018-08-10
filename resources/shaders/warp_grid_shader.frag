@@ -7,7 +7,7 @@
 flat in uint cellsize;
 in vec2 cellcoords;
 in vec2 texcoords;
-// in float pass_depth;
+in float pass_depth;
 
 // output
 layout(location=0) out vec4 gua_out_color_emit;
@@ -38,17 +38,20 @@ void main() {
     	// gua_out_color_emit = vec4(pass_depth, pass_depth, pass_depth,1);
       // gua_out_color_emit = vec4(0.3,texcoords, 1.0);
       gua_out_color_emit.a = texelFetch(sampler2D(gua_gbuffer_pbr), ivec2(texcoords*gua_resolution+vec2(0.001)), 0).r;
+      // gua_out_color_emit.a = gua_get_pbr(texcoords).r;
   }
 
-  // float intensity = log2(cellsize) / 7.0;
-  // if (pass_depth == 1) {
-  //     gua_out_color_emit = vec4(0.0,0.0,0.0,1.0);   
-  // } else {
-  //   gua_out_color_emit.rgb = heat(1-intensity);
+  #if @debug_cell_colors@ == 1
+  float intensity = log2(cellsize) / 7.0;
+  if (pass_depth == 1) {
+      gua_out_color_emit = vec4(0.0,0.0,0.0,1.0);   
+  } else {
+    gua_out_color_emit.rgb = heat(1-intensity);
 
-  //   if (any(lessThan(cellcoords, vec2(0.6/float(cellsize)))) || any(greaterThan(cellcoords, vec2(1.0-0.6/float(cellsize))))) {
-  //     gua_out_color_emit.rgb = mix(gua_out_color_emit.rgb, vec3(0), 0.7);
-  //   }
-  //   gua_out_color_emit.a = 1.0;
-  // }  
+    if (any(lessThan(cellcoords, vec2(0.6/float(cellsize)))) || any(greaterThan(cellcoords, vec2(1.0-0.6/float(cellsize))))) {
+      gua_out_color_emit.rgb = mix(gua_out_color_emit.rgb, vec3(0), 0.7);
+    }
+    gua_out_color_emit.a = 1.0;
+  }
+  #endif
 }

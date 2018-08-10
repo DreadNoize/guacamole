@@ -446,6 +446,10 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
       // std::cout << "[FAST] Warp Camera id: " << warp_res[window_name]->serialized_warp_cam->uuid << std::endl;
     }
 
+    // if(warp_res[window_name]->debug_grid != warp_res[window_name]->serialized_warp_cam->pipeline_description->get_pass_by_type<gua::WarpPassDescription>()->debug_cell_colors()) {
+    //   warp_res[window_name]->serialized_warp_cam->pipeline_description->get_pass_by_type<gua::WarpPassDescription>()->debug_cell_colors(warp_res[window_name]->debug_grid);
+    // }
+
     {
       gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
       warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
@@ -616,10 +620,10 @@ void Renderer::queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bo
   for (auto graph : scene_graphs) {
     for (auto& cam : graph->get_camera_nodes()) {
       if (cam->config.separate_windows()) {
-        send_renderclient(cam->config.get_left_output_window(), sgs, cam, enable_warping);
-        send_renderclient(cam->config.get_right_output_window(), sgs, cam, enable_warping);
+        send_renderclient(cam->config.get_left_output_window(), sgs, cam, enable_warping, enable_debug_grid);
+        send_renderclient(cam->config.get_right_output_window(), sgs, cam, enable_warping, enable_debug_grid);
       } else {
-        send_renderclient(cam->config.get_output_window_name(), sgs, cam, enable_warping);
+        send_renderclient(cam->config.get_output_window_name(), sgs, cam, enable_warping, enable_debug_grid);
       }
     }
   }

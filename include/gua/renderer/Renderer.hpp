@@ -280,6 +280,7 @@ class GUA_DLL Renderer {
     bool grid_initialized = false;
     bool grid_generated = false;
     CameraMode camera_mode;
+    bool debug_grid;
     
     std::shared_ptr<node::SerializedCameraNode> serialized_warp_cam;
 

@@ -449,7 +449,7 @@ void WarpRenderer::render_grid(Pipeline& pipe, PipelinePassDescription const& de
 
   if (!render_grid_program_) {
     render_grid_program_ = std::make_shared<ShaderProgram>();
-    render_grid_program_->set_shaders(render_grid_program_stages_, std::list<std::string>(), false);
+    render_grid_program_->set_shaders(render_grid_program_stages_, std::list<std::string>(), false, global_substitution_map_);
   }
 
   auto& ctx(pipe.get_context());
