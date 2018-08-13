@@ -86,7 +86,7 @@ void PipelinePass::process(PipelinePassDescription const& desc, Pipeline& pipe) 
     upload_program(desc, ctx);
     desc.recompile_shaders_ = false;
   }
-
+  // std::cout << "Context: " << ctx.id << " | Pass: " << desc.name_ << std::endl;
   if (RenderMode::Custom == rendermode_) {
     process_(*this, desc, pipe);
   } else {
@@ -110,7 +110,7 @@ void PipelinePass::process(PipelinePassDescription const& desc, Pipeline& pipe) 
     pipe.bind_light_table(shader_);
 
     std::string gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe.current_viewstate().viewpoint_uuid) + " / " + name_;
-    pipe.begin_gpu_query(ctx, gpu_query_name);
+    // pipe.begin_gpu_query(ctx, gpu_query_name);
 
     if (RenderMode::Callback == rendermode_) {
       process_(*this, desc, pipe);
@@ -118,7 +118,7 @@ void PipelinePass::process(PipelinePassDescription const& desc, Pipeline& pipe) 
       pipe.draw_quad();
     }
 
-    pipe.end_gpu_query(ctx, gpu_query_name);
+    // pipe.end_gpu_query(ctx, gpu_query_name);
 
     target.unbind(ctx);
     ctx.render_context->reset_state_objects();

@@ -272,6 +272,12 @@ bool GlfwWindow::should_close() const {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void GlfwWindow::set_should_close() const {
+  glfwSetWindowShouldClose(glfw_window_, 1);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void GlfwWindow::close() {
   if (get_is_open()) {
     glfwDestroyWindow(glfw_window_);

@@ -235,6 +235,9 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
     /*if (!cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpGridGeneratorPassDescription>()) {
       cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
     }*/
+    // for(auto pass: cmd.serialized_cam->pipeline_description->get_passes()) {
+    //   std::cout << "[SLOW] Pass name: " << pass->name() << std::endl;
+    // }
 
     if (window_name != "") {
       if (offscreen_window && !offscreen_window->get_is_open()) {
@@ -318,12 +321,12 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               void* const tex_ptr = &img;
               scm::gl::texture_region region(scm::math::vec3ui(0.0,0.0,0.0),scm::math::vec3ui(img->dimensions(),0.0));
               
-              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->color_buffer.second, region, 0, img->format(), &tex_ptr);
+              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->std::get<2>(color_buffer), region, 0, img->format(), &tex_ptr);
               
               void* const depth_ptr = &depth;
-              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->depth_buffer.second, region, 0, depth->format(), &depth_ptr);
+              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->std::get<2>(depth_buffer), region, 0, depth->format(), &depth_ptr);
 
-              warp_res[window_name]->is_left.second = is_left;
+              std::get<2>(warp_res[window_name]->is_left) = is_left;
               /* if (img) {
                 offscreen_window->display(img, false);
               } */
@@ -333,27 +336,32 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               // render methods
               auto img(pipe->render_scene(CameraMode::LEFT, *cmd.serialized_cam, *cmd.scene_graphs));
               /* if (img) offscreen_window->display(img, true); */
-              // warp_res[window_name]->color_buffer.second = img;
-              // warp_res[window_name]->depth_buffer.second = pipe->get_gbuffer()->get_depth_buffer();
-              warp_res[window_name]->is_left.second = true;
+              // warp_res[window_name]->std::get<2>(color_buffer) = img;
+              // warp_res[window_name]->std::get<2>(depth_buffer) = pipe->get_gbuffer()->get_depth_buffer();
+              std::get<2>(warp_res[window_name]->is_left) = true;
               
               img = pipe->render_scene(CameraMode::RIGHT, *cmd.serialized_cam, *cmd.scene_graphs);
               /*  if (img) offscreen_window->display(img, false); */
-              // warp_res[window_name]->color_buffer.second = img;
-              // warp_res[window_name]->depth_buffer.second = pipe->get_gbuffer()->get_depth_buffer();
-              warp_res[window_name]->is_left.second = false;
+              // warp_res[window_name]->std::get<2>(color_buffer) = img;
+              // warp_res[window_name]->std::get<2>(depth_buffer) = pipe->get_gbuffer()->get_depth_buffer();
+              std::get<2>(warp_res[window_name]->is_left) = false;
             }
           } else {
             // std::cout << "[RENDER] Rendering: MONO..." << std::endl;
 
             //// Rendering and retireving color and depth buffer
             // Sleep(20);
+            // std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / SLOW CLIENT"; 
+            // std::string const cpu_query_name = "CPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / SLOW CLIENT"; 
+            // pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
+            // pipe->begin_cpu_query(cpu_query_name);
+
             auto img(pipe->render_scene(cmd.serialized_cam->config.get_mono_mode(),
                     *cmd.serialized_cam, *cmd.scene_graphs));
             auto depth = pipe->get_gbuffer()->get_depth_buffer();
             warp_res[window_name]->framebuffer = pipe->get_gbuffer()->get_fbo_read();
             warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
-            warp_res[window_name]->is_left.second = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
+            std::get<2>(warp_res[window_name]->is_left) = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
             // as fast client is waiting on the first image, set flag = true
 
             //// If warping resources are initialized, set the according parameters
@@ -361,20 +369,24 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               if (img) {
                 // warp_res[window_name]->swap_shared_resources();
                 // warp_res[window_name]->swap_buffers();
-                offscreen_window->display(img, warp_res[window_name]->is_left.first);
                 warp_res[window_name]->postprocess_frame(offscreen_window->get_context());
+                warp_res[window_name]->swap_buffers_slow();
+                offscreen_window->display(img, std::get<0>(warp_res[window_name]->is_left));                
                 if(!warp_res[window_name]->renderer_ready) warp_res[window_name]->renderer_ready = true;
-                // offscreen_window->display(warp_res[window_name]->color_buffer.second, warp_res[window_name]->is_left.first);
+                // offscreen_window->display(warp_res[window_name]->std::get<2>(color_buffer), warp_res[window_name]->std::get<0>(is_left));
                 
               }
               
             }
+            // pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
+            // pipe->end_cpu_query(cpu_query_name);
 
 #if MULTITHREADED
 
 #else       //// single threaded alternative for testing purposes
             
-#endif
+#endif    
+
           pipe->clear_frame_cache();
 
           
@@ -418,57 +430,37 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
       warp_cam->get_pipeline_description()->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
       // std::cout << "[FAST] number of passes: " << warp_cam->get_pipeline_description()->get_passes().size() << std::endl;
-      /*auto warp_pass = warp_cam->get_pipeline_description()->get_warp_pass();*/
-     /* warp_pass->get_warp_state([&](){
-        gua::WarpPassDescription::WarpState state;
-
-        gua::Frustum frustum = warp_cam->get_rendering_frustum(*graph, gua::CameraMode::CENTER);
-        state.projection_view_center = frustum.get_projection() * frustum.get_view();
-        
-        gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ CENTER");
-        gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW CENTER");
-
-        frustum = warp_cam->get_rendering_frustum(*graph, gua::CameraMode::LEFT);
-        state.projection_view_left = frustum.get_projection() * frustum.get_view();
-
-        gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ LEFT");
-        gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW LEFT");
-
-        frustum = warp_cam->get_rendering_frustum(*graph, gua::CameraMode::RIGHT);
-        state.projection_view_right = frustum.get_projection() * frustum.get_view();
-
-        gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ RIGHT");
-        gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW RIGHT");
-
-        return state;
-      });*/
+      
       warp_res[window_name]->serialized_warp_cam = std::make_shared<node::SerializedCameraNode>(warp_cam->serialize());
       // std::cout << "[FAST] Warp Camera id: " << warp_res[window_name]->serialized_warp_cam->uuid << std::endl;
+
+      gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+      // gua::Frustum frustum = cmd.serialized_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+      warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
+
+      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+      // frustum = cmd.serialized_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+      warp_res[window_name]->warp_state.projection_view_left = frustum.get_projection() * frustum.get_view();
+
+      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+      // frustum = cmd.serialized_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+      warp_res[window_name]->warp_state.projection_view_right = frustum.get_projection() * frustum.get_view();
     }
+    {
+      gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+      warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
+
+      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+      warp_res[window_name]->warp_state.projection_view_left = frustum.get_projection() * frustum.get_view();
+
+      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+      warp_res[window_name]->warp_state.projection_view_right = frustum.get_projection() * frustum.get_view();
+    } 
 
     // if(warp_res[window_name]->debug_grid != warp_res[window_name]->serialized_warp_cam->pipeline_description->get_pass_by_type<gua::WarpPassDescription>()->debug_cell_colors()) {
     //   warp_res[window_name]->serialized_warp_cam->pipeline_description->get_pass_by_type<gua::WarpPassDescription>()->debug_cell_colors(warp_res[window_name]->debug_grid);
     // }
 
-    {
-      gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
-      warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
-
-      // gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ CENTER");
-      // gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW CENTER");
-
-      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
-      warp_res[window_name]->warp_state.projection_view_left = frustum.get_projection() * frustum.get_view();
-
-      // gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ LEFT");
-      // gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW LEFT");
-
-      frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
-      warp_res[window_name]->warp_state.projection_view_right = frustum.get_projection() * frustum.get_view();
-
-      // gua::WarpRenderer::print_matrix(frustum.get_projection(), "FRUSTUM PROJ RIGHT");
-      // gua::WarpRenderer::print_matrix(frustum.get_view(), "FRUSTUM VIEW RIGHT");
-    }
     
 
     // std::cout << "[FAST] PiplinePass count: " << warp_res[window_name]->serialized_warp_cam->pipeline_description->get_passes().size() << std::endl;
@@ -518,26 +510,43 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         // std::cout << "[WARP] threads are " << warp_res[window_name]->synch << std::endl;
 
         window->rendering_fps = fpsc.fps;
-        
+
+        std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
+        // std::string const cpu_query_name = "CPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT";
+        pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
+        // pipe->begin_cpu_query(cpu_query_name);
+
         //// if the slow client rendered for the first time, start display
         if(warp_res[window_name]->initialized && warp_res[window_name]->renderer_ready) {
-          warp_res[window_name]->swap_shared_resources();
-          warp_res[window_name]->swap_buffers();
+          warp_res[window_name]->swap_surface_buffer_fast();
+          warp_res[window_name]->swap_buffers_fast();
           auto tex = pipe->render_scene(warp_res[window_name]->camera_mode, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
           // display
           // std::cout << "[FAST] tex adress: " << tex->native_handle() << std::endl;
-          window->display(tex, warp_res[window_name]->is_left.first);
-          // window->display(warp_res[window_name]->surface_detection_buffer.first, warp_res[window_name]->is_left.first);
-          // std::cout << "[FAST] color buffer.first adress: " << warp_res[window_name]->color_buffer.first->native_handle() << std::endl;
-          // std::cout << "[FAST] color buffer.second adress: " << warp_res[window_name]->color_buffer.second->native_handle() << std::endl;
+          window->display(tex, std::get<0>(warp_res[window_name]->is_left));
+          // window->display(std::get<0>(warp_res[window_name]->color_buffer), std::get<0>(warp_res[window_name]->is_left));
+          // std::cout << "[FAST] color buffer.first adress: " << warp_res[window_name]->std::get<0>(color_buffer)->native_handle() << std::endl;
+          // std::cout << "[FAST] color buffer.second adress: " << warp_res[window_name]->std::get<2>(color_buffer)->native_handle() << std::endl;
 
-          // window->display(warp_res[window_name]->color_buffer.first, warp_res[window_name]->is_left.first);
-          // window->display(temp_tex, warp_res[window_name]->is_left.first);
-        }        
+          // window->display(warp_res[window_name]->std::get<0>(color_buffer), warp_res[window_name]->std::get<0>(is_left));
+          // window->display(temp_tex, warp_res[window_name]->std::get<0>(is_left));
+        }
+               
         if (0 == window->get_context()->framecount % 100) {
           gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
         }
-        
+        pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
+        pipe->fetch_gpu_query_results(pipe->get_context());
+        auto query_results = pipe->get_query();
+        auto time_bygone = query_results.results[gpu_query_name];
+        warp_res[window_name]->time_left = warp_res[window_name]->time_budget - time_bygone;
+        while (warp_res[window_name]->time_left > 1) {
+          warp_res[window_name]->time_left -= 0.1;
+          // std::cout << "[FAST] TIME LEFT: " << warp_res[window_name]->time_left << std::endl;
+          Sleep(0.1);
+        }
+        // pipe->end_cpu_query(cpu_query_name);
+
         pipe->clear_frame_cache();
         window->finish_frame();
         ++(window->get_context()->framecount);
@@ -559,7 +568,8 @@ Renderer::Renderer() :
 void Renderer::send_renderclient(std::string const& window_name,
                          std::shared_ptr<const Renderer::SceneGraphs> sgs,
                          node::CameraNode* cam,
-                         bool enable_warping)
+                         bool enable_warping,
+                         int const desired_framerate)
 {
   if(!enable_warping) {
     auto rclient = render_clients_.find(window_name);
@@ -579,10 +589,12 @@ void Renderer::send_renderclient(std::string const& window_name,
       }
     }
   } else {
-    // std::cout << "Warp 9, Mr Sulu, take us out of here" << std::endl;
     auto win = WindowDatabase::instance()->lookup(window_name);
     if (warp_resources.end() == warp_resources.find(window_name)) {
       warp_resources[window_name] = std::make_shared<Renderer::WarpingResources>();
+      // calculate time budget in ms
+      warp_resources[window_name]->time_budget = float(1000.0/desired_framerate);
+      std::cout << "Time budget: " << warp_resources[window_name]->time_budget << std::endl;
     }
 	// std::cout << "Generating clients ..." << std::endl;
     auto rwclient = warp_clients_.find(window_name); 
@@ -609,7 +621,7 @@ void Renderer::send_renderclient(std::string const& window_name,
   }
 }
 
-void Renderer::queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping) {
+void Renderer::queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping, int const desired_framerate) {
 	// std::cout << "RENDERER: starting queue draw ..." << std::endl;
   for (auto graph : scene_graphs) {
     graph->update_cache();
@@ -620,10 +632,10 @@ void Renderer::queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bo
   for (auto graph : scene_graphs) {
     for (auto& cam : graph->get_camera_nodes()) {
       if (cam->config.separate_windows()) {
-        send_renderclient(cam->config.get_left_output_window(), sgs, cam, enable_warping);
-        send_renderclient(cam->config.get_right_output_window(), sgs, cam, enable_warping);
+        send_renderclient(cam->config.get_left_output_window(), sgs, cam, enable_warping, desired_framerate);
+        send_renderclient(cam->config.get_right_output_window(), sgs, cam, enable_warping, desired_framerate);
       } else {
-        send_renderclient(cam->config.get_output_window_name(), sgs, cam, enable_warping);
+        send_renderclient(cam->config.get_output_window_name(), sgs, cam, enable_warping, desired_framerate);
       }
     }
   }

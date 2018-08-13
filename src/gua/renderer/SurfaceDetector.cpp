@@ -49,9 +49,10 @@ SurfaceDetector::SurfaceDetector()
 
 ////////////////////////////////////////////////////////////////////////////////
 SurfaceDetector::~SurfaceDetector() {
-  if (res_ && res_->surface_detection_buffer.first && res_->surface_detection_buffer.second) {
-    pipe_->get_context().render_context->make_non_resident(res_->surface_detection_buffer.first);
-    pipe_->get_context().render_context->make_non_resident(res_->surface_detection_buffer.second);
+  if (res_ && std::get<0>(res_->surface_detection_buffer) && std::get<1>(res_->surface_detection_buffer) && std::get<2>(res_->surface_detection_buffer)) {
+    pipe_->get_context().render_context->make_non_resident(std::get<0>(res_->surface_detection_buffer));
+    pipe_->get_context().render_context->make_non_resident(std::get<1>(res_->surface_detection_buffer));
+    pipe_->get_context().render_context->make_non_resident(std::get<2>(res_->surface_detection_buffer));
   }
 }
 
@@ -86,9 +87,9 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   if(!res_) {
     res_ = description->warp_resources();
 
-    /*if (res_->surface_detection_buffer.second) {
-      ctx.render_context->make_non_resident(res_->surface_detection_buffer.first);
-      ctx.render_context->make_non_resident(res_->surface_detection_buffer.second);
+    /*if (res_->std::get<2>(surface_detection_buffer)) {
+      ctx.render_context->make_non_resident(res_->std::get<0>(surface_detection_buffer));
+      ctx.render_context->make_non_resident(res_->std::get<2>(surface_detection_buffer));
     }*/
 
     math::vec2 size(resolution/2);
@@ -97,14 +98,14 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
       scm::gl::WRAP_CLAMP_TO_EDGE);
     scm::gl::sampler_state_ptr state = ctx.render_device->create_sampler_state(state_desc);
 
-    /*res_->surface_detection_buffer.first = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-    ctx.render_context->make_resident(res_->surface_detection_buffer.first, state);
-    res_->surface_detection_buffer.second = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-    ctx.render_context->make_resident(res_->surface_detection_buffer.second, state);*/
+    /*res_->std::get<0>(surface_detection_buffer) = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+    ctx.render_context->make_resident(res_->std::get<0>(surface_detection_buffer), state);
+    std::get<2>(res_->surface_detection_buffer) = ctx.render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+    ctx.render_context->make_resident(std::get<2>(res_->surface_detection_buffer), state);*/
 
-    /*res_->surface_detection_buffer.first = std::make_shared<Texture2D>(size.x, size.y,
+    /*res_->std::get<0>(surface_detection_buffer) = std::make_shared<Texture2D>(size.x, size.y,
         scm::gl::FORMAT_R_16UI, mip_map_levels, state);
-    res_->surface_detection_buffer.second = std::make_shared<Texture2D>(size.x, size.y,
+    std::get<2>(res_->surface_detection_buffer) = std::make_shared<Texture2D>(size.x, size.y,
         scm::gl::FORMAT_R_16UI, mip_map_levels, state);*/
 
     surface_detection_buffer_fbos_.clear();
@@ -114,7 +115,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   }
   for (int i(0); i<mip_map_levels; ++i) {
     surface_detection_buffer_fbos_[i]->clear_attachments();
-    surface_detection_buffer_fbos_[i]->attach_color_buffer(0, res_->surface_detection_buffer.second, i,0);
+    surface_detection_buffer_fbos_[i]->attach_color_buffer(0, std::get<2>(res_->surface_detection_buffer), i,0);
   }
   // ---------------------------------------------------------------------------
   // ------------------- Surface Information Map -------------------------------
@@ -125,7 +126,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   uint64_t h = gbuffer->get_depth_buffer()->native_handle();
   math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   surface_detection_program_->set_uniform(ctx, handle, "depth_buffer");
-  h = res_->surface_detection_buffer.second->native_handle();
+  h = std::get<2>(res_->surface_detection_buffer)->native_handle();
   handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer");
 
@@ -138,7 +139,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   }
   pipe.end_gpu_query(ctx, "Surface Detection");
 
-  res_->grid_generated = true;
+  res_->swap_surface_buffer_slow();
 
 
 }

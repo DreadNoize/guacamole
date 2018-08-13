@@ -119,6 +119,8 @@ class GUA_DLL Pipeline {
 
   void fetch_gpu_query_results(RenderContext const& ctx);
 
+  time_query_collection get_query() const;
+
   void clear_frame_cache();
 
  private:

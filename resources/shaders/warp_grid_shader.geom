@@ -24,10 +24,11 @@
 @include "shaders/common/gua_camera_uniforms.glsl"
 
 layout(points) in;
-layout(line_strip, max_vertices = 20) out;
+layout(triangle_strip, max_vertices = 16) out;
 
 uniform uvec2 gua_gbuffer_depth;
 uniform mat4 warp_matrix;
+// uniform uvec2 resolution;
 
 flat in uvec3 varying_position[];
 
@@ -35,6 +36,7 @@ flat out uint cellsize;
 out vec2 cellcoords;
 out vec2 texcoords;
 out float pass_depth;
+flat out vec2 pos;
 
 float gua_get_depth(vec2 frag_pos) {
     return texture2D(sampler2D(gua_gbuffer_depth), frag_pos).x * 2.0 - 1.0;
@@ -68,41 +70,10 @@ void emit_grid_vertex(vec2 position, float depth) {
   EmitVertex();
 }
 
-#define GAP 0.7
+#define GAP @pixel_size@
 
 @include "shaders/warp_grid_bits.glsl"
 
-// void emit_quad(uvec2 offset, uvec2 size) {
-//   float depth = get_depth_raw(varying_position[0].xy);
-
-//   cellcoords = vec2(0, 0);
-//   vec2 vertex_position = vec2(varying_position[0].xy + offset) / gua_resolution * 2 - 1;
-//   gl_Position = vec4(vertex_position, depth, 1);
-//   EmitVertex();
-
-//   cellcoords = vec2(1, 0);
-//   vertex_position = vec2(varying_position[0].xy + offset + vec2(size.x, 0)) / gua_resolution * 2 - 1;
-//   gl_Position = vec4(vertex_position, depth, 1);
-//   EmitVertex();
-
-//   cellcoords = vec2(0, 1);
-//   vertex_position = vec2(varying_position[0].xy + offset + vec2(size.x, size.y)) / gua_resolution * 2 - 1;
-//   gl_Position = vec4(vertex_position, depth, 1);
-//   EmitVertex();
-
-//   cellcoords = vec2(1, 1);
-//   vertex_position = vec2(varying_position[0].xy + offset + vec2(0, size.y)) / gua_resolution * 2 - 1;
-//   gl_Position = vec4(vertex_position, depth, 1);
-//   EmitVertex();
-
-//   // cellcoords = vec2(0, 0);
-//   // vertex_position = vec2(varying_position[0].xy + offset) / gua_resolution * 2 - 1;
-//   // gl_Position = warp_matrix * vec4(vertex_position, depth, 1);
-//   // EmitVertex();
-
-//   EndPrimitive();
-
-// }
 void emit_quad(uvec2 offset, uvec2 size) {
 
   if (size.x > 0 && size.y > 0) {
@@ -133,20 +104,24 @@ void emit_quad(uvec2 offset, uvec2 size) {
 
     cellsize = min(size.x, size.y);
 
-    texcoords = pos1 / gua_resolution;
+    texcoords = (pos1 / (gua_resolution));
     cellcoords = vec2(0, 0);
+    pos = pos1;
     emit_grid_vertex(pos1 + vec2(-GAP, -GAP), depth1);
 
-    texcoords = pos2 / gua_resolution;
+    texcoords = (pos2 / (gua_resolution));
     cellcoords = vec2(1, 0);
+    pos = pos2;
     emit_grid_vertex(pos2 + vec2( GAP, -GAP), depth2);
 
-    texcoords = pos3 / gua_resolution;
+    texcoords = (pos3 / (gua_resolution));
     cellcoords = vec2(0, 1);
+    pos = pos3;
     emit_grid_vertex(pos3 + vec2(-GAP,  GAP), depth3);
 
-    texcoords = pos4 / gua_resolution;
+    texcoords = (pos4 / (gua_resolution));
     cellcoords = vec2(1, 1);
+    pos = pos4;
     emit_grid_vertex(pos4 + vec2( GAP,  GAP), depth4);
 
     EndPrimitive();
@@ -157,20 +132,20 @@ void emit_pixel(uvec2 offset) {
 
   cellsize = 1;
   vec2 position = varying_position[0].xy + offset;
-
+  pos = position;
   // remove strange one-pixel line
   if (position.y == gua_resolution.y) return;
 
-  texcoords = position / gua_resolution;
+  texcoords = (position / (gua_resolution));
   const float depth = get_depth_raw(position);
 
   cellcoords = vec2(0, 0);
   emit_grid_vertex(position + vec2(0, 0) + vec2(-GAP, -GAP), depth);
   cellcoords = vec2(1, 0);
   emit_grid_vertex(position + vec2(1, 0) + vec2( GAP, -GAP), depth);
-  cellcoords = vec2(1, 1);
-  emit_grid_vertex(position + vec2(0, 1) + vec2(-GAP,  GAP), depth);
   cellcoords = vec2(0, 1);
+  emit_grid_vertex(position + vec2(0, 1) + vec2(-GAP,  GAP), depth);
+  cellcoords = vec2(1, 1);
   emit_grid_vertex(position + vec2(1, 1) + vec2( GAP,  GAP), depth);
 
   EndPrimitive();
@@ -182,8 +157,7 @@ void main() {
   uvec2 scale = 1 + uvec2((varying_position[0].z >> BIT_EXPAND_X) & 1, (varying_position[0].z >> BIT_EXPAND_Y) & 1);
 
   cellsize = 1 << level;
-
-  if ((varying_position[0].z & 1) > 0) {
+  if ((varying_position[0].z & 1 ) > 0) {
     emit_quad(uvec2(0), uvec2(1 << level));
     // emit_quad(uvec2(0), max(vec2(1), cellsize * scale - vec2(0)));
   } else {

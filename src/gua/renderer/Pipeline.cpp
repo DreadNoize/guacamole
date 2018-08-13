@@ -201,6 +201,7 @@ scm::gl::texture_2d_ptr Pipeline::render_scene(
   current_viewstate_.target = gbuffer_.get();
 
   // process all passes
+  // std::cout << "Context: " << context_.id << " | " << "Number of Passes: " << passes_.size() << std::endl;
   for (unsigned i(0); i < passes_.size(); ++i) {
     if (passes_[i].needs_color_buffer_as_input()) {
       gbuffer_->toggle_ping_pong();
@@ -209,18 +210,18 @@ scm::gl::texture_2d_ptr Pipeline::render_scene(
   }
 
 #ifdef GUACAMOLE_ENABLE_PIPELINE_PASS_TIME_QUERIES
-  fetch_gpu_query_results(context_);
+  // fetch_gpu_query_results(context_);
 
-  if (context_.framecount % 60 == 0) {
-    std::cout << "===== Time Queries for Context: " << context_.id
-              << " ============================" << std::endl;
-    for (auto const& t : queries_.results) {
-      std::cout << t.first << " : " << t.second << " ms" << std::endl;
-    }
-    queries_.results.clear();
-    std::cout << ">>===================================================="
-              << std::endl;
-  }
+  // if (context_.framecount % 60 == 0) {
+  //   std::cout << "===== Time Queries for Context: " << context_.id
+  //             << " ============================" << std::endl;
+  //   for (auto const& t : queries_.results) {
+  //     std::cout << t.first << " : " << t.second << " ms" << std::endl;
+  //   }
+  //   queries_.results.clear();
+  //   std::cout << ">>===================================================="
+  //             << std::endl;
+  // }
 #endif
 
   gbuffer_->toggle_ping_pong();
@@ -836,7 +837,7 @@ void Pipeline::clear_frame_cache() {
   fetch_gpu_query_results(context_);
 
 #ifdef GUACAMOLE_ENABLE_PIPELINE_PASS_TIME_QUERIES
-  if (context_.framecount % 5 == 0) {
+  if (context_.framecount % 100 == 0) {
     std::cout << "===== Time Queries for Context: " << context_.id
       << " ============================" << std::endl;
     for (auto const& t : queries_.results) {
@@ -846,6 +847,12 @@ void Pipeline::clear_frame_cache() {
     queries_.results.clear();
   }
 #endif
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Pipeline::time_query_collection Pipeline::get_query() const {
+  return queries_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

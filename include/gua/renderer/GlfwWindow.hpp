@@ -63,6 +63,8 @@ class GUA_DLL GlfwWindow : public WindowBase {
   void process_events() override;
   GLFWwindow* get_glfw_window();
 
+  // set window should close
+  void set_should_close() const;
   /**
    * Control the cursor mode.
    *

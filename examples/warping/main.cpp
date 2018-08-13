@@ -64,6 +64,7 @@ int main(int argc, char** argv) {
   Navigator nav;
   Navigator warp_nav;
   nav.set_transform(scm::math::make_translation(0.f, 0.f, 3.f));
+  warp_nav.set_transform(scm::math::make_translation(0.f, 0.f, 3.f));
 
   // initialize scenegraph
   gua::SceneGraph graph("main_scenegraph");
@@ -107,7 +108,7 @@ int main(int argc, char** argv) {
   screen->translate(0, 0, 1.0);
 
   // resolution to be used for camera resolution and windows size
-  auto resolution = gua::math::vec2ui(600, 400);
+  auto resolution = gua::math::vec2ui(1280, 720);
 
   // set up camera and connect to screen in scenegraph
   auto camera = graph.add_node<gua::node::CameraNode>("/navigation", "cam");
@@ -150,7 +151,6 @@ int main(int argc, char** argv) {
   warp_cam->config.set_far_clip(camera->config.get_far_clip() * 1.5);
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
   
-
   // update view mode
   auto update_view_mode([&](){
     // set stereo options
@@ -231,6 +231,7 @@ int main(int argc, char** argv) {
   window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
     window->config.set_resolution(new_size);
     camera->config.set_resolution(new_size);
+    warp_cam->config.set_resolution(new_size);
     screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
     warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
     
@@ -245,8 +246,8 @@ int main(int argc, char** argv) {
   window->on_key_press.connect([&](int key, int scancode, int action, int mods) {
     if (manipulation_navigator) {
       nav.set_key_press(key, action);
-    } else if (manipulation_camera) {
       warp_nav.set_key_press(key, action);
+    } else if (manipulation_camera) {
     }
     if (action == 1) {
       switch (key) {
@@ -257,6 +258,9 @@ int main(int argc, char** argv) {
           warping = !warping;
           update_view_mode();
           break;
+        case 256:
+          window->set_should_close();
+          break;
       }
     }
   });
@@ -264,8 +268,8 @@ int main(int argc, char** argv) {
   window->on_move_cursor.connect([&](gua::math::vec2 const& pos) {
     if (manipulation_navigator) {
       nav.set_mouse_position(gua::math::vec2i(pos));
-    } else {
       warp_nav.set_mouse_position(gua::math::vec2i(pos));
+    } else {
     }
   });
 
@@ -288,11 +292,11 @@ int main(int argc, char** argv) {
     auto time = gua::Timer::get_now();
     // geometry->rotate(time*0.00000000002, gua::math::vec3(0.0,1.0,0.0));
     // log fps every 150th tick
-    if (ctr++ % 150 == 0) {
+    /*if (ctr++ % 150 == 0) {
       gua::Logger::LOG_WARNING
         << "Frame time: " << 1000.f / window->get_rendering_fps()
         << " ms, fps: " << window->get_rendering_fps() << std::endl;
-    }
+    }*/
 
     nav.update();
     warp_nav.update();

@@ -179,8 +179,8 @@ void main() {
     if (depth == 1.0) opaque_color_emit = hole_filling_blur();
     else              opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
   #else
-    if (depth == 1.0) opaque_color_emit = vec4(depth,depth,depth, 1);
-    // if (depth == 1.0) opaque_color_emit = vec4(0.0,0.1,0.3, 1);
+    // if (depth == 1.0) opaque_color_emit = vec4(depth,depth,depth, 1);
+    if (depth == 1.0) opaque_color_emit = vec4(0.0,0.1,0.3, 1);
     // if (depth == 1.0) opaque_color_emit = vec4(@hole_filling_color@, 1);
     // else              opaque_color_emit = vec4(0.3,0.0,0.1,1);
     else              opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
