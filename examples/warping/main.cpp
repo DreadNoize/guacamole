@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
 
   auto screen = graph.add_node<gua::node::ScreenNode>("/navigation", "screen");
   screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
-  screen->translate(0, 0, 1.0);
+  // screen->translate(0, 0, 1.0);
 
   // resolution to be used for camera resolution and windows size
   auto resolution = gua::math::vec2ui(1280, 720);
@@ -120,6 +120,8 @@ int main(int argc, char** argv) {
   camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
   camera->config.set_far_clip(350.f);
   camera->config.set_near_clip(0.1f);
+  camera->config.set_enable_stereo(true);
+  camera->config.set_eye_offset(0.06f);
 
   auto pipe_desc = camera->get_pipeline_description();
   pipe_desc->get_resolve_pass()->
@@ -141,84 +143,16 @@ int main(int argc, char** argv) {
   warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
 
 
-  auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", "warp_cam");
+  auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation", "warp_cam");
   // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
-  // warp_cam->translate(5,0,2);
+  warp_cam->translate(0,0,2);
   warp_cam->config.set_resolution(resolution);
   warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
   warp_cam->config.set_scene_graph_name("main_scenegraph");
   warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
-  warp_cam->config.set_far_clip(camera->config.get_far_clip() * 1.5);
+  warp_cam->config.set_far_clip(camera->config.get_far_clip());
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
   
-  // update view mode
-  auto update_view_mode([&](){
-    // set stereo options
-    /* if (stereo) {
-
-      normal_cam->config.set_enable_stereo(true);
-
-      #if OCULUS1
-        warp_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(-0.04f, 0.f, -0.05f)));
-        warp_screen_right->set_transform(gua::math::mat4(scm::math::make_translation(0.04f, 0.f, -0.05f)));
-      #elif OCULUS2
-        warp_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(-0.03175f, 0.f, -0.08f)));
-        warp_screen_right->set_transform(gua::math::mat4(scm::math::make_translation(0.03175f, 0.f, -0.08f)));
-      #else
-        window->config.set_stereo_mode(POWER_WALL || USE_SIDE_BY_SIDE ? gua::StereoMode::SIDE_BY_SIDE : gua::StereoMode::ANAGLYPH_RED_CYAN);
-      #endif
-
-
-      if (warping) {
-
-        if (stereotype_spatial) {
-          normal_cam->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
-
-          #if OCULUS1
-            normal_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.05f)));
-            normal_screen_right->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.05f)));
-          #elif OCULUS2
-            normal_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.08f)));
-            normal_screen_right->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.08f)));
-          #endif
-
-        } else if (stereotype_temporal) {
-          normal_cam->config.set_stereo_type(gua::StereoType::TEMPORAL_WARP);
-        } else if (stereotype_single_temporal) {
-          normal_cam->config.set_stereo_type(gua::StereoType::SINGLE_TEMPORAL_WARP);
-        }
-
-      } else {
-        normal_cam->config.set_stereo_type(gua::StereoType::RENDER_TWICE);
-      } 
-
-    } else { */
-
-    camera->config.set_enable_stereo(false);
-
-  /*   #if OCULUS1
-      normal_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.05f)));
-      warp_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.05f)));
-    #elif OCULUS2
-      normal_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.08f)));
-      warp_screen_left->set_transform(gua::math::mat4(scm::math::make_translation(0.f, 0.f, -0.08f)));
-    #else
-      window->config.set_stereo_mode(gua::StereoMode::MONO);
-    #endif */
-
-    if (warping) {
-      camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
-      camera->config.set_eye_offset(0.f);
-      warp_cam->config.set_eye_offset(0.f);
-    } else {
-      camera->config.set_stereo_type(gua::StereoType::RENDER_TWICE);
-      camera->config.set_eye_offset(0.f);
-    }
-    // }
-
-  });
-
-  update_view_mode();
 
   // set up window
   auto window = std::make_shared<gua::GlfwWindow>();
@@ -227,7 +161,7 @@ int main(int argc, char** argv) {
   window->config.set_enable_vsync(false);
   window->config.set_size(resolution);
   window->config.set_resolution(resolution);
-  window->config.set_stereo_mode(gua::StereoMode::MONO);
+  window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
   window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
     window->config.set_resolution(new_size);
     camera->config.set_resolution(new_size);
@@ -246,17 +180,17 @@ int main(int argc, char** argv) {
   window->on_key_press.connect([&](int key, int scancode, int action, int mods) {
     if (manipulation_navigator) {
       nav.set_key_press(key, action);
-      warp_nav.set_key_press(key, action);
     } else if (manipulation_camera) {
+      warp_nav.set_key_press(key, action);
     }
     if (action == 1) {
       switch (key) {
-        case 'C':
-          std::swap(manipulation_navigator, manipulation_camera);
-          break;
-        case 'V':
-          warping = !warping;
-          update_view_mode();
+        // case 'C':
+        //   std::swap(manipulation_navigator, manipulation_camera);
+        //   break;
+        // case 'V':
+        //   warping = !warping;
+        //   update_view_mode();
           break;
         case 256:
           window->set_should_close();
@@ -268,12 +202,12 @@ int main(int argc, char** argv) {
   window->on_move_cursor.connect([&](gua::math::vec2 const& pos) {
     if (manipulation_navigator) {
       nav.set_mouse_position(gua::math::vec2i(pos));
-      warp_nav.set_mouse_position(gua::math::vec2i(pos));
     } else {
+      warp_nav.set_mouse_position(gua::math::vec2i(pos));
     }
   });
 
-    window->on_button_press.connect(std::bind(mouse_button, std::ref(object_trackball), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+  window->on_button_press.connect(std::bind(mouse_button, std::ref(object_trackball), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
   // window->open();
 
@@ -318,7 +252,7 @@ int main(int argc, char** argv) {
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, true);
+      renderer.queue_draw({&graph}, false);
     }
   });
 
