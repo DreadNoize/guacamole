@@ -88,8 +88,8 @@ class GUA_DLL Renderer {
         std::lock(copy_mutex, rhs.copy_mutex);
         std::lock_guard<std::mutex> m_lhs(copy_mutex, std::adopt_lock);
         std::lock_guard<std::mutex> m_rhs(rhs.copy_mutex, std::adopt_lock);
-        color_buffer = rhs.color_buffer;
-        depth_buffer = rhs.depth_buffer;
+        color_buffer_left = rhs.color_buffer_left;
+        depth_buffer_left = rhs.depth_buffer_left;
         sampler_state_desc = rhs.sampler_state_desc;
         sampler_state = rhs.sampler_state;
         is_left = rhs.is_left;
@@ -111,21 +111,37 @@ class GUA_DLL Renderer {
       sampler_state = ctx->render_device->create_sampler_state(sampler_state_desc);
       
       // std::cout << "Initializing Warping Texture Color ..." << std::endl; 
-      color_buffer = std::make_tuple(ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1),
+      color_buffer_left = std::make_tuple(ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1),
                                      ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1),
                                      ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1));
-      ctx->render_context->make_resident(std::get<0>(color_buffer), sampler_state);
-      ctx->render_context->make_resident(std::get<1>(color_buffer), sampler_state);
-      ctx->render_context->make_resident(std::get<2>(color_buffer), sampler_state);
+      ctx->render_context->make_resident(std::get<0>(color_buffer_left), sampler_state);
+      ctx->render_context->make_resident(std::get<1>(color_buffer_left), sampler_state);
+      ctx->render_context->make_resident(std::get<2>(color_buffer_left), sampler_state);
+
+      color_buffer_right = std::make_tuple(ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1),
+                                     ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1),
+                                     ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_RGBA_32F, 1));
+      ctx->render_context->make_resident(std::get<0>(color_buffer_right), sampler_state);
+      ctx->render_context->make_resident(std::get<1>(color_buffer_right), sampler_state);
+      ctx->render_context->make_resident(std::get<2>(color_buffer_right), sampler_state);
+
 
       // std::cout << "Initializing Warping Texture Depth ..." << std::endl; 
 
-      depth_buffer = std::make_tuple(ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1),
+      depth_buffer_left = std::make_tuple(ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1),
                                      ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1),
                                      ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1));
-      ctx->render_context->make_resident(std::get<0>(depth_buffer), sampler_state);
-      ctx->render_context->make_resident(std::get<1>(depth_buffer), sampler_state);
-      ctx->render_context->make_resident(std::get<2>(depth_buffer), sampler_state);
+      ctx->render_context->make_resident(std::get<0>(depth_buffer_left), sampler_state);
+      ctx->render_context->make_resident(std::get<1>(depth_buffer_left), sampler_state);
+      ctx->render_context->make_resident(std::get<2>(depth_buffer_left), sampler_state);
+
+      depth_buffer_right = std::make_tuple(ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1),
+                                     ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1),
+                                     ctx->render_device->create_texture_2d(resolution, scm::gl::FORMAT_D24_S8, 1));
+      ctx->render_context->make_resident(std::get<0>(depth_buffer_right), sampler_state);
+      ctx->render_context->make_resident(std::get<1>(depth_buffer_right), sampler_state);
+      ctx->render_context->make_resident(std::get<2>(depth_buffer_right), sampler_state);
+
 
       math::vec2 size(resolution / 2);
 
@@ -137,16 +153,23 @@ class GUA_DLL Renderer {
                                              scm::gl::WRAP_MIRRORED_REPEAT);
       scm::gl::sampler_state_ptr state = ctx->render_device->create_sampler_state(state_desc);
 
-      // std::get<0>(surface_detection_buffer) = ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-      // ctx->render_context->make_resident(std::get<0>(surface_detection_buffer), state);
-      // std::get<2>(surface_detection_buffer) = ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
-      // ctx->render_context->make_resident(std::get<2>(surface_detection_buffer), state);
-      surface_detection_buffer = std::make_tuple(ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels),
+      // std::get<0>(surface_detection_buffer_left) = ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+      // ctx->render_context->make_resident(std::get<0>(surface_detection_buffer_left), state);
+      // std::get<2>(surface_detection_buffer_left) = ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels);
+      // ctx->render_context->make_resident(std::get<2>(surface_detection_buffer_left), state);
+      surface_detection_buffer_left = std::make_tuple(ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels),
                                                  ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels),
                                                  ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels));
-      ctx->render_context->make_resident(std::get<0>(surface_detection_buffer), state);
-      ctx->render_context->make_resident(std::get<1>(surface_detection_buffer), state);
-      ctx->render_context->make_resident(std::get<2>(surface_detection_buffer), state);
+      ctx->render_context->make_resident(std::get<0>(surface_detection_buffer_left), state);
+      ctx->render_context->make_resident(std::get<1>(surface_detection_buffer_left), state);
+      ctx->render_context->make_resident(std::get<2>(surface_detection_buffer_left), state);
+
+      surface_detection_buffer_right = std::make_tuple(ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels),
+                                                 ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels),
+                                                 ctx->render_device->create_texture_2d(math::vec2ui(size.x, size.y), scm::gl::FORMAT_R_16UI, mip_map_levels));
+      ctx->render_context->make_resident(std::get<0>(surface_detection_buffer_right), state);
+      ctx->render_context->make_resident(std::get<1>(surface_detection_buffer_right), state);
+      ctx->render_context->make_resident(std::get<2>(surface_detection_buffer_right), state);
 
       initialized = true;
     }
@@ -177,17 +200,17 @@ class GUA_DLL Renderer {
 
     void init_fbo(gua::RenderContext* ctx) {
       framebuffer_resolved = ctx->render_device->create_frame_buffer();
-      // framebuffer_resolved->attach_color_buffer(0, std::get<2>(color_buffer));
-      // framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer));
+      // framebuffer_resolved->attach_color_buffer_left(0, std::get<2>(color_buffer_left));
+      // framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer_left));
       initialized_fbo = true;
     }
 
     void postprocess_frame(RenderContext* ctx) {
       // ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
-      // ctx->render_context->generate_mipmaps(std::get<2>(color_buffer));
-      framebuffer_resolved->attach_color_buffer(0, std::get<2>(color_buffer));
-      framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer));
-      //std::cout << "[POST PROCESS] color buffer second adress: " << std::get<2>(color_buffer)->native_handle() << std::endl;
+      // ctx->render_context->generate_mipmaps(std::get<2>(color_buffer_left));
+      framebuffer_resolved->attach_color_buffer(0, std::get<2>(color_buffer_left));
+      framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer_left));
+      //std::cout << "[POST PROCESS] color buffer second adress: " << std::get<2>(color_buffer_left)->native_handle() << std::endl;
       ctx->render_context->copy_color_buffer(framebuffer, framebuffer_resolved, 0);
       ctx->render_context->copy_depth_stencil_buffer(framebuffer, framebuffer_resolved);
       ctx->render_context->reset();
@@ -198,16 +221,16 @@ class GUA_DLL Renderer {
     void swap_buffers_fast() {
       if(updated){
         std::lock_guard<std::mutex> lock(copy_mutex);
-        std::swap(std::get<0>(color_buffer), std::get<1>(color_buffer));
-        std::swap(std::get<0>(depth_buffer), std::get<1>(depth_buffer));
+        std::swap(std::get<0>(color_buffer_left), std::get<1>(color_buffer_left));
+        std::swap(std::get<0>(depth_buffer_left), std::get<1>(depth_buffer_left));
         std::swap(std::get<0>(is_left), std::get<1>(is_left));
         updated = false;
       }
     }
     void swap_buffers_slow() {
       std::lock_guard<std::mutex> lock(copy_mutex);
-      std::swap(std::get<1>(color_buffer), std::get<2>(color_buffer));
-      std::swap(std::get<1>(depth_buffer), std::get<2>(depth_buffer));
+      std::swap(std::get<1>(color_buffer_left), std::get<2>(color_buffer_left));
+      std::swap(std::get<1>(depth_buffer_left), std::get<2>(depth_buffer_left));
       std::swap(std::get<1>(is_left), std::get<2>(is_left));
       updated = true;
     }
@@ -216,13 +239,13 @@ class GUA_DLL Renderer {
       if (grid_generated) {
         // std::cout << "[FAST] swapping shared resources" << std::endl;
         std::lock_guard<std::mutex> lock(copy_mutex);
-        std::swap(std::get<0>(surface_detection_buffer), std::get<1>(surface_detection_buffer));
+        std::swap(std::get<0>(surface_detection_buffer_left), std::get<1>(surface_detection_buffer_left));
         grid_generated = false;
       }
     }
     void swap_surface_buffer_slow() {
       std::lock_guard<std::mutex> lock(copy_mutex);
-      std::swap(std::get<1>(surface_detection_buffer), std::get<2>(surface_detection_buffer));
+      std::swap(std::get<1>(surface_detection_buffer_left), std::get<2>(surface_detection_buffer_left));
       grid_generated = true;
     }
 
@@ -244,7 +267,8 @@ class GUA_DLL Renderer {
       }
     }
 
-    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer;
+    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer_left;
+    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer_right;
 
     std::vector<scm::gl::buffer_ptr> grid_vbo;
     std::vector<scm::gl::transform_feedback_ptr> grid_tfb;
@@ -262,8 +286,10 @@ class GUA_DLL Renderer {
     
     std::shared_ptr<node::SerializedCameraNode> serialized_warp_cam;
 
-    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer;
-    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer;
+    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer_left;
+    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer_left;
+    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> color_buffer_right;
+    std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> depth_buffer_right;
 
     scm::gl::frame_buffer_ptr framebuffer;
     scm::gl::frame_buffer_ptr framebuffer_resolved;

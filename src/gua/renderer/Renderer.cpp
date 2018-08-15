@@ -213,7 +213,16 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
   offscreen_window->config.set_title("SLOW CLIENT WINDOW");
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
-    
+    // {
+    //   gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
+    //   warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
+
+    //   frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::LEFT);
+    //   warp_res[window_name]->warp_state.projection_view_left = frustum.get_projection() * frustum.get_view();
+
+    //   frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::RIGHT);
+    //   warp_res[window_name]->warp_state.projection_view_right = frustum.get_projection() * frustum.get_view();
+    // } 
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
     // std::cout << "[SLOW] PiplinePass count: " << cmd.serialized_cam->pipeline_description->get_passes().size() << std::endl;
     try {

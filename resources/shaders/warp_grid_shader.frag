@@ -57,17 +57,17 @@ void main() {
     
 
   // gua_out_color_emit = vec4((texcoords.x),0.0, 0.0,1.0);
-  // gua_out_color_emit = vec4((pos/(5000,2500)), 0.0,1.0);
+  // gua_out_color_emit = vec4(pass_depth,pass_depth,pass_depth,1.0);
 
   #if @debug_cell_colors@ == 1
-  float intensity = log2(cellsize) / 7.0;
+  float intensity = log2(cellsize) / 5.0;
   if (pass_depth == 1) {
       gua_out_color_emit = vec4(0.0,0.0,0.0,1.0);   
   } else {
     gua_out_color_emit.rgb = heat(1-intensity);
 
     if (any(lessThan(cellcoords, vec2(0.6/float(cellsize)))) || any(greaterThan(cellcoords, vec2(1.0-0.6/float(cellsize))))) {
-      gua_out_color_emit.rgb = mix(gua_out_color_emit.rgb, vec3(0), 0.7);
+      gua_out_color_emit.rgb = mix(gua_out_color_emit.rgb, vec3(0), 0.5);
     }
     gua_out_color_emit.a = 1.0;
   }

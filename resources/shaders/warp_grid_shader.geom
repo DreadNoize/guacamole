@@ -38,6 +38,8 @@ out vec2 texcoords;
 out float pass_depth;
 flat out vec2 pos;
 
+#define GUA_MAGIC_DEPTH_OFFSET  0.99999 // clamping offset, to prevent depth stencil call
+
 float gua_get_depth(vec2 frag_pos) {
     return texture2D(sampler2D(gua_gbuffer_depth), frag_pos).x * 2.0 - 1.0;
 }
@@ -100,6 +102,11 @@ void emit_quad(uvec2 offset, uvec2 size) {
     depth3 = get_depth(vec2(-cont_l,  cont_t)*cont_tl*0.5 + pos3+vec2( 0.5, -0.5));
     depth4 = get_depth(vec2( cont_r,  cont_t)*cont_tr*0.5 + pos4+vec2(-0.5, -0.5));
 
+    depth1 = clamp(depth1, 0.0, GUA_MAGIC_DEPTH_OFFSET);
+    depth2 = clamp(depth2, 0.0, GUA_MAGIC_DEPTH_OFFSET);
+    depth3 = clamp(depth3, 0.0, GUA_MAGIC_DEPTH_OFFSET);
+    depth4 = clamp(depth4, 0.0, GUA_MAGIC_DEPTH_OFFSET);    
+
     // #endif // ------------------------------------------------------------------
 
     cellsize = min(size.x, size.y);
@@ -137,7 +144,9 @@ void emit_pixel(uvec2 offset) {
   if (position.y == gua_resolution.y) return;
 
   texcoords = (position / (gua_resolution));
-  const float depth = get_depth_raw(position);
+  float depth = get_depth_raw(position);
+
+  depth = clamp(depth, 0.0, GUA_MAGIC_DEPTH_OFFSET);
 
   cellcoords = vec2(0, 0);
   emit_grid_vertex(position + vec2(0, 0) + vec2(-GAP, -GAP), depth);
