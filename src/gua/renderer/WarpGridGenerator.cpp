@@ -61,10 +61,10 @@ WarpGridGenerator::WarpGridGenerator()
 
 ////////////////////////////////////////////////////////////////////////////////
 WarpGridGenerator::~WarpGridGenerator() {
-  if (res_ && std::get<0>(res_->surface_detection_buffer_left) && std::get<1>(res_->surface_detection_buffer_left) && std::get<2>(res_->surface_detection_buffer_left)) {
-    pipe_->get_context().render_context->make_non_resident(std::get<0>(res_->surface_detection_buffer_left));
-    pipe_->get_context().render_context->make_non_resident(std::get<1>(res_->surface_detection_buffer_left));
-    pipe_->get_context().render_context->make_non_resident(std::get<2>(res_->surface_detection_buffer_left));
+  if (res_ && std::get<0>(res_->surface_detection_buffer_right) && std::get<1>(res_->surface_detection_buffer_right) && std::get<2>(res_->surface_detection_buffer_right)) {
+    pipe_->get_context().render_context->make_non_resident(std::get<0>(res_->surface_detection_buffer_right));
+    pipe_->get_context().render_context->make_non_resident(std::get<1>(res_->surface_detection_buffer_right));
+    pipe_->get_context().render_context->make_non_resident(std::get<2>(res_->surface_detection_buffer_right));
   }
 }
 
@@ -181,7 +181,13 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
     ctx.render_context->unmap_buffer(res_->grid_vbo[res_->current_vbo()]);
   }
 
-  uint64_t h = std::get<0>(res_->surface_detection_buffer_left)->native_handle();
+  uint64_t h;
+  if (ctx.mode != CameraMode::RIGHT) {
+    h = std::get<0>(res_->surface_detection_buffer_left)->native_handle();
+  } else {
+    h = std::get<0>(res_->surface_detection_buffer_right)->native_handle();
+  }
+
   math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   // surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer_left");
 

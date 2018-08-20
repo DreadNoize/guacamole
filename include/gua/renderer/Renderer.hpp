@@ -85,16 +85,18 @@ class GUA_DLL Renderer {
 
     WarpingResources& operator=(WarpingResources const& rhs) {
       if (this != &rhs) { 
-        std::lock(copy_mutex, rhs.copy_mutex);
-        std::lock_guard<std::mutex> m_lhs(copy_mutex, std::adopt_lock);
-        std::lock_guard<std::mutex> m_rhs(rhs.copy_mutex, std::adopt_lock);
+        std::lock(left_mutex, rhs.left_mutex);
+        std::lock_guard<std::mutex> m_lhs(left_mutex, std::adopt_lock);
+        std::lock_guard<std::mutex> m_rhs(rhs.left_mutex, std::adopt_lock);
         color_buffer_left = rhs.color_buffer_left;
         depth_buffer_left = rhs.depth_buffer_left;
         sampler_state_desc = rhs.sampler_state_desc;
         sampler_state = rhs.sampler_state;
         is_left = rhs.is_left;
-        renderer_ready = rhs.renderer_ready;
-        updated = rhs.updated;
+        left_ready = rhs.left_ready;
+        right_ready = rhs.right_ready;
+        updated_left = rhs.updated_left;
+        updated_right = rhs.updated_right;
         initialized = rhs.initialized;
         initialized_fbo = rhs.initialized_fbo;
         shared_initialized = rhs.shared_initialized;
@@ -205,48 +207,76 @@ class GUA_DLL Renderer {
       initialized_fbo = true;
     }
 
-    void postprocess_frame(RenderContext* ctx) {
+    void postprocess_frame(RenderContext* ctx, CameraMode mode) {
       // ctx->render_context->resolve_multi_sample_buffer(framebuffer, framebuffer_resolved);
       // ctx->render_context->generate_mipmaps(std::get<2>(color_buffer_left));
-      framebuffer_resolved->attach_color_buffer(0, std::get<2>(color_buffer_left));
-      framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer_left));
+      if (mode != CameraMode::RIGHT) {  
+        framebuffer_resolved->attach_color_buffer(0, std::get<2>(color_buffer_left));
+        framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer_left));
+      } else {  
+        framebuffer_resolved->attach_color_buffer(0, std::get<2>(color_buffer_right));
+        framebuffer_resolved->attach_depth_stencil_buffer(std::get<2>(depth_buffer_right));
+      }
       //std::cout << "[POST PROCESS] color buffer second adress: " << std::get<2>(color_buffer_left)->native_handle() << std::endl;
       ctx->render_context->copy_color_buffer(framebuffer, framebuffer_resolved, 0);
       ctx->render_context->copy_depth_stencil_buffer(framebuffer, framebuffer_resolved);
       ctx->render_context->reset();
       framebuffer_resolved->clear_attachments();
-      updated = true;
     }
 
-    void swap_buffers_fast() {
-      if(updated){
-        std::lock_guard<std::mutex> lock(copy_mutex);
+    void swap_buffers_fast(CameraMode mode) {
+      if(updated_left){
+        std::lock_guard<std::mutex> lock(left_mutex);
+        // std::swap(std::get<0>(is_left), std::get<1>(is_left));
+        // if (mode != CameraMode::RIGHT) {
         std::swap(std::get<0>(color_buffer_left), std::get<1>(color_buffer_left));
         std::swap(std::get<0>(depth_buffer_left), std::get<1>(depth_buffer_left));
-        std::swap(std::get<0>(is_left), std::get<1>(is_left));
-        updated = false;
+        updated_left = false;
+      } else if (updated_right) {
+        std::lock_guard<std::mutex> lock(right_mutex);
+        std::swap(std::get<0>(color_buffer_right), std::get<1>(color_buffer_right));
+        std::swap(std::get<0>(depth_buffer_right), std::get<1>(depth_buffer_right));
+        updated_right = false;
       }
     }
-    void swap_buffers_slow() {
-      std::lock_guard<std::mutex> lock(copy_mutex);
-      std::swap(std::get<1>(color_buffer_left), std::get<2>(color_buffer_left));
-      std::swap(std::get<1>(depth_buffer_left), std::get<2>(depth_buffer_left));
+    void swap_buffers_slow(CameraMode mode) {
       std::swap(std::get<1>(is_left), std::get<2>(is_left));
-      updated = true;
+      if (mode != CameraMode::RIGHT) {
+        std::lock_guard<std::mutex> lock(left_mutex);
+        std::swap(std::get<1>(color_buffer_left), std::get<2>(color_buffer_left));
+        std::swap(std::get<1>(depth_buffer_left), std::get<2>(depth_buffer_left));
+        updated_left = true;
+      } else {
+        std::lock_guard<std::mutex> lock(right_mutex);
+        std::swap(std::get<1>(color_buffer_right), std::get<2>(color_buffer_right));
+        std::swap(std::get<1>(depth_buffer_right), std::get<2>(depth_buffer_right));
+        updated_right = true;
+      }
     }
 
-    void swap_surface_buffer_fast() {
-      if (grid_generated) {
+    void swap_surface_buffer_fast(CameraMode mode) {
+      if (grid_generated_left) {
+        std::lock_guard<std::mutex> lock(left_mutex);
         // std::cout << "[FAST] swapping shared resources" << std::endl;
-        std::lock_guard<std::mutex> lock(copy_mutex);
+        // if (mode != CameraMode::RIGHT) {
         std::swap(std::get<0>(surface_detection_buffer_left), std::get<1>(surface_detection_buffer_left));
-        grid_generated = false;
+        grid_generated_left = false;
+      } else if (grid_generated_right) {
+        std::lock_guard<std::mutex> lock(right_mutex);
+        std::swap(std::get<0>(surface_detection_buffer_right), std::get<1>(surface_detection_buffer_right));
+        grid_generated_right = false;
       }
     }
-    void swap_surface_buffer_slow() {
-      std::lock_guard<std::mutex> lock(copy_mutex);
-      std::swap(std::get<1>(surface_detection_buffer_left), std::get<2>(surface_detection_buffer_left));
-      grid_generated = true;
+    void swap_surface_buffer_slow(CameraMode mode) {
+      if (mode != gua::CameraMode::RIGHT) {
+        std::lock_guard<std::mutex> lock(left_mutex);
+        std::swap(std::get<1>(surface_detection_buffer_left), std::get<2>(surface_detection_buffer_left));
+        grid_generated_left = true;
+      } else {
+        std::lock_guard<std::mutex> lock(right_mutex);
+        std::swap(std::get<1>(surface_detection_buffer_right), std::get<2>(surface_detection_buffer_right));
+        grid_generated_right = true;
+      }
     }
 
     inline int current_tfb() {
@@ -276,9 +306,6 @@ class GUA_DLL Renderer {
 
     size_t cell_count = 0;
     bool ping = false;
-
-    bool grid_initialized = false;
-    bool grid_generated = false;
     CameraMode camera_mode;
 
     float time_budget;
@@ -300,14 +327,21 @@ class GUA_DLL Renderer {
 
     std::tuple<bool,bool,bool> is_left = std::make_tuple<bool,bool,bool>(false, false, false);
 
-    bool renderer_ready = false;
-    bool updated = false;
+
+    bool grid_initialized = false;
+    bool grid_generated_left = false;
+    bool grid_generated_right = false;
+    bool left_ready = false;
+    bool right_ready = false;
+    bool updated_left = false;
+    bool updated_right = false;
     bool initialized = false;
     bool initialized_fbo = false;
     bool shared_initialized = false;
     GLFWwindow* shared;
 
-    mutable std::mutex copy_mutex;
+    mutable std::mutex left_mutex;
+    mutable std::mutex right_mutex;
   }; // struct WarpingResources
 
 

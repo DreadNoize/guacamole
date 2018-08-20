@@ -61,9 +61,9 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   // std::cout << "Surface Detection ..." << std::endl;
 
   
-  if(res_) {
+  /*if(res_) {
     if(res_->grid_generated) {res_->grid_generated = false;}
-  }
+  }*/
   auto& ctx(pipe.get_context());
   pipe.begin_gpu_query(ctx, "Surface Detection");
 
@@ -115,7 +115,11 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   }
   for (int i(0); i<mip_map_levels; ++i) {
     surface_detection_buffer_fbos_[i]->clear_attachments();
-    surface_detection_buffer_fbos_[i]->attach_color_buffer(0, std::get<2>(res_->surface_detection_buffer_left), i,0);
+    if (ctx.mode != gua::CameraMode::RIGHT) {
+      surface_detection_buffer_fbos_[i]->attach_color_buffer(0, std::get<2>(res_->surface_detection_buffer_left), i,0);
+    } else {
+      surface_detection_buffer_fbos_[i]->attach_color_buffer(0, std::get<2>(res_->surface_detection_buffer_right), i,0);
+    }
   }
   // ---------------------------------------------------------------------------
   // ------------------- Surface Information Map -------------------------------
@@ -126,7 +130,11 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   uint64_t h = gbuffer->get_depth_buffer()->native_handle();
   math::vec2ui handle(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   surface_detection_program_->set_uniform(ctx, handle, "depth_buffer");
-  h = std::get<2>(res_->surface_detection_buffer_left)->native_handle();
+  if (ctx.mode != gua::CameraMode::RIGHT) {
+    h = std::get<2>(res_->surface_detection_buffer_left)->native_handle();
+  } else {
+    h = std::get<2>(res_->surface_detection_buffer_right)->native_handle();
+  }
   handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
   surface_detection_program_->set_uniform(ctx, handle, "surface_detection_buffer");
 
@@ -139,7 +147,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
   }
   pipe.end_gpu_query(ctx, "Surface Detection");
 
-  res_->swap_surface_buffer_slow();
+  res_->swap_surface_buffer_slow(ctx.mode);
 
 
 }

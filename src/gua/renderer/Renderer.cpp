@@ -208,9 +208,13 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
   fpsc.start();
 
   auto application_window = WindowDatabase::instance()->lookup(window_name);
-
+  auto resolution = application_window->config.get_resolution();
   auto offscreen_window = std::make_shared<gua::GlfwWindow>(application_window->config);
   offscreen_window->config.set_title("SLOW CLIENT WINDOW");
+  offscreen_window->config.set_size(gua::math::vec2ui(2 * resolution.x, resolution.y));
+  offscreen_window->config.set_left_resolution(resolution);
+  offscreen_window->config.set_right_resolution(resolution);
+  offscreen_window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     // {
@@ -254,7 +258,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         while (!(warp_res[window_name]->shared)) {
           std::cout << "[SLOW] waiting for fast window" << std::endl;
         }
-        offscreen_window->open(warp_res[window_name]->shared, false);
+        offscreen_window->open(warp_res[window_name]->shared, true);
         warp_res[window_name]->shared_initialized = true;
 #else
         offscreen_window->open();
@@ -319,41 +323,55 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               #endif
             } else if (offscreen_window->config.get_stereo_mode() == StereoMode::SEPARATE_WINDOWS) {
               // std::cout << "[RENDER] Rendering stereo mode: seperate windows..." << std::endl;
-              bool is_left = cmd.serialized_cam->config.get_left_output_window() == window_name;
-              //auto mode = offscreen_window->config.get_is_left() ? CameraMode::LEFT : CameraMode::RIGHT;
-              auto mode = is_left ? CameraMode::LEFT : CameraMode::RIGHT;
-              auto img = pipe->render_scene(mode, *cmd.serialized_cam, *cmd.scene_graphs);
-              auto depth = pipe->get_gbuffer()->get_depth_buffer();
-              warp_res[window_name]->camera_mode = mode;
+              // bool is_left = cmd.serialized_cam->config.get_left_output_window() == window_name;
+              // //auto mode = offscreen_window->config.get_is_left() ? CameraMode::LEFT : CameraMode::RIGHT;
+              // auto mode = is_left ? CameraMode::LEFT : CameraMode::RIGHT;
+              // auto img = pipe->render_scene(mode, *cmd.serialized_cam, *cmd.scene_graphs);
+              // auto depth = pipe->get_gbuffer()->get_depth_buffer();
+              // warp_res[window_name]->camera_mode = mode;
 
 
-              void* const tex_ptr = &img;
-              scm::gl::texture_region region(scm::math::vec3ui(0.0,0.0,0.0),scm::math::vec3ui(img->dimensions(),0.0));
+              // void* const tex_ptr = &img;
+              // scm::gl::texture_region region(scm::math::vec3ui(0.0,0.0,0.0),scm::math::vec3ui(img->dimensions(),0.0));
               
-              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->std::get<2>(color_buffer), region, 0, img->format(), &tex_ptr);
+              // // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->std::get<2>(color_buffer), region, 0, img->format(), &tex_ptr);
               
-              void* const depth_ptr = &depth;
-              // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->std::get<2>(depth_buffer), region, 0, depth->format(), &depth_ptr);
+              // void* const depth_ptr = &depth;
+              // // offscreen_window->get_context()->render_context->update_sub_texture(warp_res[window_name]->std::get<2>(depth_buffer), region, 0, depth->format(), &depth_ptr);
 
-              std::get<2>(warp_res[window_name]->is_left) = is_left;
-              /* if (img) {
-                offscreen_window->display(img, false);
-              } */
+              // std::get<2>(warp_res[window_name]->is_left) = is_left;
+              // /* if (img) {
+              //   offscreen_window->display(img, false);
+              // } */
             } else {
               // std::cout << "[RENDER] Rendering stereo mode: other..." << std::endl;
               // TODO: add alternate frame rendering here? -> take clear and
               // render methods
               auto img(pipe->render_scene(CameraMode::LEFT, *cmd.serialized_cam, *cmd.scene_graphs));
-              /* if (img) offscreen_window->display(img, true); */
-              // warp_res[window_name]->std::get<2>(color_buffer) = img;
-              // warp_res[window_name]->std::get<2>(depth_buffer) = pipe->get_gbuffer()->get_depth_buffer();
-              std::get<2>(warp_res[window_name]->is_left) = true;
+              // std::get<2>(warp_res[window_name]->is_left) = true;
+              warp_res[window_name]->framebuffer = pipe->get_gbuffer()->get_fbo_read();
+              warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
+              if(warp_res[window_name]->initialized_fbo) {
+                if (img) {
+                  warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::LEFT);
+                  warp_res[window_name]->swap_buffers_slow(CameraMode::LEFT);
+                  // offscreen_window->display(img, true);                
+                  if(!warp_res[window_name]->left_ready) warp_res[window_name]->left_ready = true;  
+                }
+              }
               
               img = pipe->render_scene(CameraMode::RIGHT, *cmd.serialized_cam, *cmd.scene_graphs);
-              /*  if (img) offscreen_window->display(img, false); */
-              // warp_res[window_name]->std::get<2>(color_buffer) = img;
-              // warp_res[window_name]->std::get<2>(depth_buffer) = pipe->get_gbuffer()->get_depth_buffer();
-              std::get<2>(warp_res[window_name]->is_left) = false;
+              // std::get<2>(warp_res[window_name]->is_left) = false;
+              warp_res[window_name]->framebuffer = pipe->get_gbuffer()->get_fbo_read();
+              warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
+              if(warp_res[window_name]->initialized_fbo) {
+                if (img) {
+                  warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::RIGHT);
+                  warp_res[window_name]->swap_buffers_slow(CameraMode::RIGHT);
+                  // offscreen_window->display(img, false);
+                  if(!warp_res[window_name]->right_ready) warp_res[window_name]->right_ready = true;  
+                }
+              }
             }
           } else {
             // std::cout << "[RENDER] Rendering: MONO..." << std::endl;
@@ -367,7 +385,6 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 
             auto img(pipe->render_scene(cmd.serialized_cam->config.get_mono_mode(),
                     *cmd.serialized_cam, *cmd.scene_graphs));
-            auto depth = pipe->get_gbuffer()->get_depth_buffer();
             warp_res[window_name]->framebuffer = pipe->get_gbuffer()->get_fbo_read();
             warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
             std::get<2>(warp_res[window_name]->is_left) = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
@@ -378,10 +395,10 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               if (img) {
                 // warp_res[window_name]->swap_shared_resources();
                 // warp_res[window_name]->swap_buffers();
-                warp_res[window_name]->postprocess_frame(offscreen_window->get_context());
-                warp_res[window_name]->swap_buffers_slow();
+                warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::CENTER);
+                warp_res[window_name]->swap_buffers_slow(CameraMode::CENTER);
                 offscreen_window->display(img, std::get<0>(warp_res[window_name]->is_left));                
-                if(!warp_res[window_name]->renderer_ready) warp_res[window_name]->renderer_ready = true;
+                if(!warp_res[window_name]->left_ready) warp_res[window_name]->left_ready = true;
                 // offscreen_window->display(warp_res[window_name]->std::get<2>(color_buffer), warp_res[window_name]->std::get<0>(is_left));
                 
               }
@@ -519,42 +536,78 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         // std::cout << "[WARP] threads are " << warp_res[window_name]->synch << std::endl;
 
         window->rendering_fps = fpsc.fps;
+        float time_bygone = 0;
+        if(cmd.serialized_cam->config.get_enable_stereo()) {
+          if(window->config.get_stereo_mode() == StereoMode::NVIDIA_3D_VISION) {
+            #if GUACAMOLE_ENABLE_NVIDIA_3D_VISION
+            #else
+              Logger::LOG_WARNING << "guacamole has not been compiled with NVIDIA 3D Vision support!" << std::endl;
+            #endif
+          } else if (window->config.get_stereo_mode() == StereoMode::SEPARATE_WINDOWS) {
 
-        std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
-        // std::string const cpu_query_name = "CPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT";
-        pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
-        // pipe->begin_cpu_query(cpu_query_name);
+          } else {
+            std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
+            pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
 
-        //// if the slow client rendered for the first time, start display
-        if(warp_res[window_name]->initialized && warp_res[window_name]->renderer_ready) {
-          warp_res[window_name]->swap_surface_buffer_fast();
-          warp_res[window_name]->swap_buffers_fast();
-          auto tex = pipe->render_scene(warp_res[window_name]->camera_mode, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
-          // display
-          // std::cout << "[FAST] tex adress: " << tex->native_handle() << std::endl;
-          window->display(tex, std::get<0>(warp_res[window_name]->is_left));
-          // window->display(std::get<0>(warp_res[window_name]->color_buffer), std::get<0>(warp_res[window_name]->is_left));
-          // std::cout << "[FAST] color buffer.first adress: " << warp_res[window_name]->std::get<0>(color_buffer)->native_handle() << std::endl;
-          // std::cout << "[FAST] color buffer.second adress: " << warp_res[window_name]->std::get<2>(color_buffer)->native_handle() << std::endl;
+            //// if the slow client rendered for the first time, start display
+            if(warp_res[window_name]->initialized && warp_res[window_name]->left_ready) {
+              // std::cout << "[FAST] left eye" << std::endl;
+              warp_res[window_name]->swap_surface_buffer_fast(CameraMode::LEFT);
+              warp_res[window_name]->swap_buffers_fast(CameraMode::LEFT);
+              auto tex = pipe->render_scene(gua::CameraMode::LEFT, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
+              window->display(tex, true);
+            } 
+            if(warp_res[window_name]->initialized && warp_res[window_name]->right_ready){
+              // std::cout << "[FAST] right eye" << std::endl;
+              warp_res[window_name]->swap_surface_buffer_fast(CameraMode::RIGHT);
+              warp_res[window_name]->swap_buffers_fast(CameraMode::RIGHT);
+              auto tex = pipe->render_scene(gua::CameraMode::RIGHT, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
+              window->display(tex, false);
+              // display
+            }
+                  
+            pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
+            pipe->fetch_gpu_query_results(pipe->get_context());
+            auto query_results = pipe->get_query();
+            time_bygone = query_results.results[gpu_query_name];
+          }
+        } else {
+          std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
+          // std::string const cpu_query_name = "CPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT";
+          pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
+          // pipe->begin_cpu_query(cpu_query_name);
 
-          // window->display(warp_res[window_name]->std::get<0>(color_buffer), warp_res[window_name]->std::get<0>(is_left));
-          // window->display(temp_tex, warp_res[window_name]->std::get<0>(is_left));
+          //// if the slow client rendered for the first time, start display
+          if(warp_res[window_name]->initialized && warp_res[window_name]->left_ready) {
+            warp_res[window_name]->swap_surface_buffer_fast(CameraMode::CENTER);
+            warp_res[window_name]->swap_buffers_fast(CameraMode::CENTER);
+            auto tex = pipe->render_scene(warp_res[window_name]->camera_mode, *warp_res[window_name]->serialized_warp_cam, *cmd.scene_graphs);
+            // display
+            // std::cout << "[FAST] tex adress: " << tex->native_handle() << std::endl;
+            window->display(tex, std::get<0>(warp_res[window_name]->is_left));
+            // window->display(std::get<0>(warp_res[window_name]->color_buffer), std::get<0>(warp_res[window_name]->is_left));
+            // std::cout << "[FAST] color buffer.first adress: " << warp_res[window_name]->std::get<0>(color_buffer)->native_handle() << std::endl;
+            // std::cout << "[FAST] color buffer.second adress: " << warp_res[window_name]->std::get<2>(color_buffer)->native_handle() << std::endl;
+
+            // window->display(warp_res[window_name]->std::get<0>(color_buffer), warp_res[window_name]->std::get<0>(is_left));
+            // window->display(temp_tex, warp_res[window_name]->std::get<0>(is_left));
+          }
+                
+          pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
+          pipe->fetch_gpu_query_results(pipe->get_context());
+          auto query_results = pipe->get_query();
+          time_bygone = query_results.results[gpu_query_name];
         }
-               
         if (0 == window->get_context()->framecount % 100) {
           gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
         }
-        pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
-        pipe->fetch_gpu_query_results(pipe->get_context());
-        auto query_results = pipe->get_query();
-        auto time_bygone = query_results.results[gpu_query_name];
+        // pipe->end_cpu_query(cpu_query_name);
         warp_res[window_name]->time_left = warp_res[window_name]->time_budget - time_bygone;
         while (warp_res[window_name]->time_left > 1) {
           warp_res[window_name]->time_left -= 0.1;
           // std::cout << "[FAST] TIME LEFT: " << warp_res[window_name]->time_left << std::endl;
           Sleep(0.1);
         }
-        // pipe->end_cpu_query(cpu_query_name);
 
         pipe->clear_frame_cache();
         window->finish_frame();

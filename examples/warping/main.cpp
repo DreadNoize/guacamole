@@ -152,15 +152,17 @@ int main(int argc, char** argv) {
   warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
   warp_cam->config.set_far_clip(camera->config.get_far_clip());
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
-  
+  warp_cam->config.set_enable_stereo(true);
 
   // set up window
   auto window = std::make_shared<gua::GlfwWindow>();
   gua::WindowDatabase::instance()->add("main_window", window);
   window->config.set_title("FAST CLIENT WINDOW");
   window->config.set_enable_vsync(false);
-  window->config.set_size(resolution);
-  window->config.set_resolution(resolution);
+  window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
+  window->config.set_left_resolution(resolution);
+  window->config.set_right_resolution(resolution);
+  window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
   window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
   window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
     window->config.set_resolution(new_size);
@@ -252,7 +254,7 @@ int main(int argc, char** argv) {
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, false);
+      renderer.queue_draw({&graph}, true);
     }
   });
 

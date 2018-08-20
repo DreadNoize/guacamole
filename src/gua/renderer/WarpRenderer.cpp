@@ -300,7 +300,12 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
       // std::cout << "[WARP] color buffer.first adress: " << h << std::endl;
 
       // uint64_t h = gbuffer->get_color_buffer()->native_handle();
-      uint64_t h = std::get<0>(res_->color_buffer_left)->native_handle();
+      uint64_t h;
+      if (ctx.mode != CameraMode::RIGHT) {
+        h = std::get<0>(res_->color_buffer_left)->native_handle();
+      } else {
+        h = std::get<0>(res_->color_buffer_right)->native_handle();
+      }
       math::vec2ui handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
       render_grid_program_->set_uniform(ctx, handle, "gbuffer_color_tex");
 
@@ -308,12 +313,20 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
       handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
       render_grid_program_->set_uniform(ctx, handle, "gua_gbuffer_pbr");
 
-      h = std::get<0>(res_->depth_buffer_left)->native_handle();
+      if (ctx.mode != CameraMode::RIGHT) {
+        h = std::get<0>(res_->depth_buffer_left)->native_handle();
+      } else {
+        h = std::get<0>(res_->depth_buffer_right)->native_handle();
+      }
       // uint64_t h = gbuffer->get_depth_buffer()->native_handle();
       handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
       render_grid_program_->set_uniform(ctx, handle, "gua_gbuffer_depth");
 
-      h = std::get<0>(res_->surface_detection_buffer_left)->native_handle();
+      if (ctx.mode != CameraMode::RIGHT) {
+        h = std::get<0>(res_->surface_detection_buffer_left)->native_handle();
+      } else {
+        h = std::get<0>(res_->surface_detection_buffer_right)->native_handle();
+      }
       handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
       render_grid_program_->set_uniform(ctx, handle, "gua_warp_grid_tex");
 
