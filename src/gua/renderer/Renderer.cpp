@@ -211,10 +211,10 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
   auto resolution = application_window->config.get_resolution();
   auto offscreen_window = std::make_shared<gua::GlfwWindow>(application_window->config);
   offscreen_window->config.set_title("SLOW CLIENT WINDOW");
-  offscreen_window->config.set_size(gua::math::vec2ui(2 * resolution.x, resolution.y));
-  offscreen_window->config.set_left_resolution(resolution);
-  offscreen_window->config.set_right_resolution(resolution);
-  offscreen_window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
+
+  float accumulated_time = 0;
+  float avg_grid_gen = 0;
+  float avg_warp = 0;
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     // {
@@ -373,7 +373,8 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
                 }
               }
             }
-          } else {
+          }
+          else {
             // std::cout << "[RENDER] Rendering: MONO..." << std::endl;
 
             //// Rendering and retireving color and depth buffer
@@ -384,25 +385,25 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
             // pipe->begin_cpu_query(cpu_query_name);
 
             auto img(pipe->render_scene(cmd.serialized_cam->config.get_mono_mode(),
-                    *cmd.serialized_cam, *cmd.scene_graphs));
+              *cmd.serialized_cam, *cmd.scene_graphs));
             warp_res[window_name]->framebuffer = pipe->get_gbuffer()->get_fbo_read();
             warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
             std::get<2>(warp_res[window_name]->is_left) = cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT;
             // as fast client is waiting on the first image, set flag = true
 
             //// If warping resources are initialized, set the according parameters
-            if(warp_res[window_name]->initialized_fbo) {
+            if (warp_res[window_name]->initialized_fbo) {
               if (img) {
                 // warp_res[window_name]->swap_shared_resources();
                 // warp_res[window_name]->swap_buffers();
                 warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::CENTER);
                 warp_res[window_name]->swap_buffers_slow(CameraMode::CENTER);
-                offscreen_window->display(img, std::get<0>(warp_res[window_name]->is_left));                
-                if(!warp_res[window_name]->left_ready) warp_res[window_name]->left_ready = true;
+                offscreen_window->display(img, std::get<0>(warp_res[window_name]->is_left));
+                if (!warp_res[window_name]->left_ready) warp_res[window_name]->left_ready = true;
                 // offscreen_window->display(warp_res[window_name]->std::get<2>(color_buffer), warp_res[window_name]->std::get<0>(is_left));
-                
+
               }
-              
+
             }
             // pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
             // pipe->end_cpu_query(cpu_query_name);
@@ -410,26 +411,45 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 #if MULTITHREADED
 
 #else       //// single threaded alternative for testing purposes
-            
-#endif    
 
-          pipe->clear_frame_cache();
-
-          
-
-          // swap buffers
-          if (0 == offscreen_window->get_context()->framecount % 100) {
-            gua::Logger::LOG_MESSAGE << "[SLOW] fps: " << offscreen_window->get_rendering_fps() << std::endl;
-          }
-          offscreen_window->finish_frame();
-
-          ++(offscreen_window->get_context()->framecount);
-          fpsc.step();
+#endif   
         }
+
+        if (0 == offscreen_window->get_context()->framecount % 100) {
+          gua::Logger::LOG_MESSAGE << "[SLOW] fps: " << offscreen_window->get_rendering_fps() << std::endl;
+        }
+
+        pipe->fetch_gpu_query_results(pipe->get_context());
+        if (pipe->get_context().framecount % 100 == 0) {
+          int i = 0;
+          auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
+          float total_time = 0;
+          std::cout << "===== Time Queries for Context: " << pipe->get_context().id
+            << " ============================" << std::endl;
+          for (auto const& t : query_results->results) {
+            std::cout << t.first << " : " << t.second << " ms" << std::endl;
+            total_time += t.second;
+            i++;
+          }
+          accumulated_time += total_time;
+          std::cout << "Total" << " : " << total_time << " ms" << std::endl;
+          // std::cout << "Average" << " : " << accumulated_time/i << " ms" << std::endl;
+          std::cout << std::endl;
+          query_results->results.clear();
+        }
+
+        pipe->clear_frame_cache();
+
+        // swap buffers
+        offscreen_window->finish_frame();
+
+        ++(offscreen_window->get_context()->framecount);
+        fpsc.step();
       }
     }
-
+  // Sleep(50);
   }
+  
 }
 
 void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
@@ -437,6 +457,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
   FpsCounter fpsc(20);
   fpsc.start();
 #if MULTITHREADED
+  float accumulated_time = 0;
+  float avg_grid_gen = 0;
+  float avg_warp = 0;
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     // std::cout << "[FAST] Camera id: " << cmd.serialized_cam->uuid << std::endl;
     if (!warp_res[window_name]->serialized_warp_cam) {
@@ -494,6 +517,11 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 
     if(window_name != "") {
       auto window = WindowDatabase::instance()->lookup(window_name);
+      if(cmd.serialized_cam->config.get_enable_stereo() && window->config.get_stereo_mode() == StereoMode::SIDE_BY_SIDE) {
+        window->config.set_size(math::vec2ui(2*window->config.get_resolution().x,window->config.get_resolution().y));
+      } else {
+        window->config.set_size(math::vec2ui(window->config.get_resolution().x,window->config.get_resolution().y));
+      }
       
       if (window && !window->get_is_open()) {
         window->open();
@@ -546,8 +574,8 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           } else if (window->config.get_stereo_mode() == StereoMode::SEPARATE_WINDOWS) {
 
           } else {
-            std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
-            pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
+            // std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
+            // pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
 
             //// if the slow client rendered for the first time, start display
             if(warp_res[window_name]->initialized && warp_res[window_name]->left_ready) {
@@ -566,15 +594,15 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
               // display
             }
                   
-            pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
-            pipe->fetch_gpu_query_results(pipe->get_context());
+            // pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
+            /*pipe->fetch_gpu_query_results(pipe->get_context());
             auto query_results = pipe->get_query();
-            time_bygone = query_results.results[gpu_query_name];
+            time_bygone = query_results.results[gpu_query_name];*/
           }
         } else {
-          std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
+          // std::string const gpu_query_name = "GPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT"; 
           // std::string const cpu_query_name = "CPU: Camera uuid: " + std::to_string(pipe->current_viewstate().viewpoint_uuid) + " / FAST CLIENT";
-          pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
+          // pipe->begin_gpu_query(pipe->get_context(), gpu_query_name);
           // pipe->begin_cpu_query(cpu_query_name);
 
           //// if the slow client rendered for the first time, start display
@@ -593,21 +621,41 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
             // window->display(temp_tex, warp_res[window_name]->std::get<0>(is_left));
           }
                 
-          pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
-          pipe->fetch_gpu_query_results(pipe->get_context());
-          auto query_results = pipe->get_query();
-          time_bygone = query_results.results[gpu_query_name];
+          // pipe->end_gpu_query(pipe->get_context(), gpu_query_name);
+          // auto query_results = pipe->get_query();
+          // time_bygone = query_results.results[gpu_query_name];
         }
+
         if (0 == window->get_context()->framecount % 100) {
           gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
         }
-        // pipe->end_cpu_query(cpu_query_name);
-        warp_res[window_name]->time_left = warp_res[window_name]->time_budget - time_bygone;
-        while (warp_res[window_name]->time_left > 1) {
-          warp_res[window_name]->time_left -= 0.1;
-          // std::cout << "[FAST] TIME LEFT: " << warp_res[window_name]->time_left << std::endl;
-          Sleep(0.1);
+
+        pipe->fetch_gpu_query_results(pipe->get_context());
+        if (pipe->get_context().framecount % 100 == 0) {
+          int i = 0;
+          auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
+          float total_time = 0;
+          std::cout << "===== Time Queries for Context: " << pipe->get_context().id
+                    << " ============================" << std::endl;
+          for (auto const& t : query_results->results) {
+            std::cout << t.first << " : " << t.second << " ms" << std::endl;
+            total_time += t.second;
+            i++;
+          }
+          accumulated_time += total_time;
+          std::cout << "Total" << " : " << total_time << " ms" << std::endl;
+          // std::cout << "Average" << " : " << accumulated_time/i << " ms" << std::endl;
+          std::cout << std::endl;
+          query_results->results.clear();
         }
+
+        // pipe->end_cpu_query(cpu_query_name);
+        // warp_res[window_name]->time_left = warp_res[window_name]->time_budget - time_bygone;
+        // while (warp_res[window_name]->time_left > 1) {
+        //   warp_res[window_name]->time_left -= 0.1;
+        //   // std::cout << "[FAST] TIME LEFT: " << warp_res[window_name]->time_left << std::endl;
+        //   Sleep(0.1);
+        // }
 
         pipe->clear_frame_cache();
         window->finish_frame();

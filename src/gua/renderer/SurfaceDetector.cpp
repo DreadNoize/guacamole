@@ -65,7 +65,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
     if(res_->grid_generated) {res_->grid_generated = false;}
   }*/
   auto& ctx(pipe.get_context());
-  pipe.begin_gpu_query(ctx, "Surface Detection");
+  // pipe.begin_gpu_query(ctx, "GPU: Surface Detection");
 
   pipe_ = &pipe;
 
@@ -145,7 +145,7 @@ void SurfaceDetector::render(Pipeline& pipe, PipelinePassDescription const& desc
     surface_detection_program_->set_uniform(ctx, i, "current_level");
     pipe.draw_quad();
   }
-  pipe.end_gpu_query(ctx, "Surface Detection");
+  // pipe.end_gpu_query(ctx, "GPU: Surface Detection");
 
   res_->swap_surface_buffer_slow(ctx.mode);
 

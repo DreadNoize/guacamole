@@ -30,6 +30,7 @@
 bool manipulation_navigator = true;
 bool manipulation_camera = false;
 bool warping = true;
+bool stereo = true;
 
 /* scenegraph overview for "main_scenegraph"
   /
@@ -120,7 +121,7 @@ int main(int argc, char** argv) {
   camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
   camera->config.set_far_clip(350.f);
   camera->config.set_near_clip(0.1f);
-  camera->config.set_enable_stereo(true);
+
   camera->config.set_eye_offset(0.06f);
 
   auto pipe_desc = camera->get_pipeline_description();
@@ -159,11 +160,8 @@ int main(int argc, char** argv) {
   gua::WindowDatabase::instance()->add("main_window", window);
   window->config.set_title("FAST CLIENT WINDOW");
   window->config.set_enable_vsync(false);
-  window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
-  window->config.set_left_resolution(resolution);
-  window->config.set_right_resolution(resolution);
-  window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
-  window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
+  window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
+  window->config.set_resolution(resolution);
   window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
     window->config.set_resolution(new_size);
     camera->config.set_resolution(new_size);
@@ -172,6 +170,30 @@ int main(int argc, char** argv) {
     warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
     
   });
+
+  
+  auto updat_view_mode([&](){
+    if(stereo) {
+      camera->config.set_enable_stereo(true);
+      window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
+      // window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
+      window->config.set_left_resolution(resolution);
+      window->config.set_left_position(gua::math::vec2ui(0, 0));
+      window->config.set_right_resolution(resolution);
+      window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
+    } else {
+      camera->config.set_enable_stereo(false);
+      window->config.set_stereo_mode(gua::StereoMode::MONO);
+      // window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
+      window->config.set_left_resolution(resolution);
+      window->config.set_right_resolution(resolution);
+      window->config.set_right_position(gua::math::vec2ui(0,0));
+    }
+
+  });
+
+  updat_view_mode();
+
 
   window->on_button_press.connect([&](int key, int action, int mods) {
     nav.set_mouse_button(key, action);
@@ -187,13 +209,10 @@ int main(int argc, char** argv) {
     }
     if (action == 1) {
       switch (key) {
-        // case 'C':
-        //   std::swap(manipulation_navigator, manipulation_camera);
+        // case 'M':
+        //   stereo = !stereo;
+        //   updat_view_mode();
         //   break;
-        // case 'V':
-        //   warping = !warping;
-        //   update_view_mode();
-          break;
         case 256:
           window->set_should_close();
           break;

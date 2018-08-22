@@ -117,8 +117,13 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   // std::cout << "Warping GBuffer ..." << std::endl;
   auto ctx(pipe.get_context());
   pipe_ = &pipe;
-
-  // pipe.begin_gpu_query(ctx, "Warping");
+  std::string gpu_query_name = "GPU: Warping - ";
+  if (ctx.mode != CameraMode::RIGHT) {
+    gpu_query_name += "LEFT";
+  } else {
+    gpu_query_name += "RIGHT";
+  }
+  // pipe.begin_gpu_query(ctx, gpu_query_name);
 
   auto description(dynamic_cast<WarpPassDescription const*>(&desc));
   math::vec2ui resolution(pipe.current_viewstate().camera.config.get_resolution());
@@ -337,7 +342,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
       ctx.render_context->draw_transform_feedback(scm::gl::PRIMITIVE_POINT_LIST, res_->grid_tfb[res_->current_vbo()]);
     }
   }
-
+  // pipe.end_gpu_query(ctx, gpu_query_name);
 }
 ////////////////////////////////////////////////////////////////////////////////
 

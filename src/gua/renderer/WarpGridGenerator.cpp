@@ -76,7 +76,13 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
   // }
   auto& ctx(pipe.get_context());
 
-  // pipe.begin_gpu_query(ctx, "Grid Generation");
+  std::string gpu_query_name = "GPU: Grid Generation - ";
+  if(ctx.mode != CameraMode::RIGHT) {
+    gpu_query_name += "LEFT";
+  } else {
+    gpu_query_name += "RIGHT";
+  }
+  // pipe.begin_gpu_query(ctx, gpu_query_name);
 
   pipe_ = &pipe;
 
@@ -228,7 +234,7 @@ void WarpGridGenerator::render(Pipeline& pipe, PipelinePassDescription const& de
 
   // res_->grid_generated = true;
   ctx.render_context->reset_state_objects();
-  // pipe.end_gpu_query(ctx, "Grid Generation");
+  // pipe.end_gpu_query(ctx, gpu_query_name);
 
 }
 

@@ -837,15 +837,15 @@ void Pipeline::clear_frame_cache() {
   fetch_gpu_query_results(context_);
 
 #ifdef GUACAMOLE_ENABLE_PIPELINE_PASS_TIME_QUERIES
-  if (context_.framecount % 100 == 0) {
-    std::cout << "===== Time Queries for Context: " << context_.id
-      << " ============================" << std::endl;
-    for (auto const& t : queries_.results) {
-      std::cout << t.first << " : " << t.second << " ms" << std::endl;
-    }
-    std::cout << std::endl;
-    queries_.results.clear();
-  }
+  // if (context_.framecount % 100 == 0) {
+  //   std::cout << "===== Time Queries for Context: " << context_.id
+  //     << " ============================" << std::endl;
+  //   for (auto const& t : queries_.results) {
+  //     std::cout << t.first << " : " << t.second << " ms" << std::endl;
+  //   }
+  //   std::cout << std::endl;
+  //   queries_.results.clear();
+  // }
 #endif
 }
 
