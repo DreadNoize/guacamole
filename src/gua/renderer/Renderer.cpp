@@ -41,9 +41,9 @@
 #include <gua/memory.hpp>
 #include <gua/config.hpp>
 #include <gua/renderer/GlfwWindow.hpp>
-#include <scm/gl_core/render_device/opengl/util/binding_guards.h>
 #include <gua/renderer/WarpRenderer.hpp>
 
+#include <scm/gl_core/render_device/opengl/util/binding_guards.h>
 #include <scm/gl_core/render_device/opengl/util/data_format_helper.h>
 
 #define MULTITHREADED 1

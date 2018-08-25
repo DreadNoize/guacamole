@@ -35,15 +35,15 @@
 #include <gua/renderer/RenderContext.hpp>
 #include <gua/renderer/Texture2D.hpp>
 
-#include <scm/gl_core/texture_objects/texture_objects_fwd.h>
-#include <scm/gl_core/data_formats.h>
-#include <scm/gl_core/constants.h>
-#include <scm/gl_core/render_device/opengl/util/error_helper.h>
-//#include <scm/gl_core/render_device/opengl/util/constants_helper.h>
-#include <scm/gl_core/render_device/opengl/util/data_format_helper.h>
-#include <scm/gl_core/render_device/opengl/GL/glcorearb.h>
-#include <scm/gl_core.h>
-#include <scm/gl_core/sync_objects.h>
+// #include <scm/gl_core.h>
+// #include <scm/gl_core/texture_objects/texture_objects_fwd.h>
+// #include <scm/gl_core/data_formats.h>
+// #include <scm/gl_core/constants.h>
+// #include <scm/gl_core/render_device/opengl/util/error_helper.h>
+// //#include <scm/gl_core/render_device/opengl/util/constants_helper.h>
+// #include <scm/gl_core/render_device/opengl/util/data_format_helper.h>
+// #include <scm/gl_core/render_device/opengl/GL/glcorearb.h>
+// #include <scm/gl_core/sync_objects.h>
 
 //#define GL_PIXEL_PACK_BUFFER              0x88EB
 
@@ -292,7 +292,7 @@ class GUA_DLL Renderer {
         return;
       } else {
         while (time_left < 1.0) {
-          Sleep(0.1);
+          // Sleep(0.1);
         }
       }
     }

@@ -23,7 +23,6 @@
 #define GUA_PIPELINE_HPP
 
 #include <gua/node/CameraNode.hpp>
-#include <gua/renderer/Renderer.hpp>
 #include <gua/renderer/PipelinePass.hpp>
 #include <gua/renderer/ShadowMap.hpp>
 #include <gua/renderer/GBuffer.hpp>
@@ -31,6 +30,7 @@
 #include <gua/renderer/CameraUniformBlock.hpp>
 #include <gua/renderer/SerializedScene.hpp>
 #include <gua/math.hpp>
+#include <gua/renderer/Renderer.hpp>
 
 #include <scm/gl_util/primitives/quad.h>
 

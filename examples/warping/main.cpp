@@ -20,10 +20,28 @@
  *                                                                            *
  ******************************************************************************/
 
+#define ENABLE_LOD false
 #include <functional>
 
 #include <gua/guacamole.hpp>
 #include <gua/renderer/TriMeshLoader.hpp>
+#include <gua/renderer/ToneMappingPass.hpp>
+#include <gua/renderer/SSAAPass.hpp>
+#include <gua/renderer/BBoxPass.hpp>
+#include <gua/renderer/DebugViewPass.hpp>
+#include <gua/renderer/LineStripPass.hpp>
+#include <gua/renderer/LightVisibilityPass.hpp>
+#include <gua/renderer/TexturedQuadPass.hpp>
+#include <gua/renderer/TexturedScreenSpaceQuadPass.hpp>
+
+#if ENABLE_LOD
+#include <gua/renderer/LodLoader.hpp>
+#include <gua/renderer/PLodPass.hpp>
+#include <gua/renderer/MLodPass.hpp>
+#include <gua/node/PLodNode.hpp>
+#include <gua/node/MLodNode.hpp>
+#endif
+
 #include <gua/utils/Trackball.hpp>
 #include <Navigator.hpp>
 
@@ -31,6 +49,7 @@ bool manipulation_navigator = true;
 bool manipulation_camera = false;
 bool warping = true;
 bool stereo = true;
+
 
 /* scenegraph overview for "main_scenegraph"
   /
@@ -73,19 +92,59 @@ int main(int argc, char** argv) {
   // initialize trimeshloader for model loading
   gua::TriMeshLoader loader;
 
+#if ENABLE_LOD
+  // create simple untextured material shader
+  auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("./data/materials/PLOD_use_input_color.gmd");
+  auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
+  gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
+
+  //create material for pointcloud
+  auto lod_rough = lod_keep_color_shader->make_new_material();
+  lod_rough->set_uniform("metalness", 0.0f);
+  lod_rough->set_uniform("roughness", 0.3f);
+  lod_rough->set_uniform("emissivity", 0.0f);
+
+  //configure lod backend
+  gua::LodLoader lod_loader;
+  lod_loader.set_out_of_core_budget_in_mb(4096);
+  lod_loader.set_render_budget_in_mb(1024);
+  lod_loader.set_upload_budget_in_mb(30);
+#endif
+
   // create a transform node
   // which will be attached to the scenegraph
   auto transform = graph.add_node<gua::node::TransformNode>("/", "transform");
 
-  //auto material = ;
+#if ENABLE_LOD
+  auto mlod_transform = graph.add_node<gua::node::TransformNode>("/transform", "mlod_transform");
+  auto plod_transform = graph.add_node<gua::node::TransformNode>("/transform", "plod_transform");
+  auto tri_transform = graph.add_node<gua::node::TransformNode>("/transform", "tri_transform");
+
+  auto plod_node = lod_loader.load_lod_pointcloud(
+      "pointcloud",
+      "/opt/3d_models/lamure/plod/pig_pr.bvh",
+      lod_rough,
+      gua::LodLoader::NORMALIZE_POSITION | gua::LodLoader::NORMALIZE_SCALE |
+          gua::LodLoader::MAKE_PICKABLE);
+
+  graph.add_node("/transform/plod_transform", plod_node);
+
+  plod_transform->rotate(90.0, 0.0, 1.0, 0.0);
+  // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
+  plod_transform->translate(0.3, 0.08, 0.0);
+#else
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
-      "geometry", "../data/objects/old-house-2.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+      "geometry", /* "../ */"data/objects/old-house-2.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
       gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
       gua::TriMeshLoader::NORMALIZE_SCALE));
   // geometry->translate(-0.6, 0.0, 0.0);
   //geometry->translate(0.0, -50.0,-50.0);
   //geometry->scale(0.005);
+  graph.add_node("/transform", geometry);
+#endif
+
+
   auto sun_light = graph.add_node<gua::node::LightNode>("/", "sun_light");
   sun_light->data.set_type(gua::node::LightNode::Type::SUN);
   sun_light->data.set_color(gua::utils::Color3f(1.5f, 1.2f, 1.f));
@@ -102,7 +161,6 @@ int main(int argc, char** argv) {
   auto navigation = graph.add_node<gua::node::TransformNode>("/", "navigation");
   auto warp_navigation = graph.add_node<gua::node::TransformNode>("/navigation", "warp");
 
-  graph.add_node("/transform", geometry);
 
   auto screen = graph.add_node<gua::node::ScreenNode>("/navigation", "screen");
   screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
@@ -124,11 +182,25 @@ int main(int argc, char** argv) {
 
   camera->config.set_eye_offset(0.06f);
 
-  auto pipe_desc = camera->get_pipeline_description();
+  // auto pipe_desc = camera->get_pipeline_description();
+  auto pipe_desc = std::make_shared<gua::PipelineDescription>();
+  pipe_desc->add_pass(std::make_shared<gua::TriMeshPassDescription>());
+#if ENABLE_LOD
+  auto plod_pass = std::make_shared<gua::PLodPassDescription>();
+  pipe_desc->add_pass(std::make_shared<gua::MLodPassDescription>());
+  pipe_desc->add_pass(plod_pass);
+#endif
+  pipe_desc->add_pass(std::make_shared<gua::LineStripPassDescription>());
+  pipe_desc->add_pass(std::make_shared<gua::TexturedQuadPassDescription>());
+  pipe_desc->add_pass(std::make_shared<gua::LightVisibilityPassDescription>());
+  pipe_desc->add_pass(std::make_shared<gua::BBoxPassDescription>());
+  pipe_desc->add_pass(std::make_shared<gua::ResolvePassDescription>());
+  pipe_desc->add_pass(std::make_shared<gua::TexturedScreenSpaceQuadPassDescription>());
+
   pipe_desc->get_resolve_pass()->
     background_mode(gua::ResolvePassDescription::BackgroundMode::SKYMAP_TEXTURE).
-    background_texture("../data/textures/sphericalskymap.jpg").
-    environment_lighting_texture("../data/textures/sphericalskymap.jpg").
+    background_texture(/* "../ */"data/textures/sphericalskymap.jpg").
+    environment_lighting_texture(/* "../ */"data/textures/sphericalskymap.jpg").
     background_color(gua::utils::Color3f(0,0,0)).
     environment_lighting(gua::utils::Color3f(0.4, 0.4, 0.5)).
     environment_lighting_mode(gua::ResolvePassDescription::EnvironmentLightingMode::AMBIENT_COLOR).
@@ -138,6 +210,8 @@ int main(int argc, char** argv) {
     horizon_fade(0.2f).
     ssao_intensity(1.5f).
     ssao_radius(2.f);
+
+  camera->set_pipeline_description(pipe_desc);
 
   // set up warp cam and warp screen
   auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");

@@ -4,13 +4,16 @@ get_filename_component(_TUTORIAL_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 SET(_EXE_NAME ${_TUTORIAL_NAME})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
-
-include_directories( ${INCLUDE_PATHS} ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/examples/warping)
+  include_directories( ${INCLUDE_PATHS} ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/examples/warping)
 
 set(SOURCES Navigator.hpp)
 add_executable(${_EXE_NAME} main.cpp Navigator.cpp)
 
-target_link_libraries(${_EXE_NAME} guacamole)
+if(${PLUGIN_guacamole_lod})
+  target_link_libraries(${_EXE_NAME} guacamole-lod)
+else(${PLUGIN_guacamole_lod})
+  target_link_libraries(${_EXE_NAME} guacamole)
+endif(${PLUGIN_guacamole_lod})
 
 # copy runtime libraries as a post-build process
 IF (MSVC)
