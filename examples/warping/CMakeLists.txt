@@ -9,10 +9,11 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 set(SOURCES Navigator.hpp)
 add_executable(${_EXE_NAME} main.cpp Navigator.cpp)
 
+target_link_libraries(${_EXE_NAME} guacamole)
 if(${PLUGIN_guacamole_lod})
   target_link_libraries(${_EXE_NAME} guacamole-lod)
-else(${PLUGIN_guacamole_lod})
-  target_link_libraries(${_EXE_NAME} guacamole)
+elseif(${PLUGIN_guacamole_vive})
+  target_link_libraries(${_EXE_NAME} guacamole-vive)
 endif(${PLUGIN_guacamole_lod})
 
 # copy runtime libraries as a post-build process

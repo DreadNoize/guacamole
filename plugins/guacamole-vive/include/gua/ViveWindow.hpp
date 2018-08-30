@@ -36,10 +36,10 @@
 #include <gua/renderer/GlfwWindow.hpp>
 
 //for the OpenVR members
-#if defined (_WIN32)
+//#if defined (_WIN32)
     #include <openvr.h>
     #include <openvr_capi.h>
-#endif
+//#endif
 
 namespace gua {
 
@@ -60,7 +60,7 @@ class GUA_VIVE_DLL ViveWindow : public GlfwWindow {
 
     void display(scm::gl::texture_2d_ptr const& texture, bool is_left) override;
 
-    void open() override;
+    void open(bool hidden_window = false) override;
     void init_context() override;
     void start_frame() override;
     void finish_frame() override;

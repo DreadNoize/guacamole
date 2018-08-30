@@ -21,6 +21,7 @@
  ******************************************************************************/
 
 #define ENABLE_LOD false
+#define ENABLE_HMD true
 #include <functional>
 
 #include <gua/guacamole.hpp>
@@ -40,6 +41,10 @@
 #include <gua/renderer/MLodPass.hpp>
 #include <gua/node/PLodNode.hpp>
 #include <gua/node/MLodNode.hpp>
+#endif
+
+#if ENABLE_HMD
+#include <gua/ViveWindow.hpp>
 #endif
 
 #include <gua/utils/Trackball.hpp>
@@ -135,7 +140,7 @@ int main(int argc, char** argv) {
 #else
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
-      "geometry", /* "../ */"data/objects/old-house-2.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+      "geometry",  "../data/objects/old-house-2.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
       gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
       gua::TriMeshLoader::NORMALIZE_SCALE));
   // geometry->translate(-0.6, 0.0, 0.0);
@@ -162,12 +167,46 @@ int main(int argc, char** argv) {
   auto warp_navigation = graph.add_node<gua::node::TransformNode>("/navigation", "warp");
 
 
-  auto screen = graph.add_node<gua::node::ScreenNode>("/navigation", "screen");
-  screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
-  // screen->translate(0, 0, 1.0);
 
   // resolution to be used for camera resolution and windows size
   auto resolution = gua::math::vec2ui(1280, 720);
+
+// set up window
+#if ENABLE_HMD
+  auto window = std::make_shared<gua::ViveWindow>(":0.0");
+  gua::WindowDatabase::instance()->add("main_window", window);
+  window->config.set_enable_vsync(false);
+  window->config.set_fullscreen_mode(false);
+#else
+  auto window = std::make_shared<gua::GlfwWindow>();
+  gua::WindowDatabase::instance()->add("main_window", window);
+  window->config.set_title("FAST CLIENT WINDOW");
+  window->config.set_enable_vsync(false);
+  window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
+  window->config.set_resolution(resolution);
+  window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
+    window->config.set_resolution(new_size);
+    camera->config.set_resolution(new_size);
+    warp_cam->config.set_resolution(new_size);
+    screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
+    warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
+    
+  });
+#endif
+
+#if ENABLE_HMD
+  auto left_screen = graph.add_node<gua::node::ScreenNode>("/navigation", "left_screen");
+  left_screen->data.set_size(window->get_left_screen_size());
+  left_screen->translate(window->get_left_screen_translation());
+
+  auto right_screen = graph.add_node<gua::node::ScreenNode>("/navigation", "right_screen");
+  right_screen->data.set_size(window->get_right_screen_size());
+  right_screen->translate(window->get_right_screen_translation());
+#else
+  auto screen = graph.add_node<gua::node::ScreenNode>("/navigation", "screen");
+  screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
+  // screen->translate(0, 0, 1.0);
+#endif
 
   // set up camera and connect to screen in scenegraph
   auto camera = graph.add_node<gua::node::CameraNode>("/navigation", "cam");
@@ -179,8 +218,12 @@ int main(int argc, char** argv) {
   camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
   camera->config.set_far_clip(350.f);
   camera->config.set_near_clip(0.1f);
-
-  camera->config.set_eye_offset(0.06f);
+#if ENABLE_HMD
+  camera->config.set_left_screen_path("/navigation/cam/left_screen");
+  camera->config.set_right_screen_path("/navigation/cam/right_screen");
+  camera->config.set_eye_offset(window->get_IPD());
+  camera->config.set_enable_stereo(true);
+#endif
 
   // auto pipe_desc = camera->get_pipeline_description();
   auto pipe_desc = std::make_shared<gua::PipelineDescription>();
@@ -199,8 +242,8 @@ int main(int argc, char** argv) {
 
   pipe_desc->get_resolve_pass()->
     background_mode(gua::ResolvePassDescription::BackgroundMode::SKYMAP_TEXTURE).
-    background_texture(/* "../ */"data/textures/sphericalskymap.jpg").
-    environment_lighting_texture(/* "../ */"data/textures/sphericalskymap.jpg").
+    background_texture( "../data/textures/sphericalskymap.jpg").
+    environment_lighting_texture("../data/textures/sphericalskymap.jpg").
     background_color(gua::utils::Color3f(0,0,0)).
     environment_lighting(gua::utils::Color3f(0.4, 0.4, 0.5)).
     environment_lighting_mode(gua::ResolvePassDescription::EnvironmentLightingMode::AMBIENT_COLOR).
@@ -228,22 +271,9 @@ int main(int argc, char** argv) {
   warp_cam->config.set_far_clip(camera->config.get_far_clip());
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
   warp_cam->config.set_enable_stereo(true);
-
-  // set up window
-  auto window = std::make_shared<gua::GlfwWindow>();
-  gua::WindowDatabase::instance()->add("main_window", window);
-  window->config.set_title("FAST CLIENT WINDOW");
-  window->config.set_enable_vsync(false);
-  window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
-  window->config.set_resolution(resolution);
-  window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
-    window->config.set_resolution(new_size);
-    camera->config.set_resolution(new_size);
-    warp_cam->config.set_resolution(new_size);
-    screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
-    warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
-    
-  });
+#if ENABLE_HMD
+  warp_cam->config.set_eye_offset(window->get_IPD());
+#endif
 
   
   auto updat_view_mode([&](){

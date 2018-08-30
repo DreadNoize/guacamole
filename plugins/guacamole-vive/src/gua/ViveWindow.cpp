@@ -87,8 +87,7 @@ void ViveWindow::calculate_viewing_setup() {
         vr::EVREye eEye = eye_num == 0 ? vr::EVREye::Eye_Left : vr::EVREye::Eye_Right;
         //retreive the correct projection matrix from OpenVR
         auto const& hmd_eye_projection = pVRSystem->GetProjectionMatrix(
-            eEye, near_distance, far_distance, vr::EGraphicsAPIConvention::API_OpenGL
-        );
+            eEye, near_distance, far_distance);
 
         //convert the matrix to a gua compatible one
         scm::math::mat4 scm_eye_proj_matrix;
@@ -198,7 +197,7 @@ void ViveWindow::init_context() {
     }
 }
 
-void ViveWindow::open() {
+void ViveWindow::open(bool hidden_window) {
     config.set_title("guacamole");
     config.set_display_name(display_name_);
     config.set_stereo_mode(StereoMode::SIDE_BY_SIDE);
@@ -266,10 +265,10 @@ void ViveWindow::start_frame() {
 
 void ViveWindow::finish_frame() {
     if (left_tex_id_ && right_tex_id_) {
-        vr::Texture_t leftEyeTexture{ (void*)left_tex_id_, vr::API_OpenGL, vr::ColorSpace_Gamma };
+        vr::Texture_t leftEyeTexture{ (void*)left_tex_id_, vr::TextureType_OpenGL, vr::ColorSpace_Gamma };
         vr::VRCompositor()->Submit(vr::Eye_Left, &leftEyeTexture);
 
-        vr::Texture_t rightEyeTexture{ (void*)right_tex_id_, vr::API_OpenGL, vr::ColorSpace_Gamma };
+        vr::Texture_t rightEyeTexture{ (void*)right_tex_id_, vr::TextureType_OpenGL, vr::ColorSpace_Gamma };
         vr::VRCompositor()->Submit(vr::Eye_Right, &rightEyeTexture);
     }
 
