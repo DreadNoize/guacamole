@@ -517,11 +517,6 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 
     if(window_name != "") {
       auto window = WindowDatabase::instance()->lookup(window_name);
-      if(cmd.serialized_cam->config.get_enable_stereo() && window->config.get_stereo_mode() == StereoMode::SIDE_BY_SIDE) {
-        window->config.set_size(math::vec2ui(2*window->config.get_resolution().x,window->config.get_resolution().y));
-      } else {
-        window->config.set_size(math::vec2ui(window->config.get_resolution().x,window->config.get_resolution().y));
-      }
       
       if (window && !window->get_is_open()) {
         window->open();

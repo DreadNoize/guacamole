@@ -1,7 +1,7 @@
 /*******************************************************************************
 * guacamole - delicious VR                                                     *
 *                                                                              *
-* Copyright: (c) 2011-2016 Bauhaus-Universität Weimar                          *
+* Copyright: (c) 2011-2016 Bauhaus-Universitï¿½t Weimar                          *
 *                                                                              *
 * This program is free software: you can redistribute it and/or modify it      *
 * under the terms of the GNU General Public License as published by the Free   *

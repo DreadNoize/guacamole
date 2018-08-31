@@ -88,8 +88,8 @@ int main(int argc, char** argv) {
   gua::utils::Trackball object_trackball(0.01, 0.002, 0.2);
   Navigator nav;
   Navigator warp_nav;
-  nav.set_transform(scm::math::make_translation(0.f, 0.f, 3.f));
-  warp_nav.set_transform(scm::math::make_translation(0.f, 0.f, 3.f));
+  nav.set_transform(scm::math::make_translation(0.f, 0.f, 0.f));
+  warp_nav.set_transform(scm::math::make_translation(0.f, 0.f, 0.f));
 
   // initialize scenegraph
   gua::SceneGraph graph("main_scenegraph");
@@ -194,35 +194,38 @@ int main(int argc, char** argv) {
   });
 #endif
 
+
+  // set up camera and connect to screen in scenegraph
+  auto camera = graph.add_node<gua::node::CameraNode>("/navigation", "cam");
+  camera->config.set_scene_graph_name("main_scenegraph");
+  camera->config.set_output_window_name("main_window");
+  camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
+  camera->config.set_enable_stereo(true);
 #if ENABLE_HMD
-  auto left_screen = graph.add_node<gua::node::ScreenNode>("/navigation", "left_screen");
+  camera->config.set_resolution(window->get_window_resolution());
+  camera->config.set_left_screen_path("/navigation/cam/left_screen");
+  camera->config.set_right_screen_path("/navigation/cam/right_screen");
+  camera->config.set_eye_dist(window->get_IPD());
+#else
+  camera->translate(0, 0, 2.0);
+  camera->config.set_screen_path("/navigation/screen");
+  camera->config.set_resolution(resolution);
+  camera->config.set_far_clip(350.f);
+  camera->config.set_near_clip(0.1f);
+#endif
+
+#if ENABLE_HMD
+  auto left_screen = graph.add_node<gua::node::ScreenNode>("/navigation/cam", "left_screen");
   left_screen->data.set_size(window->get_left_screen_size());
   left_screen->translate(window->get_left_screen_translation());
 
-  auto right_screen = graph.add_node<gua::node::ScreenNode>("/navigation", "right_screen");
+  auto right_screen = graph.add_node<gua::node::ScreenNode>("/navigation/cam", "right_screen");
   right_screen->data.set_size(window->get_right_screen_size());
   right_screen->translate(window->get_right_screen_translation());
 #else
   auto screen = graph.add_node<gua::node::ScreenNode>("/navigation", "screen");
   screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
   // screen->translate(0, 0, 1.0);
-#endif
-
-  // set up camera and connect to screen in scenegraph
-  auto camera = graph.add_node<gua::node::CameraNode>("/navigation", "cam");
-  camera->translate(0, 0, 2.0);
-  camera->config.set_resolution(resolution);
-  camera->config.set_screen_path("/navigation/screen");
-  camera->config.set_scene_graph_name("main_scenegraph");
-  camera->config.set_output_window_name("main_window");
-  camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
-  camera->config.set_far_clip(350.f);
-  camera->config.set_near_clip(0.1f);
-#if ENABLE_HMD
-  camera->config.set_left_screen_path("/navigation/cam/left_screen");
-  camera->config.set_right_screen_path("/navigation/cam/right_screen");
-  camera->config.set_eye_offset(window->get_IPD());
-  camera->config.set_enable_stereo(true);
 #endif
 
   // auto pipe_desc = camera->get_pipeline_description();
@@ -257,34 +260,47 @@ int main(int argc, char** argv) {
   camera->set_pipeline_description(pipe_desc);
 
   // set up warp cam and warp screen
+#if ENABLE_HMD
+  auto warp_left_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_left_screen");
+  warp_left_screen->data.set_size(window->get_left_screen_size());
+  warp_left_screen->translate(window->get_left_screen_translation());
+
+  auto warp_right_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_right_screen");
+  warp_right_screen->data.set_size(window->get_right_screen_size());
+  warp_right_screen->translate(window->get_right_screen_translation());
+#else
   auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");
   warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
-
+#endif
 
   auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation", "warp_cam");
   // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
+  warp_cam->config.set_scene_graph_name("main_scenegraph");
+  warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
+  warp_cam->config.set_enable_stereo(true);
+#if ENABLE_HMD
+  warp_cam->config.set_resolution(window->get_window_resolution());
+  warp_cam->config.set_left_screen_path("/navigation/warp/warp_left_screen");
+  warp_cam->config.set_right_screen_path("/navigation/warp/warp_right_screen");
+  warp_cam->config.set_eye_offset(window->get_IPD());
+#else
   warp_cam->translate(0,0,2);
   warp_cam->config.set_resolution(resolution);
   warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
-  warp_cam->config.set_scene_graph_name("main_scenegraph");
-  warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
   warp_cam->config.set_far_clip(camera->config.get_far_clip());
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
-  warp_cam->config.set_enable_stereo(true);
-#if ENABLE_HMD
-  warp_cam->config.set_eye_offset(window->get_IPD());
 #endif
 
   
   auto updat_view_mode([&](){
     if(stereo) {
-      camera->config.set_enable_stereo(true);
-      window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
+      // camera->config.set_enable_stereo(true);
+      // window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
       // window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
-      window->config.set_left_resolution(resolution);
-      window->config.set_left_position(gua::math::vec2ui(0, 0));
-      window->config.set_right_resolution(resolution);
-      window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
+      // window->config.set_left_resolution(resolution);
+      // window->config.set_left_position(gua::math::vec2ui(0, 0));
+      // window->config.set_right_resolution(resolution);
+      // window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
     } else {
       camera->config.set_enable_stereo(false);
       window->config.set_stereo_mode(gua::StereoMode::MONO);
@@ -351,11 +367,11 @@ int main(int argc, char** argv) {
     auto time = gua::Timer::get_now();
     // geometry->rotate(time*0.00000000002, gua::math::vec3(0.0,1.0,0.0));
     // log fps every 150th tick
-    /*if (ctr++ % 150 == 0) {
+    if (ctr++ % 150 == 0) {
       gua::Logger::LOG_WARNING
         << "Frame time: " << 1000.f / window->get_rendering_fps()
         << " ms, fps: " << window->get_rendering_fps() << std::endl;
-    }*/
+    }
 
     nav.update();
     warp_nav.update();
@@ -367,7 +383,10 @@ int main(int argc, char** argv) {
                                                               gua::math::float_t(object_trackball.shifty()),
                                                               gua::math::float_t(object_trackball.distance())) * gua::math::mat4(object_trackball.rotation());
     transform->set_transform(modelmatrix);
-
+#if ENABLE_HMD
+    camera->set_transform(window->get_hmd_sensor_orientation());
+	warp_cam->set_transform(window->get_hmd_sensor_orientation());
+#endif
     window->process_events();
     if (window->should_close()) {
       // stop rendering and close the window
