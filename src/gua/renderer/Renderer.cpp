@@ -336,7 +336,9 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
               if(warp_res[window_name]->initialized_fbo) {
                 if (img) {
+                  pipe->begin_gpu_query(pipe->get_context(), "GPU: Texture Blitting - LEFT");
                   warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::LEFT);
+                  pipe->end_gpu_query(pipe->get_context(), "GPU: Texture Blitting - LEFT");
                   warp_res[window_name]->swap_buffers_slow(CameraMode::LEFT);
                   // offscreen_window->display(img, true);                
                   if(!warp_res[window_name]->left_ready) warp_res[window_name]->left_ready = true;  
@@ -349,7 +351,9 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               warp_res[window_name]->camera_mode = cmd.serialized_cam->config.get_mono_mode();
               if(warp_res[window_name]->initialized_fbo) {
                 if (img) {
+                  pipe->begin_gpu_query(pipe->get_context(), "GPU: Texture Blitting - RIGHT");
                   warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::RIGHT);
+                  pipe->end_gpu_query(pipe->get_context(), "GPU: Texture Blitting - RIGHT");
                   warp_res[window_name]->swap_buffers_slow(CameraMode::RIGHT);
                   // offscreen_window->display(img, false);
                   if(!warp_res[window_name]->right_ready) warp_res[window_name]->right_ready = true;  
@@ -379,7 +383,9 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
               if (img) {
                 // warp_res[window_name]->swap_shared_resources();
                 // warp_res[window_name]->swap_buffers();
+                pipe->begin_gpu_query(pipe->get_context(), "GPU: Texture Blitting");
                 warp_res[window_name]->postprocess_frame(offscreen_window->get_context(), CameraMode::CENTER);
+                pipe->end_gpu_query(pipe->get_context(), "GPU: Texture Blitting");
                 warp_res[window_name]->swap_buffers_slow(CameraMode::CENTER);
                 offscreen_window->display(img, std::get<0>(warp_res[window_name]->is_left));
                 if (!warp_res[window_name]->left_ready) warp_res[window_name]->left_ready = true;

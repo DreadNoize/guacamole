@@ -21,7 +21,7 @@
  ******************************************************************************/
 
 #define ENABLE_LOD false
-#define ENABLE_HMD true
+#define ENABLE_HMD false
 #include <functional>
 
 #include <gua/guacamole.hpp>
@@ -140,12 +140,12 @@ int main(int argc, char** argv) {
 #else
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
-      "geometry",  "../data/objects/old-house-2.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+      "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
       gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
       gua::TriMeshLoader::NORMALIZE_SCALE));
   // geometry->translate(-0.6, 0.0, 0.0);
   //geometry->translate(0.0, -50.0,-50.0);
-  //geometry->scale(0.005);
+  geometry->scale(20);
   graph.add_node("/transform", geometry);
 #endif
 
@@ -184,14 +184,6 @@ int main(int argc, char** argv) {
   window->config.set_enable_vsync(false);
   window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
   window->config.set_resolution(resolution);
-  window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
-    window->config.set_resolution(new_size);
-    camera->config.set_resolution(new_size);
-    warp_cam->config.set_resolution(new_size);
-    screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
-    warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
-    
-  });
 #endif
 
 
@@ -277,8 +269,8 @@ int main(int argc, char** argv) {
   // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
   warp_cam->config.set_scene_graph_name("main_scenegraph");
   warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
-  warp_cam->config.set_enable_stereo(true);
 #if ENABLE_HMD
+  warp_cam->config.set_enable_stereo(true);
   warp_cam->config.set_resolution(window->get_window_resolution());
   warp_cam->config.set_left_screen_path("/navigation/warp/warp_left_screen");
   warp_cam->config.set_right_screen_path("/navigation/warp/warp_right_screen");
@@ -292,15 +284,15 @@ int main(int argc, char** argv) {
 #endif
 
   
-  auto updat_view_mode([&](){
+  auto update_view_mode([&](){
     if(stereo) {
-      // camera->config.set_enable_stereo(true);
-      // window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
-      // window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
-      // window->config.set_left_resolution(resolution);
-      // window->config.set_left_position(gua::math::vec2ui(0, 0));
-      // window->config.set_right_resolution(resolution);
-      // window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
+      camera->config.set_enable_stereo(true);
+      window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
+      window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
+      window->config.set_left_resolution(resolution);
+      window->config.set_left_position(gua::math::vec2ui(0, 0));
+      window->config.set_right_resolution(resolution);
+      window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
     } else {
       camera->config.set_enable_stereo(false);
       window->config.set_stereo_mode(gua::StereoMode::MONO);
@@ -312,8 +304,15 @@ int main(int argc, char** argv) {
 
   });
 
-  updat_view_mode();
+  update_view_mode();
 
+  window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
+    window->config.set_resolution(new_size);
+    camera->config.set_resolution(new_size);
+    warp_cam->config.set_resolution(new_size);
+    screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
+    warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));    
+  });
 
   window->on_button_press.connect([&](int key, int action, int mods) {
     nav.set_mouse_button(key, action);
@@ -385,7 +384,7 @@ int main(int argc, char** argv) {
     transform->set_transform(modelmatrix);
 #if ENABLE_HMD
     camera->set_transform(window->get_hmd_sensor_orientation());
-	warp_cam->set_transform(window->get_hmd_sensor_orientation());
+	  warp_cam->set_transform(window->get_hmd_sensor_orientation());
 #endif
     window->process_events();
     if (window->should_close()) {
