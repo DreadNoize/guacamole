@@ -234,29 +234,12 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
     } catch (std::runtime_error& e) {
       cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::SurfaceDetectionPassDescription>(warp_res[window_name]));
     }
-    // std::cout << "[SLOW] Camera id: " << cmd.serialized_cam->uuid << std::endl;
-    /* try {
-      cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpGridGeneratorPassDescription>();
-    } catch (std::runtime_error& e) {
-      cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
-    }
-    try {
-      cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpPassDescription>();
-    } catch (std::runtime_error& e) {
-      cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpPassDescription>(warp_res[window_name]));
-     }*/
-    /*if (!cmd.serialized_cam->pipeline_description->get_pass_by_type<gua::WarpGridGeneratorPassDescription>()) {
-      cmd.serialized_cam->pipeline_description->add_pass(std::make_shared<gua::WarpGridGeneratorPassDescription>(warp_res[window_name]));
-    }*/
-    // for(auto pass: cmd.serialized_cam->pipeline_description->get_passes()) {
-    //   std::cout << "[SLOW] Pass name: " << pass->name() << std::endl;
-    // }
 
     if (window_name != "") {
       if (offscreen_window && !offscreen_window->get_is_open()) {
 #if MULTITHREADED
         while (!(warp_res[window_name]->shared)) {
-          std::cout << "[SLOW] waiting for fast window" << std::endl;
+          // std::cout << "[SLOW] waiting for fast window" << std::endl;
         }
         offscreen_window->open(warp_res[window_name]->shared, true);
         warp_res[window_name]->shared_initialized = true;
