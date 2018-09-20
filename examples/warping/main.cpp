@@ -21,7 +21,7 @@
  ******************************************************************************/
 
 #define ENABLE_LOD false
-#define ENABLE_HMD false
+#define ENABLE_HMD true
 #include <functional>
 
 #include <gua/guacamole.hpp>
@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
 
 #if ENABLE_LOD
   // create simple untextured material shader
-  auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("./data/materials/PLOD_use_input_color.gmd");
+  auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
   auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
   gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
 
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
       gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
       gua::TriMeshLoader::NORMALIZE_SCALE));
   // geometry->translate(-0.6, 0.0, 0.0);
-  //geometry->translate(0.0, -50.0,-50.0);
+  geometry->translate(0.0, 0.05, 0.0);
   geometry->scale(20);
   graph.add_node("/transform", geometry);
 #endif
@@ -175,6 +175,7 @@ int main(int argc, char** argv) {
 #if ENABLE_HMD
   auto window = std::make_shared<gua::ViveWindow>(":0.0");
   gua::WindowDatabase::instance()->add("main_window", window);
+  window->config.set_title("FAST CLIENT WINDOW"); 
   window->config.set_enable_vsync(false);
   window->config.set_fullscreen_mode(false);
 #else
@@ -192,8 +193,8 @@ int main(int argc, char** argv) {
   camera->config.set_scene_graph_name("main_scenegraph");
   camera->config.set_output_window_name("main_window");
   camera->config.set_stereo_type(gua::StereoType::SPATIAL_WARP);
-  camera->config.set_enable_stereo(true);
 #if ENABLE_HMD
+  camera->config.set_enable_stereo(true);
   camera->config.set_resolution(window->get_window_resolution());
   camera->config.set_left_screen_path("/navigation/cam/left_screen");
   camera->config.set_right_screen_path("/navigation/cam/right_screen");
@@ -251,20 +252,6 @@ int main(int argc, char** argv) {
 
   camera->set_pipeline_description(pipe_desc);
 
-  // set up warp cam and warp screen
-#if ENABLE_HMD
-  auto warp_left_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_left_screen");
-  warp_left_screen->data.set_size(window->get_left_screen_size());
-  warp_left_screen->translate(window->get_left_screen_translation());
-
-  auto warp_right_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_right_screen");
-  warp_right_screen->data.set_size(window->get_right_screen_size());
-  warp_right_screen->translate(window->get_right_screen_translation());
-#else
-  auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");
-  warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
-#endif
-
   auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation", "warp_cam");
   // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
   warp_cam->config.set_scene_graph_name("main_scenegraph");
@@ -272,8 +259,8 @@ int main(int argc, char** argv) {
 #if ENABLE_HMD
   warp_cam->config.set_enable_stereo(true);
   warp_cam->config.set_resolution(window->get_window_resolution());
-  warp_cam->config.set_left_screen_path("/navigation/warp/warp_left_screen");
-  warp_cam->config.set_right_screen_path("/navigation/warp/warp_right_screen");
+  warp_cam->config.set_left_screen_path("/navigation/warp_cam/warp_left_screen");
+  warp_cam->config.set_right_screen_path("/navigation/warp_cam/warp_right_screen");
   warp_cam->config.set_eye_offset(window->get_IPD());
 #else
   warp_cam->translate(0,0,2);
@@ -283,9 +270,24 @@ int main(int argc, char** argv) {
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
 #endif
 
+  // set up warp cam and warp screen
+#if ENABLE_HMD
+  auto warp_left_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp_cam", "warp_left_screen");
+  warp_left_screen->data.set_size(window->get_left_screen_size());
+  warp_left_screen->translate(window->get_left_screen_translation());
+
+  auto warp_right_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp_cam", "warp_right_screen");
+  warp_right_screen->data.set_size(window->get_right_screen_size());
+  warp_right_screen->translate(window->get_right_screen_translation());
+#else
+  auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");
+  warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
+#endif
   
+
   auto update_view_mode([&](){
     if(stereo) {
+#if !ENABLE_HMD
       camera->config.set_enable_stereo(true);
       window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
       window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
@@ -293,6 +295,7 @@ int main(int argc, char** argv) {
       window->config.set_left_position(gua::math::vec2ui(0, 0));
       window->config.set_right_resolution(resolution);
       window->config.set_right_position(gua::math::vec2ui(resolution.x, 0));
+#endif
     } else {
       camera->config.set_enable_stereo(false);
       window->config.set_stereo_mode(gua::StereoMode::MONO);
@@ -306,13 +309,15 @@ int main(int argc, char** argv) {
 
   update_view_mode();
 
+#if !ENABLE_HMD
   window->on_resize.connect([&](gua::math::vec2ui const& new_size) {
     window->config.set_resolution(new_size);
     camera->config.set_resolution(new_size);
     warp_cam->config.set_resolution(new_size);
     screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
-    warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));    
+    warp_screen->data.set_size(gua::math::vec2(0.001 * new_size.x, 0.001 * new_size.y));
   });
+#endif
 
   window->on_button_press.connect([&](int key, int action, int mods) {
     nav.set_mouse_button(key, action);
