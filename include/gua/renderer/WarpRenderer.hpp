@@ -61,6 +61,7 @@ class WarpRenderer {
     std::cout << matrix[4] << "," << matrix[5] << "," << matrix[6] << "," << matrix[7] << std::endl;
     std::cout << matrix[8] << "," << matrix[9] << "," << matrix[10] << "," << matrix[11] << std::endl;
     std::cout << matrix[12] << "," << matrix[13] << "," << matrix[14] << "," << matrix[15] << std::endl;
+    std::cout << "\n" << std::endl;
   };
  protected:
   std::shared_ptr<Renderer::WarpingResources> res_;

@@ -21,7 +21,7 @@
  ******************************************************************************/
 
 #define ENABLE_LOD false
-#define ENABLE_HMD true
+#define ENABLE_HMD false
 #include <functional>
 
 #include <gua/guacamole.hpp>
@@ -34,6 +34,7 @@
 #include <gua/renderer/LightVisibilityPass.hpp>
 #include <gua/renderer/TexturedQuadPass.hpp>
 #include <gua/renderer/TexturedScreenSpaceQuadPass.hpp>
+#include <gua/renderer/WarpRenderer.hpp>
 
 #if ENABLE_LOD
 #include <gua/renderer/LodLoader.hpp>
@@ -199,6 +200,8 @@ int main(int argc, char** argv) {
   camera->config.set_left_screen_path("/navigation/cam/left_screen");
   camera->config.set_right_screen_path("/navigation/cam/right_screen");
   camera->config.set_eye_dist(window->get_IPD());
+  camera->config.set_far_clip(500.f);
+  camera->config.set_near_clip(0.1f);
 #else
   camera->translate(0, 0, 2.0);
   camera->config.set_screen_path("/navigation/screen");
@@ -208,13 +211,18 @@ int main(int argc, char** argv) {
 #endif
 
 #if ENABLE_HMD
+  auto left_size = window->get_left_screen_size();
+  auto right_size = window->get_right_screen_size();
+  auto left_trans = window->get_left_screen_translation();
+  auto right_trans = window->get_right_screen_translation();
+
   auto left_screen = graph.add_node<gua::node::ScreenNode>("/navigation/cam", "left_screen");
-  left_screen->data.set_size(window->get_left_screen_size());
-  left_screen->translate(window->get_left_screen_translation());
+  left_screen->data.set_size(left_size);
+  left_screen->translate(left_trans);
 
   auto right_screen = graph.add_node<gua::node::ScreenNode>("/navigation/cam", "right_screen");
-  right_screen->data.set_size(window->get_right_screen_size());
-  right_screen->translate(window->get_right_screen_translation());
+  right_screen->data.set_size(right_size);
+  right_screen->translate(right_trans);
 #else
   auto screen = graph.add_node<gua::node::ScreenNode>("/navigation", "screen");
   screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
@@ -253,6 +261,7 @@ int main(int argc, char** argv) {
   camera->set_pipeline_description(pipe_desc);
 
   auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation", "warp_cam");
+  warp_cam->set_transform(camera->get_world_transform());
   // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
   warp_cam->config.set_scene_graph_name("main_scenegraph");
   warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
@@ -262,6 +271,8 @@ int main(int argc, char** argv) {
   warp_cam->config.set_left_screen_path("/navigation/warp_cam/warp_left_screen");
   warp_cam->config.set_right_screen_path("/navigation/warp_cam/warp_right_screen");
   warp_cam->config.set_eye_offset(window->get_IPD());
+  warp_cam->config.set_far_clip(500.f);
+  warp_cam->config.set_near_clip(0.1f);
 #else
   warp_cam->translate(0,0,2);
   warp_cam->config.set_resolution(resolution);
@@ -273,12 +284,12 @@ int main(int argc, char** argv) {
   // set up warp cam and warp screen
 #if ENABLE_HMD
   auto warp_left_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp_cam", "warp_left_screen");
-  warp_left_screen->data.set_size(window->get_left_screen_size());
-  warp_left_screen->translate(window->get_left_screen_translation());
+  warp_left_screen->data.set_size(left_size);
+  warp_left_screen->translate(left_trans);
 
   auto warp_right_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp_cam", "warp_right_screen");
-  warp_right_screen->data.set_size(window->get_right_screen_size());
-  warp_right_screen->translate(window->get_right_screen_translation());
+  warp_right_screen->data.set_size(right_size);
+  warp_right_screen->translate(right_trans);
 #else
   auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");
   warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
@@ -375,6 +386,10 @@ int main(int argc, char** argv) {
       gua::Logger::LOG_WARNING
         << "Frame time: " << 1000.f / window->get_rendering_fps()
         << " ms, fps: " << window->get_rendering_fps() << std::endl;
+      gua::WarpRenderer::print_matrix(warp_cam->get_world_transform(), "WARP CAM TRANSFORM");
+      gua::WarpRenderer::print_matrix(camera->get_world_transform(), "CAM TRANSFORM");
+      // gua::WarpRenderer::print_matrix(camera->get_world_transform()-warp_cam->get_world_transform(), "CAM TRANSFORM - WARP CAM TRANSFORM");
+
     }
 
     nav.update();
@@ -388,8 +403,11 @@ int main(int argc, char** argv) {
                                                               gua::math::float_t(object_trackball.distance())) * gua::math::mat4(object_trackball.rotation());
     transform->set_transform(modelmatrix);
 #if ENABLE_HMD
-    camera->set_transform(window->get_hmd_sensor_orientation());
-	  warp_cam->set_transform(window->get_hmd_sensor_orientation());
+    auto hmd_transform = window->get_hmd_sensor_orientation();
+    camera->set_transform(hmd_transform);
+	  warp_cam->set_transform(hmd_transform);
+
+    
 #endif
     window->process_events();
     if (window->should_close()) {

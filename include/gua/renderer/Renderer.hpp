@@ -74,6 +74,14 @@ class GUA_DLL Renderer {
       math::mat4f projection_view_right;
       math::mat4f projection_view_left;
 
+      math::mat4f view_center;
+      math::mat4f view_right;
+      math::mat4f view_left;
+
+      math::mat4f projection_center;
+      math::mat4f projection_right;
+      math::mat4f projection_left;
+
       math::mat4f const& get(CameraMode mode) {
         if (mode == CameraMode::LEFT)  return projection_view_left;
         if (mode == CameraMode::RIGHT) return projection_view_right;

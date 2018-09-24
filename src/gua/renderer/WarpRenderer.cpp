@@ -237,6 +237,8 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
   gua::math::mat4d proj;
   gua::math::mat4d view;
   gua::math::mat4d warp;
+  gua::math::mat4d view_cached;
+  gua::math::mat4d proj_cached;
 
   if (first_eye && stereo_type == StereoType::TEMPORAL_WARP) {
     proj = last_frustum_.get_projection();
@@ -260,6 +262,13 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     proj = pipe.current_viewstate().frustum.get_projection();
     view = pipe.current_viewstate().frustum.get_view();
     warp = cached_warp_state_.get(ctx.mode);
+    if(ctx.mode != CameraMode::RIGHT) {
+      view_cached = cached_warp_state_.view_left;
+      proj_cached = cached_warp_state_.projection_left;
+    } else {
+      view_cached = cached_warp_state_.view_right;
+      proj_cached = cached_warp_state_.projection_right;
+    }
     //cached_warp_state_ = res_->warp_state;
   }
 
@@ -268,10 +277,15 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     gbuffer->toggle_ping_pong();
     last_frustum_ = pipe.current_viewstate().frustum;
   }
-  /* print_matrix(proj, "Projection");
-  print_matrix(view, "View");
-  print_matrix(proj * view, "ProjectionView");
-  print_matrix(warp, "Cached ProjectionView"); */
+  // std::cout << "[WARP_RENDERER] Mode: " << ((ctx.mode == CameraMode::RIGHT)? "RIGHT" : "LEFT") << std::endl;
+  // print_matrix(proj, "Projection");
+  // print_matrix(view, "View");
+  // print_matrix(proj * view, "ProjectionView");
+  // print_matrix(proj_cached, "Cached Projection");
+  // print_matrix(view_cached, "Cached View");
+  // print_matrix(warp, "Cached ProjectionView");
+  // print_matrix(proj-proj_cached, "Proj - Cached Proj");
+  // print_matrix(view-view_cached, "View - Cached View");
 
   math::mat4f warp_matrix(warp * scm::math::inverse(proj * view));
   math::mat4f inv_warp_matrix(scm::math::inverse(warp * scm::math::inverse(proj * view)));

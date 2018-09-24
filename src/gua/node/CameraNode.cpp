@@ -27,6 +27,7 @@
 #include <gua/renderer/Pipeline.hpp>
 #include <gua/utils/Logger.hpp>
 #include <gua/databases/TextureDatabase.hpp>
+#include <gua/renderer/WarpRenderer.hpp>
 
 namespace gua {
 namespace node {
@@ -100,7 +101,7 @@ Frustum CameraNode::make_frustum(SceneGraph const& graph, math::mat4 const& came
         Logger::LOG_WARNING << "Cannot make Frustum: No valid screen specified" << std::endl;
         return Frustum();
     }
-
+    
     auto eye_transform(camera_transform);
     auto screen_transform(screen->get_scaled_world_transform());
 
@@ -113,6 +114,10 @@ Frustum CameraNode::make_frustum(SceneGraph const& graph, math::mat4 const& came
         math::vec4 eye_separation(camera_transform * math::vec4(config.eye_dist(), 0.f, 0.f, 0.f));
         math::vec4 screen_direction(screen_transform * math::vec4(0.f, 0.f, -1.f, 0.f));
 
+        // if(screen_name == "/navigation/cam/left_screen") {
+        //     WarpRenderer::print_matrix(camera_transform, "CAM TRANSFORM (" + screen_name + ") IN MAKE FRUSTUM");
+        //     std::cout << "[FRUSTUM] camera_scale: " << camera_scale << std::endl;
+        // }
         math::vec3 eye_separation_in_screen_direction(
             scm::math::dot(eye_separation, screen_direction) /
             scm::math::length_sqr(screen_direction) * screen_direction
@@ -138,8 +143,16 @@ Frustum CameraNode::make_frustum(SceneGraph const& graph, math::mat4 const& came
             eye_transform *= scm::math::make_translation(math::float_t(config.eye_offset() + 0.5f * config.eye_dist()), math::float_t(0), math::float_t(0));
         }
     }
-
     if (config.mode() == node::CameraNode::ProjectionMode::PERSPECTIVE) {
+        // if(screen_name == "/navigation/warp_cam/warp_right_screen") {
+            // auto eye = (mode != CameraMode::RIGHT)? "LEFT" : "RIGHT";
+            // std::cout << "Camera with screen name: " << screen_name << " | Mode: " << eye << std::endl;
+            // std::cout << "Clip NEAR: " << config.near_clip() << " | Clip FAR: " << config.far_clip() << std::endl;
+            // std::cout << "Camera Scale: " << camera_scale << " | Clipping Offset: " << clipping_offset << std::endl;
+            // WarpRenderer::print_matrix(eye_transform, "EYE TRANSFORM");
+            // WarpRenderer::print_matrix(screen_transform, "SCREEN TRANSFORM");
+        // }
+        
         return Frustum::perspective(
             eye_transform, screen_transform,
             config.near_clip()/camera_scale + clipping_offset, config.far_clip()/camera_scale + clipping_offset
