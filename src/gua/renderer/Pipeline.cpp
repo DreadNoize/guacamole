@@ -206,6 +206,7 @@ scm::gl::texture_2d_ptr Pipeline::render_scene(
     if (passes_[i].needs_color_buffer_as_input()) {
       gbuffer_->toggle_ping_pong();
     }
+    Renderer::is_time_left();
     passes_[i].process(*last_description_.get_passes()[i], *this);
   }
 

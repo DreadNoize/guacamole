@@ -294,17 +294,6 @@ class GUA_DLL Renderer {
     inline int current_vbo() {
       return ping ? 0 : 1;
     }
-
-    void is_there_time_left() {
-      if (time_left >= 1.0) {
-        return;
-      } else {
-        while (time_left < 1.0) {
-          // Sleep(0.1);
-        }
-      }
-    }
-
     std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer_left;
     std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer_right;
 
@@ -315,9 +304,6 @@ class GUA_DLL Renderer {
     size_t cell_count = 0;
     bool ping = false;
     CameraMode camera_mode;
-
-    float time_budget;
-    float time_left;
     
     std::shared_ptr<node::SerializedCameraNode> serialized_warp_cam;
 
@@ -389,6 +375,16 @@ class GUA_DLL Renderer {
     return application_fps_.fps;
   }
 
+  static void is_time_left() {
+    using namespace std::chrono_literals;
+    if (time_warped >= time_left > 1.0) {
+      //continue
+    } else {
+      while (time_left < 1.0 && time_left > time_warped) {
+        std::this_thread::sleep_for(0.1ms);
+      }
+    }
+  }
 
  private:
   void send_renderclient(std::string const& window,
@@ -423,11 +419,14 @@ class GUA_DLL Renderer {
   static void renderclient_slow(Mailbox in, std::string name, std::map<std::string, std::shared_ptr<WarpingResources>>&);
   static void renderclient_fast(Mailbox in, std::string name, std::map<std::string, std::shared_ptr<WarpingResources>>&);
 
-
   std::map<std::string, Renderclient> render_clients_;
   std::map<std::string, std::pair<Renderclient, Warpclient>> warp_clients_;
 
   FpsCounter application_fps_;
+
+  static float time_budget;
+  static float time_warped;
+  static float time_left;
 };
 
 }

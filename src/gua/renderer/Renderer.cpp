@@ -93,6 +93,11 @@ std::pair<DB<T>, DB<T> > spawnDoublebufferred() {
 }  // namespace
 
 namespace gua {
+using namespace std::chrono_literals;
+
+float Renderer::time_budget = 0;
+float Renderer::time_warped = 0;
+float Renderer::time_left = 0;
 
 std::shared_ptr<const Renderer::SceneGraphs> garbage_collected_copy(
     std::vector<SceneGraph const*> const& scene_graphs) {
@@ -458,7 +463,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 
         // swap buffers
         offscreen_window->finish_frame();
-        std::cout << "[SLOW] time bygone: " << 1000/offscreen_window->get_rendering_fps() << std::endl;
+        // std::cout << "[SLOW] time bygone: " << 1000/offscreen_window->get_rendering_fps() << std::endl;
         ++(offscreen_window->get_context()->framecount);
         fpsc.step();
       }
@@ -653,23 +658,22 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         }
 
         pipe->fetch_gpu_query_results(pipe->get_context());
+        float total_time = 0;
+        auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
+        for (auto const& t : query_results->results) {
+            total_time += t.second;
+        }
         if (pipe->get_context().framecount % 100 == 0) {
-          int i = 0;
-          auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
-          float total_time = 0;
           std::cout << "===== Time Queries for Context: " << pipe->get_context().id
                     << " ============================" << std::endl;
           for (auto const& t : query_results->results) {
             std::cout << t.first << " : " << t.second << " ms" << std::endl;
-            total_time += t.second;
-            i++;
           }
-          accumulated_time += total_time;
           std::cout << "Total" << " : " << total_time << " ms" << std::endl;
-          // std::cout << "Average" << " : " << accumulated_time/i << " ms" << std::endl;
           std::cout << std::endl;
-          query_results->results.clear();
         }
+        query_results->results.clear();
+        
 
         // warp_res[window_name]->time_left = warp_res[window_name]->time_budget - time_bygone;
         // pipe->end_cpu_query(cpu_query_name);
@@ -681,7 +685,14 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 
         pipe->clear_frame_cache();
         window->finish_frame();
-        std::cout << "[FAST] time bygone: " << 1000/window->get_rendering_fps() << std::endl;
+        time_warped = time_budget - total_time;
+        time_left = time_warped;
+        while (time_left > 1.1) {
+          time_left -= 0.1;
+          // std::this_thread::sleep_for(0.1ms);
+          // std::cout << "[FAST] time left: " << time_left << std::endl;
+        }
+        time_left = time_budget;
         ++(window->get_context()->framecount);
         fpsc.step();
       }
@@ -694,7 +705,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 Renderer::Renderer() :
   render_clients_(),
   application_fps_(20) {
-
+  
   application_fps_.start();
 }
 
@@ -726,8 +737,8 @@ void Renderer::send_renderclient(std::string const& window_name,
     if (warp_resources.end() == warp_resources.find(window_name)) {
       warp_resources[window_name] = std::make_shared<Renderer::WarpingResources>();
       // calculate time budget in ms
-      warp_resources[window_name]->time_budget = float(1000.0/desired_framerate);
-      std::cout << "Time budget: " << warp_resources[window_name]->time_budget << std::endl;
+      time_budget = float(1000.0/desired_framerate);
+      std::cout << "Time budget: " << time_budget << std::endl;
     }
 	// std::cout << "Generating clients ..." << std::endl;
     auto rwclient = warp_clients_.find(window_name); 
