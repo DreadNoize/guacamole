@@ -203,7 +203,7 @@ int main(int argc, char** argv) {
   camera->config.set_far_clip(500.f);
   camera->config.set_near_clip(0.1f);
 #else
-  camera->translate(0, 0, 2.0);
+  camera->translate(0, 0, 2);
   camera->config.set_screen_path("/navigation/screen");
   camera->config.set_resolution(resolution);
   camera->config.set_far_clip(350.f);
@@ -261,7 +261,6 @@ int main(int argc, char** argv) {
   camera->set_pipeline_description(pipe_desc);
 
   auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation", "warp_cam");
-  warp_cam->set_transform(camera->get_world_transform());
   // auto warp_cam = graph.add_node<gua::node::CameraNode>("/navigation/warp", std::make_shared<gua::node::CameraNode>("warp_cam", std::make_shared < gua::PipelineDescription > (), camera->config, camera->get_transform()));
   warp_cam->config.set_scene_graph_name("main_scenegraph");
   warp_cam->config.set_stereo_type(camera->config.get_stereo_type());
@@ -274,7 +273,8 @@ int main(int argc, char** argv) {
   warp_cam->config.set_far_clip(500.f);
   warp_cam->config.set_near_clip(0.1f);
 #else
-  warp_cam->translate(0,0,2);
+  // warp_cam->translate(0,0,0);
+  warp_cam->set_transform(camera->get_world_transform());
   warp_cam->config.set_resolution(resolution);
   warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
   warp_cam->config.set_far_clip(camera->config.get_far_clip());
@@ -384,10 +384,10 @@ int main(int argc, char** argv) {
     // log fps every 150th tick
     if (ctr++ % 150 == 0) {
       gua::Logger::LOG_WARNING
-        << "Frame time: " << 1000.f / window->get_rendering_fps()
-        << " ms, fps: " << window->get_rendering_fps() << std::endl;
-      gua::WarpRenderer::print_matrix(warp_cam->get_world_transform(), "WARP CAM TRANSFORM");
-      gua::WarpRenderer::print_matrix(camera->get_world_transform(), "CAM TRANSFORM");
+        << "[APP] Frame time: " << 1000.f / renderer.get_application_fps()
+        << " ms, fps: " << renderer.get_application_fps() << std::endl;
+      // gua::WarpRenderer::print_matrix(warp_cam->get_world_transform(), "WARP CAM TRANSFORM");
+      // gua::WarpRenderer::print_matrix(camera->get_world_transform(), "CAM TRANSFORM");
       // gua::WarpRenderer::print_matrix(camera->get_world_transform()-warp_cam->get_world_transform(), "CAM TRANSFORM - WARP CAM TRANSFORM");
 
     }

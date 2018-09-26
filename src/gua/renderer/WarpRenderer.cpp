@@ -301,7 +301,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
     // auto& target = *pipe.current_viewstate().target;
     // math::vec2ui resolution(pipe.current_viewstate().camera.config.get_resolution());
     // std::cout << "Resolution: " << resolution.x << "," << resolution.y << std::endl;
-
+  uint64_t h;
   if (perform_warp) { 
     bool write_all_layers = false;
     // bool do_clear = false;
@@ -319,7 +319,7 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
       // std::cout << "[WARP] color buffer.first adress: " << h << std::endl;
 
       // uint64_t h = gbuffer->get_color_buffer()->native_handle();
-      uint64_t h;
+      
       if (ctx.mode != CameraMode::RIGHT) {
         h = std::get<0>(res_->color_buffer_left)->native_handle();
       } else {
@@ -356,6 +356,58 @@ void WarpRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc) {
       ctx.render_context->draw_transform_feedback(scm::gl::PRIMITIVE_POINT_LIST, res_->grid_tfb[res_->current_vbo()]);
     }
   }
+
+  // ---------------------------------------------------------------------------
+  // --------------------------------- Hole Filling ----------------------------
+  // ---------------------------------------------------------------------------
+  // gbuffer->set_viewport(ctx);
+  warp_abuffer_program_->use(ctx);
+  warp_abuffer_program_->apply_uniform(ctx, "warp_matrix", warp_matrix);
+  warp_abuffer_program_->apply_uniform(ctx, "inv_warp_matrix", inv_warp_matrix);
+  warp_abuffer_program_->apply_uniform(ctx, "perform_warp", perform_warp);
+
+  // gbuffer->get_abuffer().bind_min_max_buffer(warp_abuffer_program_);
+
+  // gbuffer->bind(ctx, false);
+
+  // if (description->hole_filling_mode() == WarpPassDescription::HOLE_FILLING_BLUR) {
+  //   warp_abuffer_program_->set_uniform(ctx, hole_filling_texture_->get_handle(ctx), "hole_filling_texture");
+  // }
+
+  if (perform_warp) {
+    if (ctx.mode != CameraMode::RIGHT) {
+      h = std::get<0>(res_->color_buffer_left)->native_handle();
+    } else {
+      h = std::get<0>(res_->color_buffer_right)->native_handle();
+    }
+    // h = gbuffer->get_color_buffer()->native_handle();
+    math::vec2ui handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+    warp_abuffer_program_->set_uniform(ctx, handle, "warped_color_buffer");
+
+    h = gbuffer->get_depth_buffer()->native_handle();
+    handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+    warp_abuffer_program_->set_uniform(ctx, handle, "warped_depth_buffer");
+  } else {
+    h = gbuffer->get_pbr_buffer()->native_handle();
+    math::vec2ui handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+    warp_abuffer_program_->set_uniform(ctx, handle, "orig_pbr_buffer");
+
+    h = gbuffer->get_color_buffer()->native_handle();
+    handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+    warp_abuffer_program_->set_uniform(ctx, handle, "warped_color_buffer");
+
+    h = gbuffer->get_depth_buffer()->native_handle();
+    handle = math::vec2ui(h & 0x00000000ffffffff, h & 0xffffffff00000000);
+    warp_abuffer_program_->set_uniform(ctx, handle, "warped_depth_buffer");
+  }
+
+  ctx.render_context->set_depth_stencil_state(depth_stencil_state_no_, 1);
+  ctx.render_context->apply();
+  pipe.draw_quad();
+
+  gbuffer->unbind(ctx);
+
+  ctx.render_context->reset_state_objects();
   // pipe.end_gpu_query(ctx, gpu_query_name);
 }
 ////////////////////////////////////////////////////////////////////////////////

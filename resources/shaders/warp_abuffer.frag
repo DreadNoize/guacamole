@@ -164,14 +164,18 @@ void main() {
 
   if (!perform_warp) {
       gua_out_color = texture2D(sampler2D(warped_color_buffer), gua_quad_coords).rgb;
+      // gua_out_color = vec3(1.0,0.0,0.0);
     return;
   }
 
   // hole filling
   float depth = texture2D(sampler2D(warped_depth_buffer), gua_quad_coords).x;
   #if HOLE_FILLING_MODE == HOLE_FILLING_MODE_EPIPOLAR_SEARCH
+    // if (depth == 1.0) opaque_color_emit = vec4(0.0,0.1,0.3, 1);
     if (depth == 1.0) opaque_color_emit = hole_filling_epipolar_search();
     else              opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
+    // opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
+    // opaque_color_emit = vec4(2.0 * depth - 1.0, 2.0 * depth - 1.0, 2.0 * depth - 1.0, 1);
   #elif HOLE_FILLING_MODE == HOLE_FILLING_MODE_EPIPOLAR_MIRROR
     if (depth == 1.0) opaque_color_emit = hole_filling_epipolar_mirror();
     else              opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
@@ -180,14 +184,15 @@ void main() {
     else              opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
   #else
     // if (depth == 1.0) opaque_color_emit = vec4(depth,depth,depth, 1);
-    if (depth == 1.0) opaque_color_emit = vec4(0.0,0.1,0.3, 1);
+    if (depth == 1.0) opaque_color_emit = vec4(1.0,0.1,0.3, 1);
     // if (depth == 1.0) opaque_color_emit = vec4(@hole_filling_color@, 1);
     // else              opaque_color_emit = vec4(0.3,0.0,0.1,1);
     else              opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
     // else              opaque_color_emit = vec4(0.3,0.0,0.1,1);
     // else              opaque_color_emit = vec4(2.0 * depth - 1.0, 2.0 * depth - 1.0, 2.0 * depth - 1.0, 1);
   #endif
-    opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
-    // opaque_color_emit = vec4(2.0 * depth - 1.0, 2.0 * depth - 1.0, 2.0 * depth - 1.0, 1);
+    // opaque_color_emit = texture2D(sampler2D(warped_color_buffer), gua_quad_coords);
+    // if (depth == 1.0) opaque_color_emit = vec4(0.5, 0.3, 0.1, 1.0);
+    // else opaque_color_emit = vec4(2.0 * depth - 1.0, 2.0 * depth - 1.0, 2.0 * depth - 1.0, 1);
     gua_out_color = opaque_color_emit.rgb;
 }

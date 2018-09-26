@@ -67,7 +67,7 @@ WarpPassDescription::WarpPassDescription(std::shared_ptr<Renderer::WarpingResour
  , pixel_size_(0.7f)
  , hole_filling_color_(0.0,0.1,0.3)
  , gbuffer_warp_mode_(GBUFFER_GRID_ADVANCED_SURFACE_ESTIMATION)
- , hole_filling_mode_(HOLE_FILLING_NONE)
+ , hole_filling_mode_(HOLE_FILLING_EPIPOLAR_SEARCH)
  , interpolation_mode_(INTERPOLATION_MODE_ADAPTIVE)
  , pass_res_(resources)
 {

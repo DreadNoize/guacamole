@@ -78,7 +78,7 @@ void TriMeshRenderer::render(Pipeline& pipe, PipelinePassDescription const& desc
 {
   auto& scene = *pipe.current_viewstate().scene;
   auto sorted_objects(scene.nodes.find(std::type_index(typeid(node::TriMeshNode))));
-
+  // std::cout << "[TRIMESH RENDERER] Object count: " << sorted_objects->second.size() << std::endl;
   if (sorted_objects != scene.nodes.end() && sorted_objects->second.size() > 0) {
 
     auto& target = *pipe.current_viewstate().target;

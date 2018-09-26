@@ -379,7 +379,7 @@ class GUA_DLL Renderer {
    *
    * \param scene_graphs      The SceneGraphs to be processed.
    */
-  void queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping = false, int const desired_framerate = 300);
+  void queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping = false, int const desired_framerate = 120);
 
   void draw_single_threaded(std::vector<SceneGraph const*> const& scene_graphs);
 
