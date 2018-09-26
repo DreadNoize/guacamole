@@ -194,6 +194,10 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
           if (img) window->display(img, cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT);
         }
 
+        if (0 == window->get_context()->framecount % 100) {
+          gua::Logger::LOG_MESSAGE << "[SINGLE] fps: " << window->get_rendering_fps() << std::endl;
+        }
+
         pipe->fetch_gpu_query_results(pipe->get_context());
         if (pipe->get_context().framecount % 100 == 0) {
           int i = 0;

@@ -22,6 +22,10 @@
 
 #define ENABLE_LOD false
 #define ENABLE_HMD false
+#define SCENE_RUIN true
+#define SCENE_TEICH true
+#define SCENE_WAPPEN true
+
 #include <functional>
 
 #include <gua/guacamole.hpp>
@@ -128,7 +132,7 @@ int main(int argc, char** argv) {
 
   auto plod_node = lod_loader.load_lod_pointcloud(
       "pointcloud",
-      "/opt/3d_models/lamure/plod/pig_pr.bvh",
+      "/data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
       lod_rough,
       gua::LodLoader::NORMALIZE_POSITION | gua::LodLoader::NORMALIZE_SCALE |
           gua::LodLoader::MAKE_PICKABLE);
@@ -138,7 +142,8 @@ int main(int argc, char** argv) {
   plod_transform->rotate(90.0, 0.0, 1.0, 0.0);
   // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
   plod_transform->translate(0.3, 0.08, 0.0);
-#else
+
+#else if !defined SCENE_RUIN || !defined SCENE_TEICH || !defined SCENE_WAPPEN
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
       "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
@@ -150,6 +155,41 @@ int main(int argc, char** argv) {
   graph.add_node("/transform", geometry);
 #endif
 
+#if SCENE_RUIN
+  auto ruine(loader.create_geometry_from_file(
+      "ruine",  "../data/objects/Ruine/Modell_Ruine.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+      gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+      gua::TriMeshLoader::NORMALIZE_SCALE));
+  // geometry->translate(-0.6, 0.0, 0.0);
+  // geometry->translate(0.0, 0.05, 0.0);
+  ruine->rotate(180,gua::math::vec3(1.0,0.0,0.0));
+  ruine->scale(10);
+  graph.add_node("/transform", ruine);
+#endif
+
+#if SCENE_TEICH
+  auto teichplatz(loader.create_geometry_from_file(
+      "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+      gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+      gua::TriMeshLoader::NORMALIZE_SCALE));
+  // geometry->translate(-0.6, 0.0, 0.0);
+  // geometry->translate(0.0, 0.05, 0.0);
+  teichplatz->scale(10);
+  teichplatz->rotate(-90,gua::math::vec3(1.0,0.0,0.0));
+  graph.add_node("/transform", teichplatz);
+#endif
+
+#if SCENE_WAPPEN
+auto wappen(loader.create_geometry_from_file(
+      "wappen",  "../data/objects/Wappen/2m8k.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+      gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+      gua::TriMeshLoader::NORMALIZE_SCALE));
+  // geometry->translate(-0.6, 0.0, 0.0);
+  // geometry->translate(0.0, 0.05, 0.0);
+  wappen->rotate(180,gua::math::vec3(1.0,0.0,0.0));
+  wappen->scale(2);
+  graph.add_node("/transform", wappen);
+#endif
 
   auto sun_light = graph.add_node<gua::node::LightNode>("/", "sun_light");
   sun_light->data.set_type(gua::node::LightNode::Type::SUN);
@@ -418,7 +458,7 @@ int main(int argc, char** argv) {
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, true);
+      renderer.queue_draw({&graph}, false);
     }
   });
 
