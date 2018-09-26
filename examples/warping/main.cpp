@@ -143,7 +143,7 @@ int main(int argc, char** argv) {
   // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
   plod_transform->translate(0.3, 0.08, 0.0);
 
-#else if !defined SCENE_RUIN || !defined SCENE_TEICH || !defined SCENE_WAPPEN
+#elif !defined SCENE_RUIN || !defined SCENE_TEICH || !defined SCENE_WAPPEN
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
       "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
