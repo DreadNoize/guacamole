@@ -20,11 +20,11 @@
  *                                                                            *
  ******************************************************************************/
 
-#define ENABLE_LOD false
+#define ENABLE_LOD true
 #define ENABLE_HMD false
-#define SCENE_RUIN true
-#define SCENE_TEICH true
-#define SCENE_WAPPEN true
+#define SCENE_RUIN false
+#define SCENE_TEICH false
+#define SCENE_WAPPEN false
 
 #include <functional>
 
@@ -132,16 +132,17 @@ int main(int argc, char** argv) {
 
   auto plod_node = lod_loader.load_lod_pointcloud(
       "pointcloud",
-      "/data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
+      "../data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
       lod_rough,
       gua::LodLoader::NORMALIZE_POSITION | gua::LodLoader::NORMALIZE_SCALE |
           gua::LodLoader::MAKE_PICKABLE);
 
   graph.add_node("/transform/plod_transform", plod_node);
 
-  plod_transform->rotate(90.0, 0.0, 1.0, 0.0);
-  // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
-  plod_transform->translate(0.3, 0.08, 0.0);
+  plod_transform->rotate(-90.0, 1.0, 0.0, 0.0);
+  // plod_transform->rotate(90.0, 0.0, 0.0, 1.0);
+  // plod_transform->translate(0.3, 0.08, 0.0);
+  plod_transform->scale(10);
 
 #elif !defined SCENE_RUIN || !defined SCENE_TEICH || !defined SCENE_WAPPEN
   // the model will be attached to the transform node
@@ -458,7 +459,7 @@ auto wappen(loader.create_geometry_from_file(
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, false);
+      renderer.queue_draw({&graph}, true);
     }
   });
 

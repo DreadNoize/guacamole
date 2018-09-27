@@ -93,7 +93,7 @@ std::pair<DB<T>, DB<T> > spawnDoublebufferred() {
 }  // namespace
 
 namespace gua {
-using namespace std::chrono_literals;
+// using namespace std::literals::chrono_literals;
 
 float Renderer::time_budget = 0;
 float Renderer::time_warped = 0;
@@ -117,7 +117,7 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
   FpsCounter fpsc(20);
   fpsc.start();
 
-  TextFile single_times = TextFile("../data/evaluation/single_times.txt");
+  TextFile single_times = TextFile("../data/evaluation/single_times_teichplatz_lod.txt");
 
   float accumulated_time = 0;
   std::stringstream stream;
