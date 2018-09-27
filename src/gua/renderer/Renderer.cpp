@@ -117,7 +117,11 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
   FpsCounter fpsc(20);
   fpsc.start();
 
+  TextFile single_times = TextFile("../data/evaluation/single_times.txt");
+
   float accumulated_time = 0;
+  std::stringstream stream;
+  stream << "======================== SINGLE THREAD ========================" << std::endl;
   
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
@@ -200,20 +204,26 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
 
         pipe->fetch_gpu_query_results(pipe->get_context());
         if (pipe->get_context().framecount % 100 == 0) {
-          int i = 0;
           auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
           float total_time = 0;
-          std::cout << "===== Time Queries for Context: " << pipe->get_context().id
-                    << " ============================" << std::endl;
+          // std::cout << "===== Time Queries for Context: " << pipe->get_context().id
+          //           << " ============================" << std::endl;
+          // for (auto const& t : query_results->results) {
+          //   std::cout << t.first << " : " << t.second << " ms" << std::endl;
+          //   total_time += t.second;
+          // }
+          // std::cout << "Total" << " : " << total_time << " ms" << std::endl;
+          // std::cout << std::endl;
+          stream << "===============================================================" << std::endl;
+          stream << "==================        FPS: " << window->get_rendering_fps() << "       ==================" << std::endl;
+          stream << "===============================================================" << std::endl;
+          stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
           for (auto const& t : query_results->results) {
-            std::cout << t.first << " : " << t.second << " ms" << std::endl;
+            stream << t.first << " : " << t.second << " ms" << std::endl;
             total_time += t.second;
-            i++;
           }
-          accumulated_time += total_time;
-          std::cout << "Total" << " : " << total_time << " ms" << std::endl;
-          // std::cout << "Average" << " : " << accumulated_time/i << " ms" << std::endl;
-          std::cout << std::endl;
+          stream << "Total" << " : " << total_time << " ms" << std::endl;
+          stream << std::endl;
           query_results->results.clear();
         }
 
@@ -228,8 +238,9 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
 
       }
     }
-
   }
+  single_times.set_content(stream.str());
+  single_times.save();
 }
 
 void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
@@ -243,8 +254,8 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
   offscreen_window->config.set_title("SLOW CLIENT WINDOW");
 
   float accumulated_time = 0;
-  float avg_grid_gen = 0;
-  float avg_warp = 0;
+  std::stringstream stream;
+  stream << "========================= SLOW CLIENT =========================" << std::endl;
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     {
@@ -446,20 +457,27 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 
         pipe->fetch_gpu_query_results(pipe->get_context());
         if (pipe->get_context().framecount % 100 == 0) {
-          int i = 0;
           auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
           float total_time = 0;
-          std::cout << "===== Time Queries for Context: " << pipe->get_context().id
-            << " ============================" << std::endl;
+          // std::cout << "===== Time Queries for Context: " << pipe->get_context().id
+          //   << " ============================" << std::endl;
+          // for (auto const& t : query_results->results) {
+          //   std::cout << t.first << " : " << t.second << " ms" << std::endl;
+          //   total_time += t.second;
+          // }
+          // std::cout << "Total" << " : " << total_time << " ms" << std::endl;
+          // std::cout << std::endl;
+          stream << "===============================================================" << std::endl;
+          stream << "==================        FPS: " << offscreen_window->get_rendering_fps() << "       ==================" << std::endl;
+          stream << "===============================================================" << std::endl;
+          stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
           for (auto const& t : query_results->results) {
-            std::cout << t.first << " : " << t.second << " ms" << std::endl;
+            stream << t.first << " : " << t.second << " ms" << std::endl;
             total_time += t.second;
-            i++;
           }
-          accumulated_time += total_time;
-          std::cout << "Total" << " : " << total_time << " ms" << std::endl;
-          // std::cout << "Average" << " : " << accumulated_time/i << " ms" << std::endl;
-          std::cout << std::endl;
+          stream << "Total" << " : " << total_time << " ms" << std::endl;
+          stream << std::endl;
+          
           query_results->results.clear();
         }
 
@@ -472,6 +490,8 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         fpsc.step();
       }
     }
+    warp_res[window_name]->slow_client_times.set_content(stream.str());
+    warp_res[window_name]->slow_client_times.save();
   // Sleep(50);
   }
   
@@ -483,8 +503,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
   fpsc.start();
 #if MULTITHREADED
   float accumulated_time = 0;
-  float avg_grid_gen = 0;
-  float avg_warp = 0;
+  std::stringstream stream;
+  stream << "========================= FAST CLIENT =========================" << std::endl;
+
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     // std::cout << "[FAST] Camera id: " << cmd.serialized_cam->uuid << std::endl;
     {
@@ -668,14 +689,25 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
             total_time += t.second;
         }
         if (pipe->get_context().framecount % 100 == 0) {
-          std::cout << "===== Time Queries for Context: " << pipe->get_context().id
-                    << " ============================" << std::endl;
+          // std::cout << "===== Time Queries for Context: " << pipe->get_context().id
+          //           << " ============================" << std::endl;
+          // for (auto const& t : query_results->results) {
+          //   std::cout << t.first << " : " << t.second << " ms" << std::endl;
+          // }
+          // std::cout << "Total" << " : " << total_time << " ms" << std::endl;
+          // std::cout << std::endl;
+          stream << "===============================================================" << std::endl;
+          stream << "==================        FPS: " << window->get_rendering_fps() << "       ==================" << std::endl;
+          stream << "===============================================================" << std::endl;
+          stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
           for (auto const& t : query_results->results) {
-            std::cout << t.first << " : " << t.second << " ms" << std::endl;
+            stream << t.first << " : " << t.second << " ms" << std::endl;
           }
-          std::cout << "Total" << " : " << total_time << " ms" << std::endl;
-          std::cout << std::endl;
+          stream << "Total" << " : " << total_time << " ms" << std::endl;
+          stream << std::endl;
+
         }
+        // std::cout << "[FAST] is textfile valid: " << (warp_res[window_name]->fast_client_times.is_valid()? "Yo" : "Nope") << std::endl;
         query_results->results.clear();
         
 
@@ -691,9 +723,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         window->finish_frame();
         time_warped = time_budget - total_time;
         time_left = time_warped;
-        while (time_left > 1.1) {
-          time_left -= 0.1;
-          // std::this_thread::sleep_for(0.1ms);
+        while (time_warped >= time_left > 1.1) {
+          time_left -= 0.05;
+          // std::this_thread::sleep_for(0.09ms);
           // std::cout << "[FAST] time left: " << time_left << std::endl;
         }
         time_left = time_budget;
@@ -702,6 +734,8 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
       }
       // swap buffers
     }
+    warp_res[window_name]->fast_client_times.set_content(stream.str());
+    warp_res[window_name]->fast_client_times.save();
   }
 #endif
 }

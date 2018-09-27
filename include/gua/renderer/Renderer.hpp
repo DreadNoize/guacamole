@@ -31,6 +31,7 @@
 #include <gua/platform.hpp>
 #include <gua/math.hpp>
 #include <gua/utils/FpsCounter.hpp>
+#include <gua/utils/TextFile.hpp>
 #include <gua/concurrent/Doublebuffer.hpp>
 #include <gua/renderer/RenderContext.hpp>
 #include <gua/renderer/Texture2D.hpp>
@@ -321,6 +322,8 @@ class GUA_DLL Renderer {
 
     std::tuple<bool,bool,bool> is_left = std::make_tuple<bool,bool,bool>(false, false, false);
 
+    TextFile fast_client_times = TextFile("../data/evaluation/fast_client_times_teichplatz.txt");
+    TextFile slow_client_times = TextFile("../data/evaluation/slow_client_times_teichplatz.txt");
 
     bool grid_initialized = false;
     bool grid_generated_left = false;
@@ -381,7 +384,7 @@ class GUA_DLL Renderer {
       //continue
     } else {
       while (time_left < 1.0 && time_left > time_warped) {
-        std::this_thread::sleep_for(0.1ms);
+        std::this_thread::sleep_for(0.09ms);
       }
     }
   }
