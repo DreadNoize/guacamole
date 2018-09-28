@@ -322,8 +322,8 @@ class GUA_DLL Renderer {
 
     std::tuple<bool,bool,bool> is_left = std::make_tuple<bool,bool,bool>(false, false, false);
 
-    TextFile fast_client_times = TextFile("../data/evaluation/fast_client_times_teichplatz.txt");
-    TextFile slow_client_times = TextFile("../data/evaluation/slow_client_times_teichplatz.txt");
+    TextFile fast_client_times = TextFile("../data/evaluation/fast_client_mono_wappen.txt");
+    TextFile slow_client_times = TextFile("../data/evaluation/slow_client_mono_wappen.txt");
 
     bool grid_initialized = false;
     bool grid_generated_left = false;

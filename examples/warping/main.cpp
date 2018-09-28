@@ -20,11 +20,11 @@
  *                                                                            *
  ******************************************************************************/
 
-#define ENABLE_LOD false
-#define ENABLE_HMD false
-#define SCENE_RUIN true
-#define SCENE_TEICH true
-#define SCENE_WAPPEN true
+#define ENABLE_LOD    false
+#define ENABLE_HMD    false
+#define SCENE_RUIN    false
+#define SCENE_TEICH   false
+#define SCENE_WAPPEN  false
 
 #include <functional>
 
@@ -58,7 +58,7 @@
 bool manipulation_navigator = true;
 bool manipulation_camera = false;
 bool warping = true;
-bool stereo = true;
+bool stereo = false;
 
 
 /* scenegraph overview for "main_scenegraph"
@@ -143,7 +143,7 @@ int main(int argc, char** argv) {
   // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
   plod_transform->translate(0.3, 0.08, 0.0);
 
-#elif !defined SCENE_RUIN || !defined SCENE_TEICH || !defined SCENE_WAPPEN
+#elif  !SCENE_RUIN && !SCENE_TEICH && !SCENE_WAPPEN
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
       "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
@@ -340,6 +340,7 @@ auto wappen(loader.create_geometry_from_file(
     if(stereo) {
 #if !ENABLE_HMD
       camera->config.set_enable_stereo(true);
+      warp_cam->config.set_enable_stereo(true);
       window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
       window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
       window->config.set_left_resolution(resolution);
@@ -349,6 +350,7 @@ auto wappen(loader.create_geometry_from_file(
 #endif
     } else {
       camera->config.set_enable_stereo(false);
+      warp_cam->config.set_enable_stereo(false);
       window->config.set_stereo_mode(gua::StereoMode::MONO);
       // window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
       window->config.set_left_resolution(resolution);
@@ -458,7 +460,7 @@ auto wappen(loader.create_geometry_from_file(
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, false);
+      renderer.queue_draw({&graph}, true);
     }
   });
 
