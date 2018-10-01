@@ -168,6 +168,20 @@ int main(int argc, char** argv) {
 	  stereo = ((std::string(argv[2])=="0")?false:true);
 	  test_scene = std::string(argv[3]);
 	  record_path = ((std::string(argv[4]) == "0") ? false : true);
+    std::cout << "\n ====== EVALUATION TEST ====== " << std::endl;
+    std::cout << "  Warping:   " << ((warping==true)? "On" : "Off") << std::endl;
+    std::cout << "  Stereo:    " << ((stereo==true)? "On" : "Off") << std::endl;
+    if (test_scene=="0") {
+      std::cout << "  Scene:     Teichgraben" << std::endl;
+    } else if (test_scene=="0") {
+      std::cout << "  Scene:     Teichgraben + Ruine" << std::endl;
+    } else if (test_scene=="0") {
+      std::cout << "  Scene:     Teichgraben LoD" << std::endl;
+    } else {
+      std::cout << "  Scene:     Sponza" << std::endl;
+    }
+    std::cout << "  Recording: " << ((record_path==true)? "On" : "Off") << std::endl;
+    std::cout << " ============================= \n " << std::endl;
     argc = 1;
   }
 
