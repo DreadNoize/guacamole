@@ -1,5 +1,18 @@
 #Timings
 
+Test Case:
+./warping  {warping on/off = 0/1} {mono/stereo = 0/1} {scene: teichplatz/teichplatz+ruine/teichplatz_lod = 0/1/2}
+
+
+##Test PCs
+LAB:
+    - Titan X (Pascal)
+    - Intel i7-5930K @ 3.50 GHz
+    - 15.98 GB RAM
+HOME:
+    - GTX 760
+
+
 ##Models
 Ruine:      11 751 088 faces
 Teichplatz: 21 984 286 faces

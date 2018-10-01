@@ -22,8 +22,8 @@
 
 #define ENABLE_LOD    false
 #define ENABLE_HMD    false
-#define SCENE_RUIN    false
-#define SCENE_TEICH   false
+#define SCENE_RUIN    true
+#define SCENE_TEICH   true
 #define SCENE_WAPPEN  false
 
 #include <functional>
@@ -59,6 +59,7 @@ bool manipulation_navigator = true;
 bool manipulation_camera = false;
 bool warping = true;
 bool stereo = false;
+std::string test_scene = "3";
 
 
 /* scenegraph overview for "main_scenegraph"
@@ -85,9 +86,18 @@ void mouse_button (gua::utils::Trackball& trackball, int mousebutton, int action
   trackball.mouse(button, state, trackball.posx(), trackball.posy());
 }
 
+
+
 int main(int argc, char** argv) {
   // initialize guacamole
-  gua::init(argc, argv);
+  if(argc == 4) {
+	  warping = ((std::string(argv[1])=="0")?false:true);
+	  stereo = ((std::string(argv[2])=="0")?false:true);
+	  test_scene = std::string(argv[3]);
+    argc = 1;
+  }
+
+  gua::init(argc, &argv[0]);
 
   // initialize movement and mouse interaction
   gua::utils::Trackball object_trackball(0.01, 0.002, 0.2);
@@ -102,30 +112,102 @@ int main(int argc, char** argv) {
   // initialize trimeshloader for model loading
   gua::TriMeshLoader loader;
 
-#if ENABLE_LOD
-  // create simple untextured material shader
-  auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
-  auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
-  gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
+// #if ENABLE_LOD
+//   // create simple untextured material shader
+//   auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
+//   auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
+//   gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
 
-  //create material for pointcloud
-  auto lod_rough = lod_keep_color_shader->make_new_material();
-  lod_rough->set_uniform("metalness", 0.0f);
-  lod_rough->set_uniform("roughness", 0.3f);
-  lod_rough->set_uniform("emissivity", 0.0f);
+//   //create material for pointcloud
+//   auto lod_rough = lod_keep_color_shader->make_new_material();
+//   lod_rough->set_uniform("metalness", 0.0f);
+//   lod_rough->set_uniform("roughness", 0.3f);
+//   lod_rough->set_uniform("emissivity", 0.0f);
 
-  //configure lod backend
-  gua::LodLoader lod_loader;
-  lod_loader.set_out_of_core_budget_in_mb(4096);
-  lod_loader.set_render_budget_in_mb(1024);
-  lod_loader.set_upload_budget_in_mb(30);
-#endif
+//   //configure lod backend
+//   gua::LodLoader lod_loader;
+//   lod_loader.set_out_of_core_budget_in_mb(4096);
+//   lod_loader.set_render_budget_in_mb(1024);
+//   lod_loader.set_upload_budget_in_mb(30);
+// #endif
 
   // create a transform node
   // which will be attached to the scenegraph
   auto transform = graph.add_node<gua::node::TransformNode>("/", "transform");
 
+  if(test_scene == "0" || test_scene == "1") { // TEICHPLATZ
+    auto teichplatz(loader.create_geometry_from_file(
+        "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    // geometry->translate(0.0, 0.05, 0.0);
+    teichplatz->scale(10);
+    teichplatz->rotate(-90,gua::math::vec3(1.0,0.0,0.0));
+    graph.add_node("/transform", teichplatz);
+
+  } else if (test_scene == "1") { // RUINE
+    auto ruine(loader.create_geometry_from_file(
+        "ruine",  "../data/objects/Ruine/Modell_Ruine.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    // geometry->translate(0.0, 0.05, 0.0);
+    ruine->rotate(180,gua::math::vec3(1.0,0.0,0.0));
+    ruine->scale(10);
+    graph.add_node("/transform", ruine);
+
+  } else if (test_scene == "2") { // TEICHPLATZ LOD
 #if ENABLE_LOD
+    // create simple untextured material shader
+    auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
+    auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
+    gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
+
+    //create material for pointcloud
+    auto lod_rough = lod_keep_color_shader->make_new_material();
+    lod_rough->set_uniform("metalness", 0.0f);
+    lod_rough->set_uniform("roughness", 0.3f);
+    lod_rough->set_uniform("emissivity", 0.0f);
+
+    //configure lod backend
+    gua::LodLoader lod_loader;
+    lod_loader.set_out_of_core_budget_in_mb(4096);
+    lod_loader.set_render_budget_in_mb(1024);
+    lod_loader.set_upload_budget_in_mb(30);
+    
+    auto mlod_transform = graph.add_node<gua::node::TransformNode>("/transform", "mlod_transform");
+    auto plod_transform = graph.add_node<gua::node::TransformNode>("/transform", "plod_transform");
+    auto tri_transform = graph.add_node<gua::node::TransformNode>("/transform", "tri_transform");
+
+    auto plod_node = lod_loader.load_lod_pointcloud(
+        "pointcloud",
+        "/data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
+        lod_rough,
+        gua::LodLoader::NORMALIZE_POSITION | gua::LodLoader::NORMALIZE_SCALE |
+            gua::LodLoader::MAKE_PICKABLE);
+
+    graph.add_node("/transform/plod_transform", plod_node);
+
+    plod_transform->rotate(90.0, 0.0, 1.0, 0.0);
+    // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
+    plod_transform->translate(0.3, 0.08, 0.0);
+#endif
+
+  } else { // SPONZA
+    // the model will be attached to the transform node
+    auto geometry(loader.create_geometry_from_file(
+        "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    geometry->translate(0.0, 0.05, 0.0);
+    geometry->scale(20);
+    graph.add_node("/transform", geometry);
+
+  }
+ 
+/* #if ENABLE_LOD
   auto mlod_transform = graph.add_node<gua::node::TransformNode>("/transform", "mlod_transform");
   auto plod_transform = graph.add_node<gua::node::TransformNode>("/transform", "plod_transform");
   auto tri_transform = graph.add_node<gua::node::TransformNode>("/transform", "tri_transform");
@@ -190,7 +272,7 @@ auto wappen(loader.create_geometry_from_file(
   wappen->scale(2);
   graph.add_node("/transform", wappen);
 #endif
-
+ */
   auto sun_light = graph.add_node<gua::node::LightNode>("/", "sun_light");
   sun_light->data.set_type(gua::node::LightNode::Type::SUN);
   sun_light->data.set_color(gua::utils::Color3f(1.5f, 1.2f, 1.f));
@@ -210,7 +292,7 @@ auto wappen(loader.create_geometry_from_file(
 
 
   // resolution to be used for camera resolution and windows size
-  auto resolution = gua::math::vec2ui(1280, 720);
+  auto resolution = gua::math::vec2ui(1920, 1080);
 
 // set up window
 #if ENABLE_HMD
@@ -460,7 +542,7 @@ auto wappen(loader.create_geometry_from_file(
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, true);
+      renderer.queue_draw({&graph}, warping);
     }
   });
 
