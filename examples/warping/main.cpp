@@ -27,6 +27,9 @@
 #define SCENE_WAPPEN  false
 
 #include <functional>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 #include <gua/guacamole.hpp>
 #include <gua/renderer/TriMeshLoader.hpp>
@@ -39,6 +42,7 @@
 #include <gua/renderer/TexturedQuadPass.hpp>
 #include <gua/renderer/TexturedScreenSpaceQuadPass.hpp>
 #include <gua/renderer/WarpRenderer.hpp>
+#include <gua/utils/TextFile.hpp>
 
 #if ENABLE_LOD
 #include <gua/renderer/LodLoader.hpp>
@@ -60,6 +64,12 @@ bool manipulation_camera = false;
 bool warping = true;
 bool stereo = false;
 std::string test_scene = "3";
+
+std::vector<gua::math::mat4> key_frames;
+std::vector<gua::math::mat4> cam_path;
+std::stringstream path_data;
+
+gua::TextFile cam_path_sponza = gua::TextFile("../data/evaluation/cam_path_sponza.txt");
 
 
 /* scenegraph overview for "main_scenegraph"
@@ -86,7 +96,20 @@ void mouse_button (gua::utils::Trackball& trackball, int mousebutton, int action
   trackball.mouse(button, state, trackball.posx(), trackball.posy());
 }
 
+void add_keyframe(gua::math::mat4 cam_transform) {
+  key_frames.push_back(cam_transform);
+  std::cout << " Key Frame " << key_frames.size()-1 << " added!" << std::endl;
+  path_data << cam_transform[0] << "," << cam_transform[1] << "," << cam_transform[2] << "," << cam_transform[3] << ","
+      << cam_transform[4] << "," << cam_transform[5] << "," << cam_transform[6] << "," << cam_transform[7] << ","
+      << cam_transform[8] << "," << cam_transform[9] << "," << cam_transform[10] << "," << cam_transform[11] << ","
+      << cam_transform[12] << "," << cam_transform[13] << "," << cam_transform[14] << "," << cam_transform[15] << std::endl;
+  // path_data << "\n" << std::endl;
+  gua::WarpRenderer::print_matrix(key_frames.back(), "Keyframe");             
+}
 
+void calculate_path(std::ifstream const& input) {
+  
+}
 
 int main(int argc, char** argv) {
   // initialize guacamole
@@ -96,6 +119,7 @@ int main(int argc, char** argv) {
 	  test_scene = std::string(argv[3]);
     argc = 1;
   }
+
 
   gua::init(argc, &argv[0]);
 
@@ -135,7 +159,8 @@ int main(int argc, char** argv) {
   // which will be attached to the scenegraph
   auto transform = graph.add_node<gua::node::TransformNode>("/", "transform");
 
-  if(test_scene == "0" || test_scene == "1") { // TEICHPLATZ
+  std::ifstream input_key_frames;
+  if(test_scene == "0") { // TEICHPLATZ
     auto teichplatz(loader.create_geometry_from_file(
         "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
         gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
@@ -147,6 +172,16 @@ int main(int argc, char** argv) {
     graph.add_node("/transform", teichplatz);
 
   } else if (test_scene == "1") { // RUINE
+    auto teichplatz(loader.create_geometry_from_file(
+        "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    // geometry->translate(0.0, 0.05, 0.0);
+    teichplatz->scale(10);
+    teichplatz->rotate(-90,gua::math::vec3(1.0,0.0,0.0));
+    graph.add_node("/transform", teichplatz);
+
     auto ruine(loader.create_geometry_from_file(
         "ruine",  "../data/objects/Ruine/Modell_Ruine.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
         gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
@@ -196,6 +231,8 @@ int main(int argc, char** argv) {
 
   } else { // SPONZA
     // the model will be attached to the transform node
+    // input_key_frames.open("../data/evaluation/cam_path_sponza.txt");
+    // calculate_path(input_key_frames);
     auto geometry(loader.create_geometry_from_file(
         "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
         gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
@@ -472,6 +509,9 @@ auto wappen(loader.create_geometry_from_file(
         //   stereo = !stereo;
         //   updat_view_mode();
         //   break;
+        case 'K':
+          add_keyframe(camera->get_world_transform());
+          break;
         case 256:
           window->set_should_close();
           break;
@@ -536,6 +576,8 @@ auto wappen(loader.create_geometry_from_file(
     window->process_events();
     if (window->should_close()) {
       // stop rendering and close the window
+      cam_path_sponza.set_content(path_data.str());
+      cam_path_sponza.save();
       renderer.stop();
       window->close();
       loop.stop();
