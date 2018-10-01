@@ -1,7 +1,7 @@
 #Timings
 
 Test Case:
-./warping  {warping on/off = 0/1} {mono/stereo = 0/1} {scene: teichplatz/teichplatz+ruine/teichplatz_lod = 0/1/2}
+./warping  {warping on/off = 1/0} {mono/stereo = 0/1} {scene: teichplatz/teichplatz+ruine/teichplatz_lod = 0/1/2} {record path: on/off = 1/0}
 
 
 ##Test PCs

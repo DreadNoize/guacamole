@@ -99,6 +99,9 @@ float Renderer::time_budget = 0;
 float Renderer::time_warped = 0;
 float Renderer::time_left = 0;
 
+bool Renderer::stereo_ = true;
+std::string Renderer::test_scene_ = "4";
+
 std::shared_ptr<const Renderer::SceneGraphs> garbage_collected_copy(
     std::vector<SceneGraph const*> const& scene_graphs) {
   auto sgs = std::make_shared<Renderer::SceneGraphs>();
@@ -116,8 +119,28 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
 
   FpsCounter fpsc(20);
   fpsc.start();
-
-  TextFile single_times = TextFile("../data/evaluation/single_mono_wappen.txt");
+  TextFile single_times;
+  if (stereo_) {
+    if (test_scene_ == "0") {
+      single_times = TextFile("../data/evaluation/single_stereo_teichplatz.txt");
+    } else if (test_scene_ == "1") {
+      single_times = TextFile("../data/evaluation/single_stereo_teichplatz_ruine.txt");
+    } else if (test_scene_ == "2") {
+      single_times = TextFile("../data/evaluation/single_stereo_teichplatz_lod.txt");
+    } else {
+      single_times = TextFile("../data/evaluation/single_stereo_sponza.txt");
+    }
+  } else {
+    if (test_scene_ == "0") {
+      single_times = TextFile("../data/evaluation/single_mono_teichplatz.txt");
+    } else if (test_scene_ == "1") {
+      single_times = TextFile("../data/evaluation/single_mono_teichplatz_ruine.txt");
+    } else if (test_scene_ == "2") {
+      single_times = TextFile("../data/evaluation/single_mono_teichplatz_lod.txt");
+    } else {
+      single_times = TextFile("../data/evaluation/single_mono_sponza.txt");
+    }
+  }
 
   float accumulated_time = 0;
   int counter = 0;

@@ -63,13 +63,18 @@ bool manipulation_navigator = true;
 bool manipulation_camera = false;
 bool warping = true;
 bool stereo = false;
+bool record_path = false;
 std::string test_scene = "3";
 
-std::vector<gua::math::mat4> key_frames;
-std::vector<gua::math::mat4> cam_path;
+std::vector<gua::math::mat4d> key_frames;
+std::vector<gua::math::mat4d> path_key_frames;
+std::vector<gua::math::mat4d> cam_path;
 std::stringstream path_data;
 
 gua::TextFile cam_path_sponza = gua::TextFile("../data/evaluation/cam_path_sponza.txt");
+gua::TextFile cam_path_teichplatz = gua::TextFile("../data/evaluation/cam_path_teichplatz.txt");
+gua::TextFile cam_path_teichplatz_ruine = gua::TextFile("../data/evaluation/cam_path_teichplatz_ruine.txt");
+gua::TextFile cam_path_teichplatz_lod = gua::TextFile("../data/evaluation/cam_path_teichplatz_lod.txt");
 
 
 /* scenegraph overview for "main_scenegraph"
@@ -96,7 +101,7 @@ void mouse_button (gua::utils::Trackball& trackball, int mousebutton, int action
   trackball.mouse(button, state, trackball.posx(), trackball.posy());
 }
 
-void add_keyframe(gua::math::mat4 cam_transform) {
+void add_keyframe(gua::math::mat4d cam_transform) {
   key_frames.push_back(cam_transform);
   std::cout << " Key Frame " << key_frames.size()-1 << " added!" << std::endl;
   path_data << cam_transform[0] << "," << cam_transform[1] << "," << cam_transform[2] << "," << cam_transform[3] << ","
@@ -107,16 +112,62 @@ void add_keyframe(gua::math::mat4 cam_transform) {
   gua::WarpRenderer::print_matrix(key_frames.back(), "Keyframe");             
 }
 
-void calculate_path(std::ifstream const& input) {
-  
+void calculate_path(std::ifstream& input) {
+	std::string line;
+	while (std::getline(input, line)) {
+    gua::math::mat4d matrix; 
+    std::stringstream lines(line);
+    std::string value;
+    int i = 0;
+    while (std::getline(lines, value, ',')) {
+      matrix[i] = std::stof(value);
+      i++;
+    }
+    path_key_frames.push_back(matrix);
+	  // gua::WarpRenderer::print_matrix(matrix, "KEY FRAME");
+	}
+}
+
+void interpolate_path() {
+  cam_path.push_back(path_key_frames[0]);
+  for(int i = 0; i < path_key_frames.size()-1; i++) {
+
+    auto temp = path_key_frames[i];
+    gua::math::vec3 transform_old = gua::math::vec3(temp[12], temp[13], temp[14]);
+    gua::math::quatd rot_old = scm::math::quat<double>::from_matrix(temp);
+
+    temp = path_key_frames[i+1];
+    gua::math::vec3 transform_new = gua::math::vec3(temp[12], temp[13], temp[14]);
+    gua::math::quatd rot_new = scm::math::quat<double>::from_matrix(temp);
+
+    for (int j = 0; j < 51; j++) {
+      // translation
+      auto factor = (double)j/50;
+      auto diff = transform_new - transform_old;
+      diff *= factor;
+      auto frame_trans = transform_old + diff;
+
+      // rotation
+      auto frame_rot = (scm::math::slerp(rot_old, rot_new, factor)).to_matrix();
+
+	    auto frame = frame_rot;
+	    frame[12] = frame_trans.x;
+	    frame[13] = frame_trans.y;
+	    frame[14] = frame_trans.z;
+
+      cam_path.push_back(frame);
+    }
+  }
 }
 
 int main(int argc, char** argv) {
   // initialize guacamole
-  if(argc == 4) {
+	// std::cout << "argc: " << argc << std::endl;
+  if(argc == 5) {
 	  warping = ((std::string(argv[1])=="0")?false:true);
 	  stereo = ((std::string(argv[2])=="0")?false:true);
 	  test_scene = std::string(argv[3]);
+	  record_path = ((std::string(argv[4]) == "0") ? false : true);
     argc = 1;
   }
 
@@ -161,6 +212,11 @@ int main(int argc, char** argv) {
 
   std::ifstream input_key_frames;
   if(test_scene == "0") { // TEICHPLATZ
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_teichplatz.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
     auto teichplatz(loader.create_geometry_from_file(
         "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
         gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
@@ -172,6 +228,12 @@ int main(int argc, char** argv) {
     graph.add_node("/transform", teichplatz);
 
   } else if (test_scene == "1") { // RUINE
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_teichplatz_ruine.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
+
     auto teichplatz(loader.create_geometry_from_file(
         "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
         gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
@@ -194,6 +256,12 @@ int main(int argc, char** argv) {
 
   } else if (test_scene == "2") { // TEICHPLATZ LOD
 #if ENABLE_LOD
+if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_teichplatz_lod.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
+
     // create simple untextured material shader
     auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
     auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
@@ -231,8 +299,11 @@ int main(int argc, char** argv) {
 
   } else { // SPONZA
     // the model will be attached to the transform node
-    // input_key_frames.open("../data/evaluation/cam_path_sponza.txt");
-    // calculate_path(input_key_frames);
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_sponza.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
     auto geometry(loader.create_geometry_from_file(
         "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
         gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
@@ -510,7 +581,9 @@ auto wappen(loader.create_geometry_from_file(
         //   updat_view_mode();
         //   break;
         case 'K':
-          add_keyframe(camera->get_world_transform());
+          if (record_path) {
+            add_keyframe(navigation->get_world_transform());
+          }
           break;
         case 256:
           window->set_should_close();
@@ -540,7 +613,9 @@ auto wappen(loader.create_geometry_from_file(
   // be called by the given loop in the given interval
   gua::events::Ticker ticker(loop, 1.0 / 500.0);
 
+  gua::Renderer::set_test(stereo, test_scene);
   // log fps and handle close events
+  int i = 0;
   size_t ctr{};
   ticker.on_tick.connect([&]() {
     auto time = gua::Timer::get_now();
@@ -553,31 +628,60 @@ auto wappen(loader.create_geometry_from_file(
       // gua::WarpRenderer::print_matrix(warp_cam->get_world_transform(), "WARP CAM TRANSFORM");
       // gua::WarpRenderer::print_matrix(camera->get_world_transform(), "CAM TRANSFORM");
       // gua::WarpRenderer::print_matrix(camera->get_world_transform()-warp_cam->get_world_transform(), "CAM TRANSFORM - WARP CAM TRANSFORM");
+    }
 
+    if (ctr % 15 == 0) {
+      if (!record_path) {  
+		    //gua::WarpRenderer::print_matrix(cam_path[i], "NEW CAM POS");
+		    // gua::WarpRenderer::print_matrix(gua::math::get_rotation(cam_path[i]), "NEW CAM POS");
+        // navigation->set_transform(cam_path[i]);
+        // warp_navigation->set_transform(cam_path[i]);
+        navigation->set_transform(cam_path[i]);
+        warp_navigation->set_transform(cam_path[i]);
+        i++;
+      }
     }
 
     nav.update();
     warp_nav.update();
 
-    navigation->set_transform(gua::math::mat4(nav.get_transform()));
-    warp_navigation->set_transform(gua::math::mat4(warp_nav.get_transform()));
+    if (record_path) {
+      navigation->set_transform(gua::math::mat4(nav.get_transform()));
+      warp_navigation->set_transform(gua::math::mat4(warp_nav.get_transform()));
+    }
 
     gua::math::mat4 modelmatrix = scm::math::make_translation(gua::math::float_t(object_trackball.shiftx()),
                                                               gua::math::float_t(object_trackball.shifty()),
                                                               gua::math::float_t(object_trackball.distance())) * gua::math::mat4(object_trackball.rotation());
-    transform->set_transform(modelmatrix);
+    // transform->set_transform(modelmatrix);
 #if ENABLE_HMD
     auto hmd_transform = window->get_hmd_sensor_orientation();
     camera->set_transform(hmd_transform);
 	  warp_cam->set_transform(hmd_transform);
 
-    
 #endif
     window->process_events();
     if (window->should_close()) {
       // stop rendering and close the window
-      cam_path_sponza.set_content(path_data.str());
-      cam_path_sponza.save();
+      if (record_path) {  
+        if (test_scene == "0") {
+          cam_path_teichplatz.set_content(path_data.str());
+          cam_path_teichplatz.save();
+
+        } else if (test_scene == "1") {
+          cam_path_teichplatz_ruine.set_content(path_data.str());
+          cam_path_teichplatz_ruine.save();
+
+        } else if (test_scene == "2") {
+          cam_path_teichplatz_lod.set_content(path_data.str());
+          cam_path_teichplatz_lod.save();
+
+        } else {  
+          cam_path_sponza.set_content(path_data.str());
+          cam_path_sponza.save();
+
+        }
+      }
       renderer.stop();
       window->close();
       loop.stop();
