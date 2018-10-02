@@ -20,13 +20,16 @@
  *                                                                            *
  ******************************************************************************/
 
-#define ENABLE_LOD true
-#define ENABLE_HMD false
-#define SCENE_RUIN false
-#define SCENE_TEICH false
-#define SCENE_WAPPEN false
+#define ENABLE_LOD    true
+#define ENABLE_HMD    false
+#define SCENE_RUIN    true
+#define SCENE_TEICH   true
+#define SCENE_WAPPEN  false
 
 #include <functional>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 #include <gua/guacamole.hpp>
 #include <gua/renderer/TriMeshLoader.hpp>
@@ -39,6 +42,7 @@
 #include <gua/renderer/TexturedQuadPass.hpp>
 #include <gua/renderer/TexturedScreenSpaceQuadPass.hpp>
 #include <gua/renderer/WarpRenderer.hpp>
+#include <gua/utils/TextFile.hpp>
 
 #if ENABLE_LOD
 #include <gua/renderer/LodLoader.hpp>
@@ -58,7 +62,19 @@
 bool manipulation_navigator = true;
 bool manipulation_camera = false;
 bool warping = true;
-bool stereo = true;
+bool stereo = false;
+bool record_path = false;
+std::string test_scene = "3";
+
+std::vector<gua::math::mat4d> key_frames;
+std::vector<gua::math::mat4d> path_key_frames;
+std::vector<gua::math::mat4d> cam_path;
+std::stringstream path_data;
+
+gua::TextFile cam_path_sponza = gua::TextFile("../data/evaluation/cam_path_sponza.txt");
+gua::TextFile cam_path_teichplatz = gua::TextFile("../data/evaluation/cam_path_teichplatz.txt");
+gua::TextFile cam_path_teichplatz_ruine = gua::TextFile("../data/evaluation/cam_path_teichplatz_ruine.txt");
+gua::TextFile cam_path_teichplatz_lod = gua::TextFile("../data/evaluation/cam_path_teichplatz_lod.txt");
 
 
 /* scenegraph overview for "main_scenegraph"
@@ -85,9 +101,92 @@ void mouse_button (gua::utils::Trackball& trackball, int mousebutton, int action
   trackball.mouse(button, state, trackball.posx(), trackball.posy());
 }
 
+void add_keyframe(gua::math::mat4d cam_transform) {
+  key_frames.push_back(cam_transform);
+  std::cout << " Key Frame " << key_frames.size()-1 << " added!" << std::endl;
+  path_data << cam_transform[0] << "," << cam_transform[1] << "," << cam_transform[2] << "," << cam_transform[3] << ","
+      << cam_transform[4] << "," << cam_transform[5] << "," << cam_transform[6] << "," << cam_transform[7] << ","
+      << cam_transform[8] << "," << cam_transform[9] << "," << cam_transform[10] << "," << cam_transform[11] << ","
+      << cam_transform[12] << "," << cam_transform[13] << "," << cam_transform[14] << "," << cam_transform[15] << std::endl;
+  // path_data << "\n" << std::endl;
+  gua::WarpRenderer::print_matrix(key_frames.back(), "Keyframe");             
+}
+
+void calculate_path(std::ifstream& input) {
+	std::string line;
+	while (std::getline(input, line)) {
+    gua::math::mat4d matrix; 
+    std::stringstream lines(line);
+    std::string value;
+    int i = 0;
+    while (std::getline(lines, value, ',')) {
+      matrix[i] = std::stof(value);
+      i++;
+    }
+    path_key_frames.push_back(matrix);
+	  // gua::WarpRenderer::print_matrix(matrix, "KEY FRAME");
+	}
+}
+
+void interpolate_path() {
+  cam_path.push_back(path_key_frames[0]);
+  for(int i = 0; i < path_key_frames.size()-1; i++) {
+
+    auto temp = path_key_frames[i];
+    gua::math::vec3 transform_old = gua::math::vec3(temp[12], temp[13], temp[14]);
+    gua::math::quatd rot_old = scm::math::quat<double>::from_matrix(temp);
+
+    temp = path_key_frames[i+1];
+    gua::math::vec3 transform_new = gua::math::vec3(temp[12], temp[13], temp[14]);
+    gua::math::quatd rot_new = scm::math::quat<double>::from_matrix(temp);
+
+    for (int j = 0; j < 51; j++) {
+      // translation
+      auto factor = (double)j/50;
+      auto diff = transform_new - transform_old;
+      diff *= factor;
+      auto frame_trans = transform_old + diff;
+
+      // rotation
+      auto frame_rot = (scm::math::slerp(rot_old, rot_new, factor)).to_matrix();
+
+	    auto frame = frame_rot;
+	    frame[12] = frame_trans.x;
+	    frame[13] = frame_trans.y;
+	    frame[14] = frame_trans.z;
+
+      cam_path.push_back(frame);
+    }
+  }
+}
+
 int main(int argc, char** argv) {
   // initialize guacamole
-  gua::init(argc, argv);
+	// std::cout << "argc: " << argc << std::endl;
+  if(argc == 5) {
+	  warping = ((std::string(argv[1])=="0")?false:true);
+	  stereo = ((std::string(argv[2])=="0")?false:true);
+	  test_scene = std::string(argv[3]);
+	  record_path = ((std::string(argv[4]) == "0") ? false : true);
+    std::cout << "\n ====== EVALUATION TEST ====== " << std::endl;
+    std::cout << "  Warping:   " << ((warping==true)? "On" : "Off") << std::endl;
+    std::cout << "  Stereo:    " << ((stereo==true)? "On" : "Off") << std::endl;
+    if (test_scene=="0") {
+      std::cout << "  Scene:     Teichgraben" << std::endl;
+    } else if (test_scene=="1") {
+      std::cout << "  Scene:     Teichgraben + Ruine" << std::endl;
+    } else if (test_scene=="2") {
+      std::cout << "  Scene:     Teichgraben LoD" << std::endl;
+    } else {
+      std::cout << "  Scene:     Sponza" << std::endl;
+    }
+    std::cout << "  Recording: " << ((record_path==true)? "On" : "Off") << std::endl;
+    std::cout << " ============================= \n " << std::endl;
+    argc = 1;
+  }
+
+
+  gua::init(argc, &argv[0]);
 
   // initialize movement and mouse interaction
   gua::utils::Trackball object_trackball(0.01, 0.002, 0.2);
@@ -102,49 +201,156 @@ int main(int argc, char** argv) {
   // initialize trimeshloader for model loading
   gua::TriMeshLoader loader;
 
-#if ENABLE_LOD
-  // create simple untextured material shader
-  auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
-  auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
-  gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
+// #if ENABLE_LOD
+//   // create simple untextured material shader
+//   auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
+//   auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
+//   gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
 
-  //create material for pointcloud
-  auto lod_rough = lod_keep_color_shader->make_new_material();
-  lod_rough->set_uniform("metalness", 0.0f);
-  lod_rough->set_uniform("roughness", 0.3f);
-  lod_rough->set_uniform("emissivity", 0.0f);
+//   //create material for pointcloud
+//   auto lod_rough = lod_keep_color_shader->make_new_material();
+//   lod_rough->set_uniform("metalness", 0.0f);
+//   lod_rough->set_uniform("roughness", 0.3f);
+//   lod_rough->set_uniform("emissivity", 0.0f);
 
-  //configure lod backend
-  gua::LodLoader lod_loader;
-  lod_loader.set_out_of_core_budget_in_mb(4096);
-  lod_loader.set_render_budget_in_mb(1024);
-  lod_loader.set_upload_budget_in_mb(30);
-#endif
+//   //configure lod backend
+//   gua::LodLoader lod_loader;
+//   lod_loader.set_out_of_core_budget_in_mb(4096);
+//   lod_loader.set_render_budget_in_mb(1024);
+//   lod_loader.set_upload_budget_in_mb(30);
+// #endif
 
   // create a transform node
   // which will be attached to the scenegraph
   auto transform = graph.add_node<gua::node::TransformNode>("/", "transform");
 
+  std::ifstream input_key_frames;
+  if(test_scene == "0") { // TEICHPLATZ
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_teichplatz.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
+    auto teichplatz(loader.create_geometry_from_file(
+        "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    // geometry->translate(0.0, 0.05, 0.0);
+    teichplatz->scale(10);
+    teichplatz->rotate(-90,gua::math::vec3(1.0,0.0,0.0));
+    graph.add_node("/transform", teichplatz);
+
+  } else if (test_scene == "1") { // RUINE
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_teichplatz_ruine.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
+
+    auto teichplatz(loader.create_geometry_from_file(
+        "teichplatz",  "../data/objects/Teichplatz/3D_Modell_Teichplatz_WE.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    // geometry->translate(0.0, 0.05, 0.0);
+    teichplatz->scale(10);
+    teichplatz->rotate(-90,gua::math::vec3(1.0,0.0,0.0));
+    graph.add_node("/transform", teichplatz);
+
+    auto ruine(loader.create_geometry_from_file(
+        "ruine",  "../data/objects/Ruine/Modell_Ruine.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    // geometry->translate(0.0, 0.05, 0.0);
+    ruine->rotate(180,gua::math::vec3(1.0,0.0,0.0));
+    ruine->scale(10);
+    graph.add_node("/transform", ruine);
+
+  } else if (test_scene == "2") { // TEICHPLATZ LOD
+    std::cout << "Loading LOD!" << std::endl;
 #if ENABLE_LOD
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_teichplatz.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
+
+    // create simple untextured material shader
+    auto lod_keep_input_desc = std::make_shared<gua::MaterialShaderDescription>("../data/materials/PLOD_use_input_color.gmd");
+    auto lod_keep_color_shader(std::make_shared<gua::MaterialShader>("PLOD_pass_input_color", lod_keep_input_desc));
+    gua::MaterialShaderDatabase::instance()->add(lod_keep_color_shader);
+
+    //create material for pointcloud
+    auto lod_rough = lod_keep_color_shader->make_new_material();
+    lod_rough->set_uniform("metalness", 0.0f);
+    lod_rough->set_uniform("roughness", 0.3f);
+    lod_rough->set_uniform("emissivity", 0.0f);
+
+    //configure lod backend
+    gua::LodLoader lod_loader;
+    lod_loader.set_out_of_core_budget_in_mb(4096);
+    lod_loader.set_render_budget_in_mb(1024);
+    lod_loader.set_upload_budget_in_mb(30);
+    
+    auto mlod_transform = graph.add_node<gua::node::TransformNode>("/transform", "mlod_transform");
+    auto plod_transform = graph.add_node<gua::node::TransformNode>("/transform", "plod_transform");
+    auto tri_transform = graph.add_node<gua::node::TransformNode>("/transform", "tri_transform");
+
+    auto plod_node = lod_loader.load_lod_pointcloud(
+        "pointcloud",
+        "../data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
+        lod_rough,
+        gua::LodLoader::NORMALIZE_POSITION | gua::LodLoader::NORMALIZE_SCALE |
+            gua::LodLoader::MAKE_PICKABLE);
+
+    graph.add_node("/transform/plod_transform", plod_node);
+
+    // plod_transform->rotate(90.0, 0.0, 1.0, 0.0);
+    // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
+    // plod_transform->translate(0.3, 0.08, 0.0);
+    plod_transform->rotate(-90.0, 1.0, 0.0, 0.0);
+    plod_transform->scale(10);
+#endif
+
+  } else { // SPONZA
+    // the model will be attached to the transform node
+    if (!record_path) {  
+      input_key_frames.open("../data/evaluation/cam_path_sponza.txt");
+      calculate_path(input_key_frames);
+      interpolate_path();
+    }
+    auto geometry(loader.create_geometry_from_file(
+        "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
+        gua::TriMeshLoader::LOAD_MATERIALS | gua::TriMeshLoader::OPTIMIZE_MATERIALS |
+        gua::TriMeshLoader::NORMALIZE_SCALE));
+    // geometry->translate(-0.6, 0.0, 0.0);
+    geometry->translate(0.0, 0.05, 0.0);
+    geometry->scale(20);
+    graph.add_node("/transform", geometry);
+
+  }
+ 
+/* #if ENABLE_LOD
   auto mlod_transform = graph.add_node<gua::node::TransformNode>("/transform", "mlod_transform");
   auto plod_transform = graph.add_node<gua::node::TransformNode>("/transform", "plod_transform");
   auto tri_transform = graph.add_node<gua::node::TransformNode>("/transform", "tri_transform");
 
   auto plod_node = lod_loader.load_lod_pointcloud(
       "pointcloud",
-      "../data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
+      "/data/objects/Teichplatz_pointcloud/3D_Modell_Teichplatz_WE.bvh",
       lod_rough,
       gua::LodLoader::NORMALIZE_POSITION | gua::LodLoader::NORMALIZE_SCALE |
           gua::LodLoader::MAKE_PICKABLE);
 
   graph.add_node("/transform/plod_transform", plod_node);
 
-  plod_transform->rotate(-90.0, 1.0, 0.0, 0.0);
-  // plod_transform->rotate(90.0, 0.0, 0.0, 1.0);
-  // plod_transform->translate(0.3, 0.08, 0.0);
-  plod_transform->scale(10);
+  plod_transform->rotate(90.0, 0.0, 1.0, 0.0);
+  // plod_transform->rotate(180.0, 0.0, 1.0, 0.0);
+  plod_transform->translate(0.3, 0.08, 0.0);
 
-#elif !defined SCENE_RUIN || !defined SCENE_TEICH || !defined SCENE_WAPPEN
+#elif  !SCENE_RUIN && !SCENE_TEICH && !SCENE_WAPPEN
   // the model will be attached to the transform node
   auto geometry(loader.create_geometry_from_file(
       "geometry",  "../data/objects/sponza/sponza.obj",  gua::TriMeshLoader::OPTIMIZE_GEOMETRY | gua::TriMeshLoader::NORMALIZE_POSITION |
@@ -191,7 +397,7 @@ auto wappen(loader.create_geometry_from_file(
   wappen->scale(2);
   graph.add_node("/transform", wappen);
 #endif
-
+ */
   auto sun_light = graph.add_node<gua::node::LightNode>("/", "sun_light");
   sun_light->data.set_type(gua::node::LightNode::Type::SUN);
   sun_light->data.set_color(gua::utils::Color3f(1.5f, 1.2f, 1.f));
@@ -211,7 +417,7 @@ auto wappen(loader.create_geometry_from_file(
 
 
   // resolution to be used for camera resolution and windows size
-  auto resolution = gua::math::vec2ui(1280, 720);
+  auto resolution = gua::math::vec2ui(1920, 1080);
 
 // set up window
 #if ENABLE_HMD
@@ -317,7 +523,7 @@ auto wappen(loader.create_geometry_from_file(
   // warp_cam->translate(0,0,0);
   warp_cam->set_transform(camera->get_world_transform());
   warp_cam->config.set_resolution(resolution);
-  warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
+  warp_cam->config.set_screen_path("/navigation/warp_screen");
   warp_cam->config.set_far_clip(camera->config.get_far_clip());
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
 #endif
@@ -332,7 +538,7 @@ auto wappen(loader.create_geometry_from_file(
   warp_right_screen->data.set_size(right_size);
   warp_right_screen->translate(right_trans);
 #else
-  auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");
+  auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation", "warp_screen");
   warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
 #endif
   
@@ -341,6 +547,7 @@ auto wappen(loader.create_geometry_from_file(
     if(stereo) {
 #if !ENABLE_HMD
       camera->config.set_enable_stereo(true);
+      //warp_cam->config.set_enable_stereo(true);
       window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
       window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
       window->config.set_left_resolution(resolution);
@@ -350,6 +557,7 @@ auto wappen(loader.create_geometry_from_file(
 #endif
     } else {
       camera->config.set_enable_stereo(false);
+      warp_cam->config.set_enable_stereo(false);
       window->config.set_stereo_mode(gua::StereoMode::MONO);
       // window->config.set_size(gua::math::vec2ui(resolution.x, resolution.y));
       window->config.set_left_resolution(resolution);
@@ -389,6 +597,11 @@ auto wappen(loader.create_geometry_from_file(
         //   stereo = !stereo;
         //   updat_view_mode();
         //   break;
+        case 'K':
+          if (record_path) {
+            add_keyframe(navigation->get_world_transform());
+          }
+          break;
         case 256:
           window->set_should_close();
           break;
@@ -417,49 +630,82 @@ auto wappen(loader.create_geometry_from_file(
   // be called by the given loop in the given interval
   gua::events::Ticker ticker(loop, 1.0 / 500.0);
 
+  gua::Renderer::set_test(stereo, test_scene);
   // log fps and handle close events
+  int i = 0;
   size_t ctr{};
   ticker.on_tick.connect([&]() {
     auto time = gua::Timer::get_now();
     // geometry->rotate(time*0.00000000002, gua::math::vec3(0.0,1.0,0.0));
     // log fps every 150th tick
-    if (ctr++ % 150 == 0) {
+    if (ctr++ % 500 == 0) {
       gua::Logger::LOG_WARNING
         << "[APP] Frame time: " << 1000.f / renderer.get_application_fps()
         << " ms, fps: " << renderer.get_application_fps() << std::endl;
       // gua::WarpRenderer::print_matrix(warp_cam->get_world_transform(), "WARP CAM TRANSFORM");
       // gua::WarpRenderer::print_matrix(camera->get_world_transform(), "CAM TRANSFORM");
       // gua::WarpRenderer::print_matrix(camera->get_world_transform()-warp_cam->get_world_transform(), "CAM TRANSFORM - WARP CAM TRANSFORM");
+    }
 
+    if (ctr % 15 == 0) {
+      if (!record_path) {  
+		    //gua::WarpRenderer::print_matrix(cam_path[i], "NEW CAM POS");
+		    // gua::WarpRenderer::print_matrix(gua::math::get_rotation(cam_path[i]), "NEW CAM POS");
+        // navigation->set_transform(cam_path[i]);
+        // warp_navigation->set_transform(cam_path[i]);
+        navigation->set_transform(cam_path[i]);
+        warp_navigation->set_transform(cam_path[i]);
+        i++;
+      }
     }
 
     nav.update();
     warp_nav.update();
 
-    navigation->set_transform(gua::math::mat4(nav.get_transform()));
-    warp_navigation->set_transform(gua::math::mat4(warp_nav.get_transform()));
+    if (record_path) {
+      navigation->set_transform(gua::math::mat4(nav.get_transform()));
+      warp_navigation->set_transform(gua::math::mat4(warp_nav.get_transform()));
+    }
 
     gua::math::mat4 modelmatrix = scm::math::make_translation(gua::math::float_t(object_trackball.shiftx()),
                                                               gua::math::float_t(object_trackball.shifty()),
                                                               gua::math::float_t(object_trackball.distance())) * gua::math::mat4(object_trackball.rotation());
-    transform->set_transform(modelmatrix);
+    // transform->set_transform(modelmatrix);
 #if ENABLE_HMD
     auto hmd_transform = window->get_hmd_sensor_orientation();
     camera->set_transform(hmd_transform);
 	  warp_cam->set_transform(hmd_transform);
 
-    
 #endif
     window->process_events();
     if (window->should_close()) {
       // stop rendering and close the window
+      if (record_path) {  
+        if (test_scene == "0") {
+          cam_path_teichplatz.set_content(path_data.str());
+          cam_path_teichplatz.save();
+
+        } else if (test_scene == "1") {
+          cam_path_teichplatz_ruine.set_content(path_data.str());
+          cam_path_teichplatz_ruine.save();
+
+        } else if (test_scene == "2") {
+          cam_path_teichplatz_lod.set_content(path_data.str());
+          cam_path_teichplatz_lod.save();
+
+        } else {  
+          cam_path_sponza.set_content(path_data.str());
+          cam_path_sponza.save();
+
+        }
+      }
       renderer.stop();
       window->close();
       loop.stop();
     } else {
       // draw our scenegrapgh
       // std::cout << "MAIN: starting rendering..." << std::endl;
-      renderer.queue_draw({&graph}, true);
+      renderer.queue_draw({&graph}, warping);
     }
   });
 

@@ -27,7 +27,6 @@
 #include <string>
 #include <memory>
 #include <map>
-#include <chrono>
 
 #include <gua/platform.hpp>
 #include <gua/math.hpp>
@@ -296,6 +295,39 @@ class GUA_DLL Renderer {
     inline int current_vbo() {
       return ping ? 0 : 1;
     }
+
+    void choose_scene() {
+      if (Renderer::stereo_) {
+        if (Renderer::test_scene_ == "0") {
+          fast_client_times = TextFile("../data/evaluation/fast_client_stereo_teichplatz.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_stereo_teichplatz.txt");
+        } else if (Renderer::test_scene_ == "1") {
+          fast_client_times = TextFile("../data/evaluation/fast_client_stereo_teichplatz_ruine.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_stereo_teichplatz_ruine.txt");
+        } else if (Renderer::test_scene_ == "2") {
+          fast_client_times = TextFile("../data/evaluation/fast_client_stereo_teichplatz_lod.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_stereo_teichplatz_lod.txt");
+        } else {
+          fast_client_times = TextFile("../data/evaluation/fast_client_stereo_sponza.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_stereo_sponza.txt");
+        }
+      } else {
+        if (Renderer::test_scene_ == "0") {
+          fast_client_times = TextFile("../data/evaluation/fast_client_mono_teichplatz.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_mono_teichplatz.txt");
+        } else if (Renderer::test_scene_ == "1") {
+          fast_client_times = TextFile("../data/evaluation/fast_client_mono_teichplatz_ruine.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_mono_teichplatz_ruine.txt");
+        } else if (Renderer::test_scene_ == "2") {
+          fast_client_times = TextFile("../data/evaluation/fast_client_mono_teichplatz_lod.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_mono_teichplatz_lod.txt");
+        } else {
+          fast_client_times = TextFile("../data/evaluation/fast_client_mono_sponza.txt");
+          slow_client_times = TextFile("../data/evaluation/slow_client_mono_sponza.txt");
+        }
+      }
+    }
+
     std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer_left;
     std::tuple<scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr, scm::gl::texture_2d_ptr> surface_detection_buffer_right;
 
@@ -323,8 +355,8 @@ class GUA_DLL Renderer {
 
     std::tuple<bool,bool,bool> is_left = std::make_tuple<bool,bool,bool>(false, false, false);
 
-    TextFile fast_client_times = TextFile("../data/evaluation/fast_client_times_teichplatz_lod.txt");
-    TextFile slow_client_times = TextFile("../data/evaluation/slow_client_times_teichplatz_lod.txt");
+    TextFile fast_client_times;
+    TextFile slow_client_times;
 
     bool grid_initialized = false;
     bool grid_generated_left = false;
@@ -380,18 +412,22 @@ class GUA_DLL Renderer {
   }
 
   static void is_time_left() {
-    //using namespace chrono_literals;
-    
+    // using namespace std::chrono_literals;
     if (time_warped >= time_left > 1.0) {
       //continue
     } else {
       while (time_left < 1.0 && time_left > time_warped) {
-        //std::this_thread::sleep_for(boost::chrono::microseconds(90));
-        sleep(0.09);
+        std::this_thread::sleep_for(std::chrono::microseconds(90));
+        // std::this_thread::sleep_for(0.09ms);
       }
     }
   }
-  
+
+  static void set_test(bool stereo, std::string test_scene) {
+    stereo_ = stereo;
+    test_scene_ = test_scene;
+  }
+
  private:
   void send_renderclient(std::string const& window,
                          std::shared_ptr<const Renderer::SceneGraphs> sgs,
@@ -433,6 +469,9 @@ class GUA_DLL Renderer {
   static float time_budget;
   static float time_warped;
   static float time_left;
+
+  static bool stereo_;
+  static std::string test_scene_;
 };
 
 }

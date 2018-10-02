@@ -1,0 +1,121 @@
+======================== SINGLE THREAD ========================
+===============================================================
+==================        FPS: 16.6162       ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 22.4174 ms
+GPU: LightVisibilityPass - RIGHT : 20.594 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.415744 ms
+GPU: ResolvePass - RIGHT : 0.417792 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.37075 ms
+GPU: TriMeshPass - RIGHT : 7.3687 ms
+Total : 58.5885 ms
+
+===============================================================
+==================        FPS: 17.5177       ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 22.2362 ms
+GPU: LightVisibilityPass - RIGHT : 21.9187 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.458752 ms
+GPU: ResolvePass - RIGHT : 0.458752 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.45062 ms
+GPU: TriMeshPass - RIGHT : 7.45984 ms
+Total : 59.99 ms
+
+===============================================================
+==================        FPS: 20.4579       ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: LightVisibilityPass - LEFT : 17.111 ms
+GPU: LightVisibilityPass - RIGHT : 16.7782 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.423936 ms
+GPU: ResolvePass - RIGHT : 0.425984 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 7.44448 ms
+GPU: TriMeshPass - RIGHT : 7.4455 ms
+Total : 49.6323 ms
+
+===============================================================
+==================        FPS: 28.2405       ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: LightVisibilityPass - LEFT : 9.65837 ms
+GPU: LightVisibilityPass - RIGHT : 9.65837 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.448512 ms
+GPU: ResolvePass - RIGHT : 0.434176 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 8.01485 ms
+GPU: TriMeshPass - RIGHT : 7.65645 ms
+Total : 35.8748 ms
+
+===============================================================
+==================        FPS: 21.5209       ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 16.5386 ms
+GPU: LightVisibilityPass - RIGHT : 16.5366 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.418816 ms
+GPU: ResolvePass - RIGHT : 0.4096 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 7.96877 ms
+GPU: TriMeshPass - RIGHT : 7.62061 ms
+Total : 49.4991 ms
+
+===============================================================
+==================        FPS: 18.6206       ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 18.8908 ms
+GPU: LightVisibilityPass - RIGHT : 18.5426 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.336896 ms
+GPU: ResolvePass - RIGHT : 0.320512 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 5.74362 ms
+GPU: TriMeshPass - RIGHT : 5.74464 ms
+Total : 49.5862 ms
+
