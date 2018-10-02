@@ -1,0 +1,803 @@
+========================= FAST CLIENT =========================
+===============================================================
+==================        FPS: 63.8297       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.395552 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384064 ms
+GPU: WarpPass - LEFT : 1.7865 ms
+GPU: WarpPass - RIGHT : 1.82848 ms
+Total : 4.39459 ms
+
+===============================================================
+==================        FPS: 59.7473       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.398752 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387872 ms
+GPU: WarpPass - LEFT : 1.3368 ms
+GPU: WarpPass - RIGHT : 1.35475 ms
+Total : 3.47818 ms
+
+===============================================================
+==================        FPS: 58.9829       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386592 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.388928 ms
+GPU: WarpPass - LEFT : 1.50451 ms
+GPU: WarpPass - RIGHT : 1.75338 ms
+Total : 4.03341 ms
+
+===============================================================
+==================        FPS: 64.6626       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.396768 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38736 ms
+GPU: WarpPass - LEFT : 1.65341 ms
+GPU: WarpPass - RIGHT : 1.68461 ms
+Total : 4.12214 ms
+
+===============================================================
+==================        FPS: 57.9786       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.387872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386304 ms
+GPU: WarpPass - LEFT : 1.35539 ms
+GPU: WarpPass - RIGHT : 1.3655 ms
+Total : 3.49507 ms
+
+===============================================================
+==================        FPS: 60.5611       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.382112 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386464 ms
+GPU: WarpPass - LEFT : 1.52579 ms
+GPU: WarpPass - RIGHT : 1.57779 ms
+Total : 3.87216 ms
+
+===============================================================
+==================        FPS: 61.0719       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.383168 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38672 ms
+GPU: WarpPass - LEFT : 1.32982 ms
+GPU: WarpPass - RIGHT : 1.30794 ms
+Total : 3.40765 ms
+
+===============================================================
+==================        FPS: 65.9755       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389536 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383392 ms
+GPU: WarpPass - LEFT : 1.19312 ms
+GPU: WarpPass - RIGHT : 1.22509 ms
+Total : 3.19114 ms
+
+===============================================================
+==================        FPS: 72.8871       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.3848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387136 ms
+GPU: WarpPass - LEFT : 1.35616 ms
+GPU: WarpPass - RIGHT : 1.40374 ms
+Total : 3.53184 ms
+
+===============================================================
+==================        FPS: 68.9019       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385184 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383904 ms
+GPU: WarpPass - LEFT : 1.33072 ms
+GPU: WarpPass - RIGHT : 1.31997 ms
+Total : 3.41978 ms
+
+===============================================================
+==================        FPS: 53.7724       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.383552 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38864 ms
+GPU: WarpPass - LEFT : 1.5617 ms
+GPU: WarpPass - RIGHT : 1.59683 ms
+Total : 3.93072 ms
+
+===============================================================
+==================        FPS: 117.525       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389856 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383808 ms
+GPU: WarpPass - LEFT : 1.10717 ms
+GPU: WarpPass - RIGHT : 1.13936 ms
+Total : 3.02019 ms
+
+===============================================================
+==================        FPS: 134.468       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389056 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38672 ms
+GPU: WarpPass - LEFT : 1.09312 ms
+GPU: WarpPass - RIGHT : 1.14221 ms
+Total : 3.0111 ms
+
+===============================================================
+==================        FPS: 152.836       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.387232 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385792 ms
+GPU: WarpPass - LEFT : 1.08406 ms
+GPU: WarpPass - RIGHT : 1.12365 ms
+Total : 2.98074 ms
+
+===============================================================
+==================        FPS: 86.056       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388832 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.398272 ms
+GPU: WarpPass - LEFT : 1.2128 ms
+GPU: WarpPass - RIGHT : 1.39139 ms
+Total : 3.3913 ms
+
+===============================================================
+==================        FPS: 51.1437       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.398016 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386304 ms
+GPU: WarpPass - LEFT : 1.35942 ms
+GPU: WarpPass - RIGHT : 1.41382 ms
+Total : 3.55757 ms
+
+===============================================================
+==================        FPS: 66.1939       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385888 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387104 ms
+GPU: WarpPass - LEFT : 1.55738 ms
+GPU: WarpPass - RIGHT : 1.57917 ms
+Total : 3.90954 ms
+
+===============================================================
+==================        FPS: 62.898       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385664 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.393696 ms
+GPU: WarpPass - LEFT : 1.3815 ms
+GPU: WarpPass - RIGHT : 1.41104 ms
+Total : 3.5719 ms
+
+===============================================================
+==================        FPS: 60.6728       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.387872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387168 ms
+GPU: WarpPass - LEFT : 1.56797 ms
+GPU: WarpPass - RIGHT : 1.63398 ms
+Total : 3.97699 ms
+
+===============================================================
+==================        FPS: 64.8015       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385696 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38864 ms
+GPU: WarpPass - LEFT : 1.88314 ms
+GPU: WarpPass - RIGHT : 2.12243 ms
+Total : 4.7799 ms
+
+===============================================================
+==================        FPS: 64.2422       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388064 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385952 ms
+GPU: WarpPass - LEFT : 1.24246 ms
+GPU: WarpPass - RIGHT : 1.2449 ms
+Total : 3.26138 ms
+
+===============================================================
+==================        FPS: 59.4002       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389056 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385312 ms
+GPU: WarpPass - LEFT : 1.25686 ms
+GPU: WarpPass - RIGHT : 1.29344 ms
+Total : 3.32467 ms
+
+===============================================================
+==================        FPS: 66.1555       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385056 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38416 ms
+GPU: WarpPass - LEFT : 1.42294 ms
+GPU: WarpPass - RIGHT : 1.55536 ms
+Total : 3.74752 ms
+
+===============================================================
+==================        FPS: 113.181       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.391584 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387328 ms
+GPU: WarpPass - LEFT : 1.37498 ms
+GPU: WarpPass - RIGHT : 1.36723 ms
+Total : 3.52112 ms
+
+===============================================================
+==================        FPS: 68.7502       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386208 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38608 ms
+GPU: WarpPass - LEFT : 1.57734 ms
+GPU: WarpPass - RIGHT : 1.4935 ms
+Total : 3.84314 ms
+
+===============================================================
+==================        FPS: 57.8811       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386144 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.382176 ms
+GPU: WarpPass - LEFT : 1.48112 ms
+GPU: WarpPass - RIGHT : 1.30387 ms
+Total : 3.55331 ms
+
+===============================================================
+==================        FPS: 72.7558       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386208 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386048 ms
+GPU: WarpPass - LEFT : 1.44355 ms
+GPU: WarpPass - RIGHT : 1.44515 ms
+Total : 3.66096 ms
+
+===============================================================
+==================        FPS: 54.7313       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386336 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385728 ms
+GPU: WarpPass - LEFT : 1.6824 ms
+GPU: WarpPass - RIGHT : 1.65971 ms
+Total : 4.11418 ms
+
+===============================================================
+==================        FPS: 57.0288       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388352 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.388704 ms
+GPU: WarpPass - LEFT : 1.4911 ms
+GPU: WarpPass - RIGHT : 1.44336 ms
+Total : 3.71152 ms
+
+===============================================================
+==================        FPS: 49.255       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.3824 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385984 ms
+GPU: WarpPass - LEFT : 1.63728 ms
+GPU: WarpPass - RIGHT : 1.68531 ms
+Total : 4.09098 ms
+
+===============================================================
+==================        FPS: 68.7836       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388096 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385888 ms
+GPU: WarpPass - LEFT : 1.70691 ms
+GPU: WarpPass - RIGHT : 1.21955 ms
+Total : 3.70045 ms
+
+===============================================================
+==================        FPS: 65.82       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386368 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386976 ms
+GPU: WarpPass - LEFT : 1.19418 ms
+GPU: WarpPass - RIGHT : 1.22666 ms
+Total : 3.19418 ms
+
+===============================================================
+==================        FPS: 67.9334       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.38848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.39296 ms
+GPU: WarpPass - LEFT : 1.40086 ms
+GPU: WarpPass - RIGHT : 1.29037 ms
+Total : 3.47267 ms
+
+===============================================================
+==================        FPS: 102.156       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.38784 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383968 ms
+GPU: WarpPass - LEFT : 1.10627 ms
+GPU: WarpPass - RIGHT : 1.16781 ms
+Total : 3.04589 ms
+
+===============================================================
+==================        FPS: 152.128       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.39344 ms
+GPU: WarpPass - LEFT : 1.07402 ms
+GPU: WarpPass - RIGHT : 1.24637 ms
+Total : 3.10067 ms
+
+===============================================================
+==================        FPS: 152.063       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.397344 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384992 ms
+GPU: WarpPass - LEFT : 1.02819 ms
+GPU: WarpPass - RIGHT : 1.21238 ms
+Total : 3.02291 ms
+
+===============================================================
+==================        FPS: 60.8269       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.38912 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384768 ms
+GPU: WarpPass - LEFT : 1.35658 ms
+GPU: WarpPass - RIGHT : 1.45738 ms
+Total : 3.58784 ms
+
+===============================================================
+==================        FPS: 47.4932       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388928 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38992 ms
+GPU: WarpPass - LEFT : 1.62256 ms
+GPU: WarpPass - RIGHT : 1.59702 ms
+Total : 3.99843 ms
+
+===============================================================
+==================        FPS: 61.3685       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385088 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38384 ms
+GPU: WarpPass - LEFT : 1.40998 ms
+GPU: WarpPass - RIGHT : 1.42506 ms
+Total : 3.60397 ms
+
+===============================================================
+==================        FPS: 61.3743       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.390432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384448 ms
+GPU: WarpPass - LEFT : 1.41958 ms
+GPU: WarpPass - RIGHT : 1.41616 ms
+Total : 3.61062 ms
+
+========================= FAST CLIENT =========================
+===============================================================
+==================        FPS: 63.8297       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.395552 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384064 ms
+GPU: WarpPass - LEFT : 1.7865 ms
+GPU: WarpPass - RIGHT : 1.82848 ms
+Total : 4.39459 ms
+
+===============================================================
+==================        FPS: 59.7473       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.398752 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387872 ms
+GPU: WarpPass - LEFT : 1.3368 ms
+GPU: WarpPass - RIGHT : 1.35475 ms
+Total : 3.47818 ms
+
+===============================================================
+==================        FPS: 58.9829       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386592 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.388928 ms
+GPU: WarpPass - LEFT : 1.50451 ms
+GPU: WarpPass - RIGHT : 1.75338 ms
+Total : 4.03341 ms
+
+===============================================================
+==================        FPS: 64.6626       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.396768 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38736 ms
+GPU: WarpPass - LEFT : 1.65341 ms
+GPU: WarpPass - RIGHT : 1.68461 ms
+Total : 4.12214 ms
+
+===============================================================
+==================        FPS: 57.9786       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.387872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386304 ms
+GPU: WarpPass - LEFT : 1.35539 ms
+GPU: WarpPass - RIGHT : 1.3655 ms
+Total : 3.49507 ms
+
+===============================================================
+==================        FPS: 60.5611       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.382112 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386464 ms
+GPU: WarpPass - LEFT : 1.52579 ms
+GPU: WarpPass - RIGHT : 1.57779 ms
+Total : 3.87216 ms
+
+===============================================================
+==================        FPS: 61.0719       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.383168 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38672 ms
+GPU: WarpPass - LEFT : 1.32982 ms
+GPU: WarpPass - RIGHT : 1.30794 ms
+Total : 3.40765 ms
+
+===============================================================
+==================        FPS: 65.9755       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389536 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383392 ms
+GPU: WarpPass - LEFT : 1.19312 ms
+GPU: WarpPass - RIGHT : 1.22509 ms
+Total : 3.19114 ms
+
+===============================================================
+==================        FPS: 72.8871       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.3848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387136 ms
+GPU: WarpPass - LEFT : 1.35616 ms
+GPU: WarpPass - RIGHT : 1.40374 ms
+Total : 3.53184 ms
+
+===============================================================
+==================        FPS: 68.9019       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385184 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383904 ms
+GPU: WarpPass - LEFT : 1.33072 ms
+GPU: WarpPass - RIGHT : 1.31997 ms
+Total : 3.41978 ms
+
+===============================================================
+==================        FPS: 53.7724       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.383552 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38864 ms
+GPU: WarpPass - LEFT : 1.5617 ms
+GPU: WarpPass - RIGHT : 1.59683 ms
+Total : 3.93072 ms
+
+===============================================================
+==================        FPS: 117.525       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389856 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383808 ms
+GPU: WarpPass - LEFT : 1.10717 ms
+GPU: WarpPass - RIGHT : 1.13936 ms
+Total : 3.02019 ms
+
+===============================================================
+==================        FPS: 134.468       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389056 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38672 ms
+GPU: WarpPass - LEFT : 1.09312 ms
+GPU: WarpPass - RIGHT : 1.14221 ms
+Total : 3.0111 ms
+
+===============================================================
+==================        FPS: 152.836       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.387232 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385792 ms
+GPU: WarpPass - LEFT : 1.08406 ms
+GPU: WarpPass - RIGHT : 1.12365 ms
+Total : 2.98074 ms
+
+===============================================================
+==================        FPS: 86.056       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388832 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.398272 ms
+GPU: WarpPass - LEFT : 1.2128 ms
+GPU: WarpPass - RIGHT : 1.39139 ms
+Total : 3.3913 ms
+
+===============================================================
+==================        FPS: 51.1437       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.398016 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386304 ms
+GPU: WarpPass - LEFT : 1.35942 ms
+GPU: WarpPass - RIGHT : 1.41382 ms
+Total : 3.55757 ms
+
+===============================================================
+==================        FPS: 66.1939       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385888 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387104 ms
+GPU: WarpPass - LEFT : 1.55738 ms
+GPU: WarpPass - RIGHT : 1.57917 ms
+Total : 3.90954 ms
+
+===============================================================
+==================        FPS: 62.898       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385664 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.393696 ms
+GPU: WarpPass - LEFT : 1.3815 ms
+GPU: WarpPass - RIGHT : 1.41104 ms
+Total : 3.5719 ms
+
+===============================================================
+==================        FPS: 60.6728       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.387872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387168 ms
+GPU: WarpPass - LEFT : 1.56797 ms
+GPU: WarpPass - RIGHT : 1.63398 ms
+Total : 3.97699 ms
+
+===============================================================
+==================        FPS: 64.8015       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385696 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38864 ms
+GPU: WarpPass - LEFT : 1.88314 ms
+GPU: WarpPass - RIGHT : 2.12243 ms
+Total : 4.7799 ms
+
+===============================================================
+==================        FPS: 64.2422       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388064 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385952 ms
+GPU: WarpPass - LEFT : 1.24246 ms
+GPU: WarpPass - RIGHT : 1.2449 ms
+Total : 3.26138 ms
+
+===============================================================
+==================        FPS: 59.4002       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.389056 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385312 ms
+GPU: WarpPass - LEFT : 1.25686 ms
+GPU: WarpPass - RIGHT : 1.29344 ms
+Total : 3.32467 ms
+
+===============================================================
+==================        FPS: 66.1555       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385056 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38416 ms
+GPU: WarpPass - LEFT : 1.42294 ms
+GPU: WarpPass - RIGHT : 1.55536 ms
+Total : 3.74752 ms
+
+===============================================================
+==================        FPS: 113.181       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.391584 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.387328 ms
+GPU: WarpPass - LEFT : 1.37498 ms
+GPU: WarpPass - RIGHT : 1.36723 ms
+Total : 3.52112 ms
+
+===============================================================
+==================        FPS: 68.7502       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386208 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38608 ms
+GPU: WarpPass - LEFT : 1.57734 ms
+GPU: WarpPass - RIGHT : 1.4935 ms
+Total : 3.84314 ms
+
+===============================================================
+==================        FPS: 57.8811       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386144 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.382176 ms
+GPU: WarpPass - LEFT : 1.48112 ms
+GPU: WarpPass - RIGHT : 1.30387 ms
+Total : 3.55331 ms
+
+===============================================================
+==================        FPS: 72.7558       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386208 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386048 ms
+GPU: WarpPass - LEFT : 1.44355 ms
+GPU: WarpPass - RIGHT : 1.44515 ms
+Total : 3.66096 ms
+
+===============================================================
+==================        FPS: 54.7313       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386336 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385728 ms
+GPU: WarpPass - LEFT : 1.6824 ms
+GPU: WarpPass - RIGHT : 1.65971 ms
+Total : 4.11418 ms
+
+===============================================================
+==================        FPS: 57.0288       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388352 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.388704 ms
+GPU: WarpPass - LEFT : 1.4911 ms
+GPU: WarpPass - RIGHT : 1.44336 ms
+Total : 3.71152 ms
+
+===============================================================
+==================        FPS: 49.255       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.3824 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385984 ms
+GPU: WarpPass - LEFT : 1.63728 ms
+GPU: WarpPass - RIGHT : 1.68531 ms
+Total : 4.09098 ms
+
+===============================================================
+==================        FPS: 68.7836       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388096 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.385888 ms
+GPU: WarpPass - LEFT : 1.70691 ms
+GPU: WarpPass - RIGHT : 1.21955 ms
+Total : 3.70045 ms
+
+===============================================================
+==================        FPS: 65.82       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386368 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.386976 ms
+GPU: WarpPass - LEFT : 1.19418 ms
+GPU: WarpPass - RIGHT : 1.22666 ms
+Total : 3.19418 ms
+
+===============================================================
+==================        FPS: 67.9334       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.38848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.39296 ms
+GPU: WarpPass - LEFT : 1.40086 ms
+GPU: WarpPass - RIGHT : 1.29037 ms
+Total : 3.47267 ms
+
+===============================================================
+==================        FPS: 102.156       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.38784 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.383968 ms
+GPU: WarpPass - LEFT : 1.10627 ms
+GPU: WarpPass - RIGHT : 1.16781 ms
+Total : 3.04589 ms
+
+===============================================================
+==================        FPS: 152.128       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.386848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.39344 ms
+GPU: WarpPass - LEFT : 1.07402 ms
+GPU: WarpPass - RIGHT : 1.24637 ms
+Total : 3.10067 ms
+
+===============================================================
+==================        FPS: 152.063       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.397344 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384992 ms
+GPU: WarpPass - LEFT : 1.02819 ms
+GPU: WarpPass - RIGHT : 1.21238 ms
+Total : 3.02291 ms
+
+===============================================================
+==================        FPS: 60.8269       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.38912 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384768 ms
+GPU: WarpPass - LEFT : 1.35658 ms
+GPU: WarpPass - RIGHT : 1.45738 ms
+Total : 3.58784 ms
+
+===============================================================
+==================        FPS: 47.4932       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.388928 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38992 ms
+GPU: WarpPass - LEFT : 1.62256 ms
+GPU: WarpPass - RIGHT : 1.59702 ms
+Total : 3.99843 ms
+
+===============================================================
+==================        FPS: 61.3685       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.385088 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.38384 ms
+GPU: WarpPass - LEFT : 1.40998 ms
+GPU: WarpPass - RIGHT : 1.42506 ms
+Total : 3.60397 ms
+
+===============================================================
+==================        FPS: 61.3743       ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+GPU: WarpGridGeneratorPass - LEFT : 0.390432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.384448 ms
+GPU: WarpPass - LEFT : 1.41958 ms
+GPU: WarpPass - RIGHT : 1.41616 ms
+Total : 3.61062 ms
+
+

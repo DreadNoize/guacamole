@@ -520,7 +520,7 @@ auto wappen(loader.create_geometry_from_file(
   // warp_cam->translate(0,0,0);
   warp_cam->set_transform(camera->get_world_transform());
   warp_cam->config.set_resolution(resolution);
-  warp_cam->config.set_screen_path("/navigation/warp/warp_screen");
+  warp_cam->config.set_screen_path("/navigation/warp_screen");
   warp_cam->config.set_far_clip(camera->config.get_far_clip());
   warp_cam->config.set_near_clip(camera->config.get_near_clip());
 #endif
@@ -535,7 +535,7 @@ auto wappen(loader.create_geometry_from_file(
   warp_right_screen->data.set_size(right_size);
   warp_right_screen->translate(right_trans);
 #else
-  auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation/warp", "warp_screen");
+  auto warp_screen = graph.add_node<gua::node::ScreenNode>("/navigation", "warp_screen");
   warp_screen->data.set_size(gua::math::vec2(1.28f, 0.72f));  // real world size of screen
 #endif
   
@@ -544,7 +544,7 @@ auto wappen(loader.create_geometry_from_file(
     if(stereo) {
 #if !ENABLE_HMD
       camera->config.set_enable_stereo(true);
-      warp_cam->config.set_enable_stereo(true);
+      //warp_cam->config.set_enable_stereo(true);
       window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
       window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
       window->config.set_left_resolution(resolution);
@@ -635,7 +635,7 @@ auto wappen(loader.create_geometry_from_file(
     auto time = gua::Timer::get_now();
     // geometry->rotate(time*0.00000000002, gua::math::vec3(0.0,1.0,0.0));
     // log fps every 150th tick
-    if (ctr++ % 150 == 0) {
+    if (ctr++ % 500 == 0) {
       gua::Logger::LOG_WARNING
         << "[APP] Frame time: " << 1000.f / renderer.get_application_fps()
         << " ms, fps: " << renderer.get_application_fps() << std::endl;
