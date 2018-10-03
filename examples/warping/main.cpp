@@ -547,7 +547,7 @@ auto wappen(loader.create_geometry_from_file(
     if(stereo) {
 #if !ENABLE_HMD
       camera->config.set_enable_stereo(true);
-      //warp_cam->config.set_enable_stereo(true);
+      warp_cam->config.set_enable_stereo(true);
       window->config.set_stereo_mode(gua::StereoMode::SIDE_BY_SIDE);
       window->config.set_size(gua::math::vec2ui(2*resolution.x, resolution.y));
       window->config.set_left_resolution(resolution);

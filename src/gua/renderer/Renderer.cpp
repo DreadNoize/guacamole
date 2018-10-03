@@ -116,8 +116,7 @@ Renderer::~Renderer() {
 }
 
 void Renderer::renderclient(Mailbox in, std::string window_name) {
-  Timer timer;
-  timer.start();
+  auto start_time = std::chrono::system_clock::now();
   FpsCounter fpsc(20);
   fpsc.start();
   TextFile single_times;
@@ -242,8 +241,9 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
           if (counter < 70 && (0 != window->get_rendering_fps())) {
             stream << "===============================================================" << std::endl;
             stream << "==================        FPS:  " << window->get_rendering_fps() << "       ==================" << std::endl;
-            stream << "==================        Time: " << timer.get_elapsed() << "       ==================" << std::endl;
-            stream << "==================    Time now:     " << Timer::get_now() * 0.00001 << "   ==================" << std::endl;
+            std::time_t time_stamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            stream << "==================        Time: " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - start_time).count() << " us      ==================" << std::endl;
+            stream << "================== Time now:     " << std::ctime(&time_stamp) << " ==================" << std::endl;
             stream << "===============================================================" << std::endl;
             stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
             for (auto const& t : query_results->results) {
@@ -271,15 +271,13 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
       }
     }
   }
-  timer.reset();
   single_times.set_content(stream.str());
   single_times.save();
 }
 
 void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
   // std::cout << "started renderclient for " << window_name << std::endl;
-  Timer timer;
-  timer.start();
+  auto start_time = std::chrono::system_clock::now();
   FpsCounter fpsc(20);
   fpsc.start();
 
@@ -505,9 +503,10 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
           // std::cout << std::endl;
           if (counter < 50 && (0 != offscreen_window->get_rendering_fps())) {
             stream << "===============================================================" << std::endl;
-            stream << "==================        FPS:                    " << offscreen_window->get_rendering_fps() << "       ==================" << std::endl;
-            stream << "==================        Time elpsd: " << timer.get_elapsed() << "       ==================" << std::endl;
-            stream << "==================    Time now:     " << Timer::get_now() * 0.00001 << "   ==================" << std::endl;
+            stream << "==================        FPS: " << offscreen_window->get_rendering_fps() << "       ==================" <<  std::endl; 
+            std::time_t time_stamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            stream << "==================        Time : " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - start_time).count() << " us      ==================" << std::endl;
+            stream << "================== Time now: " << std::ctime(&time_stamp) << " ==================" << std::endl;
             stream << "===============================================================" << std::endl;
             stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
             for (auto const& t : query_results->results) {
@@ -532,7 +531,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
         fpsc.step();
       }
     }
-    timer.reset();
+
     warp_res[window_name]->slow_client_times.set_content(stream.str());
     warp_res[window_name]->slow_client_times.save();
   // Sleep(50);
@@ -542,8 +541,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 
 void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
   // std::cout << "started warpclient for "  << window_name << std::endl;
-  Timer timer;
-  timer.start();
+  auto start_time = std::chrono::system_clock::now();
   FpsCounter fpsc(20);
   fpsc.start();
 #if MULTITHREADED
@@ -746,8 +744,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           if (counter < 60 && (0 != window->get_rendering_fps())) {
             stream << "===============================================================" << std::endl;
             stream << "==================        FPS: " << window->get_rendering_fps() << "       ==================" << std::endl;
-            stream << "==================        Time: " << timer.get_elapsed() << "       ==================" << std::endl;
-            stream << "==================    Time now:     " << Timer::get_now() * 0.00001 << "   ==================" << std::endl;
+            std::time_t time_stamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            stream << "==================        Time: " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - start_time).count() << " us      ==================" << std::endl;
+            stream << "================== Time now:     " << std::ctime(&time_stamp) << " ==================" << std::endl;
             stream << "===============================================================" << std::endl;
             stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
             for (auto const& t : query_results->results) {
@@ -788,7 +787,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
       }
       // swap buffers
     }
-    timer.reset();
+
     warp_res[window_name]->fast_client_times.set_content(stream.str());
     warp_res[window_name]->fast_client_times.save();
   }
