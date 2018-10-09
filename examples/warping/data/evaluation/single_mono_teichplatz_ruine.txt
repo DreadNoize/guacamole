@@ -1,1121 +1,1044 @@
 ======================== SINGLE THREAD ========================
 ===============================================================
-==================        FPS:  46.45       ==================
-==================        Time: 10448053 us      ==================
-================== Time now:     Wed Oct  3 12:38:16 2018
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11322.1 ms      ==================
+==================        Frame Time: 23.119 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11346 ms      ==================
+==================        Frame Time: 23.151 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11369.6 ms      ==================
+==================        Frame Time: 23.339 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11393.2 ms      ==================
+==================        Frame Time: 23.459 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11416.7 ms      ==================
+==================        Frame Time: 23.246 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11440 ms      ==================
+==================        Frame Time: 23.105 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11463.4 ms      ==================
+==================        Frame Time: 23.249 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11486.7 ms      ==================
+==================        Frame Time: 23.104 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11510.1 ms      ==================
+==================        Frame Time: 23.159 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11533.4 ms      ==================
+==================        Frame Time: 23.163 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11557 ms      ==================
+==================        Frame Time: 23.313 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11580.4 ms      ==================
+==================        Frame Time: 23.224 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11604.1 ms      ==================
+==================        Frame Time: 23.467 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11627.6 ms      ==================
+==================        Frame Time: 23.318 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11651.4 ms      ==================
+==================        Frame Time: 23.657 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11675.5 ms      ==================
+==================        Frame Time: 23.886 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11699.3 ms      ==================
+==================        Frame Time: 23.558 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11723 ms      ==================
+==================        Frame Time: 23.477 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11746.6 ms      ==================
+==================        Frame Time: 23.47 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  1.77008       ==================
+==================        Elapsed Time: 11770.9 ms      ==================
+==================        Frame Time: 24.041 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  42.3556       ==================
+==================        Elapsed Time: 11816.9 ms      ==================
+==================        Frame Time: 23.633 ms      ==================
+================== Time now:     Tue Oct  9 19:53:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+Total : 0 ms
+
+===============================================================
+==================        FPS:  45.0082       ==================
+==================        Elapsed Time: 12885 ms      ==================
+==================        Frame Time: 25.547 ms      ==================
+================== Time now:     Tue Oct  9 19:53:23 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 16.2048 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.08339 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 5.25926 ms
+Total : 22.5475 ms
+
+===============================================================
+==================        FPS:  42.4138       ==================
+==================        Elapsed Time: 13733.9 ms      ==================
+==================        Frame Time: 25.537 ms      ==================
+================== Time now:     Tue Oct  9 19:53:24 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 14.1578 ms
+GPU: LightVisibilityPass - LEFT : 17.0824 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.997376 ms
+GPU: ResolvePass - LEFT : 1.09158 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 6.08973 ms
-Total : 21.248 ms
+GPU: TriMeshPass - LEFT : 4.73805 ms
+Total : 22.9151 ms
 
 ===============================================================
-==================        FPS:  43.1292       ==================
-==================        Time: 12727377 us      ==================
-================== Time now:     Wed Oct  3 12:38:18 2018
+==================        FPS:  42.2445       ==================
+==================        Elapsed Time: 14734.4 ms      ==================
+==================        Frame Time: 26.148 ms      ==================
+================== Time now:     Tue Oct  9 19:53:25 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 16.7086 ms
+GPU: LightVisibilityPass - LEFT : 17.1899 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 1.09875 ms
+GPU: ResolvePass - LEFT : 1.09261 ms
 GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 5.12 ms
-Total : 22.9284 ms
+GPU: TriMeshPass - LEFT : 5.2777 ms
+Total : 23.5612 ms
 
 ===============================================================
-==================        FPS:  40.6265       ==================
-==================        Time: 15099867 us      ==================
-================== Time now:     Wed Oct  3 12:38:21 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 18.9399 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 1.09875 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 6.1184 ms
-Total : 26.1581 ms
-
-===============================================================
-==================        FPS:  34.9569       ==================
-==================        Time: 17980558 us      ==================
-================== Time now:     Wed Oct  3 12:38:24 2018
+==================        FPS:  40.8067       ==================
+==================        Elapsed Time: 15529.5 ms      ==================
+==================        Frame Time: 26.885 ms      ==================
+================== Time now:     Tue Oct  9 19:53:26 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 18.558 ms
+GPU: LightVisibilityPass - LEFT : 17.187 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.09363 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 5.9689 ms
+Total : 24.2526 ms
+
+===============================================================
+==================        FPS:  38.207       ==================
+==================        Elapsed Time: 16273.4 ms      ==================
+==================        Frame Time: 29.332 ms      ==================
+================== Time now:     Tue Oct  9 19:53:27 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 18.8695 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 1.09158 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 6.4809 ms
+Total : 26.4451 ms
+
+===============================================================
+==================        FPS:  35.4553       ==================
+==================        Elapsed Time: 16680.1 ms      ==================
+==================        Frame Time: 3.85 ms      ==================
+================== Time now:     Tue Oct  9 19:53:27 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 19.2942 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.09056 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 7.73837 ms
+Total : 28.1242 ms
+
+===============================================================
+==================        FPS:  38.2717       ==================
+==================        Elapsed Time: 17292.8 ms      ==================
+==================        Frame Time: 4.302 ms      ==================
+================== Time now:     Tue Oct  9 19:53:28 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 20.4237 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.08851 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.85101 ms
+Total : 29.3652 ms
+
+===============================================================
+==================        FPS:  33.6639       ==================
+==================        Elapsed Time: 18200.9 ms      ==================
+==================        Frame Time: 3.936 ms      ==================
+================== Time now:     Tue Oct  9 19:53:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 18.8365 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.08749 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.26675 ms
+Total : 28.1938 ms
+
+===============================================================
+==================        FPS:  34.6387       ==================
+==================        Elapsed Time: 18457.5 ms      ==================
+==================        Frame Time: 4.124 ms      ==================
+================== Time now:     Tue Oct  9 19:53:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 19.0024 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 1.08851 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 7.89402 ms
+Total : 27.9859 ms
+
+===============================================================
+==================        FPS:  35.5357       ==================
+==================        Elapsed Time: 19697.5 ms      ==================
+==================        Frame Time: 4.073 ms      ==================
+================== Time now:     Tue Oct  9 19:53:30 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 18.4648 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.08646 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.20838 ms
+Total : 27.7617 ms
+
+===============================================================
+==================        FPS:  35.5481       ==================
+==================        Elapsed Time: 20681.6 ms      ==================
+==================        Frame Time: 3.377 ms      ==================
+================== Time now:     Tue Oct  9 19:53:31 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 18.7464 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.08851 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.87354 ms
+Total : 27.7105 ms
+
+===============================================================
+==================        FPS:  35.7331       ==================
+==================        Elapsed Time: 21653.2 ms      ==================
+==================        Frame Time: 3.284 ms      ==================
+================== Time now:     Tue Oct  9 19:53:32 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 17.7818 ms
 GPU: LineStripPass - LEFT : 0 ms
 GPU: ResolvePass - LEFT : 1.09466 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.27392 ms
-Total : 27.9286 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 8.14182 ms
+Total : 27.0203 ms
 
 ===============================================================
-==================        FPS:  35.768       ==================
-==================        Time: 20781542 us      ==================
-================== Time now:     Wed Oct  3 12:38:26 2018
+==================        FPS:  36.2643       ==================
+==================        Elapsed Time: 21974.7 ms      ==================
+==================        Frame Time: 3.31 ms      ==================
+================== Time now:     Tue Oct  9 19:53:32 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 17.4674 ms
+GPU: LightVisibilityPass - LEFT : 17.3394 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 1.10182 ms
+GPU: ResolvePass - LEFT : 1.09261 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.83258 ms
+Total : 26.2666 ms
+
+===============================================================
+==================        FPS:  37.5006       ==================
+==================        Elapsed Time: 22293.1 ms      ==================
+==================        Frame Time: 3.465 ms      ==================
+================== Time now:     Tue Oct  9 19:53:33 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 17.1551 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 1.09056 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.82848 ms
+Total : 26.0762 ms
+
+===============================================================
+==================        FPS:  39.852       ==================
+==================        Elapsed Time: 23896.5 ms      ==================
+==================        Frame Time: 3.289 ms      ==================
+================== Time now:     Tue Oct  9 19:53:34 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 15.1931 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 1.04346 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 8.14182 ms
+Total : 24.3804 ms
+
+===============================================================
+==================        FPS:  40.7889       ==================
+==================        Elapsed Time: 25190.5 ms      ==================
+==================        Frame Time: 3.299 ms      ==================
+================== Time now:     Tue Oct  9 19:53:36 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 14.6278 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 1.00557 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.82848 ms
+Total : 23.466 ms
+
+===============================================================
+==================        FPS:  41.5759       ==================
+==================        Elapsed Time: 25511.8 ms      ==================
+==================        Frame Time: 3.345 ms      ==================
+================== Time now:     Tue Oct  9 19:53:36 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 13.5393 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.999424 ms
 GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.87558 ms
-Total : 26.4458 ms
+GPU: TriMeshPass - LEFT : 7.83565 ms
+Total : 22.3754 ms
 
 ===============================================================
-==================        FPS:  39.7927       ==================
-==================        Time: 23342603 us      ==================
-================== Time now:     Wed Oct  3 12:38:29 2018
+==================        FPS:  43.9966       ==================
+==================        Elapsed Time: 26148.5 ms      ==================
+==================        Frame Time: 3.267 ms      ==================
+================== Time now:     Tue Oct  9 19:53:37 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 15.447 ms
+GPU: LightVisibilityPass - LEFT : 13.5342 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 1.04141 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.91347 ms
-Total : 24.404 ms
-
-===============================================================
-==================        FPS:  43.6893       ==================
-==================        Time: 25678627 us      ==================
-================== Time now:     Wed Oct  3 12:38:31 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 13.2844 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.968704 ms
+GPU: ResolvePass - LEFT : 0.978944 ms
 GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.19814 ms
-Total : 22.4532 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 7.82746 ms
+Total : 22.3406 ms
 
 ===============================================================
-==================        FPS:  45.0483       ==================
-==================        Time: 27918003 us      ==================
-================== Time now:     Wed Oct  3 12:38:34 2018
+==================        FPS:  44.1321       ==================
+==================        Elapsed Time: 27463.6 ms      ==================
+==================        Frame Time: 3.362 ms      ==================
+================== Time now:     Tue Oct  9 19:53:38 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 13.0232 ms
+GPU: LightVisibilityPass - LEFT : 13.1809 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.919552 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.86739 ms
-Total : 21.8122 ms
+GPU: ResolvePass - LEFT : 0.943104 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 8.13568 ms
+Total : 22.2597 ms
 
 ===============================================================
-==================        FPS:  48.3946       ==================
-==================        Time: 30021956 us      ==================
-================== Time now:     Wed Oct  3 12:38:36 2018
+==================        FPS:  45.3344       ==================
+==================        Elapsed Time: 28791.1 ms      ==================
+==================        Frame Time: 3.581 ms      ==================
+================== Time now:     Tue Oct  9 19:53:39 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 11.0244 ms
+GPU: LightVisibilityPass - LEFT : 12.9444 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.918528 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.79981 ms
+Total : 21.6658 ms
+
+===============================================================
+==================        FPS:  47.3882       ==================
+==================        Elapsed Time: 30474.9 ms      ==================
+==================        Frame Time: 3.296 ms      ==================
+================== Time now:     Tue Oct  9 19:53:41 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 11.5835 ms
+GPU: LineStripPass - LEFT : 0 ms
 GPU: ResolvePass - LEFT : 0.887808 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.15309 ms
-Total : 20.0684 ms
+GPU: TriMeshPass - LEFT : 7.79981 ms
+Total : 20.2721 ms
 
 ===============================================================
-==================        FPS:  51.1057       ==================
-==================        Time: 32004317 us      ==================
-================== Time now:     Wed Oct  3 12:38:38 2018
+==================        FPS:  48.4229       ==================
+==================        Elapsed Time: 30823 ms      ==================
+==================        Frame Time: 3.187 ms      ==================
+================== Time now:     Tue Oct  9 19:53:41 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 10.3178 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 11.1094 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.857088 ms
+GPU: ResolvePass - LEFT : 0.884736 ms
 GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.88275 ms
-Total : 19.0587 ms
+GPU: TriMeshPass - LEFT : 8.10394 ms
+Total : 20.1001 ms
 
 ===============================================================
-==================        FPS:  53.5075       ==================
-==================        Time: 33889616 us      ==================
-================== Time now:     Wed Oct  3 12:38:40 2018
+==================        FPS:  50.5908       ==================
+==================        Elapsed Time: 32494.4 ms      ==================
+==================        Frame Time: 3.362 ms      ==================
+================== Time now:     Tue Oct  9 19:53:43 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 9.47814 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 10.3864 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.867328 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.84691 ms
+Total : 19.1048 ms
+
+===============================================================
+==================        FPS:  51.4793       ==================
+==================        Elapsed Time: 32844.6 ms      ==================
+==================        Frame Time: 3.157 ms      ==================
+================== Time now:     Tue Oct  9 19:53:43 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 10.0751 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.801792 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.8848 ms
-Total : 18.1658 ms
-
-===============================================================
-==================        FPS:  58.766       ==================
-==================        Time: 35630215 us      ==================
-================== Time now:     Wed Oct  3 12:38:41 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 7.94726 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.769024 ms
+GPU: ResolvePass - LEFT : 0.86016 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.89197 ms
-Total : 16.6103 ms
+GPU: TriMeshPass - LEFT : 8.1449 ms
+Total : 19.0822 ms
 
 ===============================================================
-==================        FPS:  61.6829       ==================
-==================        Time: 37282884 us      ==================
-================== Time now:     Wed Oct  3 12:38:43 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 6.51264 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.745472 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.18381 ms
-Total : 15.445 ms
-
-===============================================================
-==================        FPS:  64.9836       ==================
-==================        Time: 38842479 us      ==================
-================== Time now:     Wed Oct  3 12:38:44 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 6.29146 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.73216 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.9063 ms
-Total : 14.932 ms
-
-===============================================================
-==================        FPS:  66.8917       ==================
-==================        Time: 40356121 us      ==================
-================== Time now:     Wed Oct  3 12:38:46 2018
+==================        FPS:  53.7471       ==================
+==================        Elapsed Time: 34526.6 ms      ==================
+==================        Frame Time: 3.038 ms      ==================
+================== Time now:     Tue Oct  9 19:53:45 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 5.97402 ms
+GPU: LightVisibilityPass - LEFT : 9.58464 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.719872 ms
+GPU: ResolvePass - LEFT : 0.813056 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.95853 ms
-Total : 14.6534 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.84691 ms
+Total : 18.2467 ms
 
 ===============================================================
-==================        FPS:  67.2991       ==================
-==================        Time: 41847955 us      ==================
-================== Time now:     Wed Oct  3 12:38:47 2018
+==================        FPS:  59.1662       ==================
+==================        Elapsed Time: 36532.6 ms      ==================
+==================        Frame Time: 2.951 ms      ==================
+================== Time now:     Tue Oct  9 19:53:47 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 5.61971 ms
+GPU: LightVisibilityPass - LEFT : 7.92166 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.627712 ms
+GPU: ResolvePass - LEFT : 0.766976 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.17459 ms
-Total : 14.423 ms
+GPU: TriMeshPass - LEFT : 7.85408 ms
+Total : 16.5437 ms
 
 ===============================================================
-==================        FPS:  69.3351       ==================
-==================        Time: 43298329 us      ==================
-================== Time now:     Wed Oct  3 12:38:49 2018
+==================        FPS:  59.2034       ==================
+==================        Elapsed Time: 37525.8 ms      ==================
+==================        Frame Time: 2.919 ms      ==================
+================== Time now:     Tue Oct  9 19:53:48 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 5.61766 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.564224 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.17766 ms
-Total : 14.3626 ms
-
-===============================================================
-==================        FPS:  66.0491       ==================
-==================        Time: 44790803 us      ==================
-================== Time now:     Wed Oct  3 12:38:50 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 6.33344 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.580608 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.89197 ms
-Total : 14.8081 ms
-
-===============================================================
-==================        FPS:  63.8309       ==================
-==================        Time: 46338301 us      ==================
-================== Time now:     Wed Oct  3 12:38:52 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 6.53619 ms
+GPU: LightVisibilityPass - LEFT : 7.19565 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.58368 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.90118 ms
-Total : 15.0221 ms
-
-===============================================================
-==================        FPS:  60.2858       ==================
-==================        Time: 47967619 us      ==================
-================== Time now:     Wed Oct  3 12:38:54 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 7.99949 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.587776 ms
+GPU: ResolvePass - LEFT : 0.755712 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.91142 ms
-Total : 16.4997 ms
-
-===============================================================
-==================        FPS:  58.9887       ==================
-==================        Time: 49661572 us      ==================
-================== Time now:     Wed Oct  3 12:38:55 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 7.92883 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.590848 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.91962 ms
-Total : 16.4424 ms
-
-===============================================================
-==================        FPS:  53.8561       ==================
-==================        Time: 51501569 us      ==================
-================== Time now:     Wed Oct  3 12:38:57 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 9.7536 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.572416 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.97184 ms
-Total : 18.3009 ms
-
-===============================================================
-==================        FPS:  51.4258       ==================
-==================        Time: 53435680 us      ==================
-================== Time now:     Wed Oct  3 12:38:59 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 10.8851 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.557056 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.23603 ms
-Total : 19.6813 ms
-
-===============================================================
-==================        FPS:  48.5123       ==================
-==================        Time: 55480103 us      ==================
-================== Time now:     Wed Oct  3 12:39:01 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 11.8364 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.611328 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.98515 ms
-Total : 20.4349 ms
-
-===============================================================
-==================        FPS:  46.606       ==================
-==================        Time: 57614129 us      ==================
-================== Time now:     Wed Oct  3 12:39:03 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.5245 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.628736 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.97696 ms
-Total : 21.1313 ms
-
-===============================================================
-==================        FPS:  46.4326       ==================
-==================        Time: 59765012 us      ==================
-================== Time now:     Wed Oct  3 12:39:05 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.5092 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.717824 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.9575 ms
-Total : 21.1866 ms
-
-===============================================================
-==================        FPS:  46.4106       ==================
-==================        Time: 61919183 us      ==================
-================== Time now:     Wed Oct  3 12:39:08 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.3279 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.768 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.89811 ms
-Total : 20.9971 ms
-
-===============================================================
-==================        FPS:  47.0201       ==================
-==================        Time: 64050397 us      ==================
-================== Time now:     Wed Oct  3 12:39:10 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.3279 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.761856 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 7.78342 ms
-Total : 20.8763 ms
-
-===============================================================
-==================        FPS:  44.8133       ==================
-==================        Time: 66240993 us      ==================
-================== Time now:     Wed Oct  3 12:39:12 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 13.3499 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.882688 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.98413 ms
-Total : 22.2188 ms
-
-===============================================================
-==================        FPS:  44.1677       ==================
-==================        Time: 68505609 us      ==================
-================== Time now:     Wed Oct  3 12:39:14 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 13.3652 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.94208 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.0128 ms
-Total : 22.3222 ms
-
-===============================================================
-==================        FPS:  42.7679       ==================
-==================        Time: 70818759 us      ==================
-================== Time now:     Wed Oct  3 12:39:16 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 13.6438 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 1.0199 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.34048 ms
-Total : 23.0072 ms
-
-===============================================================
-==================        FPS:  42.6299       ==================
-==================        Time: 73163327 us      ==================
-================== Time now:     Wed Oct  3 12:39:19 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 13.9868 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 1.01478 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.10906 ms
-Total : 23.1137 ms
-
-===============================================================
-==================        FPS:  41.5527       ==================
-==================        Time: 75560788 us      ==================
-================== Time now:     Wed Oct  3 12:39:21 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 14.8787 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 1.03424 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.22886 ms
-Total : 24.1449 ms
-
-===============================================================
-==================        FPS:  39.8982       ==================
-==================        Time: 78042083 us      ==================
-================== Time now:     Wed Oct  3 12:39:24 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 15.3262 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 1.02707 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.58624 ms
-Total : 24.9405 ms
-
-===============================================================
-==================        FPS:  39.2128       ==================
-==================        Time: 80606798 us      ==================
-================== Time now:     Wed Oct  3 12:39:26 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 15.8065 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.897024 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.58317 ms
-Total : 25.2887 ms
-
-===============================================================
-==================        FPS:  41.722       ==================
-==================        Time: 83068314 us      ==================
-================== Time now:     Wed Oct  3 12:39:29 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 14.1384 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.756736 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.51866 ms
-Total : 23.4168 ms
-
-===============================================================
-==================        FPS:  41.9668       ==================
-==================        Time: 85452403 us      ==================
-================== Time now:     Wed Oct  3 12:39:31 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 14.2039 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.758784 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.53504 ms
-Total : 23.4998 ms
-
-===============================================================
-==================        FPS:  43.8942       ==================
-==================        Time: 87774218 us      ==================
-================== Time now:     Wed Oct  3 12:39:33 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.7887 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.699392 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.22067 ms
-Total : 21.7119 ms
-
-===============================================================
-==================        FPS:  46.5359       ==================
-==================        Time: 89932162 us      ==================
-================== Time now:     Wed Oct  3 12:39:36 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.0105 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.652288 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.45824 ms
-Total : 21.1231 ms
-
-===============================================================
-==================        FPS:  46.3448       ==================
-==================        Time: 92089140 us      ==================
-================== Time now:     Wed Oct  3 12:39:38 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.0033 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.674816 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.20122 ms
-Total : 20.8835 ms
-
-===============================================================
-==================        FPS:  46.4952       ==================
-==================        Time: 94242406 us      ==================
-================== Time now:     Wed Oct  3 12:39:40 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.0105 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.633856 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
 GPU: TriMeshPass - LEFT : 8.16742 ms
-Total : 20.8148 ms
+Total : 16.1208 ms
 
 ===============================================================
-==================        FPS:  46.9564       ==================
-==================        Time: 96379568 us      ==================
-================== Time now:     Wed Oct  3 12:39:42 2018
+==================        FPS:  61.2089       ==================
+==================        Elapsed Time: 38173.1 ms      ==================
+==================        Frame Time: 2.85 ms      ==================
+================== Time now:     Tue Oct  9 19:53:49 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 11.9562 ms
+GPU: LightVisibilityPass - LEFT : 6.63757 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.743424 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 8.16026 ms
+Total : 15.5423 ms
+
+===============================================================
+==================        FPS:  62.5305       ==================
+==================        Elapsed Time: 38487.5 ms      ==================
+==================        Frame Time: 2.809 ms      ==================
+================== Time now:     Tue Oct  9 19:53:49 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 6.46349 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.73728 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.15821 ms
+Total : 15.3631 ms
+
+===============================================================
+==================        FPS:  63.5916       ==================
+==================        Elapsed Time: 38802 ms      ==================
+==================        Frame Time: 2.872 ms      ==================
+================== Time now:     Tue Oct  9 19:53:49 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 6.46758 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.736256 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.15923 ms
+Total : 15.3672 ms
+
+===============================================================
+==================        FPS:  65.7339       ==================
+==================        Elapsed Time: 40416.3 ms      ==================
+==================        Frame Time: 3.099 ms      ==================
+================== Time now:     Tue Oct  9 19:53:51 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 6.272 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.722944 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.88173 ms
+Total : 14.8797 ms
+
+===============================================================
+==================        FPS:  67.9018       ==================
+==================        Elapsed Time: 43038.7 ms      ==================
+==================        Frame Time: 2.898 ms      ==================
+================== Time now:     Tue Oct  9 19:53:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 5.57773 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.613376 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 8.17459 ms
+Total : 14.3667 ms
+
+===============================================================
+==================        FPS:  68.637       ==================
+==================        Elapsed Time: 43373 ms      ==================
+==================        Frame Time: 2.782 ms      ==================
+================== Time now:     Tue Oct  9 19:53:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 5.19475 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.594944 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 7.85613 ms
+Total : 13.6479 ms
+
+===============================================================
+==================        FPS:  69.9533       ==================
+==================        Elapsed Time: 43700.5 ms      ==================
+==================        Frame Time: 2.804 ms      ==================
+================== Time now:     Tue Oct  9 19:53:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 5.01146 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.559104 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.15718 ms
+Total : 13.7308 ms
+
+===============================================================
+==================        FPS:  70.6152       ==================
+==================        Elapsed Time: 44028.6 ms      ==================
+==================        Frame Time: 3.076 ms      ==================
+================== Time now:     Tue Oct  9 19:53:55 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 5.57773 ms
 GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 0.559104 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.84179 ms
+Total : 13.9817 ms
+
+===============================================================
+==================        FPS:  68.886       ==================
+==================        Elapsed Time: 44350.7 ms      ==================
+==================        Frame Time: 2.836 ms      ==================
+================== Time now:     Tue Oct  9 19:53:55 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 5.57978 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 0.5632 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.14694 ms
+Total : 14.293 ms
+
+===============================================================
+==================        FPS:  66.8597       ==================
+==================        Elapsed Time: 45596.2 ms      ==================
+==================        Frame Time: 2.945 ms      ==================
+================== Time now:     Tue Oct  9 19:53:56 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 6.30374 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.576512 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.85715 ms
+Total : 14.7415 ms
+
+===============================================================
+==================        FPS:  64.0621       ==================
+==================        Elapsed Time: 47757.2 ms      ==================
+==================        Frame Time: 3.09 ms      ==================
+================== Time now:     Tue Oct  9 19:53:58 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 6.8311 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 0.58368 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.17254 ms
+Total : 15.5904 ms
+
+===============================================================
+==================        FPS:  59.657       ==================
+==================        Elapsed Time: 49255.2 ms      ==================
+==================        Frame Time: 3.033 ms      ==================
+================== Time now:     Tue Oct  9 19:54:00 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 7.64928 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 0.585728 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 7.86432 ms
+Total : 16.1004 ms
+
+===============================================================
+==================        FPS:  59.3123       ==================
+==================        Elapsed Time: 50248.6 ms      ==================
+==================        Frame Time: 3.109 ms      ==================
+================== Time now:     Tue Oct  9 19:54:01 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 7.72608 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.587776 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.87046 ms
+Total : 16.1874 ms
+
+===============================================================
+==================        FPS:  54.1436       ==================
+==================        Elapsed Time: 52052.8 ms      ==================
+==================        Frame Time: 3.211 ms      ==================
+================== Time now:     Tue Oct  9 19:54:03 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 9.62662 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.56832 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TriMeshPass - LEFT : 7.87763 ms
+Total : 18.0736 ms
+
+===============================================================
+==================        FPS:  51.8032       ==================
+==================        Elapsed Time: 53708.9 ms      ==================
+==================        Frame Time: 2.961 ms      ==================
+================== Time now:     Tue Oct  9 19:54:04 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+GPU: BBoxPass - LEFT : 0 ms
+GPU: LightVisibilityPass - LEFT : 10.4991 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
 GPU: ResolvePass - LEFT : 0.548864 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.39373 ms
-Total : 20.8998 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 7.89914 ms
+Total : 18.9501 ms
 
 ===============================================================
-==================        FPS:  46.465       ==================
-==================        Time: 98526616 us      ==================
-================== Time now:     Wed Oct  3 12:39:44 2018
+==================        FPS:  50.0038       ==================
+==================        Elapsed Time: 54838.6 ms      ==================
+==================        Frame Time: 3.041 ms      ==================
+================== Time now:     Tue Oct  9 19:54:05 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.031 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.651264 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: LightVisibilityPass - LEFT : 11.2773 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.555008 ms
 GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.49101 ms
-Total : 21.1743 ms
+GPU: TriMeshPass - LEFT : 7.90323 ms
+Total : 19.7386 ms
 
 ===============================================================
-==================        FPS:  46.0497       ==================
-==================        Time: 100690527 us      ==================
-================== Time now:     Wed Oct  3 12:39:46 2018
+==================        FPS:  48.736       ==================
+==================        Elapsed Time: 55941.1 ms      ==================
+==================        Frame Time: 3.086 ms      ==================
+================== Time now:     Tue Oct  9 19:54:06 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.4017 ms
+GPU: LightVisibilityPass - LEFT : 11.2845 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.60416 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.26163 ms
-Total : 21.2705 ms
-
-===============================================================
-==================        FPS:  46.3506       ==================
-==================        Time: 102854755 us      ==================
-================== Time now:     Wed Oct  3 12:39:48 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.4959 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.540672 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.30976 ms
-Total : 21.3484 ms
-
-===============================================================
-==================        FPS:  46.4804       ==================
-==================        Time: 105014150 us      ==================
-================== Time now:     Wed Oct  3 12:39:51 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.1221 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.509952 ms
+GPU: ResolvePass - LEFT : 0.606208 ms
 GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.52378 ms
-Total : 21.1579 ms
+GPU: TriMeshPass - LEFT : 8.24934 ms
+Total : 20.1421 ms
 
 ===============================================================
-==================        FPS:  46.2214       ==================
-==================        Time: 107194727 us      ==================
-================== Time now:     Wed Oct  3 12:39:53 2018
+==================        FPS:  47.5231       ==================
+==================        Elapsed Time: 56903.1 ms      ==================
+==================        Frame Time: 3.186 ms      ==================
+================== Time now:     Tue Oct  9 19:54:07 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.2348 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.618496 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.6528 ms
-Total : 21.5081 ms
-
-===============================================================
-==================        FPS:  45.929       ==================
-==================        Time: 109377065 us      ==================
-================== Time now:     Wed Oct  3 12:39:55 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.1211 ms
+GPU: LightVisibilityPass - LEFT : 11.9532 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.601088 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.565248 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.5975 ms
-Total : 21.3217 ms
+GPU: TriMeshPass - LEFT : 8.21658 ms
+Total : 20.736 ms
 
 ===============================================================
-==================        FPS:  45.6718       ==================
-==================        Time: 111569969 us      ==================
-================== Time now:     Wed Oct  3 12:39:57 2018
+==================        FPS:  46.9433       ==================
+==================        Elapsed Time: 57796.6 ms      ==================
+==================        Frame Time: 3.376 ms      ==================
+================== Time now:     Tue Oct  9 19:54:08 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 12.5194 ms
+GPU: LightVisibilityPass - LEFT : 12.1139 ms
 GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.546816 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.35072 ms
-Total : 21.42 ms
-
-===============================================================
-==================        FPS:  50.0671       ==================
-==================        Time: 113687652 us      ==================
-================== Time now:     Wed Oct  3 12:39:59 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.1641 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.553984 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.35379 ms
-Total : 21.0739 ms
-
-===============================================================
-==================        FPS:  48.1085       ==================
-==================        Time: 115807738 us      ==================
-================== Time now:     Wed Oct  3 12:40:01 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 12.4416 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.664576 ms
+GPU: ResolvePass - LEFT : 0.602112 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 7.65338 ms
-Total : 20.7606 ms
+GPU: TriMeshPass - LEFT : 8.24525 ms
+Total : 20.9633 ms
 
 ===============================================================
-==================        FPS:  49.1471       ==================
-==================        Time: 117891221 us      ==================
-================== Time now:     Wed Oct  3 12:40:04 2018
+==================        FPS:  46.8276       ==================
+==================        Elapsed Time: 58778.6 ms      ==================
+==================        Frame Time: 3.17 ms      ==================
+================== Time now:     Tue Oct  9 19:54:09 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 13.4482 ms
+GPU: LightVisibilityPass - LEFT : 12.417 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.6912 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 6.40102 ms
-Total : 20.5435 ms
-
-===============================================================
-==================        FPS:  46.0774       ==================
-==================        Time: 120058967 us      ==================
-================== Time now:     Wed Oct  3 12:40:06 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 14.9576 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.709632 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.631808 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 5.60026 ms
-Total : 21.2705 ms
+GPU: TriMeshPass - LEFT : 7.91859 ms
+Total : 20.9705 ms
 
 ===============================================================
-==================        FPS:  47.3634       ==================
-==================        Time: 122190095 us      ==================
-================== Time now:     Wed Oct  3 12:40:08 2018
+==================        FPS:  46.7611       ==================
+==================        Elapsed Time: 59761.6 ms      ==================
+==================        Frame Time: 3.027 ms      ==================
+================== Time now:     Tue Oct  9 19:54:10 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 16.0666 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.718848 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 4.45747 ms
-Total : 21.246 ms
+GPU: LightVisibilityPass - LEFT : 12.1119 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: ResolvePass - LEFT : 0.671744 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 8.2176 ms
+Total : 21.0033 ms
 
 ===============================================================
-==================        FPS:  45.0503       ==================
-==================        Time: 124410962 us      ==================
-================== Time now:     Wed Oct  3 12:40:10 2018
+==================        FPS:  46.6978       ==================
+==================        Elapsed Time: 60747 ms      ==================
+==================        Frame Time: 3.405 ms      ==================
+================== Time now:     Tue Oct  9 19:54:11 2018
  ==================
 ===============================================================
 ================= Time Queries for Context: 0 =================
 GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 16.8325 ms
+GPU: LightVisibilityPass - LEFT : 12.417 ms
 GPU: LineStripPass - LEFT : 0.001024 ms
 GPU: ResolvePass - LEFT : 0.728064 ms
 GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 4.47795 ms
-Total : 22.0426 ms
-
-===============================================================
-==================        FPS:  44.3629       ==================
-==================        Time: 126641843 us      ==================
-================== Time now:     Wed Oct  3 12:40:12 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 16.8315 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.739328 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
 GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 4.47795 ms
-Total : 22.0498 ms
-
-===============================================================
-==================        FPS:  43.9761       ==================
-==================        Time: 128898737 us      ==================
-================== Time now:     Wed Oct  3 12:40:15 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 16.9144 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.75264 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 4.45133 ms
-Total : 22.1215 ms
-
-===============================================================
-==================        FPS:  38.194       ==================
-==================        Time: 131445128 us      ==================
-================== Time now:     Wed Oct  3 12:40:17 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 21.4456 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.772096 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 4.48205 ms
-Total : 26.7028 ms
-
-===============================================================
-==================        FPS:  38.2576       ==================
-==================        Time: 134078976 us      ==================
-================== Time now:     Wed Oct  3 12:40:20 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 20.1789 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.910336 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 4.51072 ms
-Total : 25.601 ms
-
-===============================================================
-==================        FPS:  38.5707       ==================
-==================        Time: 136660866 us      ==================
-================== Time now:     Wed Oct  3 12:40:22 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 20.1062 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.887808 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 4.4288 ms
-Total : 25.4249 ms
-
-===============================================================
-==================        FPS:  38.3041       ==================
-==================        Time: 139274145 us      ==================
-================== Time now:     Wed Oct  3 12:40:25 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 20.522 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.777216 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 4.38784 ms
-Total : 25.687 ms
-
-===============================================================
-==================        FPS:  39.503       ==================
-==================        Time: 141826306 us      ==================
-================== Time now:     Wed Oct  3 12:40:27 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 19.2788 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.982016 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 4.49741 ms
-Total : 24.7603 ms
-
-===============================================================
-==================        FPS:  39.7504       ==================
-==================        Time: 144351005 us      ==================
-================== Time now:     Wed Oct  3 12:40:30 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 19.3208 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.913408 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 4.86502 ms
-Total : 25.1023 ms
-
-===============================================================
-==================        FPS:  34.2726       ==================
-==================        Time: 147227558 us      ==================
-================== Time now:     Wed Oct  3 12:40:33 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 19.1826 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.879616 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.83302 ms
-Total : 28.8973 ms
-
-===============================================================
-==================        FPS:  33.0717       ==================
-==================        Time: 150229827 us      ==================
-================== Time now:     Wed Oct  3 12:40:36 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 20.3704 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 1.00557 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 8.66202 ms
-Total : 30.038 ms
-
-===============================================================
-==================        FPS:  31.8226       ==================
-==================        Time: 153341884 us      ==================
-================== Time now:     Wed Oct  3 12:40:39 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 21.1661 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 1.16634 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 9.0153 ms
-Total : 31.3498 ms
-
-===============================================================
-==================        FPS:  33.4732       ==================
-==================        Time: 156438019 us      ==================
-================== Time now:     Wed Oct  3 12:40:42 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 19.2799 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 1.18272 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 9.10541 ms
-Total : 29.569 ms
-
-===============================================================
-==================        FPS:  33.7373       ==================
-==================        Time: 159397216 us      ==================
-================== Time now:     Wed Oct  3 12:40:45 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 19.2727 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 1.0025 ms
-GPU: TexturedQuadPass - LEFT : 0 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
-GPU: TriMeshPass - LEFT : 9.0921 ms
-Total : 29.3693 ms
-
-===============================================================
-==================        FPS:  35.4474       ==================
-==================        Time: 162264036 us      ==================
-================== Time now:     Wed Oct  3 12:40:48 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0.001024 ms
-GPU: LightVisibilityPass - LEFT : 17.8053 ms
-GPU: LineStripPass - LEFT : 0.001024 ms
-GPU: ResolvePass - LEFT : 0.75776 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.58317 ms
-Total : 27.1503 ms
-
-===============================================================
-==================        FPS:  37.3986       ==================
-==================        Time: 164930859 us      ==================
-================== Time now:     Wed Oct  3 12:40:51 2018
- ==================
-===============================================================
-================= Time Queries for Context: 0 =================
-GPU: BBoxPass - LEFT : 0 ms
-GPU: LightVisibilityPass - LEFT : 16.7741 ms
-GPU: LineStripPass - LEFT : 0 ms
-GPU: ResolvePass - LEFT : 0.843776 ms
-GPU: TexturedQuadPass - LEFT : 0.001024 ms
-GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
-GPU: TriMeshPass - LEFT : 8.55142 ms
-Total : 26.1714 ms
+GPU: TriMeshPass - LEFT : 7.89606 ms
+Total : 21.0442 ms
 

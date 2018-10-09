@@ -7,11 +7,14 @@ Test Case:
 ##Test PCs
 LAB:
     - Titan X (Pascal)
-    - Intel i7-5930K @ 3.50 GHz
+    - Intel i7-5930K @ 3.50 GHz (6 cores, 12 logical prozessors)
     - 15.98 GB RAM
 HOME:
     - GTX 760
 
+## CAM PATH Durations
+teichgraben: 3 min == 180 000 ms
+teichgraben_ruine: 7 min == 420 000 ms
 
 ##Models
 Ruine:      11 751 088 faces

@@ -116,7 +116,8 @@ Renderer::~Renderer() {
 }
 
 void Renderer::renderclient(Mailbox in, std::string window_name) {
-  auto start_time = std::chrono::system_clock::now();
+  auto start_time = std::chrono::high_resolution_clock::now();
+  float path_time;
   FpsCounter fpsc(20);
   fpsc.start();
   TextFile single_times;
@@ -142,6 +143,12 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
     }
   }
 
+  if (test_scene_ == "1") {
+    path_time = 420000;
+  } else {    
+    path_time = 180000;
+  }
+
   float accumulated_time = 0;
   int counter = 0;
   std::stringstream stream;
@@ -150,6 +157,7 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     //auto window_name(cmd.serialized_cam->config.get_output_window_name());
 
+    auto frame_time_start = std::chrono::high_resolution_clock::now();
     if (window_name != "") {
       auto window = WindowDatabase::instance()->lookup(window_name);
 
@@ -222,12 +230,13 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
           if (img) window->display(img, cmd.serialized_cam->config.get_mono_mode() != CameraMode::RIGHT);
         }
 
-        if (0 == window->get_context()->framecount % 100) {
+        auto fps = ((int)window->get_rendering_fps() > 0)? (int)window->get_rendering_fps(): 100;
+        if (0 == window->get_context()->framecount % fps) {
           gua::Logger::LOG_MESSAGE << "[SINGLE] fps: " << window->get_rendering_fps() << std::endl;
         }
 
         pipe->fetch_gpu_query_results(pipe->get_context());
-        if (pipe->get_context().framecount % 100 == 0) {
+        if (pipe->get_context().framecount % fps == 0) {
           auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
           float total_time = 0;
           // std::cout << "===== Time Queries for Context: " << pipe->get_context().id
@@ -238,11 +247,13 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
           // }
           // std::cout << "Total" << " : " << total_time << " ms" << std::endl;
           // std::cout << std::endl;
-          if (counter < 70 && (0 != window->get_rendering_fps())) {
+          auto elapsed_time = (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_time).count()/1000;
+          if (elapsed_time < path_time && (0 != window->get_rendering_fps())) {
             stream << "===============================================================" << std::endl;
             stream << "==================        FPS:  " << window->get_rendering_fps() << "       ==================" << std::endl;
             std::time_t time_stamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            stream << "==================        Time: " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - start_time).count() << " us      ==================" << std::endl;
+            stream << "==================        Elapsed Time: " << elapsed_time << " ms      ==================" << std::endl;
+            stream << "==================        Frame Time: " << (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - frame_time_start).count()/1000 << " ms      ==================" << std::endl;
             stream << "================== Time now:     " << std::ctime(&time_stamp) << " ==================" << std::endl;
             stream << "===============================================================" << std::endl;
             stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
@@ -277,7 +288,13 @@ void Renderer::renderclient(Mailbox in, std::string window_name) {
 
 void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
   // std::cout << "started renderclient for " << window_name << std::endl;
-  auto start_time = std::chrono::system_clock::now();
+  auto start_time = std::chrono::high_resolution_clock::now();
+  float path_time;
+  if (test_scene_ == "1") {
+    path_time = 420000;
+  } else {    
+    path_time = 180000;
+  }
   FpsCounter fpsc(20);
   fpsc.start();
 
@@ -292,6 +309,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
   stream << "========================= SLOW CLIENT =========================" << std::endl;
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
+    auto frame_time_start = std::chrono::high_resolution_clock::now();
     {
       gua::Frustum frustum = cmd.serialized_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
       warp_res[window_name]->warp_state.projection_view_center = frustum.get_projection() * frustum.get_view();
@@ -368,7 +386,7 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
             pipe = pipe_iter->second;
           }
 
-        offscreen_window->rendering_fps = fpsc.fps;
+          offscreen_window->rendering_fps = fpsc.fps;
 
 
           // std::cout << "[RENDER] starting rendering process..." << std::endl;
@@ -485,12 +503,13 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 #endif   
         }
 
-        if (0 == offscreen_window->get_context()->framecount % 100) {
+        auto fps = ((int)offscreen_window->get_rendering_fps() > 0)? (int)offscreen_window->get_rendering_fps(): 100;
+        if (0 == offscreen_window->get_context()->framecount % fps) {
           gua::Logger::LOG_MESSAGE << "[SLOW] fps: " << offscreen_window->get_rendering_fps() << std::endl;
         }
 
         pipe->fetch_gpu_query_results(pipe->get_context());
-        if (pipe->get_context().framecount % 100 == 0) {
+        if (pipe->get_context().framecount % fps == 0) {
           auto query_results = std::make_shared<Pipeline::time_query_collection>(pipe->get_query());
           float total_time = 0;
           // std::cout << "===== Time Queries for Context: " << pipe->get_context().id
@@ -501,11 +520,13 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
           // }
           // std::cout << "Total" << " : " << total_time << " ms" << std::endl;
           // std::cout << std::endl;
-          if (counter < 50 && (0 != offscreen_window->get_rendering_fps())) {
+          auto elapsed_time = (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_time).count()/1000;
+          if (elapsed_time < path_time && (0 != offscreen_window->get_rendering_fps())) {
             stream << "===============================================================" << std::endl;
             stream << "==================        FPS: " << offscreen_window->get_rendering_fps() << "       ==================" <<  std::endl; 
             std::time_t time_stamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            stream << "==================        Time : " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - start_time).count() << " us      ==================" << std::endl;
+            stream << "==================        Elapsed Time: " << elapsed_time << " ms      ==================" << std::endl;
+            stream << "==================        Frame Time: " << (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - frame_time_start).count()/1000 << " ms      ==================" << std::endl;
             stream << "================== Time now: " << std::ctime(&time_stamp) << " ==================" << std::endl;
             stream << "===============================================================" << std::endl;
             stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
@@ -541,7 +562,13 @@ void Renderer::renderclient_slow(Mailbox in, std::string window_name, std::map<s
 
 void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<std::string, std::shared_ptr<Renderer::WarpingResources>> &warp_res) {
   // std::cout << "started warpclient for "  << window_name << std::endl;
-  auto start_time = std::chrono::system_clock::now();
+  auto start_time = std::chrono::high_resolution_clock::now();
+  float path_time;
+  if (test_scene_ == "1") {
+    path_time = 420000;
+  } else {    
+    path_time = 180000;
+  }
   FpsCounter fpsc(20);
   fpsc.start();
 #if MULTITHREADED
@@ -552,6 +579,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 
   for (auto& cmd : gua::concurrent::pull_items_range<Item, Mailbox>(in)) {
     // std::cout << "[FAST] Camera id: " << cmd.serialized_cam->uuid << std::endl;
+    auto frame_time_start = std::chrono::high_resolution_clock::now();
     {
       // auto warp_cam = std::make_shared<gua::node::CameraNode>("Warp_Cam", std::make_shared<PipelineDescription>(), cmd.serialized_cam->config, cmd.serialized_cam->transform);
       auto warp_cam = std::make_shared<gua::node::CameraNode>();
@@ -582,6 +610,7 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
       warp_res[window_name]->serialized_warp_cam = std::make_shared<node::SerializedCameraNode>(warp_cam->serialize());
       // std::cout << "[FAST] Warp Camera id: " << warp_res[window_name]->serialized_warp_cam->uuid << std::endl;
     }
+	  // std::cout << "[FAST] TIMING AFTER CAM INIT: " << (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - frame_time_start).count() / 1000 << std::endl;
     // if(!warp_res[window_name]->initialized) {
     //   gua::Frustum frustum = warp_res[window_name]->serialized_warp_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
     //   // gua::Frustum frustum = cmd.serialized_cam->get_rendering_frustum(*(cmd.scene_graphs->front()), gua::CameraMode::CENTER);
@@ -630,7 +659,9 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
         while(!warp_res[window_name]->shared_initialized) {
           // std::cout << "[FAST] waiting for offscreen window to get initialized" << std::endl;
         }
+        auto frame_time_start_2 = std::chrono::high_resolution_clock::now();
         window->set_active(true);
+        auto set_active_time = (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - frame_time_start_2).count() / 1000;
         window->start_frame();
         // if warp resources arent initialized, do it now
         if(!warp_res[window_name]->initialized) {
@@ -721,8 +752,8 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           // auto query_results = pipe->get_query();
           // time_bygone = query_results.results[gpu_query_name];
         }
-
-        if (0 == window->get_context()->framecount % 100) {
+        auto fps = ((int)window->get_rendering_fps() > 0)? (int)window->get_rendering_fps(): 100;
+        if (0 == window->get_context()->framecount % fps) {
           gua::Logger::LOG_MESSAGE << "[FAST] fps: " << window->get_rendering_fps() << std::endl;
         }
 
@@ -733,7 +764,10 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
             total_time += t.second;
         }
         
-        if (pipe->get_context().framecount % 100 == 0) {
+        float frame_time;
+        if (pipe->get_context().framecount % fps == 0) {
+          auto end = std::chrono::high_resolution_clock::now();
+          // std::cout << "[FAST] GPU Time: " << total_time << " | Actual time: " << (float)std::chrono::duration_cast<std::chrono::microseconds>(end - frame_time_start).count()/1000 << std::endl;
           // std::cout << "===== Time Queries for Context: " << pipe->get_context().id
           //           << " ============================" << std::endl;
           // for (auto const& t : query_results->results) {
@@ -741,11 +775,14 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
           // }
           // std::cout << "Total" << " : " << total_time << " ms" << std::endl;
           // std::cout << std::endl;
-          if (counter < 60 && (0 != window->get_rendering_fps())) {
+          auto elapsed_time = (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_time).count()/1000;
+          if (elapsed_time < path_time && (0 != window->get_rendering_fps())) {
             stream << "===============================================================" << std::endl;
             stream << "==================        FPS: " << window->get_rendering_fps() << "       ==================" << std::endl;
+            stream << "==================        Elapsed Time: " << elapsed_time << " ms      ==================" << std::endl;
+            frame_time = (float)std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - frame_time_start).count()/1000;
+            stream << "==================        Frame Time: " << frame_time << " ms      ==================" << std::endl;
             std::time_t time_stamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            stream << "==================        Time: " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - start_time).count() << " us      ==================" << std::endl;
             stream << "================== Time now:     " << std::ctime(&time_stamp) << " ==================" << std::endl;
             stream << "===============================================================" << std::endl;
             stream << "================= Time Queries for Context: " << pipe->get_context().id << " =================" << std::endl;
@@ -774,11 +811,12 @@ void Renderer::renderclient_fast(Mailbox in, std::string window_name, std::map<s
 
         pipe->clear_frame_cache();
         window->finish_frame();
-        time_warped = time_budget - total_time;
+        time_warped = time_budget - frame_time;
         time_left = time_warped;
-        while (time_warped >= time_left > 1.1) {
-          time_left -= 0.05;
-          // std::this_thread::sleep_for(0.09ms);
+        // std::cout << "[FAST] time left: " << time_left << std::endl;
+        while (time_warped >= time_left > 1.0) {
+          std::this_thread::sleep_for(0.09ms);
+          time_left -= 0.1;
           // std::cout << "[FAST] time left: " << time_left << std::endl;
         }
         time_left = time_budget;
