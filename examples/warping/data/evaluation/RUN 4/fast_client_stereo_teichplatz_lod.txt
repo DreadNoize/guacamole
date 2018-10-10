@@ -1,0 +1,2965 @@
+========================= FAST CLIENT =========================
+===============================================================
+==================        FPS: 52.0767       ==================
+==================        Elapsed Time: 2078.26 ms      ==================
+==================        Frame Time: 7.071 ms      ==================
+================== Time now:     Thu Oct 11 00:29:05 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.159 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.266 ms
+CPU: WarpPass - LEFT : 0.119 ms
+CPU: WarpPass - RIGHT : 0.108 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917696 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.9216 ms
+GPU: WarpPass - LEFT : 2.08282 ms
+GPU: WarpPass - RIGHT : 2.07155 ms
+Total : 6.64566 ms
+
+===============================================================
+==================        FPS: 86.8943       ==================
+==================        Elapsed Time: 2264.11 ms      ==================
+==================        Frame Time: 20.001 ms      ==================
+================== Time now:     Thu Oct 11 00:29:05 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.233 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.221 ms
+CPU: WarpPass - LEFT : 0.147 ms
+CPU: WarpPass - RIGHT : 0.149 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91344 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92672 ms
+GPU: WarpPass - LEFT : 2.06541 ms
+GPU: WarpPass - RIGHT : 2.03162 ms
+Total : 6.68718 ms
+
+===============================================================
+==================        FPS: 83.597       ==================
+==================        Elapsed Time: 3153.93 ms      ==================
+==================        Frame Time: 8.036 ms      ==================
+================== Time now:     Thu Oct 11 00:29:06 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.377 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.379 ms
+CPU: WarpPass - LEFT : 0.209 ms
+CPU: WarpPass - RIGHT : 0.204 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913792 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914848 ms
+GPU: WarpPass - LEFT : 2.17702 ms
+GPU: WarpPass - RIGHT : 2.11866 ms
+Total : 7.29332 ms
+
+===============================================================
+==================        FPS: 84.7594       ==================
+==================        Elapsed Time: 4170.73 ms      ==================
+==================        Frame Time: 7.327 ms      ==================
+================== Time now:     Thu Oct 11 00:29:07 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.398 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.196 ms
+CPU: WarpPass - LEFT : 0.116 ms
+CPU: WarpPass - RIGHT : 0.109 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.918528 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.920672 ms
+GPU: WarpPass - LEFT : 2.2487 ms
+GPU: WarpPass - RIGHT : 2.22106 ms
+Total : 7.12796 ms
+
+===============================================================
+==================        FPS: 90.7165       ==================
+==================        Elapsed Time: 4440.36 ms      ==================
+==================        Frame Time: 6.841 ms      ==================
+================== Time now:     Thu Oct 11 00:29:07 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.188 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.284 ms
+CPU: WarpPass - LEFT : 0.102 ms
+CPU: WarpPass - RIGHT : 0.123 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913632 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.912768 ms
+GPU: WarpPass - LEFT : 2.11251 ms
+GPU: WarpPass - RIGHT : 2.08589 ms
+Total : 6.7218 ms
+
+===============================================================
+==================        FPS: 91.2409       ==================
+==================        Elapsed Time: 5481.13 ms      ==================
+==================        Frame Time: 21.803 ms      ==================
+================== Time now:     Thu Oct 11 00:29:08 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.36 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.621 ms
+CPU: WarpPass - LEFT : 0.267 ms
+CPU: WarpPass - RIGHT : 0.266 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 2.09101 ms
+GPU: WarpPass - RIGHT : 2.048 ms
+Total : 7.4829 ms
+
+===============================================================
+==================        FPS: 88.2616       ==================
+==================        Elapsed Time: 6272.36 ms      ==================
+==================        Frame Time: 6.584 ms      ==================
+================== Time now:     Thu Oct 11 00:29:09 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.182 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.168 ms
+CPU: WarpPass - LEFT : 0.096 ms
+CPU: WarpPass - RIGHT : 0.088 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913408 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 2.05722 ms
+GPU: WarpPass - RIGHT : 2.05414 ms
+Total : 6.4732 ms
+
+===============================================================
+==================        FPS: 76.5814       ==================
+==================        Elapsed Time: 8060.53 ms      ==================
+==================        Frame Time: 7.054 ms      ==================
+================== Time now:     Thu Oct 11 00:29:11 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.182 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.161 ms
+CPU: WarpPass - LEFT : 0.09 ms
+CPU: WarpPass - RIGHT : 0.08 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.912672 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 2.18317 ms
+GPU: WarpPass - RIGHT : 2.17702 ms
+Total : 6.70234 ms
+
+===============================================================
+==================        FPS: 84.7066       ==================
+==================        Elapsed Time: 8922.34 ms      ==================
+==================        Frame Time: 25.124 ms      ==================
+================== Time now:     Thu Oct 11 00:29:12 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 18.031 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.544 ms
+CPU: WarpPass - LEFT : 0.242 ms
+CPU: WarpPass - RIGHT : 0.233 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913568 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.920576 ms
+GPU: WarpPass - LEFT : 2.04186 ms
+GPU: WarpPass - RIGHT : 2.02138 ms
+Total : 24.9474 ms
+
+===============================================================
+==================        FPS: 79.6248       ==================
+==================        Elapsed Time: 11165.3 ms      ==================
+==================        Frame Time: 6.877 ms      ==================
+================== Time now:     Thu Oct 11 00:29:14 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.228 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.209 ms
+CPU: WarpPass - LEFT : 0.118 ms
+CPU: WarpPass - RIGHT : 0.106 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917952 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.923648 ms
+GPU: WarpPass - LEFT : 2.08896 ms
+GPU: WarpPass - RIGHT : 2.06541 ms
+Total : 6.65697 ms
+
+===============================================================
+==================        FPS: 73.0756       ==================
+==================        Elapsed Time: 13012.7 ms      ==================
+==================        Frame Time: 7.956 ms      ==================
+================== Time now:     Thu Oct 11 00:29:16 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.172 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.197 ms
+CPU: WarpPass - LEFT : 0.106 ms
+CPU: WarpPass - RIGHT : 0.091 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913536 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.912416 ms
+GPU: WarpPass - LEFT : 2.23232 ms
+GPU: WarpPass - RIGHT : 2.1801 ms
+Total : 6.80437 ms
+
+===============================================================
+==================        FPS: 78.0381       ==================
+==================        Elapsed Time: 15852.5 ms      ==================
+==================        Frame Time: 7.255 ms      ==================
+================== Time now:     Thu Oct 11 00:29:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.191 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.19 ms
+CPU: WarpPass - LEFT : 0.103 ms
+CPU: WarpPass - RIGHT : 0.087 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 2.59174 ms
+GPU: WarpPass - RIGHT : 2.54259 ms
+Total : 7.53359 ms
+
+===============================================================
+==================        FPS: 79.3925       ==================
+==================        Elapsed Time: 16047.4 ms      ==================
+==================        Frame Time: 6.231 ms      ==================
+================== Time now:     Thu Oct 11 00:29:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.207 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.24 ms
+CPU: WarpPass - LEFT : 0.101 ms
+CPU: WarpPass - RIGHT : 0.099 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914656 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 2.08691 ms
+GPU: WarpPass - RIGHT : 2.02854 ms
+Total : 6.59257 ms
+
+===============================================================
+==================        FPS: 77.3357       ==================
+==================        Elapsed Time: 16578.7 ms      ==================
+==================        Frame Time: 37.267 ms      ==================
+================== Time now:     Thu Oct 11 00:29:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.319 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.411 ms
+CPU: WarpPass - LEFT : 0.17 ms
+CPU: WarpPass - RIGHT : 0.345 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913696 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.912672 ms
+GPU: WarpPass - LEFT : 2.10227 ms
+GPU: WarpPass - RIGHT : 2.0736 ms
+Total : 7.24724 ms
+
+===============================================================
+==================        FPS: 79.5203       ==================
+==================        Elapsed Time: 16991.1 ms      ==================
+==================        Frame Time: 6.547 ms      ==================
+================== Time now:     Thu Oct 11 00:29:20 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.188 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.188 ms
+CPU: WarpPass - LEFT : 0.113 ms
+CPU: WarpPass - RIGHT : 0.089 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.9128 ms
+GPU: WarpPass - LEFT : 2.5344 ms
+GPU: WarpPass - RIGHT : 2.49344 ms
+Total : 7.43307 ms
+
+===============================================================
+==================        FPS: 78.5879       ==================
+==================        Elapsed Time: 17752.3 ms      ==================
+==================        Frame Time: 7.76 ms      ==================
+================== Time now:     Thu Oct 11 00:29:21 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.15 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.242 ms
+CPU: WarpPass - LEFT : 0.101 ms
+CPU: WarpPass - RIGHT : 0.129 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91584 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.922624 ms
+GPU: WarpPass - LEFT : 2.02957 ms
+GPU: WarpPass - RIGHT : 1.98144 ms
+Total : 6.47147 ms
+
+===============================================================
+==================        FPS: 82.0129       ==================
+==================        Elapsed Time: 19645.5 ms      ==================
+==================        Frame Time: 6.514 ms      ==================
+================== Time now:     Thu Oct 11 00:29:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.277 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.192 ms
+CPU: WarpPass - LEFT : 0.168 ms
+CPU: WarpPass - RIGHT : 0.086 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916672 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913856 ms
+GPU: WarpPass - LEFT : 2.05005 ms
+GPU: WarpPass - RIGHT : 2.02138 ms
+Total : 6.62495 ms
+
+===============================================================
+==================        FPS: 91.4754       ==================
+==================        Elapsed Time: 20726 ms      ==================
+==================        Frame Time: 6.205 ms      ==================
+================== Time now:     Thu Oct 11 00:29:23 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.226 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.287 ms
+CPU: WarpPass - LEFT : 0.124 ms
+CPU: WarpPass - RIGHT : 0.161 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.919552 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914624 ms
+GPU: WarpPass - LEFT : 1.99987 ms
+GPU: WarpPass - RIGHT : 1.97632 ms
+Total : 6.60837 ms
+
+===============================================================
+==================        FPS: 81.3002       ==================
+==================        Elapsed Time: 21353.8 ms      ==================
+==================        Frame Time: 7.038 ms      ==================
+================== Time now:     Thu Oct 11 00:29:24 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.244 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.191 ms
+CPU: WarpPass - LEFT : 0.155 ms
+CPU: WarpPass - RIGHT : 0.11 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.99885 ms
+GPU: WarpPass - RIGHT : 1.97018 ms
+Total : 6.49891 ms
+
+===============================================================
+==================        FPS: 78.6899       ==================
+==================        Elapsed Time: 22458.7 ms      ==================
+==================        Frame Time: 7.513 ms      ==================
+================== Time now:     Thu Oct 11 00:29:25 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.209 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.264 ms
+CPU: WarpPass - LEFT : 0.122 ms
+CPU: WarpPass - RIGHT : 0.097 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913408 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.99475 ms
+GPU: WarpPass - RIGHT : 1.95379 ms
+Total : 6.46941 ms
+
+===============================================================
+==================        FPS: 82.9876       ==================
+==================        Elapsed Time: 22626.7 ms      ==================
+==================        Frame Time: 27.056 ms      ==================
+================== Time now:     Thu Oct 11 00:29:25 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.186 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.372 ms
+CPU: WarpPass - LEFT : 0.146 ms
+CPU: WarpPass - RIGHT : 0.186 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.9136 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.98451 ms
+GPU: WarpPass - RIGHT : 1.95482 ms
+Total : 6.65838 ms
+
+===============================================================
+==================        FPS: 90.8451       ==================
+==================        Elapsed Time: 25859.2 ms      ==================
+==================        Frame Time: 6.473 ms      ==================
+================== Time now:     Thu Oct 11 00:29:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.367 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.228 ms
+CPU: WarpPass - LEFT : 0.133 ms
+CPU: WarpPass - RIGHT : 0.116 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915552 ms
+GPU: WarpPass - LEFT : 1.91795 ms
+GPU: WarpPass - RIGHT : 1.8903 ms
+Total : 6.48531 ms
+
+===============================================================
+==================        FPS: 82.7863       ==================
+==================        Elapsed Time: 26491.9 ms      ==================
+==================        Frame Time: 7.825 ms      ==================
+================== Time now:     Thu Oct 11 00:29:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.178 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.222 ms
+CPU: WarpPass - LEFT : 0.205 ms
+CPU: WarpPass - RIGHT : 0.114 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.923904 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 2.07155 ms
+GPU: WarpPass - RIGHT : 2.02854 ms
+Total : 6.65948 ms
+
+===============================================================
+==================        FPS: 87.9793       ==================
+==================        Elapsed Time: 28032.2 ms      ==================
+==================        Frame Time: 7.134 ms      ==================
+================== Time now:     Thu Oct 11 00:29:31 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.194 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.243 ms
+CPU: WarpPass - LEFT : 0.099 ms
+CPU: WarpPass - RIGHT : 0.124 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914464 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.91795 ms
+GPU: WarpPass - RIGHT : 1.89542 ms
+Total : 6.30534 ms
+
+===============================================================
+==================        FPS: 85.7123       ==================
+==================        Elapsed Time: 28401.3 ms      ==================
+==================        Frame Time: 6.617 ms      ==================
+================== Time now:     Thu Oct 11 00:29:31 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.24 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.234 ms
+CPU: WarpPass - LEFT : 0.087 ms
+CPU: WarpPass - RIGHT : 0.107 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915584 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.928768 ms
+GPU: WarpPass - LEFT : 1.90669 ms
+GPU: WarpPass - RIGHT : 1.88109 ms
+Total : 6.30013 ms
+
+===============================================================
+==================        FPS: 87.124       ==================
+==================        Elapsed Time: 29026.3 ms      ==================
+==================        Frame Time: 6.501 ms      ==================
+================== Time now:     Thu Oct 11 00:29:32 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.2 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.214 ms
+CPU: WarpPass - LEFT : 0.105 ms
+CPU: WarpPass - RIGHT : 0.095 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914496 ms
+GPU: WarpPass - LEFT : 1.97837 ms
+GPU: WarpPass - RIGHT : 1.95277 ms
+Total : 6.37406 ms
+
+===============================================================
+==================        FPS: 91.076       ==================
+==================        Elapsed Time: 29250.4 ms      ==================
+==================        Frame Time: 6.356 ms      ==================
+================== Time now:     Thu Oct 11 00:29:32 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.239 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.233 ms
+CPU: WarpPass - LEFT : 0.125 ms
+CPU: WarpPass - RIGHT : 0.117 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.912384 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.921632 ms
+GPU: WarpPass - LEFT : 1.97222 ms
+GPU: WarpPass - RIGHT : 1.95277 ms
+Total : 6.47301 ms
+
+===============================================================
+==================        FPS: 92.7411       ==================
+==================        Elapsed Time: 29540 ms      ==================
+==================        Frame Time: 14.056 ms      ==================
+================== Time now:     Thu Oct 11 00:29:32 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.3 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.378 ms
+CPU: WarpPass - LEFT : 0.133 ms
+CPU: WarpPass - RIGHT : 0.712 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 1.95891 ms
+GPU: WarpPass - RIGHT : 1.93946 ms
+Total : 7.25023 ms
+
+===============================================================
+==================        FPS: 89.4391       ==================
+==================        Elapsed Time: 30600.1 ms      ==================
+==================        Frame Time: 12.729 ms      ==================
+================== Time now:     Thu Oct 11 00:29:33 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.276 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.39 ms
+CPU: WarpPass - LEFT : 0.171 ms
+CPU: WarpPass - RIGHT : 0.15 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914688 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.88211 ms
+GPU: WarpPass - RIGHT : 1.84218 ms
+Total : 6.54041 ms
+
+===============================================================
+==================        FPS: 94.1903       ==================
+==================        Elapsed Time: 33155.9 ms      ==================
+==================        Frame Time: 11.369 ms      ==================
+================== Time now:     Thu Oct 11 00:29:36 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.218 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.212 ms
+CPU: WarpPass - LEFT : 0.116 ms
+CPU: WarpPass - RIGHT : 4.831 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 1.91488 ms
+GPU: WarpPass - RIGHT : 1.90054 ms
+Total : 11.0203 ms
+
+===============================================================
+==================        FPS: 95.3784       ==================
+==================        Elapsed Time: 33472.8 ms      ==================
+==================        Frame Time: 11.405 ms      ==================
+================== Time now:     Thu Oct 11 00:29:36 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.226 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.268 ms
+CPU: WarpPass - LEFT : 0.177 ms
+CPU: WarpPass - RIGHT : 0.14 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.95379 ms
+GPU: WarpPass - RIGHT : 1.89747 ms
+Total : 6.49727 ms
+
+===============================================================
+==================        FPS: 91.0129       ==================
+==================        Elapsed Time: 34143.7 ms      ==================
+==================        Frame Time: 6.776 ms      ==================
+================== Time now:     Thu Oct 11 00:29:37 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.244 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.241 ms
+CPU: WarpPass - LEFT : 0.086 ms
+CPU: WarpPass - RIGHT : 0.106 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915488 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913632 ms
+GPU: WarpPass - LEFT : 1.89235 ms
+GPU: WarpPass - RIGHT : 1.85037 ms
+Total : 6.24884 ms
+
+===============================================================
+==================        FPS: 89.7356       ==================
+==================        Elapsed Time: 34414.5 ms      ==================
+==================        Frame Time: 13.92 ms      ==================
+================== Time now:     Thu Oct 11 00:29:37 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.179 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.185 ms
+CPU: WarpPass - LEFT : 0.149 ms
+CPU: WarpPass - RIGHT : 0.116 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.88006 ms
+GPU: WarpPass - RIGHT : 1.82989 ms
+Total : 6.16903 ms
+
+===============================================================
+==================        FPS: 95.9707       ==================
+==================        Elapsed Time: 34492.6 ms      ==================
+==================        Frame Time: 10.981 ms      ==================
+================== Time now:     Thu Oct 11 00:29:37 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 4.598 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.319 ms
+CPU: WarpPass - LEFT : 0.137 ms
+CPU: WarpPass - RIGHT : 0.169 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.93229 ms
+GPU: WarpPass - RIGHT : 1.89542 ms
+Total : 10.8806 ms
+
+===============================================================
+==================        FPS: 93.6834       ==================
+==================        Elapsed Time: 35822.8 ms      ==================
+==================        Frame Time: 6.647 ms      ==================
+================== Time now:     Thu Oct 11 00:29:39 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.239 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.237 ms
+CPU: WarpPass - LEFT : 0.087 ms
+CPU: WarpPass - RIGHT : 0.108 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914688 ms
+GPU: WarpPass - LEFT : 1.91078 ms
+GPU: WarpPass - RIGHT : 1.87597 ms
+Total : 6.28892 ms
+
+===============================================================
+==================        FPS: 92.3515       ==================
+==================        Elapsed Time: 36449.5 ms      ==================
+==================        Frame Time: 10.978 ms      ==================
+================== Time now:     Thu Oct 11 00:29:39 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.185 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.231 ms
+CPU: WarpPass - LEFT : 3.976 ms
+CPU: WarpPass - RIGHT : 0.084 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913408 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.924672 ms
+GPU: WarpPass - LEFT : 1.89747 ms
+GPU: WarpPass - RIGHT : 1.86982 ms
+Total : 10.0814 ms
+
+===============================================================
+==================        FPS: 95.9628       ==================
+==================        Elapsed Time: 37526.5 ms      ==================
+==================        Frame Time: 4.962 ms      ==================
+================== Time now:     Thu Oct 11 00:29:40 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.271 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.237 ms
+CPU: WarpPass - LEFT : 0.131 ms
+CPU: WarpPass - RIGHT : 0.118 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913504 ms
+GPU: WarpPass - LEFT : 1.88723 ms
+GPU: WarpPass - RIGHT : 1.85446 ms
+Total : 6.32663 ms
+
+===============================================================
+==================        FPS: 98.338       ==================
+==================        Elapsed Time: 39623.4 ms      ==================
+==================        Frame Time: 10.92 ms      ==================
+================== Time now:     Thu Oct 11 00:29:42 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.397 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.291 ms
+CPU: WarpPass - LEFT : 0.18 ms
+CPU: WarpPass - RIGHT : 0.164 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913472 ms
+GPU: WarpPass - LEFT : 1.88826 ms
+GPU: WarpPass - RIGHT : 1.86061 ms
+Total : 6.60979 ms
+
+===============================================================
+==================        FPS: 96.2427       ==================
+==================        Elapsed Time: 39893.5 ms      ==================
+==================        Frame Time: 6.725 ms      ==================
+================== Time now:     Thu Oct 11 00:29:43 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.218 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.205 ms
+CPU: WarpPass - LEFT : 0.119 ms
+CPU: WarpPass - RIGHT : 0.108 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.89952 ms
+GPU: WarpPass - RIGHT : 1.87494 ms
+Total : 6.25742 ms
+
+===============================================================
+==================        FPS: 95.6443       ==================
+==================        Elapsed Time: 40506.6 ms      ==================
+==================        Frame Time: 4.64 ms      ==================
+================== Time now:     Thu Oct 11 00:29:43 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.136 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.245 ms
+CPU: WarpPass - LEFT : 0.073 ms
+CPU: WarpPass - RIGHT : 0.087 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914752 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913856 ms
+GPU: WarpPass - LEFT : 1.89747 ms
+GPU: WarpPass - RIGHT : 1.87392 ms
+Total : 6.141 ms
+
+===============================================================
+==================        FPS: 96.4939       ==================
+==================        Elapsed Time: 41906.2 ms      ==================
+==================        Frame Time: 12.35 ms      ==================
+================== Time now:     Thu Oct 11 00:29:45 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.233 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.987 ms
+CPU: WarpPass - LEFT : 0.157 ms
+CPU: WarpPass - RIGHT : 0.084 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914464 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.80736 ms
+GPU: WarpPass - RIGHT : 1.77562 ms
+Total : 6.87492 ms
+
+===============================================================
+==================        FPS: 98.1879       ==================
+==================        Elapsed Time: 44704.8 ms      ==================
+==================        Frame Time: 6.785 ms      ==================
+================== Time now:     Thu Oct 11 00:29:47 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.268 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.196 ms
+CPU: WarpPass - LEFT : 0.177 ms
+CPU: WarpPass - RIGHT : 0.098 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.912448 ms
+GPU: WarpPass - LEFT : 1.88826 ms
+GPU: WarpPass - RIGHT : 1.84525 ms
+Total : 6.29938 ms
+
+===============================================================
+==================        FPS: 97.5881       ==================
+==================        Elapsed Time: 45306.6 ms      ==================
+==================        Frame Time: 10.126 ms      ==================
+================== Time now:     Thu Oct 11 00:29:48 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.268 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.312 ms
+CPU: WarpPass - LEFT : 0.17 ms
+CPU: WarpPass - RIGHT : 0.132 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.9216 ms
+GPU: WarpPass - LEFT : 1.88211 ms
+GPU: WarpPass - RIGHT : 1.85139 ms
+Total : 6.45461 ms
+
+===============================================================
+==================        FPS: 95.7607       ==================
+==================        Elapsed Time: 47388.6 ms      ==================
+==================        Frame Time: 6.374 ms      ==================
+================== Time now:     Thu Oct 11 00:29:50 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.305 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.219 ms
+CPU: WarpPass - LEFT : 0.094 ms
+CPU: WarpPass - RIGHT : 0.092 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914752 ms
+GPU: WarpPass - LEFT : 1.74899 ms
+GPU: WarpPass - RIGHT : 1.73261 ms
+Total : 6.02181 ms
+
+===============================================================
+==================        FPS: 96.8091       ==================
+==================        Elapsed Time: 47860.8 ms      ==================
+==================        Frame Time: 12.384 ms      ==================
+================== Time now:     Thu Oct 11 00:29:51 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.354 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.953 ms
+CPU: WarpPass - LEFT : 0.185 ms
+CPU: WarpPass - RIGHT : 0.116 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914592 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913536 ms
+GPU: WarpPass - LEFT : 1.76947 ms
+GPU: WarpPass - RIGHT : 1.73466 ms
+Total : 6.94026 ms
+
+===============================================================
+==================        FPS: 89.1405       ==================
+==================        Elapsed Time: 48390.3 ms      ==================
+==================        Frame Time: 6.95 ms      ==================
+================== Time now:     Thu Oct 11 00:29:51 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.287 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.176 ms
+CPU: WarpPass - LEFT : 0.2 ms
+CPU: WarpPass - RIGHT : 0.093 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91472 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92096 ms
+GPU: WarpPass - LEFT : 1.91898 ms
+GPU: WarpPass - RIGHT : 1.88518 ms
+Total : 6.39584 ms
+
+===============================================================
+==================        FPS: 93.6285       ==================
+==================        Elapsed Time: 49456.6 ms      ==================
+==================        Frame Time: 6.597 ms      ==================
+================== Time now:     Thu Oct 11 00:29:52 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.244 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.195 ms
+CPU: WarpPass - LEFT : 0.11 ms
+CPU: WarpPass - RIGHT : 0.093 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.93024 ms
+GPU: WarpPass - RIGHT : 1.90566 ms
+Total : 6.31026 ms
+
+===============================================================
+==================        FPS: 93.1993       ==================
+==================        Elapsed Time: 50478.5 ms      ==================
+==================        Frame Time: 12.025 ms      ==================
+================== Time now:     Thu Oct 11 00:29:53 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.218 ms
+CPU: WarpGridGeneratorPass - RIGHT : 6.133 ms
+CPU: WarpPass - LEFT : 0.094 ms
+CPU: WarpPass - RIGHT : 0.116 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913408 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914624 ms
+GPU: WarpPass - LEFT : 1.93024 ms
+GPU: WarpPass - RIGHT : 1.90157 ms
+Total : 12.2208 ms
+
+===============================================================
+==================        FPS: 88.2593       ==================
+==================        Elapsed Time: 51736.2 ms      ==================
+==================        Frame Time: 13.6 ms      ==================
+================== Time now:     Thu Oct 11 00:29:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.259 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.261 ms
+CPU: WarpPass - LEFT : 7.067 ms
+CPU: WarpPass - RIGHT : 0.209 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 1.96301 ms
+GPU: WarpPass - RIGHT : 1.93536 ms
+Total : 13.5232 ms
+
+===============================================================
+==================        FPS: 86.6769       ==================
+==================        Elapsed Time: 52501.3 ms      ==================
+==================        Frame Time: 13.604 ms      ==================
+================== Time now:     Thu Oct 11 00:29:55 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.231 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.227 ms
+CPU: WarpPass - LEFT : 0.16 ms
+CPU: WarpPass - RIGHT : 0.133 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914528 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 1.97632 ms
+GPU: WarpPass - RIGHT : 1.94765 ms
+Total : 6.5029 ms
+
+===============================================================
+==================        FPS: 70.4015       ==================
+==================        Elapsed Time: 56419.7 ms      ==================
+==================        Frame Time: 5.952 ms      ==================
+================== Time now:     Thu Oct 11 00:29:59 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.195 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.193 ms
+CPU: WarpPass - LEFT : 0.092 ms
+CPU: WarpPass - RIGHT : 0.087 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915616 ms
+GPU: WarpPass - LEFT : 1.93536 ms
+GPU: WarpPass - RIGHT : 1.89952 ms
+Total : 6.23295 ms
+
+===============================================================
+==================        FPS: 86.5475       ==================
+==================        Elapsed Time: 56656.2 ms      ==================
+==================        Frame Time: 7.214 ms      ==================
+================== Time now:     Thu Oct 11 00:29:59 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.201 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.286 ms
+CPU: WarpPass - LEFT : 0.191 ms
+CPU: WarpPass - RIGHT : 0.14 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.924 ms
+GPU: WarpPass - LEFT : 1.93229 ms
+GPU: WarpPass - RIGHT : 1.90259 ms
+Total : 6.49336 ms
+
+===============================================================
+==================        FPS: 78.8416       ==================
+==================        Elapsed Time: 57681.7 ms      ==================
+==================        Frame Time: 24.772 ms      ==================
+================== Time now:     Thu Oct 11 00:30:00 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.266 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.292 ms
+CPU: WarpPass - LEFT : 0.155 ms
+CPU: WarpPass - RIGHT : 0.233 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.97018 ms
+GPU: WarpPass - RIGHT : 1.94048 ms
+Total : 6.69003 ms
+
+===============================================================
+==================        FPS: 71.0843       ==================
+==================        Elapsed Time: 58212.9 ms      ==================
+==================        Frame Time: 6.384 ms      ==================
+================== Time now:     Thu Oct 11 00:30:01 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.235 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.126 ms
+CPU: WarpPass - LEFT : 0.109 ms
+CPU: WarpPass - RIGHT : 0.064 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914624 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914784 ms
+GPU: WarpPass - LEFT : 2.03059 ms
+GPU: WarpPass - RIGHT : 2.00294 ms
+Total : 6.39694 ms
+
+===============================================================
+==================        FPS: 85.4099       ==================
+==================        Elapsed Time: 60074.1 ms      ==================
+==================        Frame Time: 6.483 ms      ==================
+================== Time now:     Thu Oct 11 00:30:03 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.211 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.199 ms
+CPU: WarpPass - LEFT : 0.122 ms
+CPU: WarpPass - RIGHT : 0.1 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914528 ms
+GPU: WarpPass - LEFT : 2.56102 ms
+GPU: WarpPass - RIGHT : 1.94765 ms
+Total : 6.97066 ms
+
+===============================================================
+==================        FPS: 78.303       ==================
+==================        Elapsed Time: 60476.8 ms      ==================
+==================        Frame Time: 6.46 ms      ==================
+================== Time now:     Thu Oct 11 00:30:03 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.173 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.177 ms
+CPU: WarpPass - LEFT : 0.091 ms
+CPU: WarpPass - RIGHT : 0.093 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.925696 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.99987 ms
+GPU: WarpPass - RIGHT : 1.9712 ms
+Total : 6.34827 ms
+
+===============================================================
+==================        FPS: 79.7674       ==================
+==================        Elapsed Time: 62193.5 ms      ==================
+==================        Frame Time: 6.484 ms      ==================
+================== Time now:     Thu Oct 11 00:30:05 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.181 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.18 ms
+CPU: WarpPass - LEFT : 0.099 ms
+CPU: WarpPass - RIGHT : 0.096 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 2.03674 ms
+GPU: WarpPass - RIGHT : 1.99885 ms
+Total : 6.42352 ms
+
+===============================================================
+==================        FPS: 90.11       ==================
+==================        Elapsed Time: 62684.1 ms      ==================
+==================        Frame Time: 7.507 ms      ==================
+================== Time now:     Thu Oct 11 00:30:05 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.196 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.202 ms
+CPU: WarpPass - LEFT : 0.123 ms
+CPU: WarpPass - RIGHT : 0.09 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91872 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91472 ms
+GPU: WarpPass - LEFT : 2.1719 ms
+GPU: WarpPass - RIGHT : 2.12275 ms
+Total : 6.7391 ms
+
+===============================================================
+==================        FPS: 82.2957       ==================
+==================        Elapsed Time: 63726.3 ms      ==================
+==================        Frame Time: 7.299 ms      ==================
+================== Time now:     Thu Oct 11 00:30:06 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.203 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.189 ms
+CPU: WarpPass - LEFT : 0.095 ms
+CPU: WarpPass - RIGHT : 0.096 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.92576 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915872 ms
+GPU: WarpPass - LEFT : 2.35725 ms
+GPU: WarpPass - RIGHT : 2.33882 ms
+Total : 7.1207 ms
+
+===============================================================
+==================        FPS: 82.0907       ==================
+==================        Elapsed Time: 64665.2 ms      ==================
+==================        Frame Time: 6.796 ms      ==================
+================== Time now:     Thu Oct 11 00:30:07 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.234 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.21 ms
+CPU: WarpPass - LEFT : 0.136 ms
+CPU: WarpPass - RIGHT : 0.121 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.921984 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91456 ms
+GPU: WarpPass - LEFT : 2.24563 ms
+GPU: WarpPass - RIGHT : 2.18522 ms
+Total : 6.96839 ms
+
+===============================================================
+==================        FPS: 86.6262       ==================
+==================        Elapsed Time: 64881.5 ms      ==================
+==================        Frame Time: 6.294 ms      ==================
+================== Time now:     Thu Oct 11 00:30:08 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.201 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.192 ms
+CPU: WarpPass - LEFT : 0.096 ms
+CPU: WarpPass - RIGHT : 0.095 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.92896 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92784 ms
+GPU: WarpPass - LEFT : 2.0439 ms
+GPU: WarpPass - RIGHT : 1.94867 ms
+Total : 6.43338 ms
+
+===============================================================
+==================        FPS: 80.318       ==================
+==================        Elapsed Time: 65897.6 ms      ==================
+==================        Frame Time: 32.729 ms      ==================
+================== Time now:     Thu Oct 11 00:30:09 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.473 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.29 ms
+CPU: WarpPass - LEFT : 0.137 ms
+CPU: WarpPass - RIGHT : 0.13 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916864 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 2.11046 ms
+GPU: WarpPass - RIGHT : 2.13299 ms
+Total : 7.10782 ms
+
+===============================================================
+==================        FPS: 77.0197       ==================
+==================        Elapsed Time: 66074.1 ms      ==================
+==================        Frame Time: 8.936 ms      ==================
+================== Time now:     Thu Oct 11 00:30:09 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.285 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.594 ms
+CPU: WarpPass - LEFT : 0.207 ms
+CPU: WarpPass - RIGHT : 0.272 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914624 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913696 ms
+GPU: WarpPass - LEFT : 2.16474 ms
+GPU: WarpPass - RIGHT : 2.20672 ms
+Total : 7.55778 ms
+
+===============================================================
+==================        FPS: 92.2411       ==================
+==================        Elapsed Time: 66321.5 ms      ==================
+==================        Frame Time: 6.719 ms      ==================
+================== Time now:     Thu Oct 11 00:30:09 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.167 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.158 ms
+CPU: WarpPass - LEFT : 0.093 ms
+CPU: WarpPass - RIGHT : 0.08 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.916768 ms
+GPU: WarpPass - LEFT : 2.50675 ms
+GPU: WarpPass - RIGHT : 2.46374 ms
+Total : 7.30072 ms
+
+===============================================================
+==================        FPS: 78.3496       ==================
+==================        Elapsed Time: 67023 ms      ==================
+==================        Frame Time: 6.223 ms      ==================
+================== Time now:     Thu Oct 11 00:30:10 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.163 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.184 ms
+CPU: WarpPass - LEFT : 0.1 ms
+CPU: WarpPass - RIGHT : 0.08 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 2.02752 ms
+GPU: WarpPass - RIGHT : 1.99885 ms
+Total : 6.3853 ms
+
+===============================================================
+==================        FPS: 67.3346       ==================
+==================        Elapsed Time: 67690.5 ms      ==================
+==================        Frame Time: 6.537 ms      ==================
+================== Time now:     Thu Oct 11 00:30:10 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.174 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.195 ms
+CPU: WarpPass - LEFT : 0.091 ms
+CPU: WarpPass - RIGHT : 0.092 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 2.41459 ms
+GPU: WarpPass - RIGHT : 2.36851 ms
+Total : 7.16909 ms
+
+===============================================================
+==================        FPS: 75.4692       ==================
+==================        Elapsed Time: 69073.7 ms      ==================
+==================        Frame Time: 6.514 ms      ==================
+================== Time now:     Thu Oct 11 00:30:12 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.195 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.188 ms
+CPU: WarpPass - LEFT : 0.112 ms
+CPU: WarpPass - RIGHT : 0.107 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.926912 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917696 ms
+GPU: WarpPass - LEFT : 2.05722 ms
+GPU: WarpPass - RIGHT : 2.02854 ms
+Total : 6.53237 ms
+
+===============================================================
+==================        FPS: 71.7875       ==================
+==================        Elapsed Time: 69554.9 ms      ==================
+==================        Frame Time: 6.643 ms      ==================
+================== Time now:     Thu Oct 11 00:30:12 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.195 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.193 ms
+CPU: WarpPass - LEFT : 0.093 ms
+CPU: WarpPass - RIGHT : 0.104 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.918528 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 2.51802 ms
+GPU: WarpPass - RIGHT : 2.49549 ms
+Total : 7.43146 ms
+
+===============================================================
+==================        FPS: 72.9453       ==================
+==================        Elapsed Time: 70722.3 ms      ==================
+==================        Frame Time: 6.042 ms      ==================
+================== Time now:     Thu Oct 11 00:30:13 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.198 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.175 ms
+CPU: WarpPass - LEFT : 0.095 ms
+CPU: WarpPass - RIGHT : 0.093 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.927776 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.919552 ms
+GPU: WarpPass - LEFT : 2.05926 ms
+GPU: WarpPass - RIGHT : 2.00192 ms
+Total : 6.46951 ms
+
+===============================================================
+==================        FPS: 68.5948       ==================
+==================        Elapsed Time: 73519.3 ms      ==================
+==================        Frame Time: 37.503 ms      ==================
+================== Time now:     Thu Oct 11 00:30:16 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.243 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.253 ms
+CPU: WarpPass - LEFT : 0.286 ms
+CPU: WarpPass - RIGHT : 0.148 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913856 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914528 ms
+GPU: WarpPass - LEFT : 2.56512 ms
+GPU: WarpPass - RIGHT : 2.52109 ms
+Total : 7.84459 ms
+
+===============================================================
+==================        FPS: 74.928       ==================
+==================        Elapsed Time: 74048.1 ms      ==================
+==================        Frame Time: 35.939 ms      ==================
+================== Time now:     Thu Oct 11 00:30:17 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 26.501 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.258 ms
+CPU: WarpPass - LEFT : 0.174 ms
+CPU: WarpPass - RIGHT : 0.166 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.911776 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 2.01933 ms
+GPU: WarpPass - RIGHT : 1.98554 ms
+Total : 32.929 ms
+
+===============================================================
+==================        FPS: 68.8442       ==================
+==================        Elapsed Time: 74425.9 ms      ==================
+==================        Frame Time: 6.724 ms      ==================
+================== Time now:     Thu Oct 11 00:30:17 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.309 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.3 ms
+CPU: WarpPass - LEFT : 0.181 ms
+CPU: WarpPass - RIGHT : 0.158 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914848 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.920704 ms
+GPU: WarpPass - LEFT : 2.01626 ms
+GPU: WarpPass - RIGHT : 1.97632 ms
+Total : 6.77613 ms
+
+===============================================================
+==================        FPS: 74.2066       ==================
+==================        Elapsed Time: 76073.7 ms      ==================
+==================        Frame Time: 6.394 ms      ==================
+================== Time now:     Thu Oct 11 00:30:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.215 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.22 ms
+CPU: WarpPass - LEFT : 0.135 ms
+CPU: WarpPass - RIGHT : 0.127 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91552 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92384 ms
+GPU: WarpPass - LEFT : 2.33472 ms
+GPU: WarpPass - RIGHT : 2.30605 ms
+Total : 7.17713 ms
+
+===============================================================
+==================        FPS: 79.5226       ==================
+==================        Elapsed Time: 76654 ms      ==================
+==================        Frame Time: 6.237 ms      ==================
+================== Time now:     Thu Oct 11 00:30:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.248 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.173 ms
+CPU: WarpPass - LEFT : 0.132 ms
+CPU: WarpPass - RIGHT : 0.095 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.923648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.97427 ms
+GPU: WarpPass - RIGHT : 1.93843 ms
+Total : 6.40186 ms
+
+===============================================================
+==================        FPS: 72.2971       ==================
+==================        Elapsed Time: 78467 ms      ==================
+==================        Frame Time: 6.132 ms      ==================
+================== Time now:     Thu Oct 11 00:30:21 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.189 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.215 ms
+CPU: WarpPass - LEFT : 0.109 ms
+CPU: WarpPass - RIGHT : 0.081 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.912768 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.96096 ms
+GPU: WarpPass - RIGHT : 1.93946 ms
+Total : 6.32264 ms
+
+===============================================================
+==================        FPS: 73.2985       ==================
+==================        Elapsed Time: 78746.8 ms      ==================
+==================        Frame Time: 20.767 ms      ==================
+================== Time now:     Thu Oct 11 00:30:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.243 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.335 ms
+CPU: WarpPass - LEFT : 0.134 ms
+CPU: WarpPass - RIGHT : 0.139 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.9136 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.95789 ms
+GPU: WarpPass - RIGHT : 1.93741 ms
+Total : 6.57535 ms
+
+===============================================================
+==================        FPS: 75.8473       ==================
+==================        Elapsed Time: 79196.8 ms      ==================
+==================        Frame Time: 6.145 ms      ==================
+================== Time now:     Thu Oct 11 00:30:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.244 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.183 ms
+CPU: WarpPass - LEFT : 0.131 ms
+CPU: WarpPass - RIGHT : 0.098 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91456 ms
+GPU: WarpPass - LEFT : 1.94048 ms
+GPU: WarpPass - RIGHT : 1.91693 ms
+Total : 6.34445 ms
+
+===============================================================
+==================        FPS: 82.2917       ==================
+==================        Elapsed Time: 79946.5 ms      ==================
+==================        Frame Time: 19.81 ms      ==================
+================== Time now:     Thu Oct 11 00:30:23 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.214 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.323 ms
+CPU: WarpPass - LEFT : 13.345 ms
+CPU: WarpPass - RIGHT : 0.194 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.912832 ms
+GPU: WarpPass - LEFT : 1.93434 ms
+GPU: WarpPass - RIGHT : 1.91386 ms
+Total : 19.7525 ms
+
+===============================================================
+==================        FPS: 80.2234       ==================
+==================        Elapsed Time: 80911.8 ms      ==================
+==================        Frame Time: 6.696 ms      ==================
+================== Time now:     Thu Oct 11 00:30:24 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.278 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.285 ms
+CPU: WarpPass - LEFT : 0.154 ms
+CPU: WarpPass - RIGHT : 0.143 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.92672 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91664 ms
+GPU: WarpPass - LEFT : 1.93024 ms
+GPU: WarpPass - RIGHT : 1.90362 ms
+Total : 6.53722 ms
+
+===============================================================
+==================        FPS: 76.0372       ==================
+==================        Elapsed Time: 81372.4 ms      ==================
+==================        Frame Time: 6.608 ms      ==================
+================== Time now:     Thu Oct 11 00:30:24 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.323 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.223 ms
+CPU: WarpPass - LEFT : 0.129 ms
+CPU: WarpPass - RIGHT : 0.129 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916832 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.95789 ms
+GPU: WarpPass - RIGHT : 1.91898 ms
+Total : 6.5152 ms
+
+===============================================================
+==================        FPS: 75.1913       ==================
+==================        Elapsed Time: 82129.2 ms      ==================
+==================        Frame Time: 6.468 ms      ==================
+================== Time now:     Thu Oct 11 00:30:25 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.299 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.257 ms
+CPU: WarpPass - LEFT : 0.159 ms
+CPU: WarpPass - RIGHT : 0.153 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 2.12173 ms
+GPU: WarpPass - RIGHT : 2.08896 ms
+Total : 6.91062 ms
+
+===============================================================
+==================        FPS: 83.6725       ==================
+==================        Elapsed Time: 84106.3 ms      ==================
+==================        Frame Time: 15.435 ms      ==================
+================== Time now:     Thu Oct 11 00:30:27 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.267 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.403 ms
+CPU: WarpPass - LEFT : 0.145 ms
+CPU: WarpPass - RIGHT : 0.787 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 2.07565 ms
+GPU: WarpPass - RIGHT : 2.05517 ms
+Total : 7.56475 ms
+
+===============================================================
+==================        FPS: 83.0716       ==================
+==================        Elapsed Time: 85095.1 ms      ==================
+==================        Frame Time: 14.943 ms      ==================
+================== Time now:     Thu Oct 11 00:30:28 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.25 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.242 ms
+CPU: WarpPass - LEFT : 0.134 ms
+CPU: WarpPass - RIGHT : 8.74 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92288 ms
+GPU: WarpPass - LEFT : 2.04902 ms
+GPU: WarpPass - RIGHT : 2.02342 ms
+Total : 15.2778 ms
+
+===============================================================
+==================        FPS: 86.6063       ==================
+==================        Elapsed Time: 86136.1 ms      ==================
+==================        Frame Time: 6.954 ms      ==================
+================== Time now:     Thu Oct 11 00:30:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.379 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.182 ms
+CPU: WarpPass - LEFT : 0.236 ms
+CPU: WarpPass - RIGHT : 0.098 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914496 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.88109 ms
+GPU: WarpPass - RIGHT : 1.85344 ms
+Total : 6.4605 ms
+
+===============================================================
+==================        FPS: 81.3286       ==================
+==================        Elapsed Time: 86853.5 ms      ==================
+==================        Frame Time: 13.897 ms      ==================
+================== Time now:     Thu Oct 11 00:30:30 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 7.575 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.235 ms
+CPU: WarpPass - LEFT : 0.16 ms
+CPU: WarpPass - RIGHT : 0.131 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913408 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91888 ms
+GPU: WarpPass - LEFT : 2.00602 ms
+GPU: WarpPass - RIGHT : 1.98144 ms
+Total : 13.9207 ms
+
+===============================================================
+==================        FPS: 86.0112       ==================
+==================        Elapsed Time: 87133.7 ms      ==================
+==================        Frame Time: 6.254 ms      ==================
+================== Time now:     Thu Oct 11 00:30:30 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.186 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.215 ms
+CPU: WarpPass - LEFT : 0.098 ms
+CPU: WarpPass - RIGHT : 0.09 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914688 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.87904 ms
+GPU: WarpPass - RIGHT : 1.85754 ms
+Total : 6.15572 ms
+
+===============================================================
+==================        FPS: 88.0785       ==================
+==================        Elapsed Time: 89127.6 ms      ==================
+==================        Frame Time: 6.752 ms      ==================
+================== Time now:     Thu Oct 11 00:30:32 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.251 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.25 ms
+CPU: WarpPass - LEFT : 0.095 ms
+CPU: WarpPass - RIGHT : 0.129 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91456 ms
+GPU: WarpPass - LEFT : 1.84013 ms
+GPU: WarpPass - RIGHT : 1.81453 ms
+Total : 6.20865 ms
+
+===============================================================
+==================        FPS: 78.7172       ==================
+==================        Elapsed Time: 90985.5 ms      ==================
+==================        Frame Time: 6.611 ms      ==================
+================== Time now:     Thu Oct 11 00:30:34 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.287 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.205 ms
+CPU: WarpPass - LEFT : 0.098 ms
+CPU: WarpPass - RIGHT : 0.106 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916704 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.83706 ms
+GPU: WarpPass - RIGHT : 1.79814 ms
+Total : 6.16336 ms
+
+===============================================================
+==================        FPS: 80.8993       ==================
+==================        Elapsed Time: 92443.9 ms      ==================
+==================        Frame Time: 13.621 ms      ==================
+================== Time now:     Thu Oct 11 00:30:35 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 6.575 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.373 ms
+CPU: WarpPass - LEFT : 0.123 ms
+CPU: WarpPass - RIGHT : 0.163 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914496 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91664 ms
+GPU: WarpPass - LEFT : 2.05824 ms
+GPU: WarpPass - RIGHT : 2.02342 ms
+Total : 13.1468 ms
+
+===============================================================
+==================        FPS: 81.6027       ==================
+==================        Elapsed Time: 92661.1 ms      ==================
+==================        Frame Time: 14.072 ms      ==================
+================== Time now:     Thu Oct 11 00:30:35 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.272 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.517 ms
+CPU: WarpPass - LEFT : 0.129 ms
+CPU: WarpPass - RIGHT : 0.766 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916832 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914656 ms
+GPU: WarpPass - LEFT : 2.04493 ms
+GPU: WarpPass - RIGHT : 2.02445 ms
+Total : 7.58486 ms
+
+===============================================================
+==================        FPS: 78.1113       ==================
+==================        Elapsed Time: 92931.6 ms      ==================
+==================        Frame Time: 13.19 ms      ==================
+================== Time now:     Thu Oct 11 00:30:36 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.197 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.302 ms
+CPU: WarpPass - LEFT : 0.127 ms
+CPU: WarpPass - RIGHT : 0.158 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91792 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.918624 ms
+GPU: WarpPass - LEFT : 2.03469 ms
+GPU: WarpPass - RIGHT : 2.00704 ms
+Total : 6.66227 ms
+
+===============================================================
+==================        FPS: 82.542       ==================
+==================        Elapsed Time: 93854.3 ms      ==================
+==================        Frame Time: 12.776 ms      ==================
+================== Time now:     Thu Oct 11 00:30:37 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 6.239 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.273 ms
+CPU: WarpPass - LEFT : 0.161 ms
+CPU: WarpPass - RIGHT : 0.187 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91376 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913792 ms
+GPU: WarpPass - LEFT : 2.03162 ms
+GPU: WarpPass - RIGHT : 2.00602 ms
+Total : 12.7252 ms
+
+===============================================================
+==================        FPS: 93.9294       ==================
+==================        Elapsed Time: 95417.2 ms      ==================
+==================        Frame Time: 10.503 ms      ==================
+================== Time now:     Thu Oct 11 00:30:38 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.298 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.273 ms
+CPU: WarpPass - LEFT : 0.159 ms
+CPU: WarpPass - RIGHT : 0.128 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.9671 ms
+GPU: WarpPass - RIGHT : 1.93843 ms
+Total : 6.59355 ms
+
+===============================================================
+==================        FPS: 109.806       ==================
+==================        Elapsed Time: 97284.7 ms      ==================
+==================        Frame Time: 8.582 ms      ==================
+================== Time now:     Thu Oct 11 00:30:40 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.246 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.212 ms
+CPU: WarpPass - LEFT : 0.109 ms
+CPU: WarpPass - RIGHT : 0.148 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913408 ms
+GPU: WarpPass - LEFT : 1.86982 ms
+GPU: WarpPass - RIGHT : 1.8432 ms
+Total : 6.25689 ms
+
+===============================================================
+==================        FPS: 107.123       ==================
+==================        Elapsed Time: 97858.2 ms      ==================
+==================        Frame Time: 6.803 ms      ==================
+================== Time now:     Thu Oct 11 00:30:41 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.267 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.202 ms
+CPU: WarpPass - LEFT : 0.142 ms
+CPU: WarpPass - RIGHT : 0.198 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91568 ms
+GPU: WarpPass - LEFT : 1.86368 ms
+GPU: WarpPass - RIGHT : 3.5287 ms
+Total : 8.0315 ms
+
+===============================================================
+==================        FPS: 105.459       ==================
+==================        Elapsed Time: 98369.4 ms      ==================
+==================        Frame Time: 6.677 ms      ==================
+================== Time now:     Thu Oct 11 00:30:41 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.306 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.243 ms
+CPU: WarpPass - LEFT : 0.134 ms
+CPU: WarpPass - RIGHT : 0.267 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.8944 ms
+GPU: WarpPass - RIGHT : 1.87494 ms
+Total : 6.54923 ms
+
+===============================================================
+==================        FPS: 91.5159       ==================
+==================        Elapsed Time: 99986.9 ms      ==================
+==================        Frame Time: 11.822 ms      ==================
+================== Time now:     Thu Oct 11 00:30:43 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.232 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.385 ms
+CPU: WarpPass - LEFT : 0.128 ms
+CPU: WarpPass - RIGHT : 0.777 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.79712 ms
+GPU: WarpPass - RIGHT : 1.76947 ms
+Total : 6.92053 ms
+
+===============================================================
+==================        FPS: 84.9488       ==================
+==================        Elapsed Time: 101129 ms      ==================
+==================        Frame Time: 11.988 ms      ==================
+================== Time now:     Thu Oct 11 00:30:44 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.293 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.298 ms
+CPU: WarpPass - LEFT : 0.169 ms
+CPU: WarpPass - RIGHT : 0.161 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91584 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.99168 ms
+GPU: WarpPass - RIGHT : 1.95891 ms
+Total : 6.70186 ms
+
+===============================================================
+==================        FPS: 84.739       ==================
+==================        Elapsed Time: 102123 ms      ==================
+==================        Frame Time: 11.469 ms      ==================
+================== Time now:     Thu Oct 11 00:30:45 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.26 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.305 ms
+CPU: WarpPass - LEFT : 0.129 ms
+CPU: WarpPass - RIGHT : 0.182 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91856 ms
+GPU: WarpPass - LEFT : 1.93331 ms
+GPU: WarpPass - RIGHT : 1.90771 ms
+Total : 6.55002 ms
+
+===============================================================
+==================        FPS: 85.9155       ==================
+==================        Elapsed Time: 102345 ms      ==================
+==================        Frame Time: 7.132 ms      ==================
+================== Time now:     Thu Oct 11 00:30:45 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.248 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.335 ms
+CPU: WarpPass - LEFT : 0.135 ms
+CPU: WarpPass - RIGHT : 0.124 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.922624 ms
+GPU: WarpPass - LEFT : 1.93024 ms
+GPU: WarpPass - RIGHT : 1.90669 ms
+Total : 6.51803 ms
+
+===============================================================
+==================        FPS: 88.3779       ==================
+==================        Elapsed Time: 102865 ms      ==================
+==================        Frame Time: 6.884 ms      ==================
+================== Time now:     Thu Oct 11 00:30:46 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.35 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.204 ms
+CPU: WarpPass - LEFT : 0.175 ms
+CPU: WarpPass - RIGHT : 0.094 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.922624 ms
+GPU: WarpPass - LEFT : 2.21798 ms
+GPU: WarpPass - RIGHT : 1.9753 ms
+Total : 6.85436 ms
+
+===============================================================
+==================        FPS: 83.4955       ==================
+==================        Elapsed Time: 103828 ms      ==================
+==================        Frame Time: 6.613 ms      ==================
+================== Time now:     Thu Oct 11 00:30:47 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.253 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.276 ms
+CPU: WarpPass - LEFT : 0.188 ms
+CPU: WarpPass - RIGHT : 0.135 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.912416 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.9128 ms
+GPU: WarpPass - LEFT : 1.98451 ms
+GPU: WarpPass - RIGHT : 1.95379 ms
+Total : 6.61552 ms
+
+===============================================================
+==================        FPS: 85.7398       ==================
+==================        Elapsed Time: 104351 ms      ==================
+==================        Frame Time: 13.373 ms      ==================
+================== Time now:     Thu Oct 11 00:30:47 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.314 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.412 ms
+CPU: WarpPass - LEFT : 0.146 ms
+CPU: WarpPass - RIGHT : 0.155 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916576 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.99373 ms
+GPU: WarpPass - RIGHT : 1.96915 ms
+Total : 6.82089 ms
+
+===============================================================
+==================        FPS: 82.1601       ==================
+==================        Elapsed Time: 107463 ms      ==================
+==================        Frame Time: 13.547 ms      ==================
+================== Time now:     Thu Oct 11 00:30:50 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 7.157 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.257 ms
+CPU: WarpPass - LEFT : 0.122 ms
+CPU: WarpPass - RIGHT : 0.144 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.918528 ms
+GPU: WarpPass - LEFT : 2.08384 ms
+GPU: WarpPass - RIGHT : 2.03878 ms
+Total : 13.6376 ms
+
+===============================================================
+==================        FPS: 82.1555       ==================
+==================        Elapsed Time: 109543 ms      ==================
+==================        Frame Time: 14.966 ms      ==================
+================== Time now:     Thu Oct 11 00:30:52 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.268 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.952 ms
+CPU: WarpPass - LEFT : 0.134 ms
+CPU: WarpPass - RIGHT : 0.105 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915904 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914592 ms
+GPU: WarpPass - LEFT : 1.82886 ms
+GPU: WarpPass - RIGHT : 1.80326 ms
+Total : 6.92162 ms
+
+===============================================================
+==================        FPS: 79.195       ==================
+==================        Elapsed Time: 110224 ms      ==================
+==================        Frame Time: 4.273 ms      ==================
+================== Time now:     Thu Oct 11 00:30:53 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.145 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.287 ms
+CPU: WarpPass - LEFT : 0.081 ms
+CPU: WarpPass - RIGHT : 0.088 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91488 ms
+GPU: WarpPass - LEFT : 2.05824 ms
+GPU: WarpPass - RIGHT : 2.02138 ms
+Total : 6.51095 ms
+
+===============================================================
+==================        FPS: 81.1415       ==================
+==================        Elapsed Time: 111162 ms      ==================
+==================        Frame Time: 12.922 ms      ==================
+================== Time now:     Thu Oct 11 00:30:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.238 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.283 ms
+CPU: WarpPass - LEFT : 0.189 ms
+CPU: WarpPass - RIGHT : 0.191 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.77869 ms
+GPU: WarpPass - RIGHT : 1.7664 ms
+Total : 6.27905 ms
+
+===============================================================
+==================        FPS: 84.1145       ==================
+==================        Elapsed Time: 111347 ms      ==================
+==================        Frame Time: 13.179 ms      ==================
+================== Time now:     Thu Oct 11 00:30:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.23 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.398 ms
+CPU: WarpPass - LEFT : 0.132 ms
+CPU: WarpPass - RIGHT : 0.186 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913728 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915744 ms
+GPU: WarpPass - LEFT : 2.01011 ms
+GPU: WarpPass - RIGHT : 1.97837 ms
+Total : 6.76395 ms
+
+===============================================================
+==================        FPS: 82.0103       ==================
+==================        Elapsed Time: 111582 ms      ==================
+==================        Frame Time: 7.121 ms      ==================
+================== Time now:     Thu Oct 11 00:30:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.224 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.225 ms
+CPU: WarpPass - LEFT : 0.096 ms
+CPU: WarpPass - RIGHT : 0.121 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.7623 ms
+GPU: WarpPass - RIGHT : 1.73568 ms
+Total : 5.99387 ms
+
+===============================================================
+==================        FPS: 89.2698       ==================
+==================        Elapsed Time: 111702 ms      ==================
+==================        Frame Time: 12.055 ms      ==================
+================== Time now:     Thu Oct 11 00:30:54 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.313 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.248 ms
+CPU: WarpPass - LEFT : 0.137 ms
+CPU: WarpPass - RIGHT : 0.157 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.922016 ms
+GPU: WarpPass - LEFT : 1.95891 ms
+GPU: WarpPass - RIGHT : 1.92717 ms
+Total : 6.57855 ms
+
+===============================================================
+==================        FPS: 90.5067       ==================
+==================        Elapsed Time: 112904 ms      ==================
+==================        Frame Time: 7.124 ms      ==================
+================== Time now:     Thu Oct 11 00:30:56 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.284 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.215 ms
+CPU: WarpPass - LEFT : 0.184 ms
+CPU: WarpPass - RIGHT : 0.134 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91488 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.94253 ms
+GPU: WarpPass - RIGHT : 1.91386 ms
+Total : 6.5027 ms
+
+===============================================================
+==================        FPS: 86.7494       ==================
+==================        Elapsed Time: 113912 ms      ==================
+==================        Frame Time: 6.44 ms      ==================
+================== Time now:     Thu Oct 11 00:30:57 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.261 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.27 ms
+CPU: WarpPass - LEFT : 0.161 ms
+CPU: WarpPass - RIGHT : 0.095 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.8729 ms
+GPU: WarpPass - RIGHT : 1.84013 ms
+Total : 6.33298 ms
+
+===============================================================
+==================        FPS: 88.2398       ==================
+==================        Elapsed Time: 114485 ms      ==================
+==================        Frame Time: 11.362 ms      ==================
+================== Time now:     Thu Oct 11 00:30:57 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.205 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.286 ms
+CPU: WarpPass - LEFT : 0.135 ms
+CPU: WarpPass - RIGHT : 0.166 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913632 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.87085 ms
+GPU: WarpPass - RIGHT : 1.83603 ms
+Total : 6.32694 ms
+
+===============================================================
+==================        FPS: 89.4919       ==================
+==================        Elapsed Time: 115732 ms      ==================
+==================        Frame Time: 6.731 ms      ==================
+================== Time now:     Thu Oct 11 00:30:58 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.228 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.249 ms
+CPU: WarpPass - LEFT : 0.129 ms
+CPU: WarpPass - RIGHT : 0.112 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914816 ms
+GPU: WarpPass - LEFT : 1.96608 ms
+GPU: WarpPass - RIGHT : 1.9456 ms
+Total : 6.46098 ms
+
+===============================================================
+==================        FPS: 85.7795       ==================
+==================        Elapsed Time: 116499 ms      ==================
+==================        Frame Time: 6.318 ms      ==================
+================== Time now:     Thu Oct 11 00:30:59 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.184 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.225 ms
+CPU: WarpPass - LEFT : 0.176 ms
+CPU: WarpPass - RIGHT : 0.126 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917792 ms
+GPU: WarpPass - LEFT : 1.90157 ms
+GPU: WarpPass - RIGHT : 1.87494 ms
+Total : 6.32076 ms
+
+===============================================================
+==================        FPS: 81.4697       ==================
+==================        Elapsed Time: 117655 ms      ==================
+==================        Frame Time: 13.805 ms      ==================
+================== Time now:     Thu Oct 11 00:31:00 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.329 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.397 ms
+CPU: WarpPass - LEFT : 0.156 ms
+CPU: WarpPass - RIGHT : 0.747 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913792 ms
+GPU: WarpPass - LEFT : 2.01728 ms
+GPU: WarpPass - RIGHT : 1.99578 ms
+Total : 7.4713 ms
+
+===============================================================
+==================        FPS: 76.1777       ==================
+==================        Elapsed Time: 118463 ms      ==================
+==================        Frame Time: 6.346 ms      ==================
+================== Time now:     Thu Oct 11 00:31:01 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.201 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.326 ms
+CPU: WarpPass - LEFT : 0.207 ms
+CPU: WarpPass - RIGHT : 0.173 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.84627 ms
+GPU: WarpPass - RIGHT : 1.80736 ms
+Total : 6.39052 ms
+
+===============================================================
+==================        FPS: 78.3582       ==================
+==================        Elapsed Time: 119845 ms      ==================
+==================        Frame Time: 6.977 ms      ==================
+================== Time now:     Thu Oct 11 00:31:03 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.2 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.263 ms
+CPU: WarpPass - LEFT : 0.142 ms
+CPU: WarpPass - RIGHT : 0.124 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.923648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.84525 ms
+GPU: WarpPass - RIGHT : 1.81965 ms
+Total : 6.233 ms
+
+===============================================================
+==================        FPS: 79.103       ==================
+==================        Elapsed Time: 120526 ms      ==================
+==================        Frame Time: 13.967 ms      ==================
+================== Time now:     Thu Oct 11 00:31:03 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.249 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.34 ms
+CPU: WarpPass - LEFT : 0.191 ms
+CPU: WarpPass - RIGHT : 0.203 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913408 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 2.04902 ms
+GPU: WarpPass - RIGHT : 2.01728 ms
+Total : 6.87714 ms
+
+===============================================================
+==================        FPS: 80.3194       ==================
+==================        Elapsed Time: 121152 ms      ==================
+==================        Frame Time: 15.043 ms      ==================
+================== Time now:     Thu Oct 11 00:31:04 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.283 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.222 ms
+CPU: WarpPass - LEFT : 0.235 ms
+CPU: WarpPass - RIGHT : 0.113 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.920992 ms
+GPU: WarpPass - LEFT : 2.05722 ms
+GPU: WarpPass - RIGHT : 2.0265 ms
+Total : 6.77316 ms
+
+===============================================================
+==================        FPS: 77.4071       ==================
+==================        Elapsed Time: 123107 ms      ==================
+==================        Frame Time: 13.865 ms      ==================
+================== Time now:     Thu Oct 11 00:31:06 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 7.006 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.321 ms
+CPU: WarpPass - LEFT : 0.161 ms
+CPU: WarpPass - RIGHT : 0.244 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92 ms
+GPU: WarpPass - LEFT : 2.05722 ms
+GPU: WarpPass - RIGHT : 2.03059 ms
+Total : 13.6555 ms
+
+===============================================================
+==================        FPS: 89.1389       ==================
+==================        Elapsed Time: 126755 ms      ==================
+==================        Frame Time: 11.691 ms      ==================
+================== Time now:     Thu Oct 11 00:31:10 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.277 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.93 ms
+CPU: WarpPass - LEFT : 0.151 ms
+CPU: WarpPass - RIGHT : 0.082 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.927008 ms
+GPU: WarpPass - LEFT : 1.8729 ms
+GPU: WarpPass - RIGHT : 1.85958 ms
+Total : 7.01392 ms
+
+===============================================================
+==================        FPS: 88.7996       ==================
+==================        Elapsed Time: 127375 ms      ==================
+==================        Frame Time: 6.526 ms      ==================
+================== Time now:     Thu Oct 11 00:31:10 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.277 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.22 ms
+CPU: WarpPass - LEFT : 0.133 ms
+CPU: WarpPass - RIGHT : 0.114 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.923648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.86982 ms
+GPU: WarpPass - RIGHT : 1.82989 ms
+Total : 6.28486 ms
+
+===============================================================
+==================        FPS: 94.9645       ==================
+==================        Elapsed Time: 129265 ms      ==================
+==================        Frame Time: 10.051 ms      ==================
+================== Time now:     Thu Oct 11 00:31:12 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.274 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.221 ms
+CPU: WarpPass - LEFT : 0.173 ms
+CPU: WarpPass - RIGHT : 0.17 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915616 ms
+GPU: WarpPass - LEFT : 1.88518 ms
+GPU: WarpPass - RIGHT : 1.84934 ms
+Total : 6.40462 ms
+
+===============================================================
+==================        FPS: 95.0972       ==================
+==================        Elapsed Time: 129499 ms      ==================
+==================        Frame Time: 6.178 ms      ==================
+================== Time now:     Thu Oct 11 00:31:12 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.188 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.272 ms
+CPU: WarpPass - LEFT : 0.083 ms
+CPU: WarpPass - RIGHT : 0.1 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.9168 ms
+GPU: WarpPass - LEFT : 1.91795 ms
+GPU: WarpPass - RIGHT : 1.88928 ms
+Total : 6.28146 ms
+
+===============================================================
+==================        FPS: 98.5576       ==================
+==================        Elapsed Time: 131069 ms      ==================
+==================        Frame Time: 9.89 ms      ==================
+================== Time now:     Thu Oct 11 00:31:14 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.306 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.83 ms
+CPU: WarpPass - LEFT : 0.173 ms
+CPU: WarpPass - RIGHT : 0.135 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.919552 ms
+GPU: WarpPass - LEFT : 1.86061 ms
+GPU: WarpPass - RIGHT : 1.82989 ms
+Total : 6.97053 ms
+
+===============================================================
+==================        FPS: 99.7497       ==================
+==================        Elapsed Time: 131220 ms      ==================
+==================        Frame Time: 8.322 ms      ==================
+================== Time now:     Thu Oct 11 00:31:14 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.206 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.927 ms
+CPU: WarpPass - LEFT : 0.146 ms
+CPU: WarpPass - RIGHT : 0.081 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.929792 ms
+GPU: WarpPass - LEFT : 1.89952 ms
+GPU: WarpPass - RIGHT : 1.87392 ms
+Total : 6.97766 ms
+
+===============================================================
+==================        FPS: 97.7751       ==================
+==================        Elapsed Time: 131879 ms      ==================
+==================        Frame Time: 6.768 ms      ==================
+================== Time now:     Thu Oct 11 00:31:15 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.313 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.332 ms
+CPU: WarpPass - LEFT : 0.15 ms
+CPU: WarpPass - RIGHT : 0.122 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917504 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91376 ms
+GPU: WarpPass - LEFT : 1.90362 ms
+GPU: WarpPass - RIGHT : 1.86982 ms
+Total : 6.5217 ms
+
+===============================================================
+==================        FPS: 100.377       ==================
+==================        Elapsed Time: 132358 ms      ==================
+==================        Frame Time: 6.258 ms      ==================
+================== Time now:     Thu Oct 11 00:31:15 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.315 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.354 ms
+CPU: WarpPass - LEFT : 0.127 ms
+CPU: WarpPass - RIGHT : 0.103 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.922656 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917696 ms
+GPU: WarpPass - LEFT : 1.8473 ms
+GPU: WarpPass - RIGHT : 1.82784 ms
+Total : 6.41449 ms
+
+===============================================================
+==================        FPS: 103.155       ==================
+==================        Elapsed Time: 133661 ms      ==================
+==================        Frame Time: 8.647 ms      ==================
+================== Time now:     Thu Oct 11 00:31:16 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.244 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.198 ms
+CPU: WarpPass - LEFT : 0.163 ms
+CPU: WarpPass - RIGHT : 0.085 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.919552 ms
+GPU: WarpPass - LEFT : 1.89133 ms
+GPU: WarpPass - RIGHT : 1.85344 ms
+Total : 6.26875 ms
+
+===============================================================
+==================        FPS: 103.049       ==================
+==================        Elapsed Time: 134655 ms      ==================
+==================        Frame Time: 9.503 ms      ==================
+================== Time now:     Thu Oct 11 00:31:17 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.234 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.362 ms
+CPU: WarpPass - LEFT : 0.253 ms
+CPU: WarpPass - RIGHT : 0.178 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91248 ms
+GPU: WarpPass - LEFT : 1.88006 ms
+GPU: WarpPass - RIGHT : 1.85242 ms
+Total : 6.58844 ms
+
+===============================================================
+==================        FPS: 103.419       ==================
+==================        Elapsed Time: 135638 ms      ==================
+==================        Frame Time: 6.584 ms      ==================
+================== Time now:     Thu Oct 11 00:31:18 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.344 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.278 ms
+CPU: WarpPass - LEFT : 0.135 ms
+CPU: WarpPass - RIGHT : 0.108 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.87494 ms
+GPU: WarpPass - RIGHT : 1.85446 ms
+Total : 6.4243 ms
+
+===============================================================
+==================        FPS: 106.307       ==================
+==================        Elapsed Time: 135839 ms      ==================
+==================        Frame Time: 6.499 ms      ==================
+================== Time now:     Thu Oct 11 00:31:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.258 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.22 ms
+CPU: WarpPass - LEFT : 0.153 ms
+CPU: WarpPass - RIGHT : 0.194 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.920736 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91376 ms
+GPU: WarpPass - LEFT : 1.87699 ms
+GPU: WarpPass - RIGHT : 1.84115 ms
+Total : 6.37764 ms
+
+===============================================================
+==================        FPS: 103.703       ==================
+==================        Elapsed Time: 136624 ms      ==================
+==================        Frame Time: 9.199 ms      ==================
+================== Time now:     Thu Oct 11 00:31:19 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.203 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.323 ms
+CPU: WarpPass - LEFT : 0.252 ms
+CPU: WarpPass - RIGHT : 0.676 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 1.88314 ms
+GPU: WarpPass - RIGHT : 1.86368 ms
+Total : 7.03173 ms
+
+===============================================================
+==================        FPS: 105.173       ==================
+==================        Elapsed Time: 137811 ms      ==================
+==================        Frame Time: 7.504 ms      ==================
+================== Time now:     Thu Oct 11 00:31:21 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.227 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.366 ms
+CPU: WarpPass - LEFT : 0.116 ms
+CPU: WarpPass - RIGHT : 0.729 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.924 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914432 ms
+GPU: WarpPass - LEFT : 1.86573 ms
+GPU: WarpPass - RIGHT : 1.83398 ms
+Total : 6.97614 ms
+
+===============================================================
+==================        FPS: 101.467       ==================
+==================        Elapsed Time: 138320 ms      ==================
+==================        Frame Time: 6.681 ms      ==================
+================== Time now:     Thu Oct 11 00:31:21 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.324 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.353 ms
+CPU: WarpPass - LEFT : 0.16 ms
+CPU: WarpPass - RIGHT : 0.114 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915904 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917728 ms
+GPU: WarpPass - LEFT : 1.84832 ms
+GPU: WarpPass - RIGHT : 1.83194 ms
+Total : 6.46489 ms
+
+===============================================================
+==================        FPS: 106.393       ==================
+==================        Elapsed Time: 138886 ms      ==================
+==================        Frame Time: 5.531 ms      ==================
+================== Time now:     Thu Oct 11 00:31:22 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.156 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.306 ms
+CPU: WarpPass - LEFT : 0.083 ms
+CPU: WarpPass - RIGHT : 0.103 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91584 ms
+GPU: WarpPass - LEFT : 1.84627 ms
+GPU: WarpPass - RIGHT : 1.82886 ms
+Total : 6.15341 ms
+
+===============================================================
+==================        FPS: 105.872       ==================
+==================        Elapsed Time: 139803 ms      ==================
+==================        Frame Time: 6.801 ms      ==================
+================== Time now:     Thu Oct 11 00:31:23 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.195 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.28 ms
+CPU: WarpPass - LEFT : 0.089 ms
+CPU: WarpPass - RIGHT : 0.197 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913536 ms
+GPU: WarpPass - LEFT : 1.86266 ms
+GPU: WarpPass - RIGHT : 1.8391 ms
+Total : 6.29175 ms
+
+===============================================================
+==================        FPS: 106.784       ==================
+==================        Elapsed Time: 139887 ms      ==================
+==================        Frame Time: 6.442 ms      ==================
+================== Time now:     Thu Oct 11 00:31:23 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.218 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.33 ms
+CPU: WarpPass - LEFT : 0.094 ms
+CPU: WarpPass - RIGHT : 0.17 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.8688 ms
+GPU: WarpPass - RIGHT : 1.83706 ms
+Total : 6.34877 ms
+
+===============================================================
+==================        FPS: 104.408       ==================
+==================        Elapsed Time: 142672 ms      ==================
+==================        Frame Time: 6.421 ms      ==================
+================== Time now:     Thu Oct 11 00:31:25 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.321 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.324 ms
+CPU: WarpPass - LEFT : 0.129 ms
+CPU: WarpPass - RIGHT : 0.136 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.88109 ms
+GPU: WarpPass - RIGHT : 1.86061 ms
+Total : 6.48261 ms
+
+===============================================================
+==================        FPS: 103.23       ==================
+==================        Elapsed Time: 143516 ms      ==================
+==================        Frame Time: 6.274 ms      ==================
+================== Time now:     Thu Oct 11 00:31:26 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.251 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.226 ms
+CPU: WarpPass - LEFT : 0.155 ms
+CPU: WarpPass - RIGHT : 0.129 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.924928 ms
+GPU: WarpPass - LEFT : 1.87802 ms
+GPU: WarpPass - RIGHT : 1.86675 ms
+Total : 6.34513 ms
+
+===============================================================
+==================        FPS: 100.247       ==================
+==================        Elapsed Time: 143880 ms      ==================
+==================        Frame Time: 8.458 ms      ==================
+================== Time now:     Thu Oct 11 00:31:27 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.283 ms
+CPU: WarpGridGeneratorPass - RIGHT : 1.008 ms
+CPU: WarpPass - LEFT : 0.119 ms
+CPU: WarpPass - RIGHT : 0.083 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.923648 ms
+GPU: WarpPass - LEFT : 1.87494 ms
+GPU: WarpPass - RIGHT : 1.86163 ms
+Total : 7.0697 ms
+
+===============================================================
+==================        FPS: 101.557       ==================
+==================        Elapsed Time: 144114 ms      ==================
+==================        Frame Time: 6.36 ms      ==================
+================== Time now:     Thu Oct 11 00:31:27 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.4 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.218 ms
+CPU: WarpPass - LEFT : 0.128 ms
+CPU: WarpPass - RIGHT : 0.116 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.927744 ms
+GPU: WarpPass - LEFT : 1.88109 ms
+GPU: WarpPass - RIGHT : 1.86675 ms
+Total : 6.45202 ms
+
+===============================================================
+==================        FPS: 99.4144       ==================
+==================        Elapsed Time: 145592 ms      ==================
+==================        Frame Time: 6.51 ms      ==================
+================== Time now:     Thu Oct 11 00:31:28 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.326 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.231 ms
+CPU: WarpPass - LEFT : 0.137 ms
+CPU: WarpPass - RIGHT : 0.224 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914432 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.927744 ms
+GPU: WarpPass - LEFT : 1.90669 ms
+GPU: WarpPass - RIGHT : 1.87904 ms
+Total : 6.5459 ms
+
+===============================================================
+==================        FPS: 97.0539       ==================
+==================        Elapsed Time: 145952 ms      ==================
+==================        Frame Time: 9.685 ms      ==================
+================== Time now:     Thu Oct 11 00:31:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.228 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.358 ms
+CPU: WarpPass - LEFT : 0.148 ms
+CPU: WarpPass - RIGHT : 0.187 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.92 ms
+GPU: WarpPass - LEFT : 1.88006 ms
+GPU: WarpPass - RIGHT : 1.85139 ms
+Total : 6.48791 ms
+
+===============================================================
+==================        FPS: 97.3136       ==================
+==================        Elapsed Time: 146953 ms      ==================
+==================        Frame Time: 10.898 ms      ==================
+================== Time now:     Thu Oct 11 00:31:30 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.372 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.358 ms
+CPU: WarpPass - LEFT : 0.229 ms
+CPU: WarpPass - RIGHT : 0.148 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914688 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.916512 ms
+GPU: WarpPass - LEFT : 1.9159 ms
+GPU: WarpPass - RIGHT : 1.88826 ms
+Total : 6.74236 ms
+
+===============================================================
+==================        FPS: 92.4184       ==================
+==================        Elapsed Time: 148734 ms      ==================
+==================        Frame Time: 11.211 ms      ==================
+================== Time now:     Thu Oct 11 00:31:31 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.372 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.286 ms
+CPU: WarpPass - LEFT : 0.239 ms
+CPU: WarpPass - RIGHT : 0.105 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.92176 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 1.92512 ms
+GPU: WarpPass - RIGHT : 1.91795 ms
+Total : 6.68434 ms
+
+===============================================================
+==================        FPS: 93.7554       ==================
+==================        Elapsed Time: 149240 ms      ==================
+==================        Frame Time: 6.062 ms      ==================
+================== Time now:     Thu Oct 11 00:31:32 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.212 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.207 ms
+CPU: WarpPass - LEFT : 0.163 ms
+CPU: WarpPass - RIGHT : 0.104 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 1.93331 ms
+GPU: WarpPass - RIGHT : 1.90976 ms
+Total : 6.36203 ms
+
+===============================================================
+==================        FPS: 89.878       ==================
+==================        Elapsed Time: 150899 ms      ==================
+==================        Frame Time: 11.123 ms      ==================
+================== Time now:     Thu Oct 11 00:31:34 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.266 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.172 ms
+CPU: WarpPass - LEFT : 0.178 ms
+CPU: WarpPass - RIGHT : 0.112 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.913664 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.921952 ms
+GPU: WarpPass - LEFT : 1.95891 ms
+GPU: WarpPass - RIGHT : 1.93126 ms
+Total : 6.45379 ms
+
+===============================================================
+==================        FPS: 90.8859       ==================
+==================        Elapsed Time: 151536 ms      ==================
+==================        Frame Time: 6.238 ms      ==================
+================== Time now:     Thu Oct 11 00:31:34 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.246 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.185 ms
+CPU: WarpPass - LEFT : 0.254 ms
+CPU: WarpPass - RIGHT : 0.09 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.919968 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913824 ms
+GPU: WarpPass - LEFT : 1.96813 ms
+GPU: WarpPass - RIGHT : 1.94048 ms
+Total : 6.5174 ms
+
+===============================================================
+==================        FPS: 89.2865       ==================
+==================        Elapsed Time: 151889 ms      ==================
+==================        Frame Time: 11.507 ms      ==================
+================== Time now:     Thu Oct 11 00:31:35 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.248 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.364 ms
+CPU: WarpPass - LEFT : 0.17 ms
+CPU: WarpPass - RIGHT : 0.757 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.924064 ms
+GPU: WarpPass - LEFT : 1.98963 ms
+GPU: WarpPass - RIGHT : 1.97837 ms
+Total : 7.34671 ms
+
+===============================================================
+==================        FPS: 85.6153       ==================
+==================        Elapsed Time: 152854 ms      ==================
+==================        Frame Time: 9.775 ms      ==================
+================== Time now:     Thu Oct 11 00:31:36 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.222 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.882 ms
+CPU: WarpPass - LEFT : 0.16 ms
+CPU: WarpPass - RIGHT : 0.118 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915648 ms
+GPU: WarpPass - LEFT : 1.98963 ms
+GPU: WarpPass - RIGHT : 1.96813 ms
+Total : 7.17189 ms
+
+===============================================================
+==================        FPS: 82.5951       ==================
+==================        Elapsed Time: 154072 ms      ==================
+==================        Frame Time: 7.362 ms      ==================
+================== Time now:     Thu Oct 11 00:31:37 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.314 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.255 ms
+CPU: WarpPass - LEFT : 0.113 ms
+CPU: WarpPass - RIGHT : 0.126 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914528 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.918848 ms
+GPU: WarpPass - LEFT : 2.01933 ms
+GPU: WarpPass - RIGHT : 1.99782 ms
+Total : 6.65853 ms
+
+===============================================================
+==================        FPS: 80.8231       ==================
+==================        Elapsed Time: 154965 ms      ==================
+==================        Frame Time: 14.205 ms      ==================
+================== Time now:     Thu Oct 11 00:31:38 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.503 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.208 ms
+CPU: WarpPass - LEFT : 0.946 ms
+CPU: WarpPass - RIGHT : 0.104 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.917504 ms
+GPU: WarpPass - LEFT : 2.03571 ms
+GPU: WarpPass - RIGHT : 2.0183 ms
+Total : 7.64798 ms
+
+===============================================================
+==================        FPS: 81.3491       ==================
+==================        Elapsed Time: 155057 ms      ==================
+==================        Frame Time: 13.668 ms      ==================
+================== Time now:     Thu Oct 11 00:31:38 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.268 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.323 ms
+CPU: WarpPass - LEFT : 0.159 ms
+CPU: WarpPass - RIGHT : 0.192 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.924704 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.927904 ms
+GPU: WarpPass - LEFT : 2.06131 ms
+GPU: WarpPass - RIGHT : 2.0265 ms
+Total : 6.88242 ms
+
+===============================================================
+==================        FPS: 77.3518       ==================
+==================        Elapsed Time: 155378 ms      ==================
+==================        Frame Time: 14.352 ms      ==================
+================== Time now:     Thu Oct 11 00:31:38 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.256 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.171 ms
+CPU: WarpPass - LEFT : 0.15 ms
+CPU: WarpPass - RIGHT : 0.086 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915456 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 2.08691 ms
+GPU: WarpPass - RIGHT : 2.06336 ms
+Total : 6.64521 ms
+
+===============================================================
+==================        FPS: 74.4549       ==================
+==================        Elapsed Time: 156225 ms      ==================
+==================        Frame Time: 6.629 ms      ==================
+================== Time now:     Thu Oct 11 00:31:39 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.255 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.261 ms
+CPU: WarpPass - LEFT : 0.102 ms
+CPU: WarpPass - RIGHT : 0.127 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915776 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914784 ms
+GPU: WarpPass - LEFT : 1.92922 ms
+GPU: WarpPass - RIGHT : 1.89235 ms
+Total : 6.39713 ms
+
+===============================================================
+==================        FPS: 75.7811       ==================
+==================        Elapsed Time: 156682 ms      ==================
+==================        Frame Time: 13.658 ms      ==================
+================== Time now:     Thu Oct 11 00:31:39 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.29 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.937 ms
+CPU: WarpPass - LEFT : 0.141 ms
+CPU: WarpPass - RIGHT : 0.171 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.917632 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.913632 ms
+GPU: WarpPass - LEFT : 2.09818 ms
+GPU: WarpPass - RIGHT : 2.07667 ms
+Total : 7.54511 ms
+
+===============================================================
+==================        FPS: 71.7101       ==================
+==================        Elapsed Time: 157417 ms      ==================
+==================        Frame Time: 15.411 ms      ==================
+================== Time now:     Thu Oct 11 00:31:40 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.293 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.35 ms
+CPU: WarpPass - LEFT : 0.19 ms
+CPU: WarpPass - RIGHT : 0.102 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.914688 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.914688 ms
+GPU: WarpPass - LEFT : 2.14528 ms
+GPU: WarpPass - RIGHT : 2.11149 ms
+Total : 7.02114 ms
+
+===============================================================
+==================        FPS: 73.1753       ==================
+==================        Elapsed Time: 157708 ms      ==================
+==================        Frame Time: 14.578 ms      ==================
+================== Time now:     Thu Oct 11 00:31:40 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.238 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.349 ms
+CPU: WarpPass - LEFT : 0.085 ms
+CPU: WarpPass - RIGHT : 0.179 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.915712 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.91648 ms
+GPU: WarpPass - LEFT : 2.16269 ms
+GPU: WarpPass - RIGHT : 2.13811 ms
+Total : 6.98399 ms
+
+===============================================================
+==================        FPS: 70.1641       ==================
+==================        Elapsed Time: 158660 ms      ==================
+==================        Frame Time: 16.586 ms      ==================
+================== Time now:     Thu Oct 11 00:31:41 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.217 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.251 ms
+CPU: WarpPass - LEFT : 0.186 ms
+CPU: WarpPass - RIGHT : 0.188 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.916832 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.923744 ms
+GPU: WarpPass - LEFT : 2.23437 ms
+GPU: WarpPass - RIGHT : 2.18931 ms
+Total : 7.10626 ms
+
+===============================================================
+==================        FPS: 67.4254       ==================
+==================        Elapsed Time: 158838 ms      ==================
+==================        Frame Time: 6.536 ms      ==================
+================== Time now:     Thu Oct 11 00:31:42 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.247 ms
+CPU: WarpGridGeneratorPass - RIGHT : 0.224 ms
+CPU: WarpPass - LEFT : 0.138 ms
+CPU: WarpPass - RIGHT : 0.098 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91648 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.915456 ms
+GPU: WarpPass - LEFT : 2.24563 ms
+GPU: WarpPass - RIGHT : 2.22925 ms
+Total : 7.01382 ms
+
+===============================================================
+==================        FPS: 66.7512       ==================
+==================        Elapsed Time: 159720 ms      ==================
+==================        Frame Time: 16.992 ms      ==================
+================== Time now:     Thu Oct 11 00:31:42 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 1 =================
+CPU: WarpGridGeneratorPass - LEFT : 0.241 ms
+CPU: WarpGridGeneratorPass - RIGHT : 10.736 ms
+CPU: WarpPass - LEFT : 0.094 ms
+CPU: WarpPass - RIGHT : 0.146 ms
+GPU: WarpGridGeneratorPass - LEFT : 0.91792 ms
+GPU: WarpGridGeneratorPass - RIGHT : 0.916864 ms
+GPU: WarpPass - LEFT : 2.24666 ms
+GPU: WarpPass - RIGHT : 2.21184 ms
+Total : 17.5103 ms
+
+
+========  Average Frame Rate: 86.4591  ========
+
+========  Average GPU Time: 7.50414  ========
+
+========  Average Frame Time: 10.1303  ========
+
+========  Average Frame Rate: 86.4591  ========
+
+========  Average GPU Time: 7.50414  ========
+
+========  Average Frame Time: 10.1303  ========
+
+========  Average Frame Rate: 86.4591  ========
+
+========  Average GPU Time: 7.50414  ========
+
+========  Average Frame Time: 10.1303  ========
+
+========  Average Frame Rate: 86.4591  ========
+
+========  Average GPU Time: 7.50414  ========
+
+========  Average Frame Time: 10.1303  ========
+
+========  Average Frame Rate: 86.4591  ========
+
+========  Average GPU Time: 7.50414  ========
+
+========  Average Frame Time: 10.1303  ========

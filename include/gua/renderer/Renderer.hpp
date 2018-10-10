@@ -401,7 +401,7 @@ class GUA_DLL Renderer {
    *
    * \param scene_graphs      The SceneGraphs to be processed.
    */
-  void queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping = false, int const desired_framerate = 120);
+  void queue_draw(std::vector<SceneGraph const*> const& scene_graphs, bool enable_warping = false, int const desired_framerate = 100);
 
   void draw_single_threaded(std::vector<SceneGraph const*> const& scene_graphs);
 
@@ -418,7 +418,6 @@ class GUA_DLL Renderer {
     } else {
       while (time_left < 1.0 && time_left > time_warped) {
         std::this_thread::sleep_for(std::chrono::microseconds(90));
-        // std::this_thread::sleep_for(0.09ms);
       }
     }
   }
