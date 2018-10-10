@@ -88,12 +88,16 @@ void PipelinePass::process(PipelinePassDescription const& desc, Pipeline& pipe) 
   }
   // std::cout << "Context: " << ctx.id << " | Pass: " << desc.name_ << std::endl;
   std::string gpu_query_name = "GPU: " + name_;
+  std::string cpu_query_name = "CPU: " + name_;
   if (ctx.mode != CameraMode::RIGHT) {
     gpu_query_name += " - LEFT";
+    cpu_query_name += " - LEFT";
   } else {
     gpu_query_name += " - RIGHT";
+    cpu_query_name += " - RIGHT";
   }
   pipe.begin_gpu_query(ctx, gpu_query_name);
+  pipe.begin_cpu_query(cpu_query_name);
   if (RenderMode::Custom == rendermode_) {
     process_(*this, desc, pipe);
   } else {
@@ -128,6 +132,7 @@ void PipelinePass::process(PipelinePassDescription const& desc, Pipeline& pipe) 
     ctx.render_context->reset_state_objects();
   }
   pipe.end_gpu_query(ctx, gpu_query_name);
+  pipe.end_cpu_query(cpu_query_name);
 }
 
 void PipelinePass::upload_program(PipelinePassDescription const& desc, RenderContext const& ctx) {
