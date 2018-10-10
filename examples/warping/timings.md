@@ -3,12 +3,13 @@
 Test Case:
 ./warping  {warping on/off = 1/0} {mono/stereo = 0/1} {scene: teichplatz/teichplatz+ruine/teichplatz_lod = 0/1/2} {record path: on/off = 1/0}
 
+target fps: 100
 
 ##Test PCs
 LAB:
-    - Titan X (Pascal)
+    - Titan X (Pascal), 12 GB G5X; 11.4 Gbps; 1582 MHz
     - Intel i7-5930K @ 3.50 GHz (6 cores, 12 logical prozessors)
-    - 15.98 GB RAM
+    - 15.98 GB RAM DDR4(2132) 4 x 4096MB
 HOME:
     - GTX 760
 
