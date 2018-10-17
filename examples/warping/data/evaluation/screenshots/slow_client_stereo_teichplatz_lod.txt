@@ -1,0 +1,1463 @@
+========================= SLOW CLIENT =========================
+===============================================================
+==================    Screenshot ID:  4       ==================
+==================        FPS: 10.0745       ==================
+==================        Elapsed Time: 25100.1 ms      ==================
+==================        Frame Time: 77.693 ms      ==================
+================== Time now: Wed Oct 17 02:19:48 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.045 ms
+CPU:  - RIGHT : 3.156 ms
+CPU: BBoxPass - LEFT : 0.014 ms
+CPU: BBoxPass - RIGHT : 0.012 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 3.153 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 12.597 ms
+CPU: LightVisibilityPass - LEFT : 3.856 ms
+CPU: LightVisibilityPass - RIGHT : 16.229 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.104 ms
+CPU: ResolvePass - RIGHT : 0.096 ms
+CPU: SurfaceDetectionPass - LEFT : 0.281 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.298 ms
+CPU: TexturedQuadPass - LEFT : 0.009 ms
+CPU: TexturedQuadPass - RIGHT : 0.014 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.014 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.028 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.01024 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 8.37018 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 3.71917 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.415744 ms
+GPU: LightVisibilityPass - LEFT : 0.334176 ms
+GPU: LightVisibilityPass - RIGHT : 4.45238 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.33792 ms
+GPU: ResolvePass - RIGHT : 0.328704 ms
+GPU: SurfaceDetectionPass - LEFT : 0.059392 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.059392 ms
+GPU: Texture Blitting - LEFT : 0.257024 ms
+GPU: Texture Blitting - RIGHT : 0.258048 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 58.5923 ms
+
+===============================================================
+==================    Screenshot ID:  4       ==================
+==================        FPS: 14.0711       ==================
+==================        Elapsed Time: 27000.7 ms      ==================
+==================        Frame Time: 57.361 ms      ==================
+================== Time now: Wed Oct 17 02:19:50 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.082 ms
+CPU:  - RIGHT : 0.068 ms
+CPU: BBoxPass - LEFT : 0.007 ms
+CPU: BBoxPass - RIGHT : 0.008 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.066 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 8.618 ms
+CPU: LightVisibilityPass - LEFT : 12.717 ms
+CPU: LightVisibilityPass - RIGHT : 15.183 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 3.412 ms
+CPU: ResolvePass - RIGHT : 0.121 ms
+CPU: SurfaceDetectionPass - LEFT : 0.176 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.18 ms
+CPU: TexturedQuadPass - LEFT : 0.009 ms
+CPU: TexturedQuadPass - RIGHT : 0.01 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.013 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.008192 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 5.8112 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 3.07405 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.41472 ms
+GPU: LightVisibilityPass - LEFT : 0.489472 ms
+GPU: LightVisibilityPass - RIGHT : 4.74317 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.319488 ms
+GPU: ResolvePass - RIGHT : 0.31744 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.058368 ms
+GPU: Texture Blitting - LEFT : 0.256 ms
+GPU: Texture Blitting - RIGHT : 0.256 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 56.5724 ms
+
+===============================================================
+==================    Screenshot ID:  6       ==================
+==================        FPS: 37.5487       ==================
+==================        Elapsed Time: 37200.9 ms      ==================
+==================        Frame Time: 31.091 ms      ==================
+================== Time now: Wed Oct 17 02:20:00 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.071 ms
+CPU:  - RIGHT : 0.081 ms
+CPU: BBoxPass - LEFT : 0.009 ms
+CPU: BBoxPass - RIGHT : 0.012 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.078 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.348 ms
+CPU: LightVisibilityPass - LEFT : 6.765 ms
+CPU: LightVisibilityPass - RIGHT : 6.515 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.115 ms
+CPU: ResolvePass - RIGHT : 0.122 ms
+CPU: SurfaceDetectionPass - LEFT : 3.348 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.401 ms
+CPU: TexturedQuadPass - LEFT : 0.011 ms
+CPU: TexturedQuadPass - RIGHT : 0.011 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.035 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.023 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.01024 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.38285 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 1.02605 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.415744 ms
+GPU: LightVisibilityPass - LEFT : 0.607456 ms
+GPU: LightVisibilityPass - RIGHT : 1.27283 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.29184 ms
+GPU: ResolvePass - RIGHT : 0.288768 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.054272 ms
+GPU: Texture Blitting - LEFT : 0.25088 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 28.9391 ms
+
+===============================================================
+==================    Screenshot ID:  7       ==================
+==================        FPS: 31.1723       ==================
+==================        Elapsed Time: 44200.8 ms      ==================
+==================        Frame Time: 28.843 ms      ==================
+================== Time now: Wed Oct 17 02:20:07 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.048 ms
+CPU:  - RIGHT : 0.093 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.007 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.091 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.264 ms
+CPU: LightVisibilityPass - LEFT : 6.467 ms
+CPU: LightVisibilityPass - RIGHT : 5.722 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.082 ms
+CPU: ResolvePass - RIGHT : 0.081 ms
+CPU: SurfaceDetectionPass - LEFT : 3.275 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.296 ms
+CPU: TexturedQuadPass - LEFT : 0.01 ms
+CPU: TexturedQuadPass - RIGHT : 0.01 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.013 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.9927 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.795648 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.427008 ms
+GPU: LightVisibilityPass - LEFT : 0.551936 ms
+GPU: LightVisibilityPass - RIGHT : 4.51277 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.293888 ms
+GPU: ResolvePass - RIGHT : 0.294912 ms
+GPU: SurfaceDetectionPass - LEFT : 0.055296 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.252928 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 30.0626 ms
+
+===============================================================
+==================    Screenshot ID:  7       ==================
+==================        FPS: 31.1723       ==================
+==================        Elapsed Time: 44300.2 ms      ==================
+==================        Frame Time: 30.008 ms      ==================
+================== Time now: Wed Oct 17 02:20:07 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.087 ms
+CPU:  - RIGHT : 0.075 ms
+CPU: BBoxPass - LEFT : 0.01 ms
+CPU: BBoxPass - RIGHT : 0.011 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.072 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.132 ms
+CPU: LightVisibilityPass - LEFT : 6.654 ms
+CPU: LightVisibilityPass - RIGHT : 6.11 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.116 ms
+CPU: ResolvePass - RIGHT : 0.119 ms
+CPU: SurfaceDetectionPass - LEFT : 3.334 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.368 ms
+CPU: TexturedQuadPass - LEFT : 0.011 ms
+CPU: TexturedQuadPass - RIGHT : 0.011 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.019 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.015 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.048 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.794624 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.425984 ms
+GPU: LightVisibilityPass - LEFT : 0.548256 ms
+GPU: LightVisibilityPass - RIGHT : 4.10726 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.295936 ms
+GPU: ResolvePass - RIGHT : 0.29184 ms
+GPU: SurfaceDetectionPass - LEFT : 0.055296 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.055296 ms
+GPU: Texture Blitting - LEFT : 0.251904 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 30.3645 ms
+
+===============================================================
+==================    Screenshot ID:  7       ==================
+==================        FPS: 32.2542       ==================
+==================        Elapsed Time: 44600.6 ms      ==================
+==================        Frame Time: 29.7 ms      ==================
+================== Time now: Wed Oct 17 02:20:07 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.088 ms
+CPU:  - RIGHT : 0.082 ms
+CPU: BBoxPass - LEFT : 0.013 ms
+CPU: BBoxPass - RIGHT : 0.014 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.078 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.349 ms
+CPU: LightVisibilityPass - LEFT : 6.293 ms
+CPU: LightVisibilityPass - RIGHT : 6.024 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0.001 ms
+CPU: ResolvePass - LEFT : 0.089 ms
+CPU: ResolvePass - RIGHT : 0.098 ms
+CPU: SurfaceDetectionPass - LEFT : 3.395 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.437 ms
+CPU: TexturedQuadPass - LEFT : 0.018 ms
+CPU: TexturedQuadPass - RIGHT : 0.019 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.019 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.021 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.18522 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.797696 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.425984 ms
+GPU: LightVisibilityPass - LEFT : 0.726208 ms
+GPU: LightVisibilityPass - RIGHT : 7.67795 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.29696 ms
+GPU: ResolvePass - RIGHT : 0.299008 ms
+GPU: SurfaceDetectionPass - LEFT : 0.055296 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.251904 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 34.1607 ms
+
+===============================================================
+==================    Screenshot ID:  7       ==================
+==================        FPS: 32.0969       ==================
+==================        Elapsed Time: 46800.7 ms      ==================
+==================        Frame Time: 31.035 ms      ==================
+================== Time now: Wed Oct 17 02:20:09 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.072 ms
+CPU:  - RIGHT : 0.112 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.014 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.109 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.297 ms
+CPU: LightVisibilityPass - LEFT : 6.802 ms
+CPU: LightVisibilityPass - RIGHT : 7.024 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0.001 ms
+CPU: ResolvePass - LEFT : 0.106 ms
+CPU: ResolvePass - RIGHT : 0.132 ms
+CPU: SurfaceDetectionPass - LEFT : 3.43 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.387 ms
+CPU: TexturedQuadPass - LEFT : 0.01 ms
+CPU: TexturedQuadPass - RIGHT : 0.02 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.02 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.1248 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.928768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.417792 ms
+GPU: LightVisibilityPass - LEFT : 0.500736 ms
+GPU: LightVisibilityPass - RIGHT : 4.31002 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.295936 ms
+GPU: ResolvePass - RIGHT : 0.297984 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.251904 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 32.1477 ms
+
+===============================================================
+==================    Screenshot ID:  9       ==================
+==================        FPS: 18.1595       ==================
+==================        Elapsed Time: 54800 ms      ==================
+==================        Frame Time: 59.958 ms      ==================
+================== Time now: Wed Oct 17 02:20:17 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.074 ms
+CPU:  - RIGHT : 0.041 ms
+CPU: BBoxPass - LEFT : 0.039 ms
+CPU: BBoxPass - RIGHT : 0.016 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.039 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 8.48 ms
+CPU: LightVisibilityPass - LEFT : 0.829 ms
+CPU: LightVisibilityPass - RIGHT : 15.277 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.103 ms
+CPU: ResolvePass - RIGHT : 0.064 ms
+CPU: SurfaceDetectionPass - LEFT : 0.384 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.126 ms
+CPU: TexturedQuadPass - LEFT : 0.01 ms
+CPU: TexturedQuadPass - RIGHT : 0.01 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 3.299 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 7.3769 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 3.54202 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.420864 ms
+GPU: LightVisibilityPass - LEFT : 0.258048 ms
+GPU: LightVisibilityPass - RIGHT : 7.18541 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.336896 ms
+GPU: ResolvePass - RIGHT : 0.339968 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.058368 ms
+GPU: Texture Blitting - LEFT : 0.254976 ms
+GPU: Texture Blitting - RIGHT : 0.257024 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 48.987 ms
+
+===============================================================
+==================    Screenshot ID:  10       ==================
+==================        FPS: 6.02311       ==================
+==================        Elapsed Time: 65400.5 ms      ==================
+==================        Frame Time: 145.536 ms      ==================
+================== Time now: Wed Oct 17 02:20:28 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.122 ms
+CPU:  - RIGHT : 0.047 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.008 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.045 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 36.634 ms
+CPU: LightVisibilityPass - LEFT : 3.968 ms
+CPU: LightVisibilityPass - RIGHT : 26.913 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.121 ms
+CPU: ResolvePass - RIGHT : 0.092 ms
+CPU: SurfaceDetectionPass - LEFT : 0.26 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.34 ms
+CPU: TexturedQuadPass - LEFT : 0.01 ms
+CPU: TexturedQuadPass - RIGHT : 0.009 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.019 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.013 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.012288 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 12.1856 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 8.43469 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.39424 ms
+GPU: LightVisibilityPass - LEFT : 0.253952 ms
+GPU: LightVisibilityPass - RIGHT : 4.75546 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.32768 ms
+GPU: ResolvePass - RIGHT : 0.32768 ms
+GPU: SurfaceDetectionPass - LEFT : 0.059392 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.059392 ms
+GPU: Texture Blitting - LEFT : 0.259072 ms
+GPU: Texture Blitting - RIGHT : 0.258048 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 96.0235 ms
+
+===============================================================
+==================    Screenshot ID:  15       ==================
+==================        FPS: 31.0325       ==================
+==================        Elapsed Time: 95500.4 ms      ==================
+==================        Frame Time: 29.427 ms      ==================
+================== Time now: Wed Oct 17 02:20:58 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.069 ms
+CPU:  - RIGHT : 0.049 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.007 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.047 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 0.852 ms
+CPU: LightVisibilityPass - LEFT : 6.591 ms
+CPU: LightVisibilityPass - RIGHT : 6.044 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.097 ms
+CPU: ResolvePass - RIGHT : 0.063 ms
+CPU: SurfaceDetectionPass - LEFT : 3.335 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.274 ms
+CPU: TexturedQuadPass - LEFT : 0.011 ms
+CPU: TexturedQuadPass - RIGHT : 0.01 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.012 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.008192 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.75718 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.49664 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.850944 ms
+GPU: LightVisibilityPass - LEFT : 0.472352 ms
+GPU: LightVisibilityPass - RIGHT : 4.53226 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.3072 ms
+GPU: ResolvePass - RIGHT : 0.309248 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.248832 ms
+GPU: Texture Blitting - RIGHT : 0.246784 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 26.9103 ms
+
+===============================================================
+==================    Screenshot ID:  16       ==================
+==================        FPS: 33.4081       ==================
+==================        Elapsed Time: 98400.1 ms      ==================
+==================        Frame Time: 31.975 ms      ==================
+================== Time now: Wed Oct 17 02:21:01 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.078 ms
+CPU:  - RIGHT : 0.081 ms
+CPU: BBoxPass - LEFT : 0.011 ms
+CPU: BBoxPass - RIGHT : 0.012 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.079 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.083 ms
+CPU: LightVisibilityPass - LEFT : 7.516 ms
+CPU: LightVisibilityPass - RIGHT : 6.601 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 3.464 ms
+CPU: ResolvePass - RIGHT : 0.125 ms
+CPU: SurfaceDetectionPass - LEFT : 0.153 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.379 ms
+CPU: TexturedQuadPass - LEFT : 0.012 ms
+CPU: TexturedQuadPass - RIGHT : 0.011 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.028 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.008192 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.24768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.668672 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.41472 ms
+GPU: LightVisibilityPass - LEFT : 2.98003 ms
+GPU: LightVisibilityPass - RIGHT : 4.40422 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.310272 ms
+GPU: ResolvePass - RIGHT : 0.314368 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.057344 ms
+GPU: Texture Blitting - LEFT : 0.248832 ms
+GPU: Texture Blitting - RIGHT : 0.249856 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 34.6915 ms
+
+===============================================================
+==================    Screenshot ID:  18       ==================
+==================        FPS: 23.0562       ==================
+==================        Elapsed Time: 109401 ms      ==================
+==================        Frame Time: 39.983 ms      ==================
+================== Time now: Wed Oct 17 02:21:12 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.078 ms
+CPU:  - RIGHT : 0.17 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.018 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.165 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.772 ms
+CPU: LightVisibilityPass - LEFT : 13.978 ms
+CPU: LightVisibilityPass - RIGHT : 13.357 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0.001 ms
+CPU: ResolvePass - LEFT : 0.141 ms
+CPU: ResolvePass - RIGHT : 0.205 ms
+CPU: SurfaceDetectionPass - LEFT : 0.197 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.318 ms
+CPU: TexturedQuadPass - LEFT : 0.011 ms
+CPU: TexturedQuadPass - RIGHT : 0.024 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.014 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.013 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.002 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.008192 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 4.9449 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 1.7664 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.4096 ms
+GPU: LightVisibilityPass - LEFT : 0.355488 ms
+GPU: LightVisibilityPass - RIGHT : 4.39706 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.320512 ms
+GPU: ResolvePass - RIGHT : 0.320512 ms
+GPU: SurfaceDetectionPass - LEFT : 0.058368 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.058368 ms
+GPU: Texture Blitting - LEFT : 0.252928 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 43.7032 ms
+
+===============================================================
+==================    Screenshot ID:  18       ==================
+==================        FPS: 28.2442       ==================
+==================        Elapsed Time: 113100 ms      ==================
+==================        Frame Time: 33.519 ms      ==================
+================== Time now: Wed Oct 17 02:21:16 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.057 ms
+CPU:  - RIGHT : 0.039 ms
+CPU: BBoxPass - LEFT : 0.014 ms
+CPU: BBoxPass - RIGHT : 0.008 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.037 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.649 ms
+CPU: LightVisibilityPass - LEFT : 8.444 ms
+CPU: LightVisibilityPass - RIGHT : 8.139 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.119 ms
+CPU: ResolvePass - RIGHT : 0.102 ms
+CPU: SurfaceDetectionPass - LEFT : 3.531 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.602 ms
+CPU: TexturedQuadPass - LEFT : 0.016 ms
+CPU: TexturedQuadPass - RIGHT : 0.009 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.019 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.013 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.009216 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 3.32288 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 1.20525 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.408576 ms
+GPU: LightVisibilityPass - LEFT : 0.587776 ms
+GPU: LightVisibilityPass - RIGHT : 7.296 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.30208 ms
+GPU: ResolvePass - RIGHT : 0.30208 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.058368 ms
+GPU: Texture Blitting - LEFT : 3.95264 ms
+GPU: Texture Blitting - RIGHT : 0.244736 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 43.6289 ms
+
+===============================================================
+==================    Screenshot ID:  18       ==================
+==================        FPS: 27.6912       ==================
+==================        Elapsed Time: 113900 ms      ==================
+==================        Frame Time: 33.949 ms      ==================
+================== Time now: Wed Oct 17 02:21:16 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.071 ms
+CPU:  - RIGHT : 0.085 ms
+CPU: BBoxPass - LEFT : 0.018 ms
+CPU: BBoxPass - RIGHT : 0.007 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.083 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.249 ms
+CPU: LightVisibilityPass - LEFT : 11.601 ms
+CPU: LightVisibilityPass - RIGHT : 7.529 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.095 ms
+CPU: ResolvePass - RIGHT : 0.068 ms
+CPU: SurfaceDetectionPass - LEFT : 0.369 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.653 ms
+CPU: TexturedQuadPass - LEFT : 0.012 ms
+CPU: TexturedQuadPass - RIGHT : 0.01 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.023 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.012 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.009216 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 3.30547 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 1.20422 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.4096 ms
+GPU: LightVisibilityPass - LEFT : 0.535552 ms
+GPU: LightVisibilityPass - RIGHT : 1.17862 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.300032 ms
+GPU: ResolvePass - RIGHT : 0.30208 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.243712 ms
+GPU: Texture Blitting - RIGHT : 0.244736 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 32.8148 ms
+
+===============================================================
+==================    Screenshot ID:  20       ==================
+==================        FPS: 26.0822       ==================
+==================        Elapsed Time: 124600 ms      ==================
+==================        Frame Time: 34.635 ms      ==================
+================== Time now: Wed Oct 17 02:21:27 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.091 ms
+CPU:  - RIGHT : 0.091 ms
+CPU: BBoxPass - LEFT : 0.01 ms
+CPU: BBoxPass - RIGHT : 0.01 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.089 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.397 ms
+CPU: LightVisibilityPass - LEFT : 8.759 ms
+CPU: LightVisibilityPass - RIGHT : 8.311 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.133 ms
+CPU: ResolvePass - RIGHT : 0.102 ms
+CPU: SurfaceDetectionPass - LEFT : 3.323 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.406 ms
+CPU: TexturedQuadPass - LEFT : 0.018 ms
+CPU: TexturedQuadPass - RIGHT : 0.01 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.027 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.008192 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 3.80416 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 1.20422 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.661504 ms
+GPU: LightVisibilityPass - LEFT : 0.441344 ms
+GPU: LightVisibilityPass - RIGHT : 4.44621 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.313344 ms
+GPU: ResolvePass - RIGHT : 0.316416 ms
+GPU: SurfaceDetectionPass - LEFT : 0.058368 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.058368 ms
+GPU: Texture Blitting - LEFT : 0.25088 ms
+GPU: Texture Blitting - RIGHT : 0.253952 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 37.6919 ms
+
+===============================================================
+==================    Screenshot ID:  20       ==================
+==================        FPS: 26.9983       ==================
+==================        Elapsed Time: 125000 ms      ==================
+==================        Frame Time: 31.869 ms      ==================
+================== Time now: Wed Oct 17 02:21:28 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.101 ms
+CPU:  - RIGHT : 0.129 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.011 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.125 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.442 ms
+CPU: LightVisibilityPass - LEFT : 8.6 ms
+CPU: LightVisibilityPass - RIGHT : 8.534 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.1 ms
+CPU: ResolvePass - RIGHT : 0.095 ms
+CPU: SurfaceDetectionPass - LEFT : 3.478 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.318 ms
+CPU: TexturedQuadPass - LEFT : 0.011 ms
+CPU: TexturedQuadPass - RIGHT : 0.015 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.018 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.008192 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 3.58195 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 1.12742 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.416768 ms
+GPU: LightVisibilityPass - LEFT : 0.48128 ms
+GPU: LightVisibilityPass - RIGHT : 4.25472 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.314368 ms
+GPU: ResolvePass - RIGHT : 0.31232 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.057344 ms
+GPU: Texture Blitting - LEFT : 0.251904 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 34.2005 ms
+
+===============================================================
+==================    Screenshot ID:  20       ==================
+==================        FPS: 27.1917       ==================
+==================        Elapsed Time: 126000 ms      ==================
+==================        Frame Time: 32.144 ms      ==================
+================== Time now: Wed Oct 17 02:21:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.157 ms
+CPU:  - RIGHT : 0.177 ms
+CPU: BBoxPass - LEFT : 0.021 ms
+CPU: BBoxPass - RIGHT : 0.015 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.175 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.137 ms
+CPU: LightVisibilityPass - LEFT : 7.371 ms
+CPU: LightVisibilityPass - RIGHT : 7.22 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.083 ms
+CPU: ResolvePass - RIGHT : 0.093 ms
+CPU: SurfaceDetectionPass - LEFT : 3.348 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.254 ms
+CPU: TexturedQuadPass - LEFT : 0.013 ms
+CPU: TexturedQuadPass - RIGHT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.016 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 3.10374 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.917504 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.410624 ms
+GPU: LightVisibilityPass - LEFT : 0.48128 ms
+GPU: LightVisibilityPass - RIGHT : 4.35405 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.306176 ms
+GPU: ResolvePass - RIGHT : 0.310272 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.057344 ms
+GPU: Texture Blitting - LEFT : 3.64442 ms
+GPU: Texture Blitting - RIGHT : 0.251904 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 34.0999 ms
+
+===============================================================
+==================    Screenshot ID:  20       ==================
+==================        FPS: 30.3792       ==================
+==================        Elapsed Time: 126201 ms      ==================
+==================        Frame Time: 31.946 ms      ==================
+================== Time now: Wed Oct 17 02:21:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.126 ms
+CPU:  - RIGHT : 0.162 ms
+CPU: BBoxPass - LEFT : 0.01 ms
+CPU: BBoxPass - RIGHT : 0.016 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.16 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 1.155 ms
+CPU: LightVisibilityPass - LEFT : 7.66 ms
+CPU: LightVisibilityPass - RIGHT : 7.093 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.078 ms
+CPU: ResolvePass - RIGHT : 0.082 ms
+CPU: SurfaceDetectionPass - LEFT : 3.389 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.37 ms
+CPU: TexturedQuadPass - LEFT : 0.012 ms
+CPU: TexturedQuadPass - RIGHT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.023 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.022 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.012288 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 3.04333 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.858112 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.412672 ms
+GPU: LightVisibilityPass - LEFT : 0.410976 ms
+GPU: LightVisibilityPass - RIGHT : 4.1431 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.308224 ms
+GPU: ResolvePass - RIGHT : 0.306176 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.057344 ms
+GPU: Texture Blitting - LEFT : 0.251904 ms
+GPU: Texture Blitting - RIGHT : 0.251904 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 33.5693 ms
+
+===============================================================
+==================    Screenshot ID:  20       ==================
+==================        FPS: 30.3792       ==================
+==================        Elapsed Time: 126601 ms      ==================
+==================        Frame Time: 28.5 ms      ==================
+================== Time now: Wed Oct 17 02:21:29 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.3 ms
+CPU:  - RIGHT : 0.336 ms
+CPU: BBoxPass - LEFT : 0.009 ms
+CPU: BBoxPass - RIGHT : 0.009 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.333 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 4.615 ms
+CPU: LightVisibilityPass - LEFT : 6.538 ms
+CPU: LightVisibilityPass - RIGHT : 7.292 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.126 ms
+CPU: ResolvePass - RIGHT : 0.127 ms
+CPU: SurfaceDetectionPass - LEFT : 0.287 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.228 ms
+CPU: TexturedQuadPass - LEFT : 0.012 ms
+CPU: TexturedQuadPass - RIGHT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.023 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.025 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.86106 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.779264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.417792 ms
+GPU: LightVisibilityPass - LEFT : 0.420864 ms
+GPU: LightVisibilityPass - RIGHT : 4.10829 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.305152 ms
+GPU: ResolvePass - RIGHT : 0.305152 ms
+GPU: SurfaceDetectionPass - LEFT : 0.057344 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.057344 ms
+GPU: Texture Blitting - LEFT : 0.251904 ms
+GPU: Texture Blitting - RIGHT : 0.252928 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 30.1853 ms
+
+===============================================================
+==================    Screenshot ID:  22       ==================
+==================        FPS: 34.9158       ==================
+==================        Elapsed Time: 134600 ms      ==================
+==================        Frame Time: 25.173 ms      ==================
+================== Time now: Wed Oct 17 02:21:37 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.092 ms
+CPU:  - RIGHT : 0.349 ms
+CPU: BBoxPass - LEFT : 0.008 ms
+CPU: BBoxPass - RIGHT : 0.013 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.346 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 4.338 ms
+CPU: LightVisibilityPass - LEFT : 6.007 ms
+CPU: LightVisibilityPass - RIGHT : 5.954 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.1 ms
+CPU: ResolvePass - RIGHT : 0.153 ms
+CPU: SurfaceDetectionPass - LEFT : 0.234 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.423 ms
+CPU: TexturedQuadPass - LEFT : 0.014 ms
+CPU: TexturedQuadPass - RIGHT : 0.014 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.015 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.01024 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.28614 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.388096 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.671744 ms
+GPU: LightVisibilityPass - LEFT : 0.46288 ms
+GPU: LightVisibilityPass - RIGHT : 4.29056 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.289792 ms
+GPU: ResolvePass - RIGHT : 0.289792 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.25088 ms
+GPU: Texture Blitting - RIGHT : 0.25088 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 26.4606 ms
+
+===============================================================
+==================    Screenshot ID:  22       ==================
+==================        FPS: 36.022       ==================
+==================        Elapsed Time: 136800 ms      ==================
+==================        Frame Time: 24.295 ms      ==================
+================== Time now: Wed Oct 17 02:21:39 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.218 ms
+CPU:  - RIGHT : 0.117 ms
+CPU: BBoxPass - LEFT : 0.015 ms
+CPU: BBoxPass - RIGHT : 0.02 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.115 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 0.76 ms
+CPU: LightVisibilityPass - LEFT : 5.793 ms
+CPU: LightVisibilityPass - RIGHT : 5.217 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.13 ms
+CPU: ResolvePass - RIGHT : 0.094 ms
+CPU: SurfaceDetectionPass - LEFT : 3.281 ms
+CPU: SurfaceDetectionPass - RIGHT : 3.358 ms
+CPU: TexturedQuadPass - LEFT : 0.014 ms
+CPU: TexturedQuadPass - RIGHT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.016 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.015 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.01024 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.20525 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.380928 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.616448 ms
+GPU: LightVisibilityPass - LEFT : 0.856128 ms
+GPU: LightVisibilityPass - RIGHT : 4.17382 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.29184 ms
+GPU: ResolvePass - RIGHT : 0.288768 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.055296 ms
+GPU: Texture Blitting - LEFT : 0.248832 ms
+GPU: Texture Blitting - RIGHT : 0.25088 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 27.6957 ms
+
+===============================================================
+==================    Screenshot ID:  22       ==================
+==================        FPS: 36.022       ==================
+==================        Elapsed Time: 137200 ms      ==================
+==================        Frame Time: 27.753 ms      ==================
+================== Time now: Wed Oct 17 02:21:40 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.193 ms
+CPU:  - RIGHT : 0.225 ms
+CPU: BBoxPass - LEFT : 0.019 ms
+CPU: BBoxPass - RIGHT : 0.01 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.222 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 0.697 ms
+CPU: LightVisibilityPass - LEFT : 5.692 ms
+CPU: LightVisibilityPass - RIGHT : 5.416 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.082 ms
+CPU: ResolvePass - RIGHT : 0.128 ms
+CPU: SurfaceDetectionPass - LEFT : 3.368 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.31 ms
+CPU: TexturedQuadPass - LEFT : 0.013 ms
+CPU: TexturedQuadPass - RIGHT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.015 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.023 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.007168 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.18886 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.385024 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.075776 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.647168 ms
+GPU: LightVisibilityPass - LEFT : 0.454688 ms
+GPU: LightVisibilityPass - RIGHT : 5.16198 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.287744 ms
+GPU: ResolvePass - RIGHT : 0.287744 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.055296 ms
+GPU: Texture Blitting - LEFT : 0.246784 ms
+GPU: Texture Blitting - RIGHT : 0.249856 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 25.5427 ms
+
+===============================================================
+==================    Screenshot ID:  22       ==================
+==================        FPS: 35.9644       ==================
+==================        Elapsed Time: 137700 ms      ==================
+==================        Frame Time: 27.088 ms      ==================
+================== Time now: Wed Oct 17 02:21:40 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.19 ms
+CPU:  - RIGHT : 0.126 ms
+CPU: BBoxPass - LEFT : 0.01 ms
+CPU: BBoxPass - RIGHT : 0.008 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.124 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 0.841 ms
+CPU: LightVisibilityPass - LEFT : 5.714 ms
+CPU: LightVisibilityPass - RIGHT : 4.998 ms
+CPU: LineStripPass - LEFT : 0.001 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.119 ms
+CPU: ResolvePass - RIGHT : 0.099 ms
+CPU: SurfaceDetectionPass - LEFT : 3.306 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.247 ms
+CPU: TexturedQuadPass - LEFT : 0.016 ms
+CPU: TexturedQuadPass - RIGHT : 0.013 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.027 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0.001 ms
+GPU:  - LEFT : 0 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.007168 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.16122 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.382976 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.635904 ms
+GPU: LightVisibilityPass - LEFT : 2.91738 ms
+GPU: LightVisibilityPass - RIGHT : 1.11616 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.287744 ms
+GPU: ResolvePass - RIGHT : 0.28672 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.249856 ms
+GPU: Texture Blitting - RIGHT : 3.59526 ms
+GPU: TexturedQuadPass - LEFT : 0 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 26.6899 ms
+
+===============================================================
+==================    Screenshot ID:  23       ==================
+==================        FPS: 34.8642       ==================
+==================        Elapsed Time: 140300 ms      ==================
+==================        Frame Time: 26.795 ms      ==================
+================== Time now: Wed Oct 17 02:21:43 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.124 ms
+CPU:  - RIGHT : 0.15 ms
+CPU: BBoxPass - LEFT : 0.015 ms
+CPU: BBoxPass - RIGHT : 0.01 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.148 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 0.979 ms
+CPU: LightVisibilityPass - LEFT : 5.539 ms
+CPU: LightVisibilityPass - RIGHT : 4.872 ms
+CPU: LineStripPass - LEFT : 0.001 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.126 ms
+CPU: ResolvePass - RIGHT : 0.084 ms
+CPU: SurfaceDetectionPass - LEFT : 3.602 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.258 ms
+CPU: TexturedQuadPass - LEFT : 0.016 ms
+CPU: TexturedQuadPass - RIGHT : 0.012 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.04 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.013 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0.001024 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.22675 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.387072 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.633856 ms
+GPU: LightVisibilityPass - LEFT : 0.515072 ms
+GPU: LightVisibilityPass - RIGHT : 4.41344 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0.001024 ms
+GPU: ResolvePass - LEFT : 0.289792 ms
+GPU: ResolvePass - RIGHT : 0.289792 ms
+GPU: SurfaceDetectionPass - LEFT : 0.055296 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.248832 ms
+GPU: Texture Blitting - RIGHT : 0.25088 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0 ms
+Total : 24.4523 ms
+
+===============================================================
+==================    Screenshot ID:  23       ==================
+==================        FPS: 35.6175       ==================
+==================        Elapsed Time: 141101 ms      ==================
+==================        Frame Time: 26.593 ms      ==================
+================== Time now: Wed Oct 17 02:21:44 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.113 ms
+CPU:  - RIGHT : 0.09 ms
+CPU: BBoxPass - LEFT : 0.019 ms
+CPU: BBoxPass - RIGHT : 0.009 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.088 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 0.994 ms
+CPU: LightVisibilityPass - LEFT : 5.601 ms
+CPU: LightVisibilityPass - RIGHT : 5.062 ms
+CPU: LineStripPass - LEFT : 0.001 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.13 ms
+CPU: ResolvePass - RIGHT : 0.102 ms
+CPU: SurfaceDetectionPass - LEFT : 3.533 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.261 ms
+CPU: TexturedQuadPass - LEFT : 0.023 ms
+CPU: TexturedQuadPass - RIGHT : 0.014 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.026 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0.001 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0.001024 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.01024 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 1.26874 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.387072 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.815104 ms
+GPU: LightVisibilityPass - LEFT : 0.53696 ms
+GPU: LightVisibilityPass - RIGHT : 0.982016 ms
+GPU: LineStripPass - LEFT : 0 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.29184 ms
+GPU: ResolvePass - RIGHT : 0.287744 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.054272 ms
+GPU: Texture Blitting - LEFT : 0.249856 ms
+GPU: Texture Blitting - RIGHT : 3.75091 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0 ms
+GPU: TriMeshPass - LEFT : 0 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 24.854 ms
+
+===============================================================
+==================    Screenshot ID:  23       ==================
+==================        FPS: 32.7608       ==================
+==================        Elapsed Time: 145301 ms      ==================
+==================        Frame Time: 33.377 ms      ==================
+================== Time now: Wed Oct 17 02:21:48 2018
+ ==================
+===============================================================
+================= Time Queries for Context: 0 =================
+CPU:  - LEFT : 0.187 ms
+CPU:  - RIGHT : 0.158 ms
+CPU: BBoxPass - LEFT : 0.01 ms
+CPU: BBoxPass - RIGHT : 0.035 ms
+CPU: Camera uuid: 11731492440210740805 / LodPass : 0.156 ms
+CPU: Camera uuid: 17753529235811245844 / LodPass : 4.39 ms
+CPU: LightVisibilityPass - LEFT : 7.302 ms
+CPU: LightVisibilityPass - RIGHT : 6.735 ms
+CPU: LineStripPass - LEFT : 0 ms
+CPU: LineStripPass - RIGHT : 0 ms
+CPU: ResolvePass - LEFT : 0.097 ms
+CPU: ResolvePass - RIGHT : 0.091 ms
+CPU: SurfaceDetectionPass - LEFT : 0.127 ms
+CPU: SurfaceDetectionPass - RIGHT : 0.256 ms
+CPU: TexturedQuadPass - LEFT : 0.012 ms
+CPU: TexturedQuadPass - RIGHT : 0.012 ms
+CPU: TexturedScreenSpaceQuadPass - LEFT : 0.087 ms
+CPU: TexturedScreenSpaceQuadPass - RIGHT : 0.014 ms
+CPU: TriMeshPass - LEFT : 0 ms
+CPU: TriMeshPass - RIGHT : 0 ms
+GPU:  - LEFT : 0.001024 ms
+GPU:  - RIGHT : 0 ms
+GPU: BBoxPass - LEFT : 0 ms
+GPU: BBoxPass - RIGHT : 0.001024 ms
+GPU: Camera uuid: 11731492440210740805 / PLodRenderer::DepthPass : 0.011264 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::AccumulationPass : 2.20467 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::DepthPass : 0.601088 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::LogToLinConversionPass : 0.0768 ms
+GPU: Camera uuid: 17753529235811245844 / PLodRenderer::NormalizationPass : 0.41472 ms
+GPU: LightVisibilityPass - LEFT : 0.457728 ms
+GPU: LightVisibilityPass - RIGHT : 4.05917 ms
+GPU: LineStripPass - LEFT : 0.001024 ms
+GPU: LineStripPass - RIGHT : 0 ms
+GPU: ResolvePass - LEFT : 0.299008 ms
+GPU: ResolvePass - RIGHT : 0.29696 ms
+GPU: SurfaceDetectionPass - LEFT : 0.05632 ms
+GPU: SurfaceDetectionPass - RIGHT : 0.05632 ms
+GPU: Texture Blitting - LEFT : 0.249856 ms
+GPU: Texture Blitting - RIGHT : 0.25088 ms
+GPU: TexturedQuadPass - LEFT : 0.001024 ms
+GPU: TexturedQuadPass - RIGHT : 0.001024 ms
+GPU: TexturedScreenSpaceQuadPass - LEFT : 0 ms
+GPU: TexturedScreenSpaceQuadPass - RIGHT : 0.001024 ms
+GPU: TriMeshPass - LEFT : 0.001024 ms
+GPU: TriMeshPass - RIGHT : 0.001024 ms
+Total : 28.712 ms
+
+
+========  Average Frame Rate: 28.5847  ========
+
+========  Average Frame Rate: 36.6059  ========
+
+========  Average Frame Time: 38.8556  ========
